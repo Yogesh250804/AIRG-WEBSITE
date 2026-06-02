@@ -22,6 +22,7 @@ export interface User {
   credits?: number;
   streak?: number;
   lastVisit?: string;
+  preferredLanguage?: string;
   metadata: {
     creationTime?: string;
     lastSignInTime?: string;
