@@ -11,18 +11,18 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Trigger CSS animations on mount (almost instantly)
+    // Start animation almost immediately on mount
     const animTimeout = setTimeout(() => {
       setAnimate(true);
     }, 50);
 
-    // Complete loader after animations finish (faster sequence: ~0.8s total)
+    // Complete the preloader after the slide-down transition ends (~1.0s)
     const completeTimeout = setTimeout(() => {
       setVisible(false);
       if (onComplete) {
         onComplete();
       }
-    }, 800);
+    }, 1000);
 
     return () => {
       clearTimeout(animTimeout);
@@ -41,20 +41,20 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       {Array.from({ length: 10 }).map((_, i) => (
         <div
           key={i}
-          className="h-full w-[10%] bg-[#EB0028] border-r border-white/5 pointer-events-auto transition-transform duration-350 ease-in-out will-change-transform"
+          className="h-full w-[10%] bg-[#EB0028] border-r border-white/5 pointer-events-auto transition-transform duration-500 ease-in-out will-change-transform"
           style={{
             transform: animate ? "translateY(100%)" : "translateY(0%)",
-            transitionDelay: `${0.2 + i * 0.02}s`,
+            transitionDelay: `${0.1 + i * 0.03}s`,
           }}
         />
       ))}
 
       {/* Premium Corporate Logo Reveal */}
       <div 
-        className="name-text flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] w-full px-4 transition-opacity duration-200 text-center select-none"
+        className="name-text flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] w-full px-4 transition-opacity duration-300 text-center select-none"
         style={{
           opacity: animate ? 0 : 1,
-          transitionDelay: "0.5s",
+          transitionDelay: "0.4s",
         }}
       >
         {/* Line 1: AIRG */}
@@ -62,7 +62,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           {word1.map((char, idx) => (
             <span
               key={idx}
-              className="inline-block transition-transform duration-250 ease-out will-change-transform"
+              className="inline-block transition-transform duration-300 ease-out will-change-transform"
               style={{
                 transform: animate ? "translateY(0%)" : "translateY(105%)",
                 transitionDelay: `${idx * 0.02}s`,
@@ -78,7 +78,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           {word2.map((char, idx) => (
             <span
               key={idx}
-              className="inline-block transition-transform duration-250 ease-out will-change-transform"
+              className="inline-block transition-transform duration-300 ease-out will-change-transform"
               style={{
                 transform: animate ? "translateY(0%)" : "translateY(105%)",
                 transitionDelay: `${0.08 + idx * 0.01}s`,
