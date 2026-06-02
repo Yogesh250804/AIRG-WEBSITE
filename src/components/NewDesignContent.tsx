@@ -58,7 +58,7 @@ export default function NewDesignContent() {
   const [previousFace, setPreviousFace] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const rotationRef = useRef({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeNetwork, setActiveNetwork] = useState<"india" | "global">("global");
   const [selectedGlobalHub, setSelectedGlobalHub] = useState<any>(null);
@@ -135,16 +135,11 @@ export default function NewDesignContent() {
     }, 0);
   };
 
-  const x = useMotionValue(rotation.x);
-  const y = useMotionValue(rotation.y);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
   const xSpring = useSpring(x, { stiffness: 200, damping: 25, restDelta: 0.001 });
   const ySpring = useSpring(y, { stiffness: 200, damping: 25, restDelta: 0.001 });
-
-  useEffect(() => {
-    x.set(rotation.x);
-    y.set(rotation.y);
-  }, [rotation, x, y]);
-
+  
   const activeFaceRef = useRef(activeFace);
 
   useEffect(() => {
@@ -167,24 +162,25 @@ export default function NewDesignContent() {
     
     const animate = () => {
       if (!isDragging.current) {
-        setRotation(prev => {
-          const targetX = 0;
-          const targetY = 0;
-          
-          // Snappy spring-back to default straight phase
-          const baseLerpX = prev.x + (targetX - prev.x) * 0.08;
-          const baseLerpY = prev.y + (targetY - prev.y) * 0.08;
-          
-          // Subtle, organic float wave
-          const time = Date.now() * 0.0015;
-          const floatX = Math.sin(time * 1.2) * 3;
-          const floatY = Math.cos(time) * 3;
-          
-          return {
-            x: baseLerpX + (floatX - (baseLerpX - targetX)) * 0.1,
-            y: baseLerpY + (floatY - (baseLerpY - targetY)) * 0.1
-          };
-        });
+        const prev = rotationRef.current;
+        const targetX = 0;
+        const targetY = 0;
+        
+        // Snappy spring-back to default straight phase
+        const baseLerpX = prev.x + (targetX - prev.x) * 0.08;
+        const baseLerpY = prev.y + (targetY - prev.y) * 0.08;
+        
+        // Subtle, organic float wave
+        const time = Date.now() * 0.0015;
+        const floatX = Math.sin(time * 1.2) * 3;
+        const floatY = Math.cos(time) * 3;
+        
+        const nextX = baseLerpX + (floatX - (baseLerpX - targetX)) * 0.1;
+        const nextY = baseLerpY + (floatY - (baseLerpY - targetY)) * 0.1;
+        
+        rotationRef.current = { x: nextX, y: nextY };
+        x.set(nextX);
+        y.set(nextY);
       }
       animationFrame = requestAnimationFrame(animate);
     };
@@ -195,10 +191,12 @@ export default function NewDesignContent() {
       const deltaX = e.clientX - dragStart.current.x;
       const deltaY = e.clientY - dragStart.current.y;
 
-      setRotation({
-        x: lastRotation.current.x - deltaY * 0.5,
-        y: lastRotation.current.y + deltaX * 0.5
-      });
+      const nextX = lastRotation.current.x - deltaY * 0.5;
+      const nextY = lastRotation.current.y + deltaX * 0.5;
+
+      rotationRef.current = { x: nextX, y: nextY };
+      x.set(nextX);
+      y.set(nextY);
     };
 
     const handleWindowMouseUp = () => {
@@ -217,12 +215,12 @@ export default function NewDesignContent() {
       window.removeEventListener('mouseup', handleWindowMouseUp);
       cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [x, y]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
     dragStart.current = { x: e.clientX, y: e.clientY };
-    lastRotation.current = { ...rotation };
+    lastRotation.current = { ...rotationRef.current };
     document.body.style.cursor = 'grabbing';
   };
 
