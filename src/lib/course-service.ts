@@ -400,7 +400,7 @@ function generateMockLessons(courseId: string, providedCourse?: any): Lesson[] {
     ]
   };
 
-  const specificLessons = courseDataMap[courseId] || (course?.videoUrl ? Object.values(courseDataMap).find(m => m[0]?.videoUrl === course.videoUrl) : null);
+  const specificLessons = courseDataMap[courseId];
   
   // Also check by video URL if the ID doesn't match
   let curriculum = specificLessons;
