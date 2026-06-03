@@ -1181,7 +1181,7 @@ export default function NewDesignContent() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                 
                 {/* Left Side: Info & Controls */}
                 <div className="lg:col-span-4 space-y-6 relative">
@@ -1231,45 +1231,58 @@ export default function NewDesignContent() {
                   ) : (
                     <>
                       <span className="text-primary font-bold tracking-[0.4em] uppercase text-[9px] block font-mono">International Presence</span>
-                      <h2 className="font-headline tracking-tighter leading-[0.9]">
-                        <span className="block text-4xl md:text-5xl font-black text-[#1a1a2e] uppercase">
-                          Global
-                        </span>
-                        <span className="block text-4xl md:text-5xl font-black text-primary uppercase text-glow-red">
-                          Outreach
-                        </span>
-                      </h2>
+                      <div className="flex justify-between items-start gap-4">
+                        <h2 className="font-headline tracking-tighter leading-[0.9]">
+                          <span className="block text-4xl md:text-5xl font-black text-[#1a1a2e] uppercase">
+                            Global
+                          </span>
+                          <span className="block text-4xl md:text-5xl font-black text-primary uppercase text-glow-red">
+                            Outreach
+                          </span>
+                        </h2>
+                        {selectedGlobalHub && (
+                          <button 
+                            onClick={() => setSelectedGlobalHub(null)}
+                            className="px-3 py-1.5 rounded-lg border border-black/5 bg-slate-50 text-[10px] font-mono font-bold text-[#1a1a2e]/50 hover:text-primary hover:bg-primary/5 hover:border-primary/25 transition-all duration-300 flex items-center gap-1 uppercase tracking-wider mt-1"
+                            title="Back to Overview"
+                          >
+                            <span className="material-symbols-outlined text-[12px]">arrow_back</span>
+                            Back
+                          </button>
+                        )}
+                      </div>
                       
                       {selectedGlobalHub ? (
-                        <div className="space-y-6 pt-2">
+                        <div className="space-y-4 pt-2">
                           <div className="border-l-2 border-primary/35 pl-4">
-                            <h3 className="text-lg font-bold text-[#1a1a2e] uppercase tracking-tight font-sans">{selectedGlobalHub.name}</h3>
-                            <span className="text-[10px] font-mono text-primary font-bold block mt-1">{selectedGlobalHub.location}</span>
+                            <h3 className="text-base font-bold text-[#1a1a2e] uppercase tracking-tight font-sans">{selectedGlobalHub.name}</h3>
+                            <span className="text-[10px] font-mono text-primary font-bold block mt-0.5">{selectedGlobalHub.location}</span>
                           </div>
+                          
                           <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-body">
                             {selectedGlobalHub.description}
                           </p>
 
-                           {selectedGlobalHub.flyer && (
-                            <div className="rounded-2xl overflow-hidden border border-black/10 shadow-sm">
+                          <div className="grid grid-cols-3 gap-2">
+                            {selectedGlobalHub.stats.map((stat: any, idx: number) => (
+                              <div key={idx} className="glass-premium p-2.5 rounded-xl border border-black/5 flex flex-col justify-center gap-0.5 font-mono">
+                                <span className="text-[7px] text-[#1a1a2e]/40 font-semibold leading-none uppercase tracking-wider">{stat.label}</span>
+                                <span className="text-[#1a1a2e] font-black text-[10px] leading-tight mt-1 truncate" title={stat.value}>{stat.value}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {selectedGlobalHub.flyer && (
+                            <div className="rounded-2xl overflow-hidden border border-black/10 shadow-sm max-h-[260px] flex items-center justify-center bg-slate-50 transition-all duration-300">
                               <Image 
                                 src={selectedGlobalHub.flyer} 
                                 alt="Founder Profile" 
                                 width={400} 
                                 height={400}
-                                className="w-full h-auto object-cover"
+                                className="w-full h-auto object-contain max-h-[260px]"
                               />
                             </div>
                           )}
-
-                          <div className="space-y-3.5">
-                            {selectedGlobalHub.stats.map((stat: any, idx: number) => (
-                              <div key={idx} className="flex justify-between items-center text-[10px] border-b border-black/5 pb-2 font-mono">
-                                <span className="text-[#1a1a2e]/40">{stat.label.toUpperCase()}</span>
-                                <span className="text-[#1a1a2e] font-black">{stat.value}</span>
-                              </div>
-                            ))}
-                          </div>
                         </div>
                       ) : (
                         <>

@@ -5,9 +5,11 @@ import { promisify } from "util";
 const execAsync = promisify(exec);
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const results: string[] = [];
+    const { searchParams } = new URL(request.url);
+    const commitMsg = searchParams.get("msg") || "Fix global hubs layout, stats display, and alignment";
 
     // Check git status first
     try {
@@ -27,7 +29,6 @@ export async function GET() {
 
     // 2. Commit changes
     try {
-      const commitMsg = "Update global hub founder flyers, fix cache issue, and add competition timeline column";
       const commitRes = await execAsync(`git commit -m "${commitMsg}"`);
       results.push("git commit: " + (commitRes.stdout || "done"));
     } catch (commitErr: any) {
