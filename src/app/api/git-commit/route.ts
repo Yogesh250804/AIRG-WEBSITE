@@ -10,10 +10,12 @@ export async function GET(request: Request) {
     const results: string[] = [];
     const { searchParams } = new URL(request.url);
     const commitMsg = searchParams.get("msg") || "Fix global hubs layout, stats display, and alignment";
+    const cwd = process.cwd();
+    results.push("cwd: " + cwd);
 
     // Check git status first
     try {
-      const statusRes = await execAsync("git status");
+      const statusRes = await execAsync("git status", { cwd });
       results.push("git status: " + statusRes.stdout);
     } catch (statusErr: any) {
       results.push("git status error: " + statusErr.message + " | " + statusErr.stderr);
@@ -21,7 +23,7 @@ export async function GET(request: Request) {
 
     // 1. Stage changes
     try {
-      const addRes = await execAsync("git add .");
+      const addRes = await execAsync("git add .", { cwd });
       results.push("git add: " + (addRes.stdout || "done"));
     } catch (addErr: any) {
       results.push("git add error: " + addErr.message + " | " + addErr.stderr);
@@ -29,7 +31,7 @@ export async function GET(request: Request) {
 
     // 2. Commit changes
     try {
-      const commitRes = await execAsync(`git commit -m "${commitMsg}"`);
+      const commitRes = await execAsync(`git commit -m "${commitMsg}"`, { cwd });
       results.push("git commit: " + (commitRes.stdout || "done"));
     } catch (commitErr: any) {
       results.push("git commit error: " + commitErr.message + " | " + commitErr.stderr);
@@ -37,13 +39,19 @@ export async function GET(request: Request) {
 
     // 3. Push changes
     try {
-      const pushRes = await execAsync("git push");
+      const pushRes = await execAsync("git push", { cwd });
       results.push("git push: " + (pushRes.stdout || pushRes.stderr || "done"));
     } catch (pushErr: any) {
       results.push("git push error: " + pushErr.message + " | " + pushErr.stderr);
     }
 
-    return NextResponse.json({ success: true, results });
+    return NextResponse.json({ success: true, results }, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
+      }
+    });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message, stderr: err.stderr });
   }
