@@ -146,7 +146,7 @@ export default function InteractiveWorldMap({ onSelectHub }: InteractiveWorldMap
 
   return (
     <div 
-      className="relative w-full aspect-[2/1] bg-slate-50/50 rounded-[3rem] border border-black/5 p-2 flex items-center justify-center overflow-hidden"
+      className="relative w-full aspect-[4/3] md:aspect-[2/1] bg-slate-50/50 rounded-[2rem] md:rounded-[3rem] border border-black/5 p-2 flex items-center justify-center overflow-hidden"
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });

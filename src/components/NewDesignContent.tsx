@@ -52,6 +52,7 @@ const Logo = () => (
   </div>
 );
 
+
 // Optimized 3D Brand Emblem Component (Declared globally to prevent React unmounting lag)
 const ButterySmoothA = ({ 
   isTransitioning, 
@@ -64,7 +65,7 @@ const ButterySmoothA = ({
   
   return (
     <div 
-      className="relative w-[420px] h-[420px] flex items-center justify-center scale-110" 
+      className="relative w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[420px] md:h-[420px] flex items-center justify-center scale-95 sm:scale-105 md:scale-110" 
       style={{ 
         transformStyle: 'preserve-3d',
         willChange: 'transform'
@@ -87,7 +88,7 @@ const ButterySmoothA = ({
               opacity: isFace ? 1 : 0.6
             }}
           >
-            <svg viewBox="0 0 100 100" className="w-[360px] h-[360px] overflow-visible">
+            <svg viewBox="0 0 100 100" className="w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] overflow-visible">
               <defs>
                 <linearGradient id={`grad-hex-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#FF5C6C" />
@@ -147,6 +148,7 @@ export default function NewDesignContent() {
   const [isMounted, setIsMounted] = useState(false);
   const rotationRef = useRef({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Continuous rotation & letter cycling states
   const continuousYRef = useRef(0);
@@ -493,12 +495,71 @@ export default function NewDesignContent() {
             </button>
             <button 
               onClick={() => setAuthModalOpen(true)}
-              className="bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
+              className="hidden md:block bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
             >
               Connect Now
             </button>
+            {/* Mobile menu button */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden p-3 rounded-xl border border-black/10 bg-white/40 backdrop-blur-md hover:border-primary/50 transition-all duration-300 flex items-center justify-center text-[#1a1a2e]/80 hover:text-primary shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+            >
+              <span className="material-symbols-outlined text-lg">
+                {isMobileMenuOpen ? 'close' : 'menu'}
+              </span>
+            </button>
           </div>
         </nav>
+
+        {/* Mobile Drawer Navigation Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-x-0 top-20 z-[99] lg:hidden bg-white/95 backdrop-blur-lg border-b border-black/5 shadow-lg p-6 flex flex-col gap-6"
+            >
+              <div className="flex flex-col gap-4">
+                {['hero', 'learning', 'store', 'labs', 'workshops', 'centres'].map((item) => {
+                  const labels: Record<string, string> = {
+                    hero: 'Home',
+                    learning: 'Learning',
+                    store: 'Store',
+                    labs: 'Innovation Labs',
+                    workshops: 'Workshops',
+                    centres: 'Global Centres'
+                  };
+                  return (
+                    <button
+                      key={item}
+                      className={`text-left py-2 font-bold text-sm uppercase tracking-widest border-b border-black/5 transition-colors ${
+                        activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/60 hover:text-[#1a1a2e]'
+                      }`}
+                      onClick={() => {
+                        navigateTo(item);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      {labels[item] || item}
+                    </button>
+                  );
+                })}
+              </div>
+              
+              <button 
+                onClick={() => {
+                  setAuthModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full bg-primary text-[#1a1a2e] py-4 rounded-xl font-bold text-xs uppercase tracking-widest glow-red text-center"
+              >
+                Connect Now
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <div className={`scene pt-20 transition-opacity duration-300 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
@@ -519,51 +580,51 @@ export default function NewDesignContent() {
 
 
                   <h1 className="font-headline tracking-tighter leading-[0.9]">
-                    <div className="flex items-baseline gap-4 mb-2">
-                      <span className="text-6xl md:text-8xl font-black text-[#1a1a2e] uppercase">
+                    <div className="flex items-baseline gap-2 sm:gap-4 mb-2">
+                      <span className="text-4xl sm:text-6xl md:text-8xl font-black text-[#1a1a2e] uppercase">
                         Center
                       </span>
-                      <span className="text-2xl md:text-4xl font-bold text-[#1a1a2e]/30 uppercase tracking-[0.2em]">of</span>
+                      <span className="text-lg sm:text-2xl md:text-4xl font-bold text-[#1a1a2e]/30 uppercase tracking-[0.2em]">of</span>
                     </div>
-                    <span className="block text-6xl md:text-8xl font-black text-[#EB0028] uppercase">
+                    <span className="block text-4xl sm:text-6xl md:text-8xl font-black text-[#EB0028] uppercase">
                       Excellence
                     </span>
                     <div className="flex items-center gap-4 mt-2">
-                      <span className="h-[2px] w-12 bg-white/10"></span>
-                      <span className="text-3xl md:text-5xl font-black text-[#1a1a2e]/40 uppercase tracking-widest">
+                      <span className="h-[2px] w-8 sm:w-12 bg-white/10"></span>
+                      <span className="text-xl sm:text-3xl md:text-5xl font-black text-[#1a1a2e]/40 uppercase tracking-widest">
                         Innovation
                       </span>
                     </div>
                   </h1>
                   
-                  <p className="text-base md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed border-l-2 border-primary/20 pl-6">
+                  <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed border-l-2 border-primary/20 pl-4 sm:pl-6">
                     Building the digital backbone of Maharashtra through advanced R&D, physical innovation hubs, and strategic technological ecosystems.
                   </p>
 
-                  <div className="flex flex-wrap gap-4 pt-4">
-                    <button className="group relative px-10 py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" onClick={() => navigateTo('labs')}>
+                  <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
+                    <button className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" onClick={() => navigateTo('labs')}>
                       <span className="relative z-10 flex items-center gap-3">Explore Labs <span className="material-symbols-outlined text-sm">bolt</span></span>
                     </button>
-                    <button className="group px-10 py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2" onClick={() => navigateTo('workshops')}>
+                    <button className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2" onClick={() => navigateTo('workshops')}>
                       <span>Watch Protocol</span>
                       <span className="material-symbols-outlined text-sm">play_circle</span>
                     </button>
                   </div>
 
-                  <div className="flex gap-12 pt-8">
+                  <div className="flex gap-6 sm:gap-12 pt-6">
                     <div>
-                      <div className="text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">120<span className="text-primary">+</span></div>
-                      <div className="text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Patents</div>
+                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">120<span className="text-primary">+</span></div>
+                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Patents</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">{labs.length}</div>
-                      <div className="text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Global Hubs</div>
+                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">{labs.length}</div>
+                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Global Hubs</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">24/7</div>
-                      <div className="text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Monitoring</div>
+                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">24/7</div>
+                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Monitoring</div>
+                    </div>
                   </div>
-                </div>
               </div>
 
                 <div className="hidden lg:flex justify-center items-center relative h-[560px] w-full rounded-[3.5rem] overflow-hidden translate-x-12 bg-white border border-black/5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
@@ -1184,7 +1245,7 @@ export default function NewDesignContent() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                 
                 {/* Left Side: Info & Controls */}
-                <div className="lg:col-span-4 space-y-6 relative">
+                <div className="lg:col-span-4 order-2 lg:order-1 space-y-6 relative">
                   <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
                     <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                   </div>
@@ -1253,7 +1314,7 @@ export default function NewDesignContent() {
                       </div>
                       
                       {selectedGlobalHub ? (
-                        <div className="space-y-4 pt-2">
+                        <div className="space-y-4 pt-2 max-h-[380px] overflow-y-auto pr-2 custom-scrollbar">
                           <div className="border-l-2 border-primary/35 pl-4">
                             <h3 className="text-base font-bold text-[#1a1a2e] uppercase tracking-tight font-sans">{selectedGlobalHub.name}</h3>
                             <span className="text-[10px] font-mono text-primary font-bold block mt-0.5">{selectedGlobalHub.location}</span>
@@ -1317,7 +1378,7 @@ export default function NewDesignContent() {
                 </div>
 
                 {/* Right Side: Map Container */}
-                <div className="lg:col-span-8 relative group">
+                <div className="lg:col-span-8 order-1 lg:order-2 relative group">
                   {/* Premium red glow behind the map container */}
                   <div className="absolute -inset-3 bg-gradient-to-tr from-[#EE2C3C]/10 to-[#FF5C6C]/5 rounded-[3.5rem] opacity-80 blur-2xl group-hover:opacity-100 transition-all duration-700 pointer-events-none"></div>
                   
