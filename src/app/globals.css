@@ -84,6 +84,7 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   background: #ffffff;
+  padding-top: 80px;
 }
 
 /* GPU optimizations during 3D rotation */
