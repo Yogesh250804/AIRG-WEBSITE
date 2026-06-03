@@ -380,6 +380,10 @@ a.bg-primary { color: #ffffff !important; }
 .glow-red .text-white,
 button.glow-red { color: #ffffff !important; }
 
+.text-white-force {
+  color: #ffffff !important;
+}
+
 /* ── Map section dark panel — keep dark ────────────────── */
 .cube-face .glass-premium.bg-black\/40 {
   background: rgba(255,255,255,0.85) !important;

@@ -1,4 +1,20 @@
-<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+11:04:33.149 Type error: Cannot find module '@radix-ui/react-accordion' or its corresponding type declarations.
+11:04:33.149   2 |
+11:04:33.149   3 | import * as React from 'react'
+11:04:33.149 > 4 | import * as AccordionPrimitive from '@radix-ui/react-accordion'
+11:04:33.149     |                                     ^
+11:04:33.150   5 | import { ChevronDownIcon } from 'lucide-react'
+11:04:33.150   6 |
+11:04:33.150   7 | import { cn } from '@/lib/utils'
+11:04:33.278 Error: Command "npm run build" exited with 111:04:33.149 Type error: Cannot find module '@radix-ui/react-accordion' or its corresponding type declarations.
+11:04:33.149   2 |
+11:04:33.149   3 | import * as React from 'react'
+11:04:33.149 > 4 | import * as AccordionPrimitive from '@radix-ui/react-accordion'
+11:04:33.149     |                                     ^
+11:04:33.150   5 | import { ChevronDownIcon } from 'lucide-react'
+11:04:33.150   6 |
+11:04:33.150   7 | import { cn } from '@/lib/utils'
+11:04:33.278 Error: Command "npm run build" exited with 1<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
 <head>
     <title>Design and Development Revisions Walkthrough</title>
     <style>

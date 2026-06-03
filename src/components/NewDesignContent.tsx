@@ -52,6 +52,93 @@ const Logo = () => (
   </div>
 );
 
+// Optimized 3D Brand Emblem Component (Declared globally to prevent React unmounting lag)
+const ButterySmoothA = ({ 
+  isTransitioning, 
+  currentLetter = "A"
+}: { 
+  isTransitioning: boolean; 
+  currentLetter?: string; 
+}) => {
+  const layers = isTransitioning ? 2 : 12;
+  
+  return (
+    <div 
+      className="relative w-[420px] h-[420px] flex items-center justify-center scale-110" 
+      style={{ 
+        transformStyle: 'preserve-3d',
+        willChange: 'transform'
+      }}
+    >
+      {/* 3D Layered Depth Stack */}
+      {[...Array(layers)].map((_, i) => {
+        const isFront = i === layers - 1;
+        const isBack = i === 0;
+        const isFace = isFront || isBack;
+        const depthZ = i * 3.5 - (layers * 1.75);
+        
+        return (
+          <div 
+            key={i} 
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+            style={{ 
+              transform: `translateZ(${depthZ}px)`, 
+              transformStyle: 'preserve-3d',
+              opacity: isFace ? 1 : 0.6
+            }}
+          >
+            <svg viewBox="0 0 100 100" className="w-[360px] h-[360px] overflow-visible">
+              <defs>
+                <linearGradient id={`grad-hex-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FF5C6C" />
+                  <stop offset="100%" stopColor="#E11B22" />
+                </linearGradient>
+                <linearGradient id={`grad-a-${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="100%" stopColor="rgba(255, 255, 255, 0.25)" />
+                </linearGradient>
+                {isFace && (
+                  <filter id={`neon-glow-${i}`} colorInterpolationFilters="sRGB">
+                    <feGaussianBlur stdDeviation="1.5" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                )}
+              </defs>
+              
+              {/* Solid Hexagon Core */}
+              <polygon 
+                points="50,22 75,36 75,64 50,78 25,64 25,36" 
+                fill={isFace ? "rgba(10, 22, 40, 0.94)" : "rgba(225, 27, 34, 0.8)"}
+                stroke={isFace ? `url(#grad-hex-${i})` : "transparent"}
+                strokeWidth={isFace ? "2.5" : "0"}
+                strokeLinejoin="round"
+                style={{ filter: isFace ? `url(#neon-glow-${i})` : 'none' }}
+                className={isFace ? "backdrop-blur-md" : ""}
+              />
+
+              {/* Stylized Geometric Letter inside Hexagon */}
+              <text
+                className="emblem-text-layer"
+                x="50"
+                y="51"
+                dominantBaseline="central"
+                textAnchor="middle"
+                fill={isFace ? `url(#grad-a-${i})` : "rgba(255, 255, 255, 0.25)"}
+                fontSize="34"
+                fontWeight="900"
+                fontFamily="var(--font-headline)"
+                opacity="0.9"
+              >
+                {currentLetter}
+              </text>
+            </svg>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 export default function NewDesignContent() {
   const { isAuthModalOpen, setAuthModalOpen } = useAppContext();
   const [activeFace, setActiveFace] = useState("");
@@ -60,6 +147,14 @@ export default function NewDesignContent() {
   const [isMounted, setIsMounted] = useState(false);
   const rotationRef = useRef({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // Continuous rotation & letter cycling states
+  const continuousYRef = useRef(0);
+  const lastIndexRef = useRef(0);
+  const lastCycleRef = useRef(0);
+  const startTimeRef = useRef(Date.now());
+  const letters = ["A", "I", "R", "G"];
+  
   const [activeNetwork, setActiveNetwork] = useState<"india" | "global">("global");
   const [selectedGlobalHub, setSelectedGlobalHub] = useState<any>(null);
   const [isMapFullscreen, setIsMapFullscreen] = useState(false);
@@ -137,6 +232,8 @@ export default function NewDesignContent() {
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const idleY = useMotionValue(0);
+  const letterOpacity = useMotionValue(0.9);
   const xSpring = useSpring(x, { stiffness: 200, damping: 25, restDelta: 0.001 });
   const ySpring = useSpring(y, { stiffness: 200, damping: 25, restDelta: 0.001 });
   
@@ -161,16 +258,38 @@ export default function NewDesignContent() {
     let animationFrame: number;
     
     const animate = () => {
+      // Continuous Y spin for auto-rotate when NOT dragging
       if (!isDragging.current) {
+        const t = (Date.now() - startTimeRef.current) * 0.001; // Elapsed time in seconds starting from 0
+        const T_cycle = 3.5;          // Total time per letter (2.7s pause + 0.8s spin)
+        const T_spin = 0.8;           // Spin transition duration
+        const T_pause = T_cycle - T_spin;
+        
+        const local_t = t % T_cycle;
+        const current_letter_index = Math.floor(t / T_cycle);
+        
+        let rotationAngle = 0;
+        
+        if (local_t < T_pause) {
+          // Keep flat-facing during pause (multiples of 180)
+          rotationAngle = current_letter_index * 180;
+        } else {
+          // Smooth ease-in-out spin transition
+          const progress = (local_t - T_pause) / T_spin;
+          const smooth_progress = (1 - Math.cos(progress * Math.PI)) / 2;
+          rotationAngle = (current_letter_index + smooth_progress) * 180;
+        }
+        
+        idleY.set(rotationAngle);
+        
         const prev = rotationRef.current;
         const targetX = 0;
         const targetY = 0;
         
-        // Snappy spring-back to default straight phase
+        // Snappy spring alignment and float wave
         const baseLerpX = prev.x + (targetX - prev.x) * 0.08;
         const baseLerpY = prev.y + (targetY - prev.y) * 0.08;
         
-        // Subtle, organic float wave
         const time = Date.now() * 0.0015;
         const floatX = Math.sin(time * 1.2) * 3;
         const floatY = Math.cos(time) * 3;
@@ -182,6 +301,28 @@ export default function NewDesignContent() {
         x.set(nextX);
         y.set(nextY);
       }
+
+      // Calculate letter cycle: uses combined angle of auto-spin (idleY) and manual spin (y)
+      // Offsetting/rounding to 180 ensures the letter changes exactly halfway through the rotation (90 degrees, edge-on)
+      const currentAngle = idleY.get() + y.get();
+      const cycle = Math.round(currentAngle / 180);
+      
+      if (cycle !== lastCycleRef.current) {
+        lastCycleRef.current = cycle;
+        const index = ((cycle % letters.length) + letters.length) % letters.length;
+        
+        // Direct DOM update for instant frame-perfect text swap
+        const elements = document.querySelectorAll(".emblem-text-layer");
+        elements.forEach((el) => {
+          el.textContent = letters[index];
+          if (cycle % 2 !== 0) {
+            el.setAttribute("transform", "translate(100, 0) scale(-1, 1)");
+          } else {
+            el.removeAttribute("transform");
+          }
+        });
+      }
+
       animationFrame = requestAnimationFrame(animate);
     };
 
@@ -298,77 +439,7 @@ export default function NewDesignContent() {
 
   const fieldRecords = workshopsData;
 
-  // Optimized 3D Brand Emblem Component
-  const ButterySmoothA = ({ isTransitioning }: { isTransitioning: boolean }) => {
-    const layers = isTransitioning ? 2 : 12;
-    
-    return (
-      <div 
-        className="relative w-[420px] h-[420px] flex items-center justify-center scale-110" 
-        style={{ 
-          transformStyle: 'preserve-3d',
-          willChange: 'transform'
-        }}
-      >
-        {/* 3D Layered Depth Stack */}
-        {[...Array(layers)].map((_, i) => {
-          const isFront = i === layers - 1;
-          const isBack = i === 0;
-          const isFace = isFront || isBack;
-          const depthZ = i * 3.5 - (layers * 1.75);
-          
-          return (
-            <div 
-              key={i} 
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              style={{ 
-                transform: `translateZ(${depthZ}px)`, 
-                transformStyle: 'preserve-3d',
-                opacity: isFace ? 1 : 0.6
-              }}
-            >
-              <svg viewBox="0 0 100 100" className="w-[360px] h-[360px] overflow-visible">
-                <defs>
-                  <linearGradient id={`grad-hex-${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FF5C6C" />
-                    <stop offset="100%" stopColor="#E11B22" />
-                  </linearGradient>
-                  <linearGradient id={`grad-a-${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="100%" stopColor="rgba(255, 255, 255, 0.25)" />
-                  </linearGradient>
-                  {isFace && (
-                    <filter id={`neon-glow-${i}`} colorInterpolationFilters="sRGB">
-                      <feGaussianBlur stdDeviation="1.5" result="blur" />
-                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                  )}
-                </defs>
-                
-                {/* Solid Hexagon Core */}
-                <polygon 
-                  points="50,22 75,36 75,64 50,78 25,64 25,36" 
-                  fill={isFace ? "rgba(10, 22, 40, 0.94)" : "rgba(225, 27, 34, 0.8)"}
-                  stroke={isFace ? `url(#grad-hex-${i})` : "transparent"}
-                  strokeWidth={isFace ? "2.5" : "0"}
-                  strokeLinejoin="round"
-                  style={{ filter: isFace ? `url(#neon-glow-${i})` : 'none' }}
-                  className={isFace ? "backdrop-blur-md" : ""}
-                />
 
-                {/* Stylized Geometric Letter A inside Hexagon */}
-                <path 
-                  d="M50 34 L64 60 H56 L50 48 L44 60 H36 Z" 
-                  fill={isFace ? `url(#grad-a-${i})` : "rgba(255, 255, 255, 0.25)"}
-                  opacity="0.9"
-                />
-              </svg>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
 
   return (
     <div className="font-body bg-white text-[#1a1a2e] overflow-hidden min-h-screen select-none relative">
@@ -667,7 +738,15 @@ export default function NewDesignContent() {
                     }}
                     onMouseDown={handleMouseDown}
                   >
-                    <ButterySmoothA isTransitioning={isTransitioning} />
+                    <motion.div
+                      style={{ rotateY: idleY, transformStyle: 'preserve-3d' }}
+                      className="w-full h-full flex items-center justify-center"
+                    >
+                      <ButterySmoothA 
+                        isTransitioning={isTransitioning} 
+                        currentLetter="A"
+                      />
+                    </motion.div>
                   </motion.div>
                 </div>
               </div>
@@ -1555,67 +1634,239 @@ export default function NewDesignContent() {
                     <span className="material-symbols-outlined text-primary text-xl">emoji_events</span>
                     Active Engineering Competitions
                   </h3>
-                  
-                  <div className="space-y-6">
-                    {[
-                      {
-                        id: "drone",
-                        title: "Maharashtra Autonomous Drone Challenge",
-                        desc: "Program automated flight navigation protocols, obstacle avoidance systems, and precision crop-monitoring payloads for low-altitude drones.",
-                        date: "Oct 12, 2026",
-                        location: "Sakharwadi Agri-Tech Hub",
-                        prize: "₹1,50,000 Cash Prize + Incubation"
-                      },
-                      {
-                        id: "robotics",
-                        title: "Satara Robotics Championship",
-                        desc: "Design and implement neural-network based mechanical controllers for heavy industrial pick-and-place robots.",
-                        date: "Nov 05, 2026",
-                        location: "Mudhoji Lab Center",
-                        prize: "₹2,50,000 Cash Prize + R&D Grant"
-                      },
-                      {
-                        id: "space",
-                        title: "Space Tech & Cubesat Exhibition",
-                        desc: "Develop and test ground station antennas, transceiver modules, and communication boards for micro-satellite nodes.",
-                        date: "Dec 18, 2026",
-                        location: "Rajendra Aerospace Division",
-                        prize: "Elite Internship at ISRO Partners"
-                      }
-                    ].map((comp) => (
-                      <div key={comp.id} className="glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/25 transition-all duration-300 relative overflow-hidden group shadow-sm">
-                        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 relative z-10">
-                          <div className="space-y-3">
-                            <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-[8px] font-black font-mono text-primary uppercase tracking-widest">Registration Open</span>
-                            <h4 className="text-xl font-headline font-bold text-[#1a1a2e] uppercase tracking-tight">{comp.title}</h4>
-                            <p className="text-xs text-[#1a1a2e]/50 leading-relaxed font-light font-body max-w-lg">{comp.desc}</p>
-                            
-                            <div className="flex flex-wrap gap-4 pt-2 font-mono text-[9px] text-[#1a1a2e]/40 uppercase tracking-wider">
-                              <div className="flex items-center gap-1">
-                                <span className="material-symbols-outlined text-xs text-primary">calendar_today</span>
-                                <span>{comp.date}</span>
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <span className="material-symbols-outlined text-xs text-primary">location_on</span>
-                                <span>{comp.location}</span>
-                              </div>
-                              <div className="flex items-center gap-1 font-bold text-primary">
-                                <span className="material-symbols-outlined text-xs">payments</span>
-                                <span>{comp.prize}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <button 
-                            onClick={() => setSelectedComp(comp.title)}
-                            className="bg-[#EB0028] text-white hover:bg-[#EB0028]/90 hover:scale-[1.03] transition-all px-6 py-4.5 rounded-xl text-[10px] font-bold uppercase tracking-widest shrink-0 self-end md:self-start flex items-center gap-2"
-                          >
-                            <span>Register Hub</span>
-                            <span className="material-symbols-outlined text-xs">arrow_forward</span>
-                          </button>
-                        </div>
-                      </div>
-                    ))}
+                  <div className="glass-premium rounded-[2rem] border border-black/5 overflow-hidden shadow-sm">
+                    <div className="overflow-x-auto max-h-[650px] overflow-y-auto custom-scrollbar">
+                      <table className="w-full text-left border-collapse border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+                        <thead>
+                          <tr className="border-b border-slate-300 bg-slate-100 font-sans text-[10px] text-slate-700 uppercase tracking-wider sticky top-0 z-10">
+                            <th className="py-3 px-4 font-bold border-r border-slate-200">Program / Description</th>
+                            <th className="py-3 px-4 font-bold border-r border-slate-200">Organized By</th>
+                            <th className="py-3 px-4 font-bold border-r border-slate-200">Eligibility</th>
+                            <th className="py-3 px-4 font-bold text-center">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200">
+                          {[
+                            {
+                              id: "atl-marathon",
+                              title: "ATL Marathon",
+                              eligibility: "ATL School Students",
+                              desc: "National level technology and innovation competition focusing on AI, Robotics, and STEM solutions. Benefits include national recognition and mentoring.",
+                              organizedBy: "NITI Aayog",
+                              level: "National",
+                              link: "https://aim.gov.in/atl.php"
+                            },
+                            {
+                              id: "sih-junior",
+                              title: "Smart India Hackathon Junior",
+                              eligibility: "School Students",
+                              desc: "National digital product building competition for solving pressing real-life problems of government departments and ministries.",
+                              organizedBy: "Government of India",
+                              level: "National",
+                              link: "https://www.sih.gov.in/"
+                            },
+                            {
+                              id: "inspire-manak",
+                              title: "INSPIRE Awards MANAK",
+                              eligibility: "Class 6–10 Students",
+                              desc: "STEM innovation scheme to foster creative thinking and original ideas in science and societal applications.",
+                              organizedBy: "DST Govt. of India",
+                              level: "National",
+                              link: "https://www.inspireawards-dst.gov.in/"
+                            },
+                            {
+                              id: "ignite-awards",
+                              title: "Dr APJ Abdul Kalam IGNITE Awards",
+                              eligibility: "School Students",
+                              desc: "National competition seeking original technological ideas and innovations from children up to class 12.",
+                              organizedBy: "NIF + DST",
+                              level: "National",
+                              link: "https://nif.org.in/ignite"
+                            },
+                            {
+                              id: "nasa-space-apps",
+                              title: "NASA Space Apps Challenge",
+                              eligibility: "Open Students / Tech Teams",
+                              desc: "Global hackathon where teams use NASA's open data to build solutions for real-world space and Earth challenges.",
+                              organizedBy: "NASA",
+                              level: "Global",
+                              link: "https://www.spaceappschallenge.org/"
+                            },
+                            {
+                              id: "samsung-solve",
+                              title: "Samsung Solve for Tomorrow",
+                              eligibility: "Youth Aged 14–22 Years",
+                              desc: "STEM innovation competition encouraging young minds to build technology ideas addressing social and community issues.",
+                              organizedBy: "Samsung India",
+                              level: "National",
+                              link: "https://www.samsung.com/in/solvefortomorrow/"
+                            },
+                            {
+                              id: "vivo-ignite",
+                              title: "Vivo Ignite Technology Initiative",
+                              eligibility: "Class 8–12 Students",
+                              desc: "Platform designed to promote scientific reasoning and technological innovation among secondary school students.",
+                              organizedBy: "Vivo India",
+                              level: "National",
+                              link: "https://www.vivoignite.com/"
+                            },
+                            {
+                              id: "codeavour",
+                              title: "Codeavour International",
+                              eligibility: "K–12 Students",
+                              desc: "International AI, coding, and robotics competition that challenges students to build smart automation projects.",
+                              organizedBy: "STEMpedia",
+                              level: "International",
+                              link: "https://codeavour.org/"
+                            },
+                            {
+                              id: "cbse-ai",
+                              title: "CBSE AI Hackathon",
+                              eligibility: "CBSE School Students",
+                              desc: "Competitive platform encouraging students to apply Artificial Intelligence algorithms to solve real-world problems.",
+                              organizedBy: "CBSE",
+                              level: "National",
+                              link: "https://cbseacademic.nic.in/"
+                            },
+                            {
+                              id: "toycathon",
+                              title: "Toycathon",
+                              eligibility: "School & College Students",
+                              desc: "Innovative challenge targeting IoT and indigenous game conceptualization to revive cultural toys and tech designs.",
+                              organizedBy: "Ministry of Education",
+                              level: "National",
+                              link: "https://toycathon.mic.gov.in/"
+                            },
+                            {
+                              id: "futurex-ai",
+                              title: "FutureX AI Challenge",
+                              eligibility: "Grade 6–12 Students",
+                              desc: "Emerging tech challenge focusing on AI & IoT implementations to solve daily lifestyle and environmental concerns.",
+                              organizedBy: "Wonder Minds",
+                              level: "National",
+                              link: "https://aim.gov.in/"
+                            },
+                            {
+                              id: "robocraze-stem",
+                              title: "Robocraze STEM-A-Thon",
+                              eligibility: "School Students",
+                              desc: "Focused STEM and Robotics showcase challenge where young innovators present automated mechanical models.",
+                              organizedBy: "Robocraze + Pludo",
+                              level: "National",
+                              link: "https://robocraze.com/"
+                            },
+                            {
+                              id: "atl-challenges",
+                              title: "Atal Tinkering Lab Challenges",
+                              eligibility: "ATL School Affiliates",
+                              desc: "Sectoral challenges spanning robotics, IoT, and green tech designed to promote an active innovation ecosystem.",
+                              organizedBy: "NITI Aayog",
+                              level: "National",
+                              link: "https://aim.gov.in/"
+                            },
+                            {
+                              id: "astp-olympiad",
+                              title: "ASTP National Science Talent Olympiad",
+                              eligibility: "Class 6–10 Students",
+                              desc: "Rigorous academic examination and practical showcase evaluating advanced STEM knowledge.",
+                              organizedBy: "ASTP India",
+                              level: "National",
+                              link: "https://astp.in/"
+                            },
+                            {
+                              id: "vvm-science",
+                              title: "Vidyarthi Vigyan Manthan (VVM)",
+                              eligibility: "Class 6–11 Students",
+                              desc: "National talent search program aimed at identifying and nurturing students with a keen interest in science.",
+                              organizedBy: "Vigyan Prasar",
+                              level: "National",
+                              link: "https://vvm.org.in/"
+                            },
+                            {
+                              id: "reliance-scholarship",
+                              title: "Reliance Foundation Scholarships",
+                              eligibility: "School & College Students",
+                              desc: "Prestigious funding opportunity supporting students pursuing STEM and technology-based courses.",
+                              organizedBy: "Reliance Foundation",
+                              level: "National",
+                              link: "https://www.scholarships.reliancefoundation.org/"
+                            },
+                            {
+                              id: "hdfc-parivartan",
+                              title: "HDFC Bank Parivartan Scholarship",
+                              eligibility: "Underprivileged School Students",
+                              desc: "Education support scheme ensuring access to smart learning and tech toolkits for meritorious students.",
+                              organizedBy: "HDFC Bank",
+                              level: "National",
+                              link: "https://www.buddy4study.com/page/hdfc-educational-crisis-scholarship-support-ecss"
+                            },
+                            {
+                              id: "icici-programs",
+                              title: "ICICI Foundation Digital Skill Programs",
+                              eligibility: "Students & Associated Schools",
+                              desc: "Vocational and digital literacy training initiatives utilizing high-tech simulation packages.",
+                              organizedBy: "ICICI Bank",
+                              level: "National",
+                              link: "https://www.icicifoundation.org/"
+                            },
+                            {
+                              id: "tata-building-india",
+                              title: "Tata Building India Competition",
+                              eligibility: "School Students",
+                              desc: "Prestigious essay and concept competition focused on nation-building topics and community tech solutions.",
+                              organizedBy: "Tata Group",
+                              level: "National",
+                              link: "https://www.tatabuildingindia.com/"
+                            },
+                            {
+                              id: "siemens-scholarship",
+                              title: "Siemens Scholarship Program",
+                              eligibility: "Engineering & STEM Students",
+                              desc: "Scholarship program for first-year engineering students, offering tuition fees, books, and laptops.",
+                              organizedBy: "Siemens India",
+                              level: "National",
+                              link: "https://www.siemens.co.in/about-us/corporate-citizenship/siemens-scholarship-program.html"
+                            },
+                            {
+                              id: "iet-scholarship",
+                              title: "IET India Scholarship Award",
+                              eligibility: "Technology Pathway Students",
+                              desc: "National award recognizing tech-based vision, excellence, and creative leadership in engineering.",
+                              organizedBy: "IET India",
+                              level: "National",
+                              link: "https://scholarships.theiet.in/"
+                            }
+                          ].map((comp) => (
+                            <tr key={comp.id} className="hover:bg-slate-50 even:bg-slate-50/40 transition-colors group">
+                              <td className="py-4 px-4 align-top border-r border-slate-200">
+                                <div className="font-sans font-bold text-slate-800 text-xs uppercase tracking-tight group-hover:text-primary transition-colors">{comp.title}</div>
+                                <div className="text-[11px] text-slate-500 mt-1 max-w-sm font-light leading-relaxed font-sans">{comp.desc}</div>
+                              </td>
+                              <td className="py-4 px-4 align-top border-r border-slate-200">
+                                <div className="font-sans font-bold text-slate-700 text-[10px] uppercase tracking-wide">{comp.organizedBy}</div>
+                                <div className="text-[9px] text-slate-400 font-mono mt-0.5 uppercase tracking-wide">{comp.level}</div>
+                              </td>
+                              <td className="py-4 px-4 align-top border-r border-slate-200 whitespace-nowrap">
+                                <span className="inline-block px-2.5 py-1 bg-slate-100 border border-slate-300 rounded-md text-[9px] font-bold font-sans text-slate-800 uppercase tracking-wider">
+                                  {comp.eligibility}
+                                </span>
+                              </td>
+                              <td className="py-4 px-4 text-center align-middle">
+                                <a 
+                                  href={comp.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center gap-1 text-slate-700 hover:text-slate-950 hover:underline transition-colors text-[10px] font-bold uppercase tracking-wider font-sans"
+                                >
+                                  <span>Register</span>
+                                  <span className="material-symbols-outlined text-[12px] shrink-0">open_in_new</span>
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
 

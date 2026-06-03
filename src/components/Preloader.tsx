@@ -16,13 +16,13 @@ export default function Preloader({ onComplete }: PreloaderProps) {
       setAnimate(true);
     }, 50);
 
-    // Complete the preloader after the slide-down transition ends (~1.0s)
+    // Complete the preloader after the slide-down transition ends (~1.5s total)
     const completeTimeout = setTimeout(() => {
       setVisible(false);
       if (onComplete) {
         onComplete();
       }
-    }, 1000);
+    }, 1500);
 
     return () => {
       clearTimeout(animTimeout);
@@ -44,7 +44,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           className="h-full w-[10%] bg-[#EB0028] border-r border-white/5 pointer-events-auto transition-transform duration-500 ease-in-out will-change-transform"
           style={{
             transform: animate ? "translateY(100%)" : "translateY(0%)",
-            transitionDelay: `${0.1 + i * 0.03}s`,
+            transitionDelay: `${0.6 + i * 0.04}s`,
           }}
         />
       ))}
@@ -54,7 +54,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         className="name-text flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] w-full px-4 transition-opacity duration-300 text-center select-none"
         style={{
           opacity: animate ? 0 : 1,
-          transitionDelay: "0.4s",
+          transitionDelay: "0.9s",
         }}
       >
         {/* Line 1: AIRG */}
@@ -65,7 +65,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               className="inline-block transition-transform duration-300 ease-out will-change-transform"
               style={{
                 transform: animate ? "translateY(0%)" : "translateY(105%)",
-                transitionDelay: `${idx * 0.02}s`,
+                transitionDelay: `${idx * 0.03}s`,
               }}
             >
               {char}
@@ -81,7 +81,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               className="inline-block transition-transform duration-300 ease-out will-change-transform"
               style={{
                 transform: animate ? "translateY(0%)" : "translateY(105%)",
-                transitionDelay: `${0.08 + idx * 0.01}s`,
+                transitionDelay: `${0.12 + idx * 0.02}s`,
               }}
             >
               {char}
