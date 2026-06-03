@@ -527,7 +527,7 @@ export const labsData: Lab[] = [
   {
     "slug": "holy-convent",
     "name": "Holy Convent Lab",
-    "icon": "vr_video",
+    "icon": "vrpano",
     "sIcon": "visibility",
     "desc": "Immersive VR Education. Navigating solar systems and organic cells in virtual headsets.",
     "detailedDesc": "Located at Holy Convent in Karad, this lab utilizes VR to teach complex sciences. Students take virtual field trips to space, examine microscopic cells, and manipulate virtual organs to bring textbooks to life.",
