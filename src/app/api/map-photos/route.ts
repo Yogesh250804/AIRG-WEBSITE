@@ -27,33 +27,27 @@ export async function GET() {
       return NextResponse.json({ success: false, error: "No images found in extracted-hi" });
     }
 
-    // Read the labs.ts content
-    let labsContent = fs.readFileSync(labsFilePath, "utf8");
-
-    // We will parse the labsData block and replace images
-    // Let's read the current labsData
+    // Read current labsData
     const labsDataModule = await import("@/data/labs");
     const labsData = labsDataModule.labsData;
 
-    // Distribute images. We have 27 images and 15 labs.
-    // Each lab will get 3 images, cycling through the 27 images.
+    // Map disjoint photo sets
+    // We have 27 images:
+    // - Labs 0 to 14 (15 labs) get unique primary images from index 0 to 14.
+    // - The remaining 12 images (index 15 to 26) are distributed as secondary images.
     const updatedLabs = labsData.map((lab, index) => {
-      const startIdx = (index * 2) % images.length;
-      // take 3 images per lab
-      const labImages = [
-        images[startIdx],
-        images[(startIdx + 1) % images.length],
-        images[(startIdx + 2) % images.length]
-      ];
+      const primaryImage = images[index % images.length];
+      const secondaryImage = images[15 + (index % 12)];
+
+      const labImages = [primaryImage, secondaryImage];
 
       return {
         ...lab,
-        img: labImages[0],
+        img: primaryImage,
         images: labImages
       };
     });
 
-    // Generate a fresh labs.ts file content
     const fileHeader = `export interface Lab {
   slug: string;
   name: string;
@@ -76,8 +70,7 @@ export const labsData: Lab[] = `;
 
     return NextResponse.json({ 
       success: true, 
-      message: `Successfully mapped ${images.length} photos to ${updatedLabs.length} labs.`,
-      sampleImages: updatedLabs[0].images
+      message: `Successfully mapped disjoint photo sets to ${updatedLabs.length} labs.`
     });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message });

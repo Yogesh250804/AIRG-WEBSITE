@@ -25,8 +25,7 @@ export const labsData: Lab[] = [
     "img": "/extracted-hi/09462899-fd09-4dd9-9f48-a2ef7174280e.jpeg",
     "images": [
       "/extracted-hi/09462899-fd09-4dd9-9f48-a2ef7174280e.jpeg",
-      "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
-      "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg"
+      "/extracted-hi/8de7aef7-e23f-4fcb-af05-fba1a8be7031.jpeg"
     ],
     "techStack": [
       "Arduino UNO",
@@ -63,11 +62,10 @@ export const labsData: Lab[] = [
     "desc": "Agricultural Tech & Science. Automated irrigation prototypes and soil moisture telemetry developed by students.",
     "detailedDesc": "Located at Sakharwadi High School, this lab leverages technology to understand local agriculture. Students write code to interface soil sensors with automated water pumps, building practical smart-watering systems and weather monitoring stations.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
+    "img": "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
     "images": [
-      "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
-      "/extracted-hi/13b605b2-a681-45de-911d-b3724780786c.jpeg",
-      "/extracted-hi/15bb553a-5336-4d36-8c55-818efdfbac5f.jpeg"
+      "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
+      "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg"
     ],
     "techStack": [
       "Soil Moisture Sensors",
@@ -103,11 +101,10 @@ export const labsData: Lab[] = [
     "desc": "Aerodynamics & Flight Science. Assembly of educational gliders and model rockets to teach physics.",
     "detailedDesc": "Situated at Rajendra School in Khandala, this lab introduces students to aviation science. Through constructing model gliders, studying wind resistance, and mapping flight paths, physics concepts are made active and engaging.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/15bb553a-5336-4d36-8c55-818efdfbac5f.jpeg",
+    "img": "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
     "images": [
-      "/extracted-hi/15bb553a-5336-4d36-8c55-818efdfbac5f.jpeg",
-      "/extracted-hi/1b6ad0f0-e1bb-4ef7-b799-60d07bbc9800.jpeg",
-      "/extracted-hi/2b5a45d0-4af7-4af0-9ce7-050df50662f4.jpeg"
+      "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
+      "/extracted-hi/acdaffd4-7572-43c2-8b34-2a0df298aca1.jpeg"
     ],
     "techStack": [
       "Model Glider Kits",
@@ -143,11 +140,10 @@ export const labsData: Lab[] = [
     "desc": "Electronics & Logic Circuitry. Breadboard circuit assembly and digital logic gate demonstrations.",
     "detailedDesc": "The Sant Tukaram Lab provides a solid foundation in electronics. Students learn to assemble fundamental logic gates on breadboards, utilize resistors, transistors, and LEDs, and understand the core hardware components that make up modern computers.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/2b5a45d0-4af7-4af0-9ce7-050df50662f4.jpeg",
+    "img": "/extracted-hi/13b605b2-a681-45de-911d-b3724780786c.jpeg",
     "images": [
-      "/extracted-hi/2b5a45d0-4af7-4af0-9ce7-050df50662f4.jpeg",
-      "/extracted-hi/2dedec70-5df7-4417-a08f-16a09e3ba02a.jpeg",
-      "/extracted-hi/36ce59c9-c73c-4415-9b0b-9b3453af7866.jpeg"
+      "/extracted-hi/13b605b2-a681-45de-911d-b3724780786c.jpeg",
+      "/extracted-hi/b6994ed0-bfb9-46cd-984b-5924a8bcd659.jpeg"
     ],
     "techStack": [
       "Breadboards",
@@ -184,11 +180,10 @@ export const labsData: Lab[] = [
     "desc": "Biology Sensors & STEM. Interfacing pulse sensors and thermal nodes to teach human anatomy.",
     "detailedDesc": "At Swami Ramanand Lab, biology meets technology. Students use heart-rate monitors, temperature probes, and respiratory telemetry kits to map physical responses during exercise, learning biological systems through interactive sensor data.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/36ce59c9-c73c-4415-9b0b-9b3453af7866.jpeg",
+    "img": "/extracted-hi/15bb553a-5336-4d36-8c55-818efdfbac5f.jpeg",
     "images": [
-      "/extracted-hi/36ce59c9-c73c-4415-9b0b-9b3453af7866.jpeg",
-      "/extracted-hi/428fac04-8639-484f-bfe1-625d489fdaa1.jpeg",
-      "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg"
+      "/extracted-hi/15bb553a-5336-4d36-8c55-818efdfbac5f.jpeg",
+      "/extracted-hi/d2e24064-920f-4c3d-9542-8c43a0bcb403.jpeg"
     ],
     "techStack": [
       "Heart Rate Monitors",
@@ -224,11 +219,10 @@ export const labsData: Lab[] = [
     "desc": "Microcontrollers & Displays. Coding LED pixel panels and running simple games on Arduino.",
     "detailedDesc": "Koteshwar Vidyaly Lab in Wai focuses on embedded software. Students connect microchips with LED matrices, programming basic snake games, countdown timers, and scrolling message displays.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg",
+    "img": "/extracted-hi/1b6ad0f0-e1bb-4ef7-b799-60d07bbc9800.jpeg",
     "images": [
-      "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg",
-      "/extracted-hi/4fa71794-9da2-4237-bce5-5ab472591b79.jpeg",
-      "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg"
+      "/extracted-hi/1b6ad0f0-e1bb-4ef7-b799-60d07bbc9800.jpeg",
+      "/extracted-hi/d4e1f097-6287-480b-a416-68daa23276ee.jpeg"
     ],
     "techStack": [
       "Arduino Nano",
@@ -265,11 +259,10 @@ export const labsData: Lab[] = [
     "desc": "Cyber Literacy & Web Basics. Teaching safe browsing, local web building, and internet safety.",
     "detailedDesc": "Shauryasaihiki Lab teaches students HTML/CSS essentials and basic internet hygiene. Topics include strong password creation, identifying phishing emails, and building personal static website portfolios.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg",
+    "img": "/extracted-hi/2b5a45d0-4af7-4af0-9ce7-050df50662f4.jpeg",
     "images": [
-      "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg",
-      "/extracted-hi/71604ee3-d3a6-4fa5-af0a-3d7ea92a82e6.jpeg",
-      "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg"
+      "/extracted-hi/2b5a45d0-4af7-4af0-9ce7-050df50662f4.jpeg",
+      "/extracted-hi/dad8acc1-522d-4606-9fb3-2523bb7e3fbd.jpeg"
     ],
     "techStack": [
       "HTML5",
@@ -305,11 +298,10 @@ export const labsData: Lab[] = [
     "desc": "Renewable Energy Models. Building mini solar trackers and studying green energy sources.",
     "detailedDesc": "Kshitij Hub focuses on ecological science. Students build mini solar panels that follow the light, assemble wind turbine toys, and track daily energy generated by clean models around the classroom.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg",
+    "img": "/extracted-hi/2dedec70-5df7-4417-a08f-16a09e3ba02a.jpeg",
     "images": [
-      "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg",
-      "/extracted-hi/8de7aef7-e23f-4fcb-af05-fba1a8be7031.jpeg",
-      "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg"
+      "/extracted-hi/2dedec70-5df7-4417-a08f-16a09e3ba02a.jpeg",
+      "/extracted-hi/e6ae9a91-8e6f-4f86-934e-95601aef7e25.jpeg"
     ],
     "techStack": [
       "Mini Solar Panels",
@@ -345,11 +337,10 @@ export const labsData: Lab[] = [
     "desc": "Autonomous Mobile Models. Coding line-following cars and ultrasonic obstacle avoidance.",
     "detailedDesc": "Shivtej Aare Lab teaches spatial mechanics. Students mount ultrasonic rangefinders to miniature smart cars, programming them to navigate around walls and complete small maze courses without crashing.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg",
+    "img": "/extracted-hi/36ce59c9-c73c-4415-9b0b-9b3453af7866.jpeg",
     "images": [
-      "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg",
-      "/extracted-hi/acdaffd4-7572-43c2-8b34-2a0df298aca1.jpeg",
-      "/extracted-hi/b6994ed0-bfb9-46cd-984b-5924a8bcd659.jpeg"
+      "/extracted-hi/36ce59c9-c73c-4415-9b0b-9b3453af7866.jpeg",
+      "/extracted-hi/eb25e183-eb9d-482d-ae58-03d3f64f9d90.jpeg"
     ],
     "techStack": [
       "Smart Car Chassis",
@@ -385,11 +376,10 @@ export const labsData: Lab[] = [
     "desc": "Design & Construction. 3D modeling and evaluating geometric bridge models.",
     "detailedDesc": "Birla Innovation Lab combines structural arts with physics. Students create bridge and dome models using 3D CAD design tools, testing their strength under weights to study compression, tension, and load limits.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/b6994ed0-bfb9-46cd-984b-5924a8bcd659.jpeg",
+    "img": "/extracted-hi/428fac04-8639-484f-bfe1-625d489fdaa1.jpeg",
     "images": [
-      "/extracted-hi/b6994ed0-bfb9-46cd-984b-5924a8bcd659.jpeg",
-      "/extracted-hi/d2e24064-920f-4c3d-9542-8c43a0bcb403.jpeg",
-      "/extracted-hi/d4e1f097-6287-480b-a416-68daa23276ee.jpeg"
+      "/extracted-hi/428fac04-8639-484f-bfe1-625d489fdaa1.jpeg",
+      "/extracted-hi/f4a4c6c9-c67c-4e32-825b-87dac1c4b72b.jpeg"
     ],
     "techStack": [
       "3D CAD Design",
@@ -425,11 +415,10 @@ export const labsData: Lab[] = [
     "desc": "Weather Telemetry & IoT. Running connected weather stations to record local temperature.",
     "detailedDesc": "S.S. Nikam Lab introduces internet-connected devices. Middle schoolers configure temperature, humidity, and barometric sensors, uploading live local weather charts to a shared campus web page.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/d4e1f097-6287-480b-a416-68daa23276ee.jpeg",
+    "img": "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg",
     "images": [
-      "/extracted-hi/d4e1f097-6287-480b-a416-68daa23276ee.jpeg",
-      "/extracted-hi/dad8acc1-522d-4606-9fb3-2523bb7e3fbd.jpeg",
-      "/extracted-hi/e6ae9a91-8e6f-4f86-934e-95601aef7e25.jpeg"
+      "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg",
+      "/extracted-hi/fa1640fb-1fb4-499e-a1f4-52861ca1beca.jpeg"
     ],
     "techStack": [
       "DHT11 Temperature Sensor",
@@ -465,11 +454,10 @@ export const labsData: Lab[] = [
     "desc": "Local Language Software. Building simple scratch-based translation tools for learning.",
     "detailedDesc": "Shoran Tech Lab teaches computer software integration with languages. Students build voice translation apps, regional language dictionaries, and interactive scratch games that speak Marathi and Hindi.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/e6ae9a91-8e6f-4f86-934e-95601aef7e25.jpeg",
+    "img": "/extracted-hi/4fa71794-9da2-4237-bce5-5ab472591b79.jpeg",
     "images": [
-      "/extracted-hi/e6ae9a91-8e6f-4f86-934e-95601aef7e25.jpeg",
-      "/extracted-hi/eb25e183-eb9d-482d-ae58-03d3f64f9d90.jpeg",
-      "/extracted-hi/f4a4c6c9-c67c-4e32-825b-87dac1c4b72b.jpeg"
+      "/extracted-hi/4fa71794-9da2-4237-bce5-5ab472591b79.jpeg",
+      "/extracted-hi/fb8255e5-dfd3-4eb7-bd23-f0027f2c99ff.jpeg"
     ],
     "techStack": [
       "Scratch Audio Blocks",
@@ -505,11 +493,10 @@ export const labsData: Lab[] = [
     "desc": "Fluid Flow Models. Building automatic school water level regulators and tank alerts.",
     "detailedDesc": "The Venurai Chavan Lab introduces water conservation tech. Students program ultrasonic depth sensors to read school water levels, building automatic pump cutoff switches to prevent overflow.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/f4a4c6c9-c67c-4e32-825b-87dac1c4b72b.jpeg",
+    "img": "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg",
     "images": [
-      "/extracted-hi/f4a4c6c9-c67c-4e32-825b-87dac1c4b72b.jpeg",
-      "/extracted-hi/fa1640fb-1fb4-499e-a1f4-52861ca1beca.jpeg",
-      "/extracted-hi/fb8255e5-dfd3-4eb7-bd23-f0027f2c99ff.jpeg"
+      "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg",
+      "/extracted-hi/8de7aef7-e23f-4fcb-af05-fba1a8be7031.jpeg"
     ],
     "techStack": [
       "Ultrasonic Depth Sensors",
@@ -545,11 +532,10 @@ export const labsData: Lab[] = [
     "desc": "Immersive VR Education. Navigating solar systems and organic cells in virtual headsets.",
     "detailedDesc": "Located at Holy Convent in Karad, this lab utilizes VR to teach complex sciences. Students take virtual field trips to space, examine microscopic cells, and manipulate virtual organs to bring textbooks to life.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/fb8255e5-dfd3-4eb7-bd23-f0027f2c99ff.jpeg",
+    "img": "/extracted-hi/71604ee3-d3a6-4fa5-af0a-3d7ea92a82e6.jpeg",
     "images": [
-      "/extracted-hi/fb8255e5-dfd3-4eb7-bd23-f0027f2c99ff.jpeg",
-      "/extracted-hi/09462899-fd09-4dd9-9f48-a2ef7174280e.jpeg",
-      "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg"
+      "/extracted-hi/71604ee3-d3a6-4fa5-af0a-3d7ea92a82e6.jpeg",
+      "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg"
     ],
     "techStack": [
       "VR Educational Suites",
@@ -585,11 +571,10 @@ export const labsData: Lab[] = [
     "desc": "Coding & Algorithms. Basic Python workshops and logic puzzles to teach computational thinking.",
     "detailedDesc": "EON Hub focuses on computer programming fundamentals. Through solving logic puzzles, writing basic Python algorithms, and sorting lists, students develop strong computational thinking skills.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
+    "img": "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg",
     "images": [
-      "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
-      "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
-      "/extracted-hi/13b605b2-a681-45de-911d-b3724780786c.jpeg"
+      "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg",
+      "/extracted-hi/acdaffd4-7572-43c2-8b34-2a0df298aca1.jpeg"
     ],
     "techStack": [
       "Python 3",
