@@ -9,27 +9,18 @@ export async function GET(request: Request) {
   try {
     const results: string[] = [];
     const { searchParams } = new URL(request.url);
-    const commitMsg = searchParams.get("msg") || "Fix global outreach layout shifting and vertical overflow";
+    const commitMsg = searchParams.get("msg") || "Update website features";
     const cwd = process.cwd();
-    results.push("cwd: " + cwd);
 
-    // 1. Git add
+    // 1. Stage changes
     try {
-      const addRes = await execAsync("git add src/components/NewDesignContent.tsx src/app/api/git-commit/route.ts", { cwd });
+      const addRes = await execAsync("git add .", { cwd });
       results.push("git add: " + (addRes.stdout || "done"));
     } catch (addErr: any) {
       results.push("git add error: " + addErr.message);
     }
 
-    // 2. Git status
-    try {
-      const statusRes = await execAsync("git status", { cwd });
-      results.push("git status: " + statusRes.stdout);
-    } catch (statusErr: any) {
-      results.push("git status error: " + statusErr.message);
-    }
-
-    // 3. Git commit
+    // 2. Commit changes
     try {
       const commitRes = await execAsync(`git commit -m "${commitMsg}"`, { cwd });
       results.push("git commit: " + (commitRes.stdout || "done"));
@@ -37,9 +28,9 @@ export async function GET(request: Request) {
       results.push("git commit error: " + commitErr.message);
     }
 
-    // 4. Git push
+    // 3. Push changes
     try {
-      const pushRes = await execAsync("git push", { cwd });
+      const pushRes = await execAsync("git push origin main", { cwd });
       results.push("git push: " + (pushRes.stdout || pushRes.stderr || "done"));
     } catch (pushErr: any) {
       results.push("git push error: " + pushErr.message);
