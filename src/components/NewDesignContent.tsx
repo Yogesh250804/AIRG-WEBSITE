@@ -1249,6 +1249,19 @@ export default function NewDesignContent() {
                           <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-body">
                             {selectedGlobalHub.description}
                           </p>
+
+                           {selectedGlobalHub.flyer && (
+                            <div className="rounded-2xl overflow-hidden border border-black/10 shadow-sm">
+                              <Image 
+                                src={selectedGlobalHub.flyer} 
+                                alt="Founder Profile" 
+                                width={400} 
+                                height={400}
+                                className="w-full h-auto object-cover"
+                              />
+                            </div>
+                          )}
+
                           <div className="space-y-3.5">
                             {selectedGlobalHub.stats.map((stat: any, idx: number) => (
                               <div key={idx} className="flex justify-between items-center text-[10px] border-b border-black/5 pb-2 font-mono">
@@ -1628,8 +1641,8 @@ export default function NewDesignContent() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                {/* COLUMN 1: COMPETITIONS REGISTRATION (Left, 7 spans) */}
-                <div className="lg:col-span-7 space-y-6">
+                {/* COLUMN 1: COMPETITIONS REGISTRATION (Left, 8 spans) */}
+                <div className="lg:col-span-8 space-y-6">
                   <h3 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-2">
                     <span className="material-symbols-outlined text-primary text-xl">emoji_events</span>
                     Active Engineering Competitions
@@ -1641,6 +1654,7 @@ export default function NewDesignContent() {
                           <tr className="border-b border-slate-300 bg-slate-100 font-sans text-[10px] text-slate-700 uppercase tracking-wider sticky top-0 z-10">
                             <th className="py-3 px-4 font-bold border-r border-slate-200">Program / Description</th>
                             <th className="py-3 px-4 font-bold border-r border-slate-200">Organized By</th>
+                            <th className="py-3 px-4 font-bold border-r border-slate-200 text-center">Timeline / Dates</th>
                             <th className="py-3 px-4 font-bold border-r border-slate-200">Eligibility</th>
                             <th className="py-3 px-4 font-bold text-center">Action</th>
                           </tr>
@@ -1654,6 +1668,7 @@ export default function NewDesignContent() {
                               desc: "National level technology and innovation competition focusing on AI, Robotics, and STEM solutions. Benefits include national recognition and mentoring.",
                               organizedBy: "NITI Aayog",
                               level: "National",
+                              timeline: "July – December",
                               link: "https://aim.gov.in/atl.php"
                             },
                             {
@@ -1663,6 +1678,7 @@ export default function NewDesignContent() {
                               desc: "National digital product building competition for solving pressing real-life problems of government departments and ministries.",
                               organizedBy: "Government of India",
                               level: "National",
+                              timeline: "August – September",
                               link: "https://www.sih.gov.in/"
                             },
                             {
@@ -1672,6 +1688,7 @@ export default function NewDesignContent() {
                               desc: "STEM innovation scheme to foster creative thinking and original ideas in science and societal applications.",
                               organizedBy: "DST Govt. of India",
                               level: "National",
+                              timeline: "June – September",
                               link: "https://www.inspireawards-dst.gov.in/"
                             },
                             {
@@ -1681,6 +1698,7 @@ export default function NewDesignContent() {
                               desc: "National competition seeking original technological ideas and innovations from children up to class 12.",
                               organizedBy: "NIF + DST",
                               level: "National",
+                              timeline: "March – August",
                               link: "https://nif.org.in/ignite"
                             },
                             {
@@ -1690,6 +1708,7 @@ export default function NewDesignContent() {
                               desc: "Global hackathon where teams use NASA's open data to build solutions for real-world space and Earth challenges.",
                               organizedBy: "NASA",
                               level: "Global",
+                              timeline: "July – October",
                               link: "https://www.spaceappschallenge.org/"
                             },
                             {
@@ -1699,6 +1718,7 @@ export default function NewDesignContent() {
                               desc: "STEM innovation competition encouraging young minds to build technology ideas addressing social and community issues.",
                               organizedBy: "Samsung India",
                               level: "National",
+                              timeline: "May – July",
                               link: "https://www.samsung.com/in/solvefortomorrow/"
                             },
                             {
@@ -1708,6 +1728,7 @@ export default function NewDesignContent() {
                               desc: "Platform designed to promote scientific reasoning and technological innovation among secondary school students.",
                               organizedBy: "Vivo India",
                               level: "National",
+                              timeline: "April – June",
                               link: "https://www.vivoignite.com/"
                             },
                             {
@@ -1717,6 +1738,7 @@ export default function NewDesignContent() {
                               desc: "International AI, coding, and robotics competition that challenges students to build smart automation projects.",
                               organizedBy: "STEMpedia",
                               level: "International",
+                              timeline: "September – December",
                               link: "https://codeavour.org/"
                             },
                             {
@@ -1726,6 +1748,7 @@ export default function NewDesignContent() {
                               desc: "Competitive platform encouraging students to apply Artificial Intelligence algorithms to solve real-world problems.",
                               organizedBy: "CBSE",
                               level: "National",
+                              timeline: "October – November",
                               link: "https://cbseacademic.nic.in/"
                             },
                             {
@@ -1735,6 +1758,7 @@ export default function NewDesignContent() {
                               desc: "Innovative challenge targeting IoT and indigenous game conceptualization to revive cultural toys and tech designs.",
                               organizedBy: "Ministry of Education",
                               level: "National",
+                              timeline: "November – December",
                               link: "https://toycathon.mic.gov.in/"
                             },
                             {
@@ -1744,6 +1768,7 @@ export default function NewDesignContent() {
                               desc: "Emerging tech challenge focusing on AI & IoT implementations to solve daily lifestyle and environmental concerns.",
                               organizedBy: "Wonder Minds",
                               level: "National",
+                              timeline: "September – November",
                               link: "https://aim.gov.in/"
                             },
                             {
@@ -1753,6 +1778,7 @@ export default function NewDesignContent() {
                               desc: "Focused STEM and Robotics showcase challenge where young innovators present automated mechanical models.",
                               organizedBy: "Robocraze + Pludo",
                               level: "National",
+                              timeline: "November – December",
                               link: "https://robocraze.com/"
                             },
                             {
@@ -1762,6 +1788,7 @@ export default function NewDesignContent() {
                               desc: "Sectoral challenges spanning robotics, IoT, and green tech designed to promote an active innovation ecosystem.",
                               organizedBy: "NITI Aayog",
                               level: "National",
+                              timeline: "Year-Round",
                               link: "https://aim.gov.in/"
                             },
                             {
@@ -1771,6 +1798,7 @@ export default function NewDesignContent() {
                               desc: "Rigorous academic examination and practical showcase evaluating advanced STEM knowledge.",
                               organizedBy: "ASTP India",
                               level: "National",
+                              timeline: "November – January",
                               link: "https://astp.in/"
                             },
                             {
@@ -1780,6 +1808,7 @@ export default function NewDesignContent() {
                               desc: "National talent search program aimed at identifying and nurturing students with a keen interest in science.",
                               organizedBy: "Vigyan Prasar",
                               level: "National",
+                              timeline: "August – October",
                               link: "https://vvm.org.in/"
                             },
                             {
@@ -1789,6 +1818,7 @@ export default function NewDesignContent() {
                               desc: "Prestigious funding opportunity supporting students pursuing STEM and technology-based courses.",
                               organizedBy: "Reliance Foundation",
                               level: "National",
+                              timeline: "August – October",
                               link: "https://www.scholarships.reliancefoundation.org/"
                             },
                             {
@@ -1798,6 +1828,7 @@ export default function NewDesignContent() {
                               desc: "Education support scheme ensuring access to smart learning and tech toolkits for meritorious students.",
                               organizedBy: "HDFC Bank",
                               level: "National",
+                              timeline: "December – January",
                               link: "https://www.buddy4study.com/page/hdfc-educational-crisis-scholarship-support-ecss"
                             },
                             {
@@ -1807,6 +1838,7 @@ export default function NewDesignContent() {
                               desc: "Vocational and digital literacy training initiatives utilizing high-tech simulation packages.",
                               organizedBy: "ICICI Bank",
                               level: "National",
+                              timeline: "Year-Round",
                               link: "https://www.icicifoundation.org/"
                             },
                             {
@@ -1816,6 +1848,7 @@ export default function NewDesignContent() {
                               desc: "Prestigious essay and concept competition focused on nation-building topics and community tech solutions.",
                               organizedBy: "Tata Group",
                               level: "National",
+                              timeline: "August – December",
                               link: "https://www.tatabuildingindia.com/"
                             },
                             {
@@ -1825,6 +1858,7 @@ export default function NewDesignContent() {
                               desc: "Scholarship program for first-year engineering students, offering tuition fees, books, and laptops.",
                               organizedBy: "Siemens India",
                               level: "National",
+                              timeline: "July – August",
                               link: "https://www.siemens.co.in/about-us/corporate-citizenship/siemens-scholarship-program.html"
                             },
                             {
@@ -1834,35 +1868,49 @@ export default function NewDesignContent() {
                               desc: "National award recognizing tech-based vision, excellence, and creative leadership in engineering.",
                               organizedBy: "IET India",
                               level: "National",
+                              timeline: "June – August",
                               link: "https://scholarships.theiet.in/"
                             }
                           ].map((comp) => (
-                            <tr key={comp.id} className="hover:bg-slate-50 even:bg-slate-50/40 transition-colors group">
-                              <td className="py-4 px-4 align-top border-r border-slate-200">
-                                <div className="font-sans font-bold text-slate-800 text-xs uppercase tracking-tight group-hover:text-primary transition-colors">{comp.title}</div>
-                                <div className="text-[11px] text-slate-500 mt-1 max-w-sm font-light leading-relaxed font-sans">{comp.desc}</div>
-                              </td>
-                              <td className="py-4 px-4 align-top border-r border-slate-200">
-                                <div className="font-sans font-bold text-slate-700 text-[10px] uppercase tracking-wide">{comp.organizedBy}</div>
-                                <div className="text-[9px] text-slate-400 font-mono mt-0.5 uppercase tracking-wide">{comp.level}</div>
-                              </td>
-                              <td className="py-4 px-4 align-top border-r border-slate-200 whitespace-nowrap">
-                                <span className="inline-block px-2.5 py-1 bg-slate-100 border border-slate-300 rounded-md text-[9px] font-bold font-sans text-slate-800 uppercase tracking-wider">
-                                  {comp.eligibility}
-                                </span>
-                              </td>
-                              <td className="py-4 px-4 text-center align-middle">
-                                <a 
-                                  href={comp.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center justify-center gap-1 text-slate-700 hover:text-slate-950 hover:underline transition-colors text-[10px] font-bold uppercase tracking-wider font-sans"
-                                >
-                                  <span>Register</span>
-                                  <span className="material-symbols-outlined text-[12px] shrink-0">open_in_new</span>
-                                </a>
-                              </td>
-                            </tr>
+                            <tr key={comp.id} className="hover:bg-slate-50/80 even:bg-slate-50/30 transition-colors group">
+                               <td className="py-5 px-5 align-top border-r border-slate-200">
+                                 <div className="font-sans font-black text-slate-800 text-xs uppercase tracking-tight group-hover:text-primary transition-colors">{comp.title}</div>
+                                 <div className="text-[11px] text-slate-500 mt-1 max-w-sm font-light leading-relaxed font-sans">{comp.desc}</div>
+                               </td>
+                               <td className="py-5 px-5 align-top border-r border-slate-200">
+                                 <div className="font-sans font-bold text-slate-700 text-[10px] uppercase tracking-wide">{comp.organizedBy}</div>
+                                 <div className="text-[9px] text-slate-400 font-mono mt-0.5 uppercase tracking-wide">{comp.level}</div>
+                               </td>
+                               <td className="py-5 px-5 align-top border-r border-slate-200 text-center">
+                                 <span 
+                                   className="inline-block px-2.5 py-1 rounded-md text-[9px] font-black font-mono uppercase tracking-wide whitespace-nowrap border"
+                                   style={{
+                                     backgroundColor: "rgba(235, 0, 40, 0.08)",
+                                     borderColor: "rgba(235, 0, 40, 0.25)",
+                                     color: "#EB0028"
+                                   }}
+                                 >
+                                   {comp.timeline}
+                                 </span>
+                               </td>
+                               <td className="py-5 px-5 align-top border-r border-slate-200 whitespace-nowrap">
+                                 <span className="inline-block px-2.5 py-1 bg-slate-100 border border-slate-300 rounded-md text-[9px] font-bold font-sans text-slate-800 uppercase tracking-wider">
+                                   {comp.eligibility}
+                                 </span>
+                               </td>
+                               <td className="py-5 px-5 text-center align-middle">
+                                 <a 
+                                   href={comp.link}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-primary text-white hover:bg-primary/95 rounded-xl transition-all duration-300 text-[10px] font-black uppercase tracking-wider font-mono shadow-md hover:scale-105 active:scale-95 whitespace-nowrap"
+                                   style={{ color: "#ffffff" }}
+                                 >
+                                   <span>Register</span>
+                                   <span className="material-symbols-outlined text-[12px] shrink-0">open_in_new</span>
+                                 </a>
+                               </td>
+                             </tr>
                           ))}
                         </tbody>
                       </table>
@@ -1870,8 +1918,8 @@ export default function NewDesignContent() {
                   </div>
                 </div>
 
-                {/* COLUMN 2: AIR G APP SHOWCASE (Right, 5 spans) */}
-                <div className="lg:col-span-5 space-y-6 lg:pl-4">
+                {/* COLUMN 2: AIR G APP SHOWCASE (Right, 4 spans) */}
+                <div className="lg:col-span-4 space-y-6 lg:pl-4">
                   <h3 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-2">
                     <span className="material-symbols-outlined text-primary text-xl">smartphone</span>
                     AIR G Learning App

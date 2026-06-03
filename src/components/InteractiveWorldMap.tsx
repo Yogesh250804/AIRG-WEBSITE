@@ -1,9 +1,7 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import worldMapPaths from "./worldMapPaths.json";
 
-interface Hub {
+export interface Hub {
   id: string;
   name: string;
   location: string;
@@ -11,17 +9,19 @@ interface Hub {
   description: string;
   coordinates: { x: number; y: number }; // Tooltip position on SVG
   coordinator?: string;
+  flyer?: string;
 }
 
 interface InteractiveWorldMapProps {
   onSelectHub: (hub: Hub | null) => void;
 }
 
-export const globalHubs: Record<string, Hub> = {
+// Fallback initial hubs
+const fallbackHubs: Record<string, Hub> = {
   in: {
     id: "in",
     name: "India Core Hub",
-    location: "Satara / Pune, MH",
+    location: "Pune / Satara, MH",
     stats: [
       { label: "Active Centres", value: "15 Centres" },
       { label: "Students Reached", value: "3,500+" },
@@ -29,72 +29,7 @@ export const globalHubs: Record<string, Hub> = {
     ],
     description: "The primary operational and development center hosting curriculum development, engineering workshops, and IoT school deployments.",
     coordinates: { x: 719, y: 207 },
-    coordinator: "Dr. Rajesh Patil"
-  },
-  us: {
-    id: "us",
-    name: "United States Outreach",
-    location: "San Francisco, CA",
-    stats: [
-      { label: "Partnerships", value: "3 Universities" },
-      { label: "Research Nodes", value: "2 Active" },
-      { label: "Focus", value: "AI & CAD Design" }
-    ],
-    description: "Focusing on curriculum alignment with global academic standards and collaborating with educational technology researchers.",
-    coordinates: { x: 234, y: 174 },
-    coordinator: "Prof. Alan Vance"
-  },
-  gb: {
-    id: "gb",
-    name: "United Kingdom Hub",
-    location: "London, England",
-    stats: [
-      { label: "Partner Schools", value: "8 Institutions" },
-      { label: "Certifications", value: "UK Standard Alignment" },
-      { label: "Focus", value: "Coding Paths" }
-    ],
-    description: "Aligning digital literacy training pathways with international frameworks and providing accredited certifications.",
-    coordinates: { x: 495, y: 137 },
-    coordinator: "Sarah Jenkins"
-  },
-  sg: {
-    id: "sg",
-    name: "Singapore ASEAN Center",
-    location: "Singapore City",
-    stats: [
-      { label: "Exchange Programs", value: "Annual Event" },
-      { label: "Students Enrolled", value: "400+ Active" },
-      { label: "Focus", value: "Smart Nation Tech" }
-    ],
-    description: "Southeast Asian technology exchange hub, importing smart electronics design modules and hosting innovation exhibits.",
-    coordinates: { x: 788, y: 246 },
-    coordinator: "Tan Wei Kiat"
-  },
-  ae: {
-    id: "ae",
-    name: "United Arab Emirates Hub",
-    location: "Dubai City",
-    stats: [
-      { label: "Active Labs", value: "4 Centres" },
-      { label: "Students Trained", value: "850+ Trained" },
-      { label: "Focus", value: "Robotics Core" }
-    ],
-    description: "Collaborating with local academic nodes to deploy custom intelligent learning modules.",
-    coordinates: { x: 650, y: 198 },
-    coordinator: "Faisal Al Mansour"
-  },
-  kh: {
-    id: "kh",
-    name: "Cambodia Core Hub",
-    location: "Western International School, Phnom Penh",
-    stats: [
-      { label: "Active Centres", value: "4 Centres" },
-      { label: "Students Reached", value: "1,200+" },
-      { label: "Focus", value: "Robotics Labs" }
-    ],
-    description: "Deploying high-quality modular educational kits and training local teachers.",
-    coordinates: { x: 791, y: 226 },
-    coordinator: "Mr. Sokha Mean"
+    coordinator: "Pratap Pawar"
   },
   ke: {
     id: "ke",
@@ -107,16 +42,99 @@ export const globalHubs: Record<string, Hub> = {
     ],
     description: "Empowering rural students with IoT sensor deployment and drone navigation.",
     coordinates: { x: 605, y: 250 },
-    coordinator: "Mr. David Ndwiga"
+    coordinator: "Mr. Haggai Mosses",
+    flyer: "/kenya-founder-v2.png"
+  },
+  ng: {
+    id: "ng",
+    name: "Nigeria Core Hub",
+    location: "Nigeria School Network",
+    stats: [
+      { label: "Active Centres", value: "8 Centres" },
+      { label: "Students Reached", value: "2,100+" },
+      { label: "Focus", value: "AIG Innovation & STEM" }
+    ],
+    description: "Empowering students in Nigeria through advanced curriculum integration, robotics training, and technology-driven education solutions.",
+    coordinates: { x: 520, y: 220 },
+    coordinator: "Mr. Abdulrazaq Chubado",
+    flyer: "/nigeria-founder.png"
+  },
+  sd: {
+    id: "sd",
+    name: "Sudan Core Hub",
+    location: "Sudan Education Grid",
+    stats: [
+      { label: "Active Centres", value: "4 Centres" },
+      { label: "Students Reached", value: "1,200+" },
+      { label: "Focus", value: "STEM & Robotics" }
+    ],
+    description: "Driving digital literacy and technical training initiatives in collaboration with local schools.",
+    coordinates: { x: 570, y: 220 },
+    coordinator: "Mr. Yassin Adam",
+    flyer: "/sudan-founder.png"
+  },
+  kh: {
+    id: "kh",
+    name: "Cambodia Core Hub",
+    location: "Western International School, Phnom Penh",
+    stats: [
+      { label: "Active Centres", value: "4 Centres" },
+      { label: "Students Reached", value: "1,200+" },
+      { label: "Focus", value: "Robotics Labs" }
+    ],
+    description: "Deploying high-quality modular educational kits and training local teachers.",
+    coordinates: { x: 791, y: 226 },
+    coordinator: "Western International School",
+    flyer: "/cambodia-founder.png"
+  },
+  np: {
+    id: "np",
+    name: "Nepal Outreach Hub",
+    location: "Kathmandu Valley Network",
+    stats: [
+      { label: "Active Centres", value: "5 Centres" },
+      { label: "Students Reached", value: "1,500+" },
+      { label: "Focus", value: "STEM Education" }
+    ],
+    description: "Promoting scientific reasoning and technical bootcamps for primary and secondary students.",
+    coordinates: { x: 745, y: 205 },
+    coordinator: "Mr. Aniket Singh",
+    flyer: "/nepal-founder.png"
+  },
+  ye: {
+    id: "ye",
+    name: "Yemen Core Hub",
+    location: "Yemen Tech Outreach",
+    stats: [
+      { label: "Active Centres", value: "3 Centres" },
+      { label: "Students Reached", value: "750+" },
+      { label: "Focus", value: "Digital Skills & IoT" }
+    ],
+    description: "Delivering modern computing courses and practical training workshops in robotics and automation.",
+    coordinates: { x: 645, y: 215 },
+    coordinator: "Mr. Murhib Alahmar",
+    flyer: "/yemen-founder.png"
   }
 };
-
 
 export default function InteractiveWorldMap({ onSelectHub }: InteractiveWorldMapProps) {
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
   const [hoveredCountryName, setHoveredCountryName] = useState<string | null>(null);
   const [activeHubId, setActiveHubId] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [globalHubs, setGlobalHubs] = useState<Record<string, Hub>>(fallbackHubs);
+
+  useEffect(() => {
+    // Fetch live global hubs data from API
+    fetch("/api/global-hubs")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.hubs) {
+          setGlobalHubs(data.hubs);
+        }
+      })
+      .catch((err) => console.error("Error fetching global hubs:", err));
+  }, []);
 
   const handleSelect = (id: string) => {
     const hub = globalHubs[id];
