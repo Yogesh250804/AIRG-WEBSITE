@@ -1,12 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/demo-navbar";
 import { Footer } from "@/components/demo-footer";
 import { motion } from "framer-motion";
 import {
   Briefcase,
   MapPin,
-  Clock,
   ArrowRight,
   Coffee,
   Zap,
@@ -20,11 +20,30 @@ import {
 import Link from "next/link";
 
 const jobs = [
-  { title: "Senior AI Curriculum Developer", category: "Education", location: "Bangalore / Remote", type: "Full-time", salary: "₹25L – ₹40L" },
-  { title: "Full Stack Engineer (Next.js)", category: "Engineering", location: "Remote", type: "Full-time", salary: "₹18L – ₹30L" },
-  { title: "Student Success Manager", category: "Operations", location: "Mumbai", type: "Full-time", salary: "₹12L – ₹18L" },
-  { title: "Content Marketing Lead", category: "Marketing", location: "Remote", type: "Full-time", salary: "₹15L – ₹25L" },
-  { title: "Mobile App Developer (React Native)", category: "Engineering", location: "Remote", type: "Full-time", salary: "₹20L – ₹35L" },
+  { 
+    title: "AI Instructor", 
+    category: "Education", 
+    location: "Remote / Hybrid", 
+    type: "Full-time", 
+    salary: "Competitive", 
+    link: "https://forms.gle/bqWX3a8vqFvJzkbYA" 
+  },
+  { 
+    title: "Business Development Executive", 
+    category: "Business Development", 
+    location: "Remote / Hybrid", 
+    type: "Full-time", 
+    salary: "Competitive", 
+    link: "https://forms.gle/agH5kBTKsQKv9m4H6" 
+  },
+  { 
+    title: "Sales Executive", 
+    category: "Sales", 
+    location: "Remote / Hybrid", 
+    type: "Full-time", 
+    salary: "Competitive", 
+    link: "https://forms.gle/G1GgMEGrQ9gaKmjq7" 
+  },
 ];
 
 const perks = [
@@ -35,6 +54,10 @@ const perks = [
 ];
 
 export default function CareersPage() {
+  useEffect(() => {
+    document.title = "Careers | AIR GURUJI INTERNATIONAL";
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Navbar />
@@ -51,10 +74,10 @@ export default function CareersPage() {
                 We're Hiring
               </span>
               <h1 className="text-5xl md:text-8xl font-black text-[#1a1a2e] tracking-tight leading-[0.95]">
-                Build the<br /><span className="text-[#EE2C3C]">Future</span> of Learning.
+                Careers at<br /><span className="text-[#EE2C3C]">AIR GURUJI</span>
               </h1>
               <p className="text-lg md:text-xl text-[#1a1a2e]/50 max-w-2xl mx-auto mt-6 leading-relaxed font-light">
-                Join a team of visionaries, educators, and engineers working to make quality education free for 100 million people.
+                Join us in building high-precision learning ecosystems and driving technological innovation.
               </p>
             </motion.div>
           </div>
@@ -98,35 +121,41 @@ export default function CareersPage() {
 
             <div className="space-y-4">
               {jobs.map((job, i) => (
-                <motion.div
+                <a
+                  href={job.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="group bg-white p-6 md:p-8 rounded-2xl border border-black/5 hover:border-[#EE2C3C]/20 hover:shadow-xl transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer"
+                  className="block no-underline"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 bg-[#f8f8fa] text-[#1a1a2e]/60 text-[9px] font-black uppercase tracking-widest rounded-full">{job.category}</span>
-                      <span className="px-3 py-1 bg-[#EE2C3C]/5 text-[#EE2C3C] text-[9px] font-black uppercase tracking-widest rounded-full">{job.type}</span>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="group bg-white p-6 md:p-8 rounded-2xl border border-black/5 hover:border-[#EE2C3C]/20 hover:shadow-xl transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <span className="px-3 py-1 bg-[#f8f8fa] text-[#1a1a2e]/60 text-[9px] font-black uppercase tracking-widest rounded-full">{job.category}</span>
+                        <span className="px-3 py-1 bg-[#EE2C3C]/5 text-[#EE2C3C] text-[9px] font-black uppercase tracking-widest rounded-full">{job.type}</span>
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-black text-[#1a1a2e] group-hover:text-[#EE2C3C] transition-colors">{job.title}</h3>
+                      <div className="flex items-center gap-4 text-sm text-[#1a1a2e]/40 font-medium">
+                        <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {job.location}</span>
+                      </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-black text-[#1a1a2e] group-hover:text-[#EE2C3C] transition-colors">{job.title}</h3>
-                    <div className="flex items-center gap-4 text-sm text-[#1a1a2e]/40 font-medium">
-                      <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {job.location}</span>
-                      <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> Posted 2 days ago</span>
+                    <div className="flex items-center gap-6">
+                      <div className="text-right hidden md:block">
+                        <p className="text-[9px] font-black text-[#1a1a2e]/30 uppercase tracking-widest">Salary</p>
+                        <p className="text-xl font-black text-[#EE2C3C]">{job.salary}</p>
+                      </div>
+                      <span className="px-8 py-3 bg-[#EE2C3C] text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:scale-105 transition-all flex items-center gap-2">
+                        Apply <ArrowRight className="h-4 w-4" />
+                      </span>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <div className="text-right hidden md:block">
-                      <p className="text-[9px] font-black text-[#1a1a2e]/30 uppercase tracking-widest">Salary</p>
-                      <p className="text-xl font-black text-[#EE2C3C]">{job.salary}</p>
-                    </div>
-                    <button className="px-8 py-3 bg-[#EE2C3C] text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:scale-105 transition-all flex items-center gap-2">
-                      Apply <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </a>
               ))}
             </div>
           </div>

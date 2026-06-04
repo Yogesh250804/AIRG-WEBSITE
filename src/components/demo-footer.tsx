@@ -10,26 +10,12 @@ const Logo = () => (
       {/* Brand Title: AIR GURUJI */}
       <div className="flex items-baseline justify-center gap-1.5 leading-none">
         <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">AIR</span>
-        <span className="relative font-serif text-[17px] font-black text-[#EB0028] tracking-wide flex items-center">
-          {/* Mortarboard Graduation Cap over the G */}
-          <span className="absolute -top-3 left-[-2px] pointer-events-none">
-            <svg width="15" height="10" viewBox="0 0 20 15">
-              {/* Cap Diamond */}
-              <polygon points="10,2 18,6 10,10 2,6" fill="#1a1a2e" stroke="#ffffff" strokeWidth="0.5" />
-              {/* Cap Base */}
-              <path d="M 6,7.5 L 6,11 A 4,2 0 0,0 14,11 L 14,7.5" fill="#1a1a2e" />
-              {/* Cap Tassel */}
-              <path d="M 10,6 L 16,8.5 L 16,11" fill="none" stroke="#ffeb3b" strokeWidth="0.8" />
-              <circle cx="16" cy="11" r="1.2" fill="#ffeb3b" />
-            </svg>
-          </span>
-          GURUJI
-        </span>
+        <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">GURUJI</span>
       </div>
 
-      {/* Sub-Brand: Centre of Excellence */}
+      {/* Sub-Brand: AIR G INNOVATION */}
       <span className="text-[6.5px] font-sans font-bold text-[#EB0028] tracking-[0.05em] mt-0.5 uppercase leading-none">
-        Centre of Excellence
+        AIR G INNOVATION
       </span>
 
       {/* Corporate Division: INTERNATIONAL */}

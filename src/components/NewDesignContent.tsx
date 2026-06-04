@@ -22,26 +22,12 @@ const Logo = () => (
       {/* Brand Title: AIR GURUJI */}
       <div className="flex items-baseline justify-center gap-1.5 leading-none">
         <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">AIR</span>
-        <span className="relative font-serif text-[17px] font-black text-[#EB0028] tracking-wide flex items-center">
-          {/* Mortarboard Graduation Cap over the G */}
-          <span className="absolute -top-3 left-[-2px] pointer-events-none">
-            <svg width="15" height="10" viewBox="0 0 20 15">
-              {/* Cap Diamond */}
-              <polygon points="10,2 18,6 10,10 2,6" fill="#1a1a2e" stroke="#ffffff" strokeWidth="0.5" />
-              {/* Cap Base */}
-              <path d="M 6,7.5 L 6,11 A 4,2 0 0,0 14,11 L 14,7.5" fill="#1a1a2e" />
-              {/* Cap Tassel */}
-              <path d="M 10,6 L 16,8.5 L 16,11" fill="none" stroke="#ffeb3b" strokeWidth="0.8" />
-              <circle cx="16" cy="11" r="1.2" fill="#ffeb3b" />
-            </svg>
-          </span>
-          GURUJI
-        </span>
+        <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">GURUJI</span>
       </div>
 
-      {/* Sub-Brand: Centre of Excellence */}
+      {/* Sub-Brand: AIR G INNOVATION */}
       <span className="text-[6.5px] font-sans font-bold text-[#EB0028] tracking-[0.05em] mt-0.5 uppercase leading-none">
-        Centre of Excellence
+        AIR G INNOVATION
       </span>
 
       {/* Corporate Division: INTERNATIONAL */}
@@ -580,25 +566,22 @@ export default function NewDesignContent() {
 
 
                   <h1 className="font-headline tracking-tighter leading-[0.9]">
-                    <div className="flex items-baseline gap-2 sm:gap-4 mb-2">
-                      <span className="text-4xl sm:text-6xl md:text-8xl font-black text-[#1a1a2e] uppercase">
-                        Center
-                      </span>
-                      <span className="text-lg sm:text-2xl md:text-4xl font-bold text-[#1a1a2e]/30 uppercase tracking-[0.2em]">of</span>
-                    </div>
-                    <span className="block text-4xl sm:text-6xl md:text-8xl font-black text-[#EB0028] uppercase">
-                      Excellence
+                    <span className="block text-4xl sm:text-6xl md:text-8xl font-black text-[#1a1a2e] uppercase">
+                      Empowering
+                    </span>
+                    <span className="block text-4xl sm:text-6xl md:text-7xl font-black text-[#EB0028] uppercase whitespace-nowrap">
+                      The Next Gen
                     </span>
                     <div className="flex items-center gap-4 mt-2">
-                      <span className="h-[2px] w-8 sm:w-12 bg-white/10"></span>
-                      <span className="text-xl sm:text-3xl md:text-5xl font-black text-[#1a1a2e]/40 uppercase tracking-widest">
-                        Innovation
+                      <span className="h-[2px] w-8 sm:w-12 bg-[#1a1a2e]/10"></span>
+                      <span className="text-xl sm:text-3xl md:text-5xl font-black text-[#1a1a2e]/25 uppercase tracking-widest">
+                        Innovators
                       </span>
                     </div>
                   </h1>
                   
                   <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed border-l-2 border-primary/20 pl-4 sm:pl-6">
-                    Building the digital backbone of Maharashtra through advanced R&D, physical innovation hubs, and strategic technological ecosystems.
+                    Equipping students across India with hands-on robotics, AI, and deep-tech skills through our network of innovation labs and tactical training programs.
                   </p>
 
                   <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
@@ -606,23 +589,23 @@ export default function NewDesignContent() {
                       <span className="relative z-10 flex items-center gap-3">Explore Labs <span className="material-symbols-outlined text-sm">bolt</span></span>
                     </button>
                     <button className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2" onClick={() => navigateTo('workshops')}>
-                      <span>Watch Protocol</span>
+                      <span>View Workshops</span>
                       <span className="material-symbols-outlined text-sm">play_circle</span>
                     </button>
                   </div>
 
                   <div className="flex gap-6 sm:gap-12 pt-6">
                     <div>
-                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">120<span className="text-primary">+</span></div>
-                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Patents</div>
+                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">5000<span className="text-primary">+</span></div>
+                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Students Impacted</div>
                     </div>
                     <div>
                       <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">{labs.length}</div>
-                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Global Hubs</div>
+                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Active Labs</div>
                     </div>
                     <div>
-                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">24/7</div>
-                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Monitoring</div>
+                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">3</div>
+                      <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">States Covered</div>
                     </div>
                   </div>
               </div>
@@ -1167,18 +1150,18 @@ export default function NewDesignContent() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {labs.map((lab, i) => (
-                  <div key={i} className="glass-premium p-6 rounded-3xl border border-black/5 border-t-4 border-t-primary group hover:border-primary/50 transition-all duration-500 relative overflow-hidden shadow-sm flex flex-col justify-between h-full">
+                  <div key={i} className="glass-premium p-5 rounded-3xl border border-black/5 border-t-4 border-t-primary group hover:border-primary/50 transition-all duration-500 relative overflow-hidden shadow-sm flex flex-col justify-between h-full">
                     <div className="scanning-line group-hover:translate-y-[380px] transition-transform duration-[3000ms] ease-linear"></div>
                     <div>
-                      <div className="flex justify-between items-start mb-6">
+                      <div className="flex justify-between items-start mb-4">
                         <span className="font-mono text-[10px] text-[#1a1a2e]/20 uppercase tracking-widest">LAB-{String(i + 1).padStart(2, '0')}</span>
                         <span className="font-mono text-[8px] px-2 py-1 bg-primary/10 text-primary rounded border border-primary/20 uppercase tracking-widest">Operational</span>
                       </div>
 
                       {/* Lab Centre Photo */}
-                      <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 border border-black/5 bg-slate-100 shrink-0">
+                      <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-4 border border-black/5 bg-slate-100 shrink-0">
                         <Image 
                           src={lab.img} 
                           alt={lab.name} 
@@ -1188,20 +1171,16 @@ export default function NewDesignContent() {
                         />
                       </div>
 
-                      <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary/80 mb-6 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                        <span className="material-symbols-outlined text-2xl">{lab.icon}</span>
-                      </div>
-                      <h4 className="text-xl font-headline font-bold mb-3 text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{lab.name}</h4>
-                      <p className="text-xs text-[#1a1a2e]/40 leading-relaxed mb-8 h-16 overflow-hidden line-clamp-3 font-body">{lab.desc}</p>
+                      <h4 className="text-lg font-headline font-bold mb-2 text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{lab.name}</h4>
+                      <p className="text-xs text-[#1a1a2e]/40 leading-relaxed mb-4 h-16 overflow-hidden line-clamp-3 font-body">{lab.desc}</p>
                     </div>
-                    <div className="pt-6 border-t border-black/5 flex items-center justify-between font-mono mt-auto">
+                    <div className="pt-4 border-t border-black/5 flex items-center justify-between font-mono mt-auto">
                       <Link 
                         href={`/labs/${lab.slug}`}
                         className="text-[10px] font-bold text-primary flex items-center gap-2 group/btn uppercase tracking-widest font-mono hover:text-[#EE2C3C] transition-colors"
                       >
                         Launch Phase <span className="material-symbols-outlined text-xs transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                       </Link>
-                      <span className="material-symbols-outlined text-[#1a1a2e]/10 text-lg group-hover:text-primary/50 transition-colors">{lab.sIcon}</span>
                     </div>
                   </div>
                 ))}
