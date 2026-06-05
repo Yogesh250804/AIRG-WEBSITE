@@ -7,9 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 interface ImageSliderProps {
   images: string[];
   name: string;
+  className?: string;
 }
 
-export default function ImageSlider({ images, name }: ImageSliderProps) {
+export default function ImageSlider({ 
+  images, 
+  name, 
+  className = "relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-sm border border-black/5 bg-slate-100 group select-none" 
+}: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
 
@@ -46,7 +51,7 @@ export default function ImageSlider({ images, name }: ImageSliderProps) {
   if (!images || images.length === 0) return null;
 
   return (
-    <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-sm border border-black/5 bg-slate-100 group select-none">
+    <div className={className}>
       {/* Sliding Image Animation Container */}
       <div className="relative w-full h-full">
         <AnimatePresence initial={false} custom={direction}>

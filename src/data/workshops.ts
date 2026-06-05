@@ -35,27 +35,6 @@ export const workshopsData: Workshop[] = [
     ]
   },
   {
-    slug: "strategic-briefing",
-    title: "Strategic Briefing",
-    category: "Partnerships",
-    desc: "High-level presentation of AI-driven roadmaps to government and corporate partners.",
-    url: "https://gurujiair.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-03-28-at-1.04.07-PM-1.jpeg",
-    detailedDesc: "During this high-level session, our senior architects presented the long-term technological roadmaps to government representatives and corporate delegates. The briefing focused on establishing private edge-cloud infrastructure to power decentralized computing nodes across the region, securing critical communication lines, and integrating deep-learning algorithms into civic services.",
-    location: "Corporate Briefing Room, Pune HQ",
-    date: "April 12, 2026",
-    techStack: ["Private Cloud", "Decentralized Edge", "Cryptographic Mesh", "Civic AI Solutions"],
-    stats: [
-      { label: "Delegates", value: "30+" },
-      { label: "States Engaged", value: "3 Regional" },
-      { label: "Active Nodes Projected", value: "250 Nodes" }
-    ],
-    highlights: [
-      "Detailed walk-through of the cryptographic communication protocol",
-      "Signing of MoU for regional AI development and incubation centers",
-      "Overview of cybersecurity defense layers for state infrastructure"
-    ]
-  },
-  {
     slug: "industrial-expo",
     title: "Industrial Expo",
     category: "Exhibition",
@@ -179,6 +158,69 @@ export const workshopsData: Workshop[] = [
       "Autonomous search-and-rescue mission simulation using localized heat signatures",
       "Stress-testing mesh networking ranges in dense forested environments",
       "Deploying solar-powered relay modules designed for long-term field installation"
+    ]
+  },
+  {
+    slug: "drone-navigation",
+    title: "Autonomous Drone Navigation",
+    category: "Aviation",
+    desc: "Autonomous flight path computing and real-time obstacle avoidance systems.",
+    url: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800",
+    detailedDesc: "Learn key pathfinding and navigation algorithms used to fly autonomous drones in complex, unmapped environments.",
+    location: "AIG Aero Lab, Satara",
+    date: "June 5, 2026",
+    techStack: ["ROS2", "SLAM", "Computer Vision", "PX4 Autopilot"],
+    stats: [
+      { label: "Hours of Flight", value: "120 Hrs" },
+      { label: "Algorithms Tested", value: "8 Active" },
+      { label: "Sync Latency", value: "18ms" }
+    ],
+    highlights: [
+      "Real-time LiDAR mapping using ROS2 nodes",
+      "Hands-on obstacle avoidance flight trials",
+      "Point-cloud data visualisations"
+    ]
+  },
+  {
+    slug: "robotics-assembly",
+    title: "Robotics Assembly Bootcamp",
+    category: "Robotics",
+    desc: "Industrial-grade robot arm design, kinematics, and motor calibration.",
+    url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800",
+    detailedDesc: "A hands-on engineering masterclass focused on the assembly, wiring, and kinematic calibration of 6-axis industrial robotic arms.",
+    location: "AIG Robotics Lab, Pune",
+    date: "June 18, 2026",
+    techStack: ["Inverse Kinematics", "CAN Bus communication", "Calibrators", "MCU Programming"],
+    stats: [
+      { label: "Axes Calibrated", value: "6 Axis" },
+      { label: "Custom Arm Designs", value: "12 Assemblies" },
+      { label: "Joint Precision", value: "0.02mm" }
+    ],
+    highlights: [
+      "Assembling high-torque actuator joints",
+      "Programming servo motors via CAN Bus protocols",
+      "Configuring forward and inverse kinematic coordinates"
+    ]
+  },
+  {
+    slug: "deep-learning-core",
+    title: "Deep Learning Core",
+    category: "Machine Learning",
+    desc: "Training neural networks from scratch, matrix calculations, and backpropagation.",
+    url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
+    detailedDesc: "Deep dive into backpropagation, custom loss functions, and optimizing layers to build enterprise-grade neural models from scratch.",
+    location: "AI Innovation Lab, Satara",
+    date: "July 2, 2026",
+    techStack: ["PyTorch", "NumPy Matrix Operations", "Gradient Optimization", "CUDA Compilation"],
+    stats: [
+      { label: "Epochs Run", value: "10,000+" },
+      { label: "Models Synthesized", value: "4 Frameworks" },
+      { label: "Accuracy Achieved", value: "98.7%" }
+    ],
+    highlights: [
+      "Deriving gradient descents manually",
+      "Optimizing layers for CUDA-based hardware acceleration",
+      "Deploying model endpoints using Docker"
     ]
   }
 ];

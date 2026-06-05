@@ -11,7 +11,10 @@ import { workshopsData } from "@/data/workshops";
 import { labsData } from "@/data/labs";
 import { useAppContext } from "@/context/AppContext";
 import AuthModal from "./AuthModal";
+import CertificateModal from "./CertificateModal";
 import { Courses } from "./Courses";
+import ImageSlider from "./ImageSlider";
+import AppleCarousel from "./AppleCarousel";
 
 
 // Premium SVG Logo - Recreated for "AIR GURUJI International" (Vertical Centered Layout)
@@ -132,6 +135,7 @@ export default function NewDesignContent() {
   const [previousFace, setPreviousFace] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [isCertModalOpen, setIsCertModalOpen] = useState(false);
   const rotationRef = useRef({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -565,22 +569,19 @@ export default function NewDesignContent() {
                   </div>
 
 
-                  <h1 className="font-headline tracking-tighter leading-[0.9]">
-                    <span className="block text-4xl sm:text-6xl md:text-8xl font-black text-[#1a1a2e] uppercase">
+                  <h1 className="font-headline tracking-tighter leading-[0.85] uppercase">
+                    <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-[#1a1a2e]">
                       Empowering
                     </span>
-                    <span className="block text-4xl sm:text-6xl md:text-7xl font-black text-[#EB0028] uppercase whitespace-nowrap">
+                    <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-[#EE2C3C] whitespace-nowrap">
                       The Next Gen
                     </span>
-                    <div className="flex items-center gap-4 mt-2">
-                      <span className="h-[2px] w-8 sm:w-12 bg-[#1a1a2e]/10"></span>
-                      <span className="text-xl sm:text-3xl md:text-5xl font-black text-[#1a1a2e]/25 uppercase tracking-widest">
-                        Innovators
-                      </span>
-                    </div>
+                    <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-[#1a1a2e]/30">
+                      Innovators
+                    </span>
                   </h1>
                   
-                  <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed border-l-2 border-primary/20 pl-4 sm:pl-6">
+                  <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed">
                     Equipping students across India with hands-on robotics, AI, and deep-tech skills through our network of innovation labs and tactical training programs.
                   </p>
 
@@ -795,11 +796,33 @@ export default function NewDesignContent() {
                 </div>
               </div>
 
-              {/* HOMEPAGE SECTIONS: NAVIGATION PILOTS */}
-              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 py-16 space-y-16 relative z-10 border-t border-black/5">
+              {/* GALLERY / SLIDING IMAGES (Full Width Section) */}
+              <div className="w-full py-10 space-y-8 relative z-10 border-t border-black/5 bg-white">
+                <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20">
+                  <div className="relative">
+                    <div className="absolute left-[-20px] top-0 h-12 w-[1px] bg-black/5">
+                      <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                    </div>
+                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // Operational Frontiers</span>
+                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+                      Field Record <span className="text-primary text-glow-red">Gallery</span>
+                    </h2>
+                  </div>
+                </div>
 
-                {/* PILLAR 1: INNOVATION LABS */}
-                <div className="glass-premium p-8 md:p-14 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="w-full">
+                  <AppleCarousel />
+                </div>
+              </div>
+
+              {/* PREMIUM RED DIVIDER LINE */}
+              <div className="w-full max-w-[1440px] mx-auto px-4">
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+              </div>
+
+              {/* REST OF SECTIONS IN PADDED CONTAINER */}
+              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 py-10 space-y-12 relative z-10">
+                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-7 space-y-6 relative">
@@ -838,20 +861,30 @@ export default function NewDesignContent() {
 
                     <div className="lg:col-span-5 grid grid-cols-2 gap-4">
                       {[
-                        { name: "Mudhoji Lab", type: "Robotics", icon: "precision_manufacturing" },
-                        { name: "Sakharwadi Lab", type: "AgriTech", icon: "agriculture" },
-                        { name: "Sant Tukaram", type: "Decentralized", icon: "hub" },
-                        { name: "Swami Ramanand", type: "Bio-Signals", icon: "biotech" }
+                        { name: "Mudhoji Lab", type: "Robotics", icon: "precision_manufacturing", stats: "14 Nodes // Sync", tech: "ROS2, LiDAR" },
+                        { name: "Sakharwadi Lab", type: "AgriTech", icon: "agriculture", stats: "9 Nodes // Sync", tech: "Mesh, Multispectral" },
+                        { name: "Sant Tukaram", type: "Decentralized", icon: "hub", stats: "32 Nodes // Sync", tech: "IPFS, Custom Ledger" },
+                        { name: "Swami Ramanand", type: "Bio-Signals", icon: "biotech", stats: "11 Nodes // Sync", tech: "EEG, DSP Matrix" }
                       ].map((item, i) => (
                         <div 
                           key={i} 
                           onClick={() => navigateTo('labs')}
-                          className="p-5 glass-premium rounded-2xl border border-black/5 hover:border-primary/30 transition-all cursor-pointer group/item space-y-3"
+                          className="p-5 md:p-6 glass-premium rounded-2xl border border-black/5 hover:border-primary/30 transition-all cursor-pointer group/item flex flex-col justify-between h-[160px] relative overflow-hidden"
                         >
-                          <span className="material-symbols-outlined text-primary text-xl group-hover/item:scale-110 transition-transform">{item.icon}</span>
+                          <div className="flex justify-between items-start">
+                            <span className="material-symbols-outlined text-primary text-xl group-hover/item:scale-110 transition-transform">{item.icon}</span>
+                            <span className="text-[7px] font-mono text-emerald-500 font-bold uppercase tracking-wider flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                              Active
+                            </span>
+                          </div>
                           <div>
-                            <div className="text-[#1a1a2e] font-headline font-bold text-xs uppercase tracking-tight">{item.name}</div>
-                            <div className="text-[#1a1a2e]/30 text-[8px] font-mono uppercase tracking-widest mt-1">{item.type}</div>
+                            <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight leading-tight">{item.name}</div>
+                            <div className="text-[#1a1a2e]/30 text-[8px] font-mono uppercase tracking-widest mt-0.5">{item.type}</div>
+                          </div>
+                          <div className="pt-2 border-t border-black/5 flex flex-col gap-0.5 text-[6.5px] font-mono text-[#1a1a2e]/45">
+                            <div>TELEMETRY: {item.stats}</div>
+                            <div>STACK: {item.tech}</div>
                           </div>
                         </div>
                       ))}
@@ -859,8 +892,13 @@ export default function NewDesignContent() {
                   </div>
                 </div>
 
+                {/* PREMIUM RED DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-4">
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+                </div>
+
                 {/* PILLAR 2: OFFLINE CENTRES */}
-                <div className="glass-premium p-8 md:p-14 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-5 relative group rounded-3xl overflow-hidden border border-white/10 bg-[#070d19] p-2 shadow-2xl order-2 lg:order-1">
@@ -914,8 +952,13 @@ export default function NewDesignContent() {
                   </div>
                 </div>
 
+                {/* PREMIUM RED DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-4">
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+                </div>
+
                 {/* PILLAR 3: WORKSHOPS */}
-                <div className="glass-premium p-8 md:p-14 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-7 space-y-6 relative">
@@ -979,8 +1022,13 @@ export default function NewDesignContent() {
                   </div>
                 </div>
 
+                {/* PREMIUM RED DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-4">
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+                </div>
+
                 {/* PILLAR 4: ELITE STORE */}
-                <div className="glass-premium p-8 md:p-14 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-5 grid grid-cols-2 gap-4 order-2 lg:order-1">
@@ -1032,6 +1080,11 @@ export default function NewDesignContent() {
                       </div>
                     </div>
                   </div>
+                </div>
+
+                {/* PREMIUM RED DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-4">
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
                 </div>
 
               </div>
@@ -1611,12 +1664,22 @@ export default function NewDesignContent() {
                 <p className="text-[#1a1a2e]/40 mt-4 max-w-2xl text-base font-light border-l-2 border-primary/20 pl-6">
                   Register for state-level engineering challenges, track active student nodes, and synchronize your curriculums via the official AIR G Learning App.
                 </p>
+
                  {/* Free Training Courses Section (Full Width, 4 columns) */}
               <div className="space-y-6 mb-16 pt-6">
-                <h3 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary text-xl">menu_book</span>
-                  Free E-Learning & Certifications
-                </h3>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 pb-4">
+                  <h3 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary text-xl">menu_book</span>
+                    Free E-Learning & Certifications
+                  </h3>
+                  <button 
+                    onClick={() => setIsCertModalOpen(true)}
+                    className="px-5 py-2.5 bg-primary hover:bg-[#eb0028]/95 text-[#1a1a2e] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 rounded-xl text-xs font-black uppercase tracking-widest font-mono flex items-center gap-2 shadow-md hover:shadow-lg self-start sm:self-auto cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-sm text-[#1a1a2e]">workspace_premium</span>
+                    View Sample Certificate
+                  </button>
+                </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
@@ -2235,6 +2298,7 @@ export default function NewDesignContent() {
         </div>
       </div>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setAuthModalOpen(false)} />
+      <CertificateModal isOpen={isCertModalOpen} onClose={() => setIsCertModalOpen(false)} />
 
       {/* CART DRAWER */}
       <AnimatePresence>
