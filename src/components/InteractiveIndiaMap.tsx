@@ -591,9 +591,10 @@ const TOTAL_LABS = STATE_MAPS.mh.labs.length + STATE_MAPS.br.labs.length + STATE
 interface InteractiveIndiaMapProps {
   onStateSelect?: (stateId: string, stateName: string) => void;
   isDark?: boolean;
+  isPreview?: boolean;
 }
 
-export default function InteractiveIndiaMap({ onStateSelect, isDark }: InteractiveIndiaMapProps) {
+export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isPreview = false }: InteractiveIndiaMapProps) {
   const [hoveredState, setHoveredState] = useState<string | null>(null);
   const [hoveredStateName, setHoveredStateName] = useState<string>("");
   const [selectedState, setSelectedState] = useState<string | null>(null);
@@ -629,7 +630,7 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark }: Interacti
     const isDistrict = !!selectedDistrict;
     return (
       <div 
-        className="relative w-full h-full min-h-[85vh] flex flex-col"
+        className={`relative w-full h-full flex flex-col ${isPreview ? "min-h-0" : "min-h-[85vh]"}`}
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
@@ -686,8 +687,8 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark }: Interacti
                   <path
                     key={region.id}
                     d={region.path}
-                    fill={isHovered ? "url(#state-hover-gradient)" : "rgba(0,0,0,0.04)"}
-                    stroke={isHovered ? "#ff4d4d" : "rgba(0,0,0,0.12)"}
+                    fill={isHovered ? "url(#state-hover-gradient)" : isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)"}
+                    stroke={isHovered ? "#ff4d4d" : isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.12)"}
                     strokeWidth={isHovered ? "1.5" : "0.5"}
                     style={{
                       cursor: isClickable ? "pointer" : "default",
@@ -826,14 +827,14 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark }: Interacti
   // Main India SVG Map view
   return (
     <div
-      className="relative w-full h-full min-h-[85vh] flex items-center justify-center"
+      className={`relative w-full h-full flex items-center justify-center ${isPreview ? "min-h-0" : "min-h-[85vh]"}`}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
       }}
     >
       {/* SVG Map Container */}
-      <div className="relative w-full max-w-[600px] mx-auto py-8">
+      <div className={`relative w-full mx-auto ${isPreview ? "py-0 max-w-full" : "py-8 max-w-[600px]"}`}>
         <svg
           viewBox={indiaMapData.viewBox}
           className="w-full h-auto drop-shadow-[0_0_80px_rgba(238,44,60,0.08)]"
@@ -866,17 +867,21 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark }: Interacti
                   isHovered
                     ? "url(#state-hover-gradient)"
                     : hasDetailMap
-                      ? "rgba(238, 44, 60, 0.10)"
-                      : "rgba(0,0,0,0.04)"
+                      ? "rgba(238, 44, 60, 0.15)"
+                      : isDark
+                        ? "rgba(255, 255, 255, 0.08)"
+                        : "rgba(0,0,0,0.04)"
                 }
                 stroke={
                   isHovered
                     ? "#ff5c6c"
                     : hasDetailMap
-                      ? "rgba(238, 44, 60, 0.45)"
-                      : "rgba(0,0,0,0.12)"
+                      ? "rgba(238, 44, 60, 0.6)"
+                      : isDark
+                        ? "rgba(255, 255, 255, 0.2)"
+                        : "rgba(0,0,0,0.12)"
                 }
-                strokeWidth={isHovered ? "1.5" : hasDetailMap ? "1" : "0.5"}
+                strokeWidth={isHovered ? "1.5" : hasDetailMap ? "1.2" : "0.5"}
                 style={{
                   cursor: hasDetailMap ? "pointer" : "default",
                   transform: isHovered ? "scale(1.03)" : "scale(1)",
@@ -931,25 +936,27 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark }: Interacti
       )}
 
       {/* Legend */}
-      <div className="absolute bottom-6 left-6 glass-premium p-4 rounded-xl border border-white/15 hidden md:block">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-sm bg-white/5 border border-white/15" />
-            <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">State / UT</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-sm bg-[rgba(238,44,60,0.15)] border border-[#EE2C3C]/40" />
-            <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">Active Region</span>
-          </div>
-          <div className="flex items-center gap-2 mt-1 pt-1 border-t border-white/5">
-            <span className="material-symbols-outlined text-[10px] text-primary">touch_app</span>
-            <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">Click active state</span>
+      {!isPreview && (
+        <div className="absolute bottom-6 left-6 glass-premium p-4 rounded-xl border border-white/15 hidden md:block">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-sm bg-white/5 border border-white/15" />
+              <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">State / UT</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-sm bg-[rgba(238,44,60,0.15)] border border-[#EE2C3C]/40" />
+              <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">Active Region</span>
+            </div>
+            <div className="flex items-center gap-2 mt-1 pt-1 border-t border-white/5">
+              <span className="material-symbols-outlined text-[10px] text-primary">touch_app</span>
+              <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">Click active state</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Lab Counter */}
-      {TOTAL_LABS > 0 && (
+      {!isPreview && TOTAL_LABS > 0 && (
         <div className="absolute top-6 right-6 glass-premium px-4 py-3 rounded-xl border border-white/15 hidden md:block">
           <div className="flex flex-col gap-1">
             <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">Innovation Labs</span>

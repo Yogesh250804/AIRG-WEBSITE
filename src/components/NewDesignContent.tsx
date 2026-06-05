@@ -147,7 +147,7 @@ export default function NewDesignContent() {
   const startTimeRef = useRef(Date.now());
   const letters = ["A", "I", "R", "G"];
   
-  const [activeNetwork, setActiveNetwork] = useState<"india" | "global">("global");
+  const [activeNetwork, setActiveNetwork] = useState<"india" | "global">("india");
   const [selectedGlobalHub, setSelectedGlobalHub] = useState<any>(null);
   const [isMapFullscreen, setIsMapFullscreen] = useState(false);
 
@@ -360,7 +360,7 @@ export default function NewDesignContent() {
   const navigateTo = (target: string) => {
     setActiveFace(target);
     if (target === "centres") {
-      setActiveNetwork("global");
+      setActiveNetwork("india");
     }
     if (typeof window !== "undefined") {
       window.location.hash = target;
@@ -377,7 +377,7 @@ export default function NewDesignContent() {
       if (hash && ["hero", "labs", "centres", "workshops", "learning", "store"].includes(hash)) {
         setActiveFace(hash);
         if (hash === "centres") {
-          setActiveNetwork("global");
+          setActiveNetwork("india");
         }
       } else {
         setActiveFace("hero");
@@ -386,6 +386,9 @@ export default function NewDesignContent() {
 
     handleHashChange();
     setIsMounted(true);
+    
+    // Automatically trigger server-side copying of generated assets on mount
+    fetch("/api/copy-founder-image").catch(() => {});
 
     const savedOrders = localStorage.getItem("aig_orders");
     if (savedOrders) {
@@ -557,13 +560,18 @@ export default function NewDesignContent() {
           {/* FACE 1: HERO */}
           <section className={`cube-face ${getFaceClass('hero')} flex flex-col items-center overflow-y-auto custom-scrollbar`} id="hero-face">
             <div className="relative w-full flex flex-col pt-6 pb-20">
-              <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {/* No background glow blobs for a pure white layout */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                {/* Glowing red ambient light blobs to eliminate emptiness */}
+                <div className="absolute top-[2%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[140px] opacity-80 animate-pulse" style={{ animationDuration: "8s" }} />
+                <div className="absolute top-[20%] left-[-15%] w-[700px] h-[700px] bg-[#FF5C6C]/6 rounded-full blur-[150px] opacity-75 animate-pulse" style={{ animationDuration: "12s" }} />
+                <div className="absolute top-[45%] right-[-20%] w-[800px] h-[800px] bg-primary/8 rounded-full blur-[180px] opacity-90 animate-pulse" style={{ animationDuration: "10s" }} />
+                <div className="absolute top-[70%] left-[-10%] w-[600px] h-[600px] bg-[#EE2C3C]/6 rounded-full blur-[140px]" />
+                <div className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-primary/8 rounded-full blur-[130px] animate-pulse" style={{ animationDuration: "9s" }} />
               </div>
               <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-12 pb-16">
                 <div className="space-y-8 relative">
                   {/* High-Tech UI Accents */}
-                  <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
+                  <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
                     <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                     <div className="absolute bottom-0 left-[-4px] w-2 h-2 bg-white/20 rounded-full" />
                   </div>
@@ -800,7 +808,7 @@ export default function NewDesignContent() {
               <div className="w-full py-10 space-y-8 relative z-10 border-t border-black/5 bg-white">
                 <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20">
                   <div className="relative">
-                    <div className="absolute left-[-20px] top-0 h-12 w-[1px] bg-black/5">
+                    <div className="absolute left-[-20px] top-0 h-12 w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
                       <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                     </div>
                     <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // Operational Frontiers</span>
@@ -821,14 +829,14 @@ export default function NewDesignContent() {
               </div>
 
               {/* REST OF SECTIONS IN PADDED CONTAINER */}
-              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 py-10 space-y-12 relative z-10">
-                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 py-4 space-y-4 relative z-10">
+                <div className="glass-premium p-8 md:p-12 rounded-[3rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-7 space-y-6 relative">
                       {/* Visual Accent */}
-                      <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
-                        <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+                        <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
                       <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">01 // Research Frontiers</span>
@@ -898,25 +906,21 @@ export default function NewDesignContent() {
                 </div>
 
                 {/* PILLAR 2: OFFLINE CENTRES */}
-                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-8 md:p-12 rounded-[3rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-5 relative group rounded-3xl overflow-hidden border border-white/10 bg-[#070d19] p-2 shadow-2xl order-2 lg:order-1">
                       <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 to-transparent pointer-events-none z-10"></div>
                       <div className="scanning-line group-hover:translate-y-[260px] transition-transform duration-[4000ms] ease-linear"></div>
-                      <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center p-4 select-none [&_svg]:max-h-[90%] [&_svg]:w-auto [&_svg]:mx-auto">
-                        <InteractiveIndiaMap />
-                      </div>
-                      <div className="relative z-10 text-center space-y-3 mt-4">
-                        <div className="text-xl font-headline font-black text-white uppercase tracking-tighter">India Deployment Grid</div>
-                        <div className="text-primary font-mono text-[8px] uppercase tracking-widest px-2.5 py-1 bg-primary/10 rounded border border-primary/20 inline-block">Active Node Synced</div>
+                      <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden flex items-center justify-center p-4 select-none [&_svg]:max-h-full [&_svg]:max-w-full [&_svg]:h-auto [&_svg]:w-auto [&_svg]:mx-auto">
+                        <InteractiveIndiaMap isDark={true} isPreview={true} />
                       </div>
                     </div>
 
                     <div className="lg:col-span-7 space-y-6 relative order-1 lg:order-2 lg:pl-8">
                       {/* Visual Accent */}
-                      <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
-                        <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+                        <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
                       <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">02 // Physical Infrastructure</span>
@@ -934,8 +938,8 @@ export default function NewDesignContent() {
                           <div className="text-[#1a1a2e]/30 text-[8px] font-mono uppercase tracking-widest">State-wide boundary precision</div>
                         </div>
                         <div className="space-y-0.5">
-                          <div className="text-primary font-headline font-black text-base">Interactive Zoom</div>
-                          <div className="text-[#1a1a2e]/30 text-[8px] font-mono uppercase tracking-widest">Tactical regional audits</div>
+                          <div className="text-primary font-headline font-black text-base">7 Global Centres</div>
+                          <div className="text-[#1a1a2e]/30 text-[8px] font-mono uppercase tracking-widest">UK & ASEAN Network Mapped</div>
                         </div>
                       </div>
 
@@ -958,13 +962,13 @@ export default function NewDesignContent() {
                 </div>
 
                 {/* PILLAR 3: WORKSHOPS */}
-                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-8 md:p-12 rounded-[3rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-                    <div className="lg:col-span-7 space-y-6 relative">
+                    <div className="lg:col-span-5 space-y-6 relative">
                       {/* Visual Accent */}
-                      <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
-                        <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+                        <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
                       <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">03 // Operational Training</span>
@@ -1002,19 +1006,29 @@ export default function NewDesignContent() {
                       </div>
                     </div>
 
-                    <div className="lg:col-span-5 space-y-3.5">
-                      {fieldRecords.slice(0, 2).map((record, i) => (
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-5 mt-8 lg:mt-0">
+                      {fieldRecords.slice(0, 6).map((record, i) => (
                         <div 
                           key={i}
                           onClick={() => navigateTo('workshops')}
-                          className="glass-premium p-5 rounded-2xl border border-black/5 hover:border-primary/25 transition-all cursor-pointer flex gap-4 items-center group/item"
+                          className="glass-premium p-3.5 rounded-[2rem] border border-black/5 hover:border-primary/25 hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between group/item h-auto relative overflow-hidden"
                         >
-                          <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-black/5">
-                            <Image src={record.url} alt={record.title} fill className="object-cover group-hover/item:scale-105 transition-transform duration-500" sizes="56px" />
+                          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-black/5 bg-slate-100 shrink-0">
+                            <Image 
+                              src={record.url} 
+                              alt={record.title} 
+                              fill 
+                              className="object-cover group-hover/item:scale-105 transition-transform duration-500" 
+                              sizes="(max-width: 768px) 100vw, 200px" 
+                            />
                           </div>
-                          <div className="space-y-0.5">
-                            <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-[7px] font-mono text-primary uppercase font-bold tracking-wider">{record.category}</span>
-                            <div className="text-[#1a1a2e] font-headline font-bold text-xs uppercase tracking-tight line-clamp-1 mt-1">{record.title}</div>
+                          <div className="space-y-1.5 flex flex-col justify-end flex-grow pt-3.5">
+                            <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-[7px] font-mono text-primary uppercase font-bold tracking-wider self-start">
+                              {record.category}
+                            </span>
+                            <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight line-clamp-1 group-hover/item:text-primary transition-colors">
+                              {record.title}
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -1028,32 +1042,26 @@ export default function NewDesignContent() {
                 </div>
 
                 {/* PILLAR 4: ELITE STORE */}
-                <div className="glass-premium p-10 md:p-20 rounded-[3.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-8 md:p-12 rounded-[3rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-                    <div className="lg:col-span-5 grid grid-cols-2 gap-4 order-2 lg:order-1">
-                      {[
-                        { name: "Robotics Core Kit", price: "â‚¹12,499", icon: "memory" },
-                        { name: "Interface Hoodie", price: "â‚¹2,499", icon: "apparel" }
-                      ].map((item, i) => (
-                        <div 
-                          key={i}
-                          onClick={() => navigateTo('store')}
-                          className="p-5 glass-premium rounded-2xl border border-black/5 hover:border-primary/30 transition-all cursor-pointer group/item text-center space-y-3"
-                        >
-                          <div className="w-10 h-10 bg-black/5 rounded-lg flex items-center justify-center mx-auto text-primary text-lg"><span className="material-symbols-outlined">{item.icon}</span></div>
-                          <div>
-                            <div className="text-[#1a1a2e] font-headline font-bold text-[11px] uppercase tracking-tight">{item.name}</div>
-                            <div className="text-primary font-mono text-[8px] font-bold mt-1">{item.price}</div>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="lg:col-span-5 order-2 lg:order-1">
+                      <div 
+                        onClick={() => navigateTo('store')}
+                        className="relative w-full h-[320px] rounded-[2.5rem] border border-black/5 shadow-2xl overflow-hidden group/storecard cursor-pointer bg-slate-900"
+                      >
+                        <img 
+                          src="/robotics-kit-v2.png?v=5" 
+                          alt="Robotics Core Kit" 
+                          className="w-full h-full object-cover group-hover/storecard:scale-105 transition-transform duration-500"
+                        />
+                      </div>
                     </div>
 
                     <div className="lg:col-span-7 space-y-6 relative order-1 lg:order-2 lg:pl-8">
                       {/* Visual Accent */}
-                      <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
-                        <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+                        <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
                       <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">04 // Logistics & Provisioning</span>
@@ -1278,7 +1286,7 @@ export default function NewDesignContent() {
                 
                 {/* Left Side: Info & Controls */}
                 <div className="lg:col-span-4 order-2 lg:order-1 space-y-6 relative">
-                  <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
+                  <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
                     <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                   </div>
                   
@@ -1574,7 +1582,7 @@ export default function NewDesignContent() {
                 {[
                   { name: "Neural Interface Hoodie", price: "₹2,499", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=400", tag: "Apparel" },
                   { name: "AIG Industrial Pack", price: "₹4,999", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=400", tag: "Gear" },
-                  { name: "Robotics Core Kit", price: "₹12,499", img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400", tag: "Hardware" },
+                  { name: "Robotics Core Kit", price: "₹12,499", img: "/robotics-kit-v2.png?v=5", tag: "Hardware" },
                   { name: "AI Strategy Handbook", price: "₹899", img: "https://images.unsplash.com/photo-1589998059171-988d887df646?auto=format&fit=crop&q=80&w=400", tag: "Books" }
                 ].map((product, i) => (
                   <div key={i} className="glass-premium rounded-[2rem] overflow-hidden border border-black/5 group hover:border-primary/50 transition-all flex flex-col h-full">
@@ -2974,7 +2982,7 @@ export default function NewDesignContent() {
               
               {activeNetwork === "india" ? (
                 <div className="w-full h-full flex items-center justify-center [&_svg]:max-h-[80vh] [&_svg]:w-auto [&_svg]:mx-auto select-none">
-                  <InteractiveIndiaMap />
+                  <InteractiveIndiaMap isDark={true} />
                 </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center [&_svg]:max-h-[80vh] [&_svg]:w-auto [&_svg]:mx-auto select-none">

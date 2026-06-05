@@ -83,8 +83,8 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
 
         {/* Hero Title Grid */}
         <div className="mb-16 relative">
-          <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
-            <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+          <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+            <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
           </div>
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="px-3 py-1 bg-primary/10 border border-primary/25 rounded-full text-[8.5px] font-black font-mono text-primary uppercase tracking-widest">

@@ -10,6 +10,7 @@ export default function AppleCarousel() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const activeWorkshop = workshopsData[activeIndex];
   const [isHovered, setIsHovered] = useState(false);
+  const [isPortrait, setIsPortrait] = useState(false);
 
   // Triple the data array to create a seamless infinite marquee loop
   const duplicatedWorkshops = [...workshopsData, ...workshopsData, ...workshopsData];
@@ -98,26 +99,31 @@ export default function AppleCarousel() {
                   priority
                 />
                 {/* Contained foreground image to show the full photograph without extreme zooming or cropping */}
-                <div className="relative w-full h-full z-10">
-                  <Image
-                    src={activeWorkshop.url}
-                    alt={activeWorkshop.title}
-                    fill
-                    className="object-contain opacity-90"
-                    priority
-                  />
-                </div>
-              </motion.div>
-              {/* Cinematic Overlay Gradient for readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/15 pointer-events-none z-20" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/30 to-transparent pointer-events-none z-20" />
+              {/* Contained or Covered foreground image based on orientation to prevent blank boxes for landscape and distortion for portrait */}
+              <div className="relative w-full h-full z-10">
+                <Image
+                  src={activeWorkshop.url}
+                  alt={activeWorkshop.title}
+                  fill
+                  className={`${isPortrait ? "object-contain" : "object-cover"} opacity-90 transition-all duration-300`}
+                  priority
+                  onLoad={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    setIsPortrait(img.naturalHeight > img.naturalWidth);
+                  }}
+                />
+              </div>
             </motion.div>
-          </AnimatePresence>
+            {/* Subtle overlay gradients to keep the image bright and vibrant while maintaining text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none z-20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none z-20" />
+          </motion.div>
+        </AnimatePresence>
 
-          {/* Billboard Text Content Overlay (Aligned inside the card layout) */}
-          <div className="absolute inset-x-0 bottom-0 top-0 z-30 flex items-end">
-            <div className="w-full pb-6 sm:pb-12 px-6 sm:px-12 text-white">
-              <div className="max-w-xl space-y-4">
+        {/* Billboard Text Content Overlay (Aligned inside the card layout) */}
+        <div className="absolute inset-x-0 bottom-0 top-0 z-30 flex items-end">
+          <div className="w-full pb-6 sm:pb-12 px-6 sm:px-12 text-white">
+            <div className="max-w-xl space-y-4">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeWorkshop.slug}
@@ -127,13 +133,19 @@ export default function AppleCarousel() {
                   transition={{ duration: 0.5 }}
                   className="space-y-3"
                 >
-                  <span className="inline-block px-3 py-1 bg-white/15 border border-white/20 rounded-md text-[8px] font-mono font-bold uppercase tracking-widest text-[#FF5C6C]">
+                  <span className="inline-block px-3 py-1 bg-white/15 border border-white/20 rounded-md text-[8px] font-mono font-bold uppercase tracking-widest" style={{ color: "#FF5C6C" }}>
                     {activeWorkshop.category}
                   </span>
-                  <h3 className="text-2xl sm:text-4xl md:text-5xl font-headline font-black uppercase tracking-tight leading-none text-white">
+                  <h3 
+                    className="text-2xl sm:text-4xl md:text-5xl font-headline font-black uppercase tracking-tight leading-none"
+                    style={{ color: "#ffffff", textShadow: "0 2px 8px rgba(0, 0, 0, 0.85)" }}
+                  >
                     {activeWorkshop.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-white/70 font-light leading-relaxed line-clamp-2 sm:line-clamp-3">
+                  <p 
+                    className="text-xs sm:text-sm font-medium leading-relaxed line-clamp-2 sm:line-clamp-3"
+                    style={{ color: "rgba(255, 255, 255, 0.95)", textShadow: "0 2.5px 10px rgba(0, 0, 0, 0.9)" }}
+                  >
                     {activeWorkshop.desc}
                   </p>
                   <div className="flex items-center gap-3 pt-2">
