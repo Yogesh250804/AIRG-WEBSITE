@@ -74,7 +74,7 @@ export default function AppleCarousel() {
       
       {/* 1. Large Feature Billboard (Hero Banner - Matches Page Width Layout) */}
       <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20">
-        <div className="relative w-full aspect-[21/10] sm:aspect-[21/9] overflow-hidden bg-black shadow-2xl rounded-3xl border border-black/5">
+        <div className="relative w-full aspect-[16/10] sm:aspect-[21/10] md:aspect-[21/9] overflow-hidden bg-black shadow-2xl rounded-3xl border border-black/5">
           <AnimatePresence initial={false}>
             <motion.div
               key={activeWorkshop.slug}
@@ -208,7 +208,7 @@ export default function AppleCarousel() {
               <div
                 key={`${w.slug}-${idx}`}
                 onClick={() => handleThumbnailClick(originalIndex)}
-                className="flex-shrink-0 w-[240px] sm:w-[320px] md:w-[380px] cursor-pointer transition-all duration-300"
+                className="flex-shrink-0 w-[180px] sm:w-[320px] md:w-[380px] cursor-pointer transition-all duration-300"
               >
                 {/* Image card wrapper */}
                 <div 
