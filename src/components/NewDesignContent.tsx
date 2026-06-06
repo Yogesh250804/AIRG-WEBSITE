@@ -19,25 +19,12 @@ import AppleCarousel from "./AppleCarousel";
 
 // Premium SVG Logo - Recreated for "AIR GURUJI International" (Vertical Centered Layout)
 const Logo = () => (
-  <div className="flex flex-col items-center justify-center text-center group cursor-pointer py-1 select-none">
-    {/* Stylized Logo Typography */}
-    <div className="flex flex-col items-center leading-none select-none">
-      {/* Brand Title: AIR GURUJI */}
-      <div className="flex items-baseline justify-center gap-1.5 leading-none">
-        <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">AIR</span>
-        <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">GURUJI</span>
-      </div>
-
-      {/* Sub-Brand: AIR G INNOVATION */}
-      <span className="text-[6.5px] font-sans font-bold text-[#EB0028] tracking-[0.05em] mt-0.5 uppercase leading-none">
-        AIR G INNOVATION
-      </span>
-
-      {/* Corporate Division: INTERNATIONAL */}
-      <span className="text-[8px] font-sans font-black text-[#1a1a2e] tracking-[0.38em] mt-0.5 uppercase leading-none">
-        INTERNATIONAL
-      </span>
-    </div>
+  <div className="flex items-center gap-2 group cursor-pointer py-1 select-none">
+    <img 
+      src="/aig-logo.png" 
+      alt="AIR GURUJI International Logo" 
+      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+    />
   </div>
 );
 
@@ -135,6 +122,7 @@ export default function NewDesignContent() {
   const [previousFace, setPreviousFace] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [showCallButton, setShowCallButton] = useState(false);
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
   const rotationRef = useRef({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -166,7 +154,7 @@ export default function NewDesignContent() {
     email: "rahul.sharma@airg.com",
     role: "Elite Developer",
     memberSince: "May 2026",
-    walletBalance: 25000,
+    walletBalance: 0,
     node: "Satara Mesh #04"
   });
 
@@ -403,10 +391,15 @@ export default function NewDesignContent() {
       setIsInitialLoad(false);
     }, 50);
 
+    const callBtnTimer = setTimeout(() => {
+      setShowCallButton(true);
+    }, 1300);
+
     window.addEventListener("hashchange", handleHashChange);
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
       clearTimeout(timer);
+      clearTimeout(callBtnTimer);
     };
   }, []);
 
@@ -438,13 +431,16 @@ export default function NewDesignContent() {
 
   return (
     <div className="font-body bg-white text-[#1a1a2e] overflow-hidden min-h-screen select-none relative">
-      <Preloader onComplete={() => setIsMounted(true)} />
+      <Preloader onComplete={() => {
+        setIsMounted(true);
+        setShowCallButton(true);
+      }} />
       <header className="fixed top-0 w-full z-[100] glass-premium border-b border-black/5">
         <nav className="flex justify-between items-center max-w-[1440px] mx-auto px-5 h-20 md:px-20">
-          <div onClick={() => navigateTo('hero')}>
+          <div onClick={() => navigateTo('hero')} className="mr-8 xl:mr-16 shrink-0">
             <Logo />
           </div>
-          <div className="hidden lg:flex gap-10 items-center">
+          <div className="hidden lg:flex gap-6 xl:gap-8 items-center mr-auto">
             {['hero', 'learning', 'store', 'labs', 'workshops', 'centres'].map((item) => {
               const labels: Record<string, string> = {
                 hero: 'Home',
@@ -486,6 +482,29 @@ export default function NewDesignContent() {
             >
               <span className="material-symbols-outlined text-lg group-hover:scale-110 transition-transform duration-300">person</span>
             </button>
+            {/* Social Media Links */}
+            <div className="hidden xl:flex items-center gap-2 border-l border-black/10 pl-3 mr-1">
+              <a href="https://youtube.com/@airguruji?si=y_hiDFi8YpiePL-v" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-[#FF0000] hover:bg-black/5 transition-all flex items-center justify-center hover:scale-115" title="YouTube">
+                <svg className="w-[16px] h-[16px] fill-current" viewBox="0 0 24 24">
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/gurujiair?igsh=bW8wNW5pcnIwcDU=" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-[#E1306C] hover:bg-black/5 transition-all flex items-center justify-center hover:scale-115" title="Instagram">
+                <svg className="w-[16px] h-[16px] fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                </svg>
+              </a>
+              <a href="https://wa.me/919860779172" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-[#25D366] hover:bg-black/5 transition-all flex items-center justify-center hover:scale-115" title="WhatsApp">
+                <svg className="w-[16px] h-[16px] fill-current" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.455h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/company/guruji-air/" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-[#0077B5] hover:bg-black/5 transition-all flex items-center justify-center hover:scale-115" title="LinkedIn">
+                <svg className="w-[16px] h-[16px] fill-current" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+            </div>
             <button 
               onClick={() => setAuthModalOpen(true)}
               className="hidden md:block bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
@@ -550,12 +569,36 @@ export default function NewDesignContent() {
               >
                 Connect Now
               </button>
+
+              {/* Mobile Social Links */}
+              <div className="flex items-center justify-center gap-6 pt-4 border-t border-black/5">
+                <a href="https://youtube.com/@airguruji?si=y_hiDFi8YpiePL-v" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:scale-110 transition-transform" title="YouTube">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </a>
+                <a href="https://www.instagram.com/gurujiair?igsh=bW8wNW5pcnIwcDU=" target="_blank" rel="noopener noreferrer" className="text-[#E1306C] hover:scale-110 transition-transform" title="Instagram">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                  </svg>
+                </a>
+                <a href="https://wa.me/919860779172" target="_blank" rel="noopener noreferrer" className="text-[#25D366] hover:scale-110 transition-transform" title="WhatsApp">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.455h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/company/guruji-air/" target="_blank" rel="noopener noreferrer" className="text-[#0077B5] hover:scale-110 transition-transform" title="LinkedIn">
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </a>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      <div className={`scene pt-20 transition-opacity duration-300 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`scene pt-10 transition-opacity duration-300 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
         <div className={`cube-container ${getCubeClass()} ${isInitialLoad ? 'no-transition' : ''} ${!isTransitioning && !isInitialLoad && activeFace ? 'flat-view' : ''} ${isTransitioning ? 'is-rotating' : ''}`}>
           {/* FACE 1: HERO */}
           <section className={`cube-face ${getFaceClass('hero')} flex flex-col items-center overflow-y-auto custom-scrollbar`} id="hero-face">
@@ -568,7 +611,7 @@ export default function NewDesignContent() {
                 <div className="absolute top-[70%] left-[-10%] w-[600px] h-[600px] bg-[#EE2C3C]/6 rounded-full blur-[140px]" />
                 <div className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-primary/8 rounded-full blur-[130px] animate-pulse" style={{ animationDuration: "9s" }} />
               </div>
-              <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-12 pb-16">
+              <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-4 pb-16">
                 <div className="space-y-8 relative">
                   {/* High-Tech UI Accents */}
                   <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
@@ -605,7 +648,7 @@ export default function NewDesignContent() {
 
                   <div className="flex gap-6 sm:gap-12 pt-6">
                     <div>
-                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">5000<span className="text-primary">+</span></div>
+                      <div className="text-2xl sm:text-3xl font-headline font-black text-[#1a1a2e] tracking-tighter">30000<span className="text-primary">+</span></div>
                       <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">Students Impacted</div>
                     </div>
                     <div>
@@ -617,9 +660,9 @@ export default function NewDesignContent() {
                       <div className="text-[8px] sm:text-[9px] text-[#1a1a2e]/20 font-bold uppercase tracking-[0.3em] mt-1">States Covered</div>
                     </div>
                   </div>
-              </div>
+                </div>
 
-                <div className="hidden lg:flex justify-center items-center relative h-[560px] w-full rounded-[3.5rem] overflow-hidden translate-x-12 bg-white border border-black/5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
+                 <div className="hidden lg:flex justify-center items-center relative h-[560px] w-full rounded-[3.5rem] overflow-hidden translate-x-12 bg-white border border-black/5 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
                   {/* Rich layered background */}
                   <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #1a1a2e 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
                   
@@ -775,7 +818,7 @@ export default function NewDesignContent() {
                   <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-primary/20 rounded-tr-xl pointer-events-none"></div>
 
                   {/* Floating pulsing nodes */}
-                  <div className="absolute top-12 right-16 w-2 h-2 bg-primary/25 rounded-full animate-pulse"></div>
+                <div className="absolute top-12 right-16 w-2 h-2 bg-primary/25 rounded-full animate-pulse"></div>
                   <div className="absolute bottom-16 left-12 w-1.5 h-1.5 bg-primary/30 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
                   <div className="absolute top-1/3 right-8 w-1 h-1 bg-primary/20 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
 
@@ -804,8 +847,173 @@ export default function NewDesignContent() {
                 </div>
               </div>
 
+              {/* PREMIUM GRADIENT DIVIDER LINE */}
+              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+              </div>
+
+              {/* WHY AIR G? SECTION */}
+              <div className="w-full pt-10 pb-8 relative z-10 bg-white overflow-hidden">
+                {/* Small animated tech-grid background */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #1a1a2e 1px, transparent 0)', backgroundSize: '20px 20px' }}></div>
+                <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{
+                  backgroundImage: `linear-gradient(to right, rgba(26,26,46,0.1) 1px, transparent 1px), 
+                                    linear-gradient(to bottom, rgba(26,26,46,0.1) 1px, transparent 1px)`,
+                  backgroundSize: '40px 40px'
+                }}></div>
+
+                <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 space-y-16">
+                  {/* Header */}
+                  <div className="relative max-w-3xl space-y-4">
+                    <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+                      <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                    </div>
+                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // System Overview</span>
+                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+                      Why <span className="text-primary text-glow-red">AIR G?</span>
+                    </h2>
+                    <p className="text-lg md:text-xl font-bold text-[#1a1a2e] uppercase tracking-tight mt-3">
+                      A complete ecosystem for AI, Robotics, Innovation, and Future-Ready Education.
+                    </p>
+                    <p className="text-sm md:text-base text-[#1a1a2e]/50 font-light leading-relaxed max-w-2xl">
+                      From curriculum design to lab deployment and educator training, AIR G provides everything institutions need to build a world-class innovation ecosystem.
+                    </p>
+                  </div>
+
+                  {/* 3-Card Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Card 1 */}
+                    <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                      <div className="space-y-6">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.3)] transition-all duration-300">
+                          <span className="material-symbols-outlined text-2xl">school</span>
+                        </div>
+                        <h3 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">Curriculum & Training</h3>
+                        <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                          Industry-aligned AI, Robotics, IoT, Drone, and Emerging Technology programs designed for practical learning and real-world application.
+                        </p>
+                        <div className="h-[1px] bg-black/5 w-full"></div>
+                        <ul className="space-y-2.5">
+                          {['Structured Learning Paths', 'Student Certifications', 'Teacher Enablement Programs'].map((h, i) => (
+                            <li key={i} className="flex items-center gap-2 text-xs font-bold text-[#1a1a2e]/70">
+                              <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Card 2 */}
+                    <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                      <div className="space-y-6">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.3)] transition-all duration-300">
+                          <span className="material-symbols-outlined text-2xl">precision_manufacturing</span>
+                        </div>
+                        <h3 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">Complete Lab Setup</h3>
+                        <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                          End-to-end planning, installation, equipment deployment, and infrastructure support for AI and Robotics Innovation Labs.
+                        </p>
+                        <div className="h-[1px] bg-black/5 w-full"></div>
+                        <ul className="space-y-2.5">
+                          {['Hardware & Equipment', 'Lab Design & Deployment', 'Technical Support'].map((h, i) => (
+                            <li key={i} className="flex items-center gap-2 text-xs font-bold text-[#1a1a2e]/70">
+                              <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Card 3 */}
+                    <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                      <div className="space-y-6">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.3)] transition-all duration-300">
+                          <span className="material-symbols-outlined text-2xl">memory</span>
+                        </div>
+                        <h3 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">Industry-Aligned AI Programs</h3>
+                        <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                          Future-focused programs that equip students with skills demanded by modern industries and emerging technology sectors.
+                        </p>
+                        <div className="h-[1px] bg-black/5 w-full"></div>
+                        <ul className="space-y-2.5">
+                          {['Artificial Intelligence', 'Robotics & Automation', 'Future Career Readiness'].map((h, i) => (
+                            <li key={i} className="flex items-center gap-2 text-xs font-bold text-[#1a1a2e]/70">
+                              <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* PREMIUM GRADIENT DIVIDER LINE */}
+              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+              </div>
+
+              {/* TRUSTED ACROSS INDIA SECTION */}
+              <div className="w-full pt-10 pb-10 relative z-10 bg-white overflow-hidden">
+                {/* Soft futuristic grid background */}
+                <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '30px 30px' }}></div>
+                
+                <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 space-y-12">
+                  {/* Header */}
+                  <div className="relative text-center max-w-3xl mx-auto space-y-3">
+                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // National Credibility</span>
+                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+                      Trusted Across <span className="text-primary text-glow-red">India</span>
+                    </h2>
+                    <p className="text-sm md:text-base text-[#1a1a2e]/50 font-light leading-relaxed max-w-2xl mx-auto">
+                      Building future-ready institutions through AI, Robotics, Innovation Labs, and industry-focused learning programs.
+                    </p>
+                  </div>
+
+                  {/* 4 Stats Cards */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    {[
+                      { val: "30000+", label: "Students Trained" },
+                      { val: "15+", label: "Innovation Labs" },
+                      { val: "3", label: "States Covered" },
+                      { val: "100+", label: "Workshops Conducted" }
+                    ].map((stat, i) => (
+                      <div key={i} className="group relative glass-premium p-6 sm:p-8 rounded-[2rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_15px_30px_rgba(238,44,60,0.04)] transition-all duration-300 flex flex-col items-center justify-center text-center overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        <div className="relative z-10 space-y-2">
+                          <span className="block text-4xl sm:text-5xl font-headline font-black text-[#EE2C3C] tracking-tighter group-hover:scale-105 transition-transform duration-300 text-glow-red">
+                            {stat.val}
+                          </span>
+                          <span className="block text-[10px] sm:text-xs uppercase tracking-widest font-black text-[#1a1a2e]/60 font-mono">
+                            {stat.label}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Bottom CTA Button */}
+                  <div className="flex justify-center pt-4">
+                    <button className="group relative px-8 py-4 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" onClick={() => window.location.href = '/contact'}>
+                      <span className="relative z-10 flex items-center gap-3">Get Free Consultation <span className="material-symbols-outlined text-sm">bolt</span></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* PREMIUM GRADIENT DIVIDER LINE */}
+              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
+              </div>
+
               {/* GALLERY / SLIDING IMAGES (Full Width Section) */}
-              <div className="w-full py-10 space-y-8 relative z-10 border-t border-black/5 bg-white">
+              <div className="w-full py-6 space-y-8 relative z-10 bg-white">
                 <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20">
                   <div className="relative">
                     <div className="absolute left-[-20px] top-0 h-12 w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
@@ -824,7 +1032,7 @@ export default function NewDesignContent() {
               </div>
 
               {/* PREMIUM RED DIVIDER LINE */}
-              <div className="w-full max-w-[1440px] mx-auto px-4">
+              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
                 <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
               </div>
 
@@ -1106,6 +1314,25 @@ export default function NewDesignContent() {
                       <p className="text-[#1a1a2e]/40 text-xs font-light leading-relaxed max-w-xs font-body">
                         Building the digital and physical infrastructure layer for decentralized intelligence hubs and autonomous ecosystems.
                       </p>
+                      <div className="flex gap-4 pt-2">
+                        <a href="https://youtube.com/@airguruji?si=y_hiDFi8YpiePL-v" target="_blank" rel="noopener noreferrer" className="text-[#1a1a2e]/40 hover:text-primary transition-colors" title="YouTube">
+                          <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                            <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                          </svg>
+                        </a>
+                        <a href="https://www.instagram.com/gurujiair?igsh=bW8wNW5pcnIwcDU=" target="_blank" rel="noopener noreferrer" className="text-[#1a1a2e]/40 hover:text-primary transition-colors" title="Instagram">
+                          <svg className="w-[18px] h-[18px] fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                          </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/guruji-air/" target="_blank" rel="noopener noreferrer" className="text-[#1a1a2e]/40 hover:text-primary transition-colors" title="LinkedIn">
+                          <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                     <div className="md:col-span-2">
                       <h4 className="font-sans font-bold text-[#1a1a2e] mb-4 uppercase tracking-wider text-[11px]">Company</h4>
@@ -1619,8 +1846,23 @@ export default function NewDesignContent() {
                   <Logo />
                   <p className="text-[10px] text-[#1a1a2e]/20 uppercase tracking-[0.2em]">© 2026 AIR G INTERNATIONAL. ALL RIGHTS RESERVED.</p>
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-[#1a1a2e] hover:bg-primary transition-all cursor-pointer group shadow-lg"><span className="material-symbols-outlined text-sm">mail</span></div>
-                    <div className="w-10 h-10 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-[#1a1a2e] hover:bg-primary transition-all cursor-pointer group shadow-lg"><span className="material-symbols-outlined text-sm">hub</span></div>
+                    <a href="https://youtube.com/@airguruji?si=y_hiDFi8YpiePL-v" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-[#1a1a2e] hover:bg-primary transition-all cursor-pointer group shadow-lg" title="YouTube">
+                      <svg className="w-[16px] h-[16px] fill-current" viewBox="0 0 24 24">
+                        <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                    </a>
+                    <a href="https://www.instagram.com/gurujiair?igsh=bW8wNW5pcnIwcDU=" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-[#1a1a2e] hover:bg-primary transition-all cursor-pointer group shadow-lg" title="Instagram">
+                      <svg className="w-[16px] h-[16px] fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                      </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/guruji-air/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black/5 border border-black/10 flex items-center justify-center text-[#1a1a2e] hover:bg-primary transition-all cursor-pointer group shadow-lg" title="LinkedIn">
+                      <svg className="w-[16px] h-[16px] fill-current" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                      </svg>
+                    </a>
                   </div>
                 </div>
                 <div>
@@ -2974,7 +3216,7 @@ export default function NewDesignContent() {
               {/* Close Button */}
               <button 
                 onClick={() => setIsMapFullscreen(false)}
-                className="absolute top-6 right-6 z-50 bg-[#1a1a2e] text-white hover:bg-[#EB0028] hover:text-white transition-colors duration-300 w-12 h-12 rounded-full flex items-center justify-center shadow-xl"
+                className="absolute top-6 right-6 z-50 bg-slate-100 text-slate-800 hover:bg-[#EB0028] hover:text-white transition-colors duration-300 w-12 h-12 rounded-full flex items-center justify-center shadow-md"
                 title="Close Fullscreen"
               >
                 <span className="material-symbols-outlined text-2xl">close</span>
@@ -2982,7 +3224,7 @@ export default function NewDesignContent() {
               
               {activeNetwork === "india" ? (
                 <div className="w-full h-full flex items-center justify-center [&_svg]:max-h-[80vh] [&_svg]:w-auto [&_svg]:mx-auto select-none">
-                  <InteractiveIndiaMap isDark={true} />
+                  <InteractiveIndiaMap />
                 </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center [&_svg]:max-h-[80vh] [&_svg]:w-auto [&_svg]:mx-auto select-none">
@@ -2996,6 +3238,62 @@ export default function NewDesignContent() {
           </div>
         )}
       </AnimatePresence>
+      {/* Floating Pulse Call Button & Promo Widget */}
+      {showCallButton && (
+        <div className="fixed bottom-6 right-6 z-[9999] flex items-center gap-3">
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes phone-ring {
+              0%, 100% { transform: rotate(0) scale(1); }
+              5% { transform: rotate(-18deg) scale(1.12); }
+              10% { transform: rotate(18deg) scale(1.12); }
+              15% { transform: rotate(-18deg) scale(1.12); }
+              20% { transform: rotate(18deg) scale(1.12); }
+              25% { transform: rotate(-18deg) scale(1.12); }
+              30% { transform: rotate(18deg) scale(1.12); }
+              35% { transform: rotate(0) scale(1.12); }
+              40% { transform: rotate(0) scale(1); }
+            }
+            .animate-phone-ring {
+              animation: phone-ring 2.8s ease-in-out infinite;
+            }
+            @keyframes border-glow {
+              0%, 100% { border-color: rgba(238, 44, 60, 0.4); box-shadow: 0 0 15px rgba(238, 44, 60, 0.2), inset 0 0 5px rgba(238, 44, 60, 0.1); }
+              50% { border-color: rgba(238, 44, 60, 0.95); box-shadow: 0 0 25px rgba(238, 44, 60, 0.55), inset 0 0 10px rgba(238, 44, 60, 0.25); }
+            }
+            .animate-border-glow {
+              animation: border-glow 2s ease-in-out infinite;
+            }
+            @keyframes marquee-bounce {
+              0%, 15% { transform: translateX(0); }
+              45%, 55% { transform: translateX(calc(-100% + 196px)); }
+              85%, 100% { transform: translateX(0); }
+            }
+            .animate-marquee {
+              display: inline-block;
+              white-space: nowrap;
+              animation: marquee-bounce 8s ease-in-out infinite;
+            }
+          `}} />
+          <div className="bg-white/95 backdrop-blur-md border border-[#EE2C3C]/30 rounded-full px-5 hidden sm:flex animate-border-glow select-none h-12 items-center justify-center w-[380px] min-w-[380px] text-[10px] font-black uppercase tracking-widest whitespace-nowrap gap-3 shadow-lg">
+            <span className="text-[#1a1a2e] font-extrabold tracking-widest">Launch an AI Lab</span>
+            <span className="text-[#EE2C3C]/40 font-light">|</span>
+            <span className="text-[#EE2C3C] flex items-center gap-1.5 animate-pulse font-extrabold">
+              📞 Talk to an Expert Now
+            </span>
+          </div>
+          <a 
+            href="https://wa.me/919860779172" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-14 h-14 bg-[#EE2C3C] text-white rounded-full flex items-center justify-center shadow-[0_0_25px_rgba(238,44,60,0.8)] hover:bg-[#d61e2e] hover:scale-110 active:scale-95 transition-all duration-300 relative group shrink-0 animate-phone-ring"
+            aria-label="Contact Us on WhatsApp"
+            id="floating-call-btn"
+          >
+            <span className="absolute inset-0 rounded-full bg-[#EE2C3C]/40 animate-ping pointer-events-none" />
+            <span className="material-symbols-outlined text-2xl relative z-10 text-white">call</span>
+          </a>
+        </div>
+      )}
     </div>
   );
 }

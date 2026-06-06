@@ -176,17 +176,23 @@ export default function AppleCarousel() {
     </div>
 
       {/* 2. Interactive Navigation Thumbnails Strip (Aligned to container grid) */}
-      <div className="relative w-full max-w-[1440px] mx-auto px-5 md:px-20 group/strip">
+      <div 
+        className="relative w-full max-w-[1440px] mx-auto px-5 md:px-20 group/strip"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onTouchStart={() => setIsHovered(true)}
+        onTouchEnd={() => setIsHovered(false)}
+      >
         {/* Navigation Arrows for Thumbnail strip */}
         <button
           onClick={() => handleArrowScroll("left")}
-          className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-black/10 hover:text-[#EE2C3C] shadow-md z-20 cursor-pointer active:scale-95 opacity-0 group-hover/strip:opacity-100 transition-opacity"
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-black/10 hover:text-[#EE2C3C] shadow-md z-20 cursor-pointer active:scale-95 opacity-0 group-hover/strip:opacity-100 transition-opacity flex items-center justify-center"
         >
           <span className="material-symbols-outlined text-base">arrow_back_ios_new</span>
         </button>
         <button
           onClick={() => handleArrowScroll("right")}
-          className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-black/10 hover:text-[#EE2C3C] shadow-md z-20 cursor-pointer active:scale-95 opacity-0 group-hover/strip:opacity-100 transition-opacity"
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-md border border-black/10 hover:text-[#EE2C3C] shadow-md z-20 cursor-pointer active:scale-95 opacity-0 group-hover/strip:opacity-100 transition-opacity flex items-center justify-center"
         >
           <span className="material-symbols-outlined text-base">arrow_forward_ios</span>
         </button>
@@ -194,10 +200,6 @@ export default function AppleCarousel() {
         {/* Scrollable track of Thumbnails */}
         <div
           ref={scrollContainerRef}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onTouchStart={() => setIsHovered(true)}
-          onTouchEnd={() => setIsHovered(false)}
           className="flex gap-5 overflow-x-auto no-scrollbar py-4 px-1"
           style={{ scrollbarWidth: "none" }}
         >

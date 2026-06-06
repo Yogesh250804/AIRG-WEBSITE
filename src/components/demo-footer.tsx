@@ -4,25 +4,12 @@ import React from "react";
 
 // Premium SVG Logo - Recreated for "AIR GURUJI International" (Vertical Centered Layout)
 const Logo = () => (
-  <div className="flex flex-col items-center justify-center text-center group cursor-pointer py-1 select-none">
-    {/* Stylized Logo Typography */}
-    <div className="flex flex-col items-center leading-none select-none">
-      {/* Brand Title: AIR GURUJI */}
-      <div className="flex items-baseline justify-center gap-1.5 leading-none">
-        <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">AIR</span>
-        <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">GURUJI</span>
-      </div>
-
-      {/* Sub-Brand: AIR G INNOVATION */}
-      <span className="text-[6.5px] font-sans font-bold text-[#EB0028] tracking-[0.05em] mt-0.5 uppercase leading-none">
-        AIR G INNOVATION
-      </span>
-
-      {/* Corporate Division: INTERNATIONAL */}
-      <span className="text-[8px] font-sans font-black text-[#1a1a2e] tracking-[0.38em] mt-0.5 uppercase leading-none">
-        INTERNATIONAL
-      </span>
-    </div>
+  <div className="flex items-center gap-2 group cursor-pointer py-1 select-none">
+    <img 
+      src="/aig-logo.png" 
+      alt="AIR GURUJI International Logo" 
+      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+    />
   </div>
 );
 
@@ -31,13 +18,32 @@ export function Footer() {
     <footer className="w-full border-t border-black/5 pt-16 pb-12 relative z-10 bg-white">
       <div className="max-w-[1440px] mx-auto px-5 md:px-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 mb-12">
-          <div className="space-y-4 sm:col-span-2 md:col-span-3 pr-0 md:pr-4">
+          <div className="space-y-4 sm:col-span-2 md:col-span-3 pr-0 md:pr-4 flex flex-col items-center md:items-start">
             <a href="/">
               <Logo />
             </a>
             <p className="text-[#1a1a2e]/40 text-xs font-light leading-relaxed max-w-xs font-body text-center md:text-left">
               Building the digital and physical infrastructure layer for decentralized intelligence hubs and autonomous ecosystems.
             </p>
+            <div className="flex gap-4 pt-2 justify-center md:justify-start">
+              <a href="https://youtube.com/@airguruji?si=y_hiDFi8YpiePL-v" target="_blank" rel="noopener noreferrer" className="text-[#1a1a2e]/40 hover:text-[#EB0028] transition-colors" title="YouTube">
+                <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/gurujiair?igsh=bW8wNW5pcnIwcDU=" target="_blank" rel="noopener noreferrer" className="text-[#1a1a2e]/40 hover:text-[#EB0028] transition-colors" title="Instagram">
+                <svg className="w-[18px] h-[18px] fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/company/guruji-air/" target="_blank" rel="noopener noreferrer" className="text-[#1a1a2e]/40 hover:text-[#EB0028] transition-colors" title="LinkedIn">
+                <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
+            </div>
           </div>
           <div className="md:col-span-2">
             <h4 className="font-sans font-bold text-[#1a1a2e] mb-4 uppercase tracking-wider text-[11px]">Company</h4>

@@ -1,20 +1,33 @@
-"use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Mail, Lock, Loader2 } from "lucide-react";
+import { X, Mail, Lock, Loader2, AlertCircle, User } from "lucide-react";
+import { useAuth } from "@/context/auth-context";
 
 const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { login, signup } = useAuth();
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      alert("Login Successful (Demo)");
+    setError(null);
+    try {
+      if (isSignUp) {
+        await signup(email, password, name);
+      } else {
+        await login(email, password);
+      }
       onClose();
-    }, 2000);
+    } catch (err: any) {
+      setError(err.message || `${isSignUp ? 'Signup' : 'Login'} failed. Please check your credentials.`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -49,11 +62,40 @@ const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 <span className="text-xs font-semibold text-primary tracking-wide uppercase">AIR G Portal</span>
               </div>
-              <h2 className="text-3xl font-heading font-bold mb-2 tracking-tight">Welcome back</h2>
-              <p className="text-slate-400 text-sm leading-relaxed">Sign in to access the AIR G ecosystem.</p>
+              <h2 className="text-3xl font-heading font-bold mb-2 tracking-tight text-white">
+                {isSignUp ? "Create an Account" : "Welcome back"}
+              </h2>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                {isSignUp ? "Sign up to join the AIR G ecosystem." : "Sign in to access the AIR G ecosystem."}
+              </p>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-5">
+            {error && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xs flex items-center gap-3">
+                <AlertCircle size={16} className="shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Full Name (Only for signup) */}
+              {isSignUp && (
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-slate-300 tracking-wide uppercase">Full Name</label>
+                  <div className="relative">
+                    <User size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
+                    <input
+                      type="text"
+                      required
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full bg-slate-900/60 border border-white/5 rounded-xl py-3.5 pl-11 pr-4 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all text-sm placeholder:text-slate-600 text-white"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Email */}
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-300 tracking-wide uppercase">Email</label>
@@ -62,7 +104,9 @@ const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   <input
                     type="email"
                     required
-                    className="w-full bg-slate-900/60 border border-white/5 rounded-xl py-3.5 pl-11 pr-4 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all text-sm placeholder:text-slate-600"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-slate-900/60 border border-white/5 rounded-xl py-3.5 pl-11 pr-4 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all text-sm placeholder:text-slate-600 text-white"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -76,22 +120,26 @@ const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                   <input
                     type="password"
                     required
-                    className="w-full bg-slate-900/60 border border-white/5 rounded-xl py-3.5 pl-11 pr-4 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all text-sm placeholder:text-slate-600"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-slate-900/60 border border-white/5 rounded-xl py-3.5 pl-11 pr-4 focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all text-sm placeholder:text-slate-600 text-white"
                     placeholder="••••••••"
                   />
                 </div>
               </div>
 
-              {/* Options row */}
-              <div className="flex items-center justify-between text-xs font-medium pt-1">
-                <label className="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-200 transition-colors">
-                  <input type="checkbox" className="accent-primary rounded" />
-                  Remember me
-                </label>
-                <button type="button" className="text-primary hover:text-blue-400 transition-colors">
-                  Forgot password?
-                </button>
-              </div>
+              {/* Options row (Only for login) */}
+              {!isSignUp && (
+                <div className="flex items-center justify-between text-xs font-medium pt-1">
+                  <label className="flex items-center gap-2 cursor-pointer text-slate-400 hover:text-slate-200 transition-colors">
+                    <input type="checkbox" className="accent-primary rounded" />
+                    Remember me
+                  </label>
+                  <button type="button" className="text-primary hover:text-blue-400 transition-colors">
+                    Forgot password?
+                  </button>
+                </div>
+              )}
 
               {/* Submit */}
               <button
@@ -101,12 +149,29 @@ const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
                 {isLoading ? (
                   <>
                     <Loader2 className="animate-spin" size={18} />
-                    <span>Signing in…</span>
+                    <span>{isSignUp ? "Signing up…" : "Signing in…"}</span>
                   </>
                 ) : (
-                  <span>Sign In</span>
+                  <span>{isSignUp ? "Sign Up" : "Sign In"}</span>
                 )}
               </button>
+
+              {/* Toggle Mode */}
+              <div className="text-center text-xs text-slate-400 mt-4">
+                <span>
+                  {isSignUp ? "Already have an account? " : "Don't have an account? "}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsSignUp(!isSignUp);
+                    setError(null);
+                  }}
+                  className="text-primary hover:text-blue-400 font-bold transition-colors ml-1"
+                >
+                  {isSignUp ? "Sign In" : "Sign Up"}
+                </button>
+              </div>
             </form>
           </motion.div>
         </div>

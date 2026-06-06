@@ -639,16 +639,26 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
         {/* Back Button */}
         <button
           onClick={handleBack}
-          className="absolute top-6 left-6 z-50 flex items-center gap-2 px-5 py-3 glass-premium rounded-xl border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 group"
+          className={`absolute top-6 left-6 z-50 flex items-center gap-2 px-5 py-3 rounded-xl border transition-all duration-300 group ${
+            isDark 
+              ? "glass-premium border-white/10 text-white hover:border-primary/50 hover:bg-primary/10" 
+              : "bg-white border-black/10 text-slate-800 hover:border-primary/50 hover:bg-primary/5 shadow-sm"
+          }`}
         >
           <span className="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
           {isDistrict ? "Back to State" : "Back to India"}
         </button>
 
         {/* State/District Name Header */}
-        <div className="absolute top-6 right-6 z-50">
-          <div className="glass-premium px-6 py-3 rounded-xl border border-primary/30">
-            <span className="text-[10px] text-white/40 font-mono uppercase tracking-widest block">
+        <div className="absolute top-6 right-20 z-50">
+          <div className={`px-6 py-3 rounded-xl border ${
+            isDark 
+              ? "glass-premium border-primary/30" 
+              : "bg-white border-primary/30 shadow-sm"
+          }`}>
+            <span className={`text-[10px] font-mono uppercase tracking-widest block ${
+              isDark ? "text-white/40" : "text-slate-500"
+            }`}>
               {isDistrict ? "District View" : "State View"}
             </span>
             <span className="text-lg font-headline font-black text-primary uppercase tracking-tight">
@@ -658,7 +668,11 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
         </div>
 
         {/* Vector SVG Map Container */}
-        <div className="flex-1 relative rounded-[3rem] overflow-hidden glass-premium border border-white/10 flex items-center justify-center p-10">
+        <div className={`flex-1 relative rounded-[3rem] overflow-hidden border flex items-center justify-center p-10 ${
+          isDark 
+            ? "glass-premium border-white/10" 
+            : "bg-white border-black/5 shadow-sm"
+        }`}>
           <div className="relative w-full max-w-[600px] mx-auto py-8">
             <svg
               viewBox={currentMapData.viewBox}
@@ -688,8 +702,8 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
                     key={region.id}
                     d={region.path}
                     fill={isHovered ? "url(#state-hover-gradient)" : isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)"}
-                    stroke={isHovered ? "#ff4d4d" : isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.12)"}
-                    strokeWidth={isHovered ? "1.5" : "0.5"}
+                    stroke={isHovered ? "#ff4d4d" : isDark ? "rgba(255,255,255,0.2)" : "rgba(26, 26, 46, 0.28)"}
+                    strokeWidth={isHovered ? "1.5" : "0.85"}
                     style={{
                       cursor: isClickable ? "pointer" : "default",
                       transform: isHovered ? "scale(1.03)" : "scale(1)",
@@ -768,28 +782,34 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
               top: mousePos.y - 10,
             }}
           >
-            <div className="glass-premium px-5 py-4 rounded-xl border border-primary/30 shadow-[0_0_40px_rgba(238,44,60,0.3)] min-w-[220px]">
+            <div className={`px-5 py-4 rounded-xl border border-primary/30 shadow-2xl min-w-[220px] ${
+              isDark 
+                ? "glass-premium" 
+                : "bg-white text-slate-800"
+            }`}>
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_8px_#EE2C3C]" />
-                <span className="text-[10px] font-mono text-primary uppercase tracking-widest">
+                <span className="text-[10px] font-mono text-primary uppercase tracking-widest font-bold">
                   LAB-{String(hoveredLab + 1).padStart(2, "0")}
                 </span>
               </div>
-              <h4 className="text-sm font-headline font-bold text-white uppercase tracking-tight">
+              <h4 className={`text-sm font-headline font-bold uppercase tracking-tight ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}>
                 {currentMapData.labs[hoveredLab].name}
               </h4>
-              <div className="mt-2 pt-2 border-t border-white/10">
+              <div className={`mt-2 pt-2 border-t ${isDark ? "border-white/10" : "border-slate-100"}`}>
                 <div className="flex items-center gap-2">
                   <span className="material-symbols-outlined text-xs text-primary">{currentMapData.labs[hoveredLab].icon}</span>
-                  <span className="text-[9px] font-mono text-white/50">{currentMapData.labs[hoveredLab].focus}</span>
+                  <span className={`text-[9px] font-mono ${isDark ? "text-white/50" : "text-slate-600"}`}>{currentMapData.labs[hoveredLab].focus}</span>
                 </div>
                 <div className="flex items-center gap-1.5 mt-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  <span className="text-[8px] font-mono text-white/40 uppercase tracking-widest">Operational</span>
+                  <span className={`text-[8px] font-mono uppercase tracking-widest ${isDark ? "text-white/40" : "text-slate-500"}`}>Operational</span>
                 </div>
-                <div className="flex items-center gap-1.5 mt-2 pt-2 border-t border-white/10">
+                <div className={`flex items-center gap-1.5 mt-2 pt-2 border-t ${isDark ? "border-white/10" : "border-slate-100"}`}>
                   <span className="material-symbols-outlined text-[10px] text-primary">open_in_new</span>
-                  <span className="text-[8px] font-mono text-primary uppercase tracking-widest">Click to view location</span>
+                  <span className="text-[8px] font-mono text-primary uppercase tracking-widest font-bold">Click to view location</span>
                 </div>
               </div>
             </div>
@@ -805,8 +825,14 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
               top: mousePos.y - 10,
             }}
           >
-            <div className="px-5 py-4 rounded-xl border border-[#EE2C3C]/25 shadow-2xl min-w-[200px]">
-              <h4 className="text-sm font-headline font-bold text-white uppercase tracking-tight">
+            <div className={`px-5 py-4 rounded-xl border border-[#EE2C3C]/25 shadow-2xl min-w-[200px] ${
+              isDark 
+                ? "glass-premium" 
+                : "bg-white text-slate-800"
+            }`}>
+              <h4 className={`text-sm font-headline font-bold uppercase tracking-tight ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}>
                 {hoveredRegionName}
               </h4>
               {hoveredRegionClickable && (
@@ -914,13 +940,19 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
             top: mousePos.y - 10,
           }}
         >
-          <div className="glass-premium px-5 py-4 rounded-xl border border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)] min-w-[200px]">
+          <div className={`px-5 py-4 rounded-xl border min-w-[200px] ${
+            isDark 
+              ? "glass-premium border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]" 
+              : "bg-white border-black/10 shadow-[0_10px_35px_rgba(0,0,0,0.1)]"
+          }`}>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+              <span className={`text-[10px] font-mono uppercase tracking-widest ${isDark ? "text-white/40" : "text-slate-500"}`}>
                 {hoveredState.toUpperCase()}
               </span>
             </div>
-            <h4 className="text-sm font-headline font-bold text-white uppercase tracking-tight">
+            <h4 className={`text-sm font-headline font-bold uppercase tracking-tight ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}>
               {hoveredStateName}
             </h4>
             {AVAILABLE_STATE_MAPS[hoveredState] && (
@@ -937,19 +969,23 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
 
       {/* Legend */}
       {!isPreview && (
-        <div className="absolute bottom-6 left-6 glass-premium p-4 rounded-xl border border-white/15 hidden md:block">
+        <div className={`absolute bottom-6 left-6 p-4 rounded-xl border hidden md:block ${
+          isDark 
+            ? "glass-premium border-white/15" 
+            : "bg-white border-black/10 shadow-md"
+        }`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-sm bg-white/5 border border-white/15" />
-              <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">State / UT</span>
+              <span className={`w-3 h-3 rounded-sm ${isDark ? "bg-white/5 border-white/15" : "bg-black/5 border-black/10"} border`} />
+              <span className={`text-[9px] font-mono uppercase tracking-widest ${isDark ? "text-white/50" : "text-slate-600"}`}>State / UT</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-sm bg-[rgba(238,44,60,0.15)] border border-[#EE2C3C]/40" />
-              <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">Active Region</span>
+              <span className={`text-[9px] font-mono uppercase tracking-widest ${isDark ? "text-white/50" : "text-slate-600"}`}>Active Region</span>
             </div>
-            <div className="flex items-center gap-2 mt-1 pt-1 border-t border-white/5">
+            <div className={`flex items-center gap-2 mt-1 pt-1 border-t ${isDark ? "border-white/5" : "border-slate-100"}`}>
               <span className="material-symbols-outlined text-[10px] text-primary">touch_app</span>
-              <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">Click active state</span>
+              <span className={`text-[9px] font-mono uppercase tracking-widest ${isDark ? "text-white/50" : "text-slate-600"}`}>Click active state</span>
             </div>
           </div>
         </div>
@@ -957,10 +993,14 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
 
       {/* Lab Counter */}
       {!isPreview && TOTAL_LABS > 0 && (
-        <div className="absolute top-6 right-6 glass-premium px-4 py-3 rounded-xl border border-white/15 hidden md:block">
-          <div className="flex flex-col gap-1">
-            <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest">Innovation Labs</span>
-            <span className="text-lg font-headline font-black text-primary">{TOTAL_LABS}</span>
+        <div className={`absolute top-6 right-20 px-4 py-3 rounded-xl border hidden md:block ${
+          isDark 
+            ? "glass-premium border-white/15" 
+            : "bg-white border-black/10 shadow-md"
+        }`}>
+          <div className="flex flex-col items-center justify-center text-center">
+            <span className="text-xl font-headline font-black text-primary leading-none mb-1">{TOTAL_LABS}</span>
+            <span className={`text-[9px] font-mono uppercase tracking-widest whitespace-nowrap ${isDark ? "text-white/40" : "text-slate-500"}`}>Innovation Labs</span>
           </div>
         </div>
       )}

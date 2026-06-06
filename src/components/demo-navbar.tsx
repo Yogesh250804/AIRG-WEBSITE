@@ -27,20 +27,11 @@ export function Navbar() {
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-5 md:px-20">
           {/* Stacked Graduation Cap Logo */}
           <Link href="/" className="flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-95">
-            <div className="flex flex-col items-center justify-center text-center py-1 select-none">
-              <div className="flex flex-col items-center leading-none select-none">
-                <div className="flex items-baseline justify-center gap-1.5 leading-none">
-                  <span className="font-serif text-[17px] font-black text-[#EE2C3C] tracking-wide">AIR</span>
-                  <span className="font-serif text-[17px] font-black text-[#EE2C3C] tracking-wide">GURUJI</span>
-                </div>
-                <span className="text-[6.5px] font-sans font-bold text-[#EE2C3C] tracking-[0.05em] mt-0.5 uppercase leading-none">
-                  AIR G INNOVATION
-                </span>
-                <span className="text-[8px] font-sans font-black text-[#1a1a2e] tracking-[0.38em] mt-0.5 uppercase leading-none">
-                  INTERNATIONAL
-                </span>
-              </div>
-            </div>
+            <img 
+              src="/aig-logo.png" 
+              alt="AIR GURUJI International Logo" 
+              className="h-14 w-auto object-contain" 
+            />
           </Link>
 
           {/* Desktop Navigation Links (matching premium homepage sections) */}

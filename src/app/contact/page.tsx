@@ -15,9 +15,23 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setIsSubmitted(true);
+      } else {
+        alert("Failed to send message: " + data.error);
+      }
+    } catch (err) {
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,9 +59,9 @@ export default function ContactPage() {
 
               <div className="space-y-6">
                 {[
-                  { icon: Mail, title: "Email Us", detail: "support@airginternational.com" },
-                  { icon: Phone, title: "Call Us", detail: "+91 (800) 123-4567" },
-                  { icon: MapPin, title: "Visit Us", detail: "123 Tech Hub, Silicon Valley of India, Bangalore" },
+                  { icon: Mail, title: "Email Us", detail: "airgdatalab@gmail.com" },
+                  { icon: Phone, title: "Call Us", detail: "+91 9860779172" },
+                  { icon: MapPin, title: "Visit Us", detail: "Air Guruji International, The Capital, 106, Baner - Pashan Link Rd, Baner, Pune, Maharashtra 411045" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4">
                     <div className="h-12 w-12 rounded-xl bg-[#EE2C3C]/5 text-[#EE2C3C] flex items-center justify-center shrink-0">
