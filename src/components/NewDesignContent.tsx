@@ -1259,7 +1259,7 @@ export default function NewDesignContent() {
                         className="relative w-full h-[320px] rounded-[2.5rem] border border-black/5 shadow-2xl overflow-hidden group/storecard cursor-pointer bg-slate-900"
                       >
                         <img 
-                          src="/robotics-kit-v2.png?v=5" 
+                          src="/robotics-kit.png" 
                           alt="Robotics Core Kit" 
                           className="w-full h-full object-cover group-hover/storecard:scale-105 transition-transform duration-500"
                         />
@@ -1805,25 +1805,28 @@ export default function NewDesignContent() {
                 <p className="text-[#1a1a2e]/40 mt-4 max-w-2xl text-base font-light border-l-2 border-primary/20 pl-6">Exclusive high-performance gear and academic resources for the next generation of engineers.</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {[
-                  { name: "Neural Interface Hoodie", price: "₹2,499", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=400", tag: "Apparel" },
-                  { name: "AIG Industrial Pack", price: "₹4,999", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&q=80&w=400", tag: "Gear" },
-                  { name: "Robotics Core Kit", price: "₹12,499", img: "/robotics-kit-v2.png?v=5", tag: "Hardware" },
-                  { name: "AI Strategy Handbook", price: "₹899", img: "https://images.unsplash.com/photo-1589998059171-988d887df646?auto=format&fit=crop&q=80&w=400", tag: "Books" }
+                  { name: "AI KIT", price: "₹5,999", img: "/ai-kit.png", tag: "Hardware" },
+                  { name: "IOT KIT", price: "₹4,499", img: "/iot-kit.png", tag: "Hardware" },
+                  { name: "ROBOTICS KIT", price: "₹7,999", img: "/robotics-kit.png", tag: "Hardware" },
+                  { name: "DRONE KIT", price: "₹8,999", img: "/drone-kit.png", tag: "Hardware" }
                 ].map((product, i) => (
                   <div key={i} className="glass-premium rounded-[2rem] overflow-hidden border border-black/5 group hover:border-primary/50 transition-all flex flex-col h-full">
-                    <div className="relative h-64 overflow-hidden">
-                      <img src={product.img} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute top-4 right-4 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full text-[10px] font-bold text-[#1a1a2e] uppercase tracking-widest">{product.tag}</div>
+                    <div className="relative w-full h-[420px] overflow-hidden">
+                      <img 
+                        src={product.img} 
+                        alt={product.name} 
+                        className={`w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ${product.name === "DRONE KIT" ? "scale-[1.2]" : ""}`}
+                      />
                     </div>
                     <div className="p-8 flex flex-col flex-grow">
-                      <h4 className="text-lg font-headline font-bold text-[#1a1a2e] mb-2 uppercase tracking-tight">{product.name}</h4>
+                      <h4 className="text-lg font-headline font-black text-[#1a1a2e] mb-2 uppercase tracking-tight">{product.name}</h4>
                       <div className="flex justify-between items-center font-mono mt-auto pt-4">
                         <span className="text-primary font-bold">{product.price}</span>
                         <button 
                           onClick={() => addToCart(product)}
-                          className="text-[10px] font-bold text-[#1a1a2e] uppercase tracking-widest px-4 py-2 bg-black/5 rounded-lg hover:bg-primary transition-all font-mono"
+                          className="text-[10px] font-bold text-[#1a1a2e] uppercase tracking-widest px-5 py-2.5 bg-black/5 rounded-lg hover:bg-primary transition-all font-mono"
                         >
                           Add to Bag
                         </button>
