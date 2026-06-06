@@ -1259,8 +1259,8 @@ export default function NewDesignContent() {
                         className="relative w-full h-[320px] rounded-[2.5rem] border border-black/5 shadow-2xl overflow-hidden group/storecard cursor-pointer bg-slate-900"
                       >
                         <img 
-                          src="/robotics-kit.png" 
-                          alt="Robotics Core Kit" 
+                          src="/drone-kit-elite.png" 
+                          alt="Drone Kit - Full Setup" 
                           className="w-full h-full object-cover group-hover/storecard:scale-105 transition-transform duration-500"
                         />
                       </div>
