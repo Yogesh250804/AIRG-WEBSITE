@@ -10,7 +10,7 @@ import AuthModal from "./AuthModal";
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isAuthModalOpen, setAuthModalOpen } = useAppContext();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -30,7 +30,7 @@ export function Navbar() {
             <img 
               src="/aig-logo.png" 
               alt="AIR GURUJI International Logo" 
-              className="h-14 w-auto object-contain" 
+              className="h-14 w-auto object-contain mix-blend-multiply" 
             />
           </Link>
 
@@ -54,12 +54,21 @@ export function Navbar() {
                 <User className="h-4 w-4" />
               </div>
             )}
-            <button 
-              onClick={() => setAuthModalOpen(true)}
-              className="bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
-            >
-              Connect Now
-            </button>
+            {user ? (
+              <button 
+                onClick={() => logout()}
+                className="bg-primary text-white px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
+              >
+                Logout
+              </button>
+            ) : (
+              <button 
+                onClick={() => setAuthModalOpen(true)}
+                className="bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
+              >
+                Connect Now
+              </button>
+            )}
 
             {/* Mobile Menu Toggle */}
             <button

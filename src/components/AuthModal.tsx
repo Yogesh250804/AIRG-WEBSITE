@@ -2,10 +2,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, Lock, Loader2, AlertCircle, User } from "lucide-react";
 import { useAuth } from "@/context/auth-context";
+import { useAppContext } from "@/context/AppContext";
 
 const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { login, signup } = useAuth();
+  const { addNotification } = useAppContext();
   const [isSignUp, setIsSignUp] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +21,10 @@ const AuthModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }
     try {
       if (isSignUp) {
         await signup(email, password, name);
+        addNotification(`Welcome, ${name || 'User'}! Successfully signed up.`);
       } else {
         await login(email, password);
+        addNotification(`Welcome back! Successfully logged in.`);
       }
       onClose();
     } catch (err: any) {

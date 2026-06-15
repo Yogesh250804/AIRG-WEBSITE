@@ -8,7 +8,7 @@ const Logo = () => (
     <img 
       src="/aig-logo.png" 
       alt="AIR GURUJI International Logo" 
-      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply" 
     />
   </div>
 );

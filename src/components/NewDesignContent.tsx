@@ -5,13 +5,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import Preloader from "./Preloader";
-import InteractiveIndiaMap from "./InteractiveIndiaMap";
-import InteractiveWorldMap from "./InteractiveWorldMap";
+import dynamic from "next/dynamic";
+
+const InteractiveIndiaMap = dynamic(() => import("./InteractiveIndiaMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-full w-full flex items-center justify-center text-primary font-mono text-xs uppercase tracking-widest animate-pulse">
+      Loading India Map...
+    </div>
+  ),
+});
+
+const InteractiveWorldMap = dynamic(() => import("./InteractiveWorldMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-full w-full flex items-center justify-center text-primary font-mono text-xs uppercase tracking-widest animate-pulse">
+      Loading World Map...
+    </div>
+  ),
+});
 import { workshopsData } from "@/data/workshops";
 import { labsData } from "@/data/labs";
 import { useAppContext } from "@/context/AppContext";
 import AuthModal from "./AuthModal";
+import { useAuth } from "@/context/auth-context";
 import CertificateModal from "./CertificateModal";
+import ProductDetailModal from "./ProductDetailModal";
+import { CheckoutModal } from "./store/CheckoutModal";
 import { Courses } from "./Courses";
 import ImageSlider from "./ImageSlider";
 import AppleCarousel from "./AppleCarousel";
@@ -23,7 +43,7 @@ const Logo = () => (
     <img 
       src="/aig-logo.png" 
       alt="AIR GURUJI International Logo" 
-      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply" 
     />
   </div>
 );
@@ -117,13 +137,15 @@ const ButterySmoothA = ({
 };
 
 export default function NewDesignContent() {
-  const { isAuthModalOpen, setAuthModalOpen } = useAppContext();
-  const [activeFace, setActiveFace] = useState("");
+  const { isAuthModalOpen, setAuthModalOpen, addNotification } = useAppContext();
+  const { user, logout } = useAuth();
+  const [activeFace, setActiveFace] = useState("hero");
   const [previousFace, setPreviousFace] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const [showCallButton, setShowCallButton] = useState(false);
   const [isCertModalOpen, setIsCertModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<{ name: string; price: string; img: string; tag: string; desc: string } | null>(null);
   const rotationRef = useRef({ x: 0, y: 0 });
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -158,6 +180,59 @@ export default function NewDesignContent() {
     node: "Satara Mesh #04"
   });
 
+  // Top-Up Payment Gateway States
+  const [isTopUpPaymentOpen, setIsTopUpPaymentOpen] = useState(false);
+  const [pendingTopUpAmount, setPendingTopUpAmount] = useState(0);
+  const [topUpPaymentStep, setTopUpPaymentStep] = useState<'options' | 'processing' | 'success'>('options');
+  const [topUpPaymentMethod, setTopUpPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
+
+  // Sync user info from auth state
+  useEffect(() => {
+    if (user) {
+      setUserProfile({
+        name: user.displayName || user.email.split("@")[0],
+        email: user.email,
+        role: user.role || "Student",
+        memberSince: user.metadata?.creationTime 
+          ? new Date(user.metadata.creationTime).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+          : "June 2026",
+        walletBalance: user.walletBalance ?? 0,
+        node: "Satara Mesh #04"
+      });
+    } else {
+      setUserProfile({
+        name: "Rahul Sharma",
+        email: "rahul.sharma@airg.com",
+        role: "Elite Developer",
+        memberSince: "May 2026",
+        walletBalance: 0,
+        node: "Satara Mesh #04"
+      });
+    }
+  }, [user]);
+
+  // Load orders dynamically based on current user session
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const ordersKey = user ? `aig_orders_${user.email}` : "aig_orders";
+      const savedOrders = localStorage.getItem(ordersKey);
+      if (savedOrders) {
+        try {
+          setOrders(JSON.parse(savedOrders));
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        setOrders([]);
+      }
+    }
+  }, [user]);
+
+  const handleLogout = async () => {
+    await logout();
+    addNotification("Logged out successfully.");
+  };
+
   // Competition Registration States
   const [selectedComp, setSelectedComp] = useState<string | null>(null);
   const [compName, setCompName] = useState("");
@@ -165,11 +240,30 @@ export default function NewDesignContent() {
   const [compInst, setCompInst] = useState("");
   const [isSubmittingComp, setIsSubmittingComp] = useState(false);
 
-  const topUpWallet = (amount: number) => {
-    setUserProfile(prev => ({
-      ...prev,
-      walletBalance: prev.walletBalance + amount
-    }));
+  const topUpWallet = async (amount: number) => {
+    if (user) {
+      try {
+        const res = await fetch("/api/auth/topup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setUserProfile(prev => ({
+            ...prev,
+            walletBalance: data.walletBalance
+          }));
+        }
+      } catch (err) {
+        console.error("Failed to update wallet balance", err);
+      }
+    } else {
+      setUserProfile(prev => ({
+        ...prev,
+        walletBalance: prev.walletBalance + amount
+      }));
+    }
   };
 
   const addToCart = (product: { name: string; price: string; img: string; tag: string }) => {
@@ -241,8 +335,8 @@ export default function NewDesignContent() {
       // Continuous Y spin for auto-rotate when NOT dragging
       if (!isDragging.current) {
         const t = (Date.now() - startTimeRef.current) * 0.001; // Elapsed time in seconds starting from 0
-        const T_cycle = 3.5;          // Total time per letter (2.7s pause + 0.8s spin)
-        const T_spin = 0.8;           // Spin transition duration
+        const T_cycle = 2.9167;          // Total time per letter (2.25s pause + 0.67s spin) - Sped up by 20%
+        const T_spin = 0.6667;           // Spin transition duration - Sped up by 20%
         const T_pause = T_cycle - T_spin;
         
         const local_t = t % T_cycle;
@@ -377,15 +471,6 @@ export default function NewDesignContent() {
     
     // Automatically trigger server-side copying of generated assets on mount
     fetch("/api/copy-founder-image").catch(() => {});
-
-    const savedOrders = localStorage.getItem("aig_orders");
-    if (savedOrders) {
-      try {
-        setOrders(JSON.parse(savedOrders));
-      } catch (e) {
-        console.error(e);
-      }
-    }
     
     const timer = setTimeout(() => {
       setIsInitialLoad(false);
@@ -477,7 +562,13 @@ export default function NewDesignContent() {
             </button>
             {/* User Profile Button */}
             <button 
-              onClick={() => setIsProfileOpen(true)}
+              onClick={() => {
+                if (user) {
+                  setIsProfileOpen(true);
+                } else {
+                  setAuthModalOpen(true);
+                }
+              }}
               className="relative p-3 rounded-xl border border-black/10 bg-white/40 backdrop-blur-md hover:border-primary/50 transition-all duration-300 flex items-center justify-center text-[#1a1a2e]/80 hover:text-primary shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_0_20px_rgba(238,44,60,0.15)] group"
             >
               <span className="material-symbols-outlined text-lg group-hover:scale-110 transition-transform duration-300">person</span>
@@ -505,12 +596,21 @@ export default function NewDesignContent() {
                 </svg>
               </a>
             </div>
-            <button 
-              onClick={() => setAuthModalOpen(true)}
-              className="hidden md:block bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
-            >
-              Connect Now
-            </button>
+            {user ? (
+              <button 
+                onClick={() => handleLogout()}
+                className="hidden md:block bg-primary text-white px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
+              >
+                Logout
+              </button>
+            ) : (
+              <button 
+                onClick={() => setAuthModalOpen(true)}
+                className="hidden md:block bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
+              >
+                Connect Now
+              </button>
+            )}
             {/* Mobile menu button */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -560,15 +660,27 @@ export default function NewDesignContent() {
                 })}
               </div>
               
-              <button 
-                onClick={() => {
-                  setAuthModalOpen(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full bg-primary text-[#1a1a2e] py-4 rounded-xl font-bold text-xs uppercase tracking-widest glow-red text-center"
-              >
-                Connect Now
-              </button>
+              {user ? (
+                <button 
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full bg-primary text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest glow-red text-center"
+                >
+                  Logout
+                </button>
+              ) : (
+                <button 
+                  onClick={() => {
+                    setAuthModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full bg-primary text-[#1a1a2e] py-4 rounded-xl font-bold text-xs uppercase tracking-widest glow-red text-center"
+                >
+                  Connect Now
+                </button>
+              )}
 
               {/* Mobile Social Links */}
               <div className="flex items-center justify-center gap-6 pt-4 border-t border-black/5">
@@ -598,7 +710,7 @@ export default function NewDesignContent() {
         </AnimatePresence>
       </header>
 
-      <div className={`scene pt-10 transition-opacity duration-300 ${isMounted ? 'opacity-100' : 'opacity-0'}`}>
+      <div className="scene pt-10 opacity-100">
         <div className={`cube-container ${getCubeClass()} ${isInitialLoad ? 'no-transition' : ''} ${!isTransitioning && !isInitialLoad && activeFace ? 'flat-view' : ''} ${isTransitioning ? 'is-rotating' : ''}`}>
           {/* FACE 1: HERO */}
           <section className={`cube-face ${getFaceClass('hero')} flex flex-col items-center overflow-y-auto custom-scrollbar`} id="hero-face">
@@ -887,7 +999,7 @@ export default function NewDesignContent() {
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                       <div className="space-y-6">
                         <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.3)] transition-all duration-300">
-                          <span className="material-symbols-outlined text-2xl">school</span>
+                          <span className="material-symbols-outlined text-2xl text-[#EE2C3C]">school</span>
                         </div>
                         <h3 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">Curriculum & Training</h3>
                         <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
@@ -910,7 +1022,7 @@ export default function NewDesignContent() {
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                       <div className="space-y-6">
                         <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.3)] transition-all duration-300">
-                          <span className="material-symbols-outlined text-2xl">precision_manufacturing</span>
+                          <span className="material-symbols-outlined text-2xl text-[#EE2C3C]">precision_manufacturing</span>
                         </div>
                         <h3 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">Complete Lab Setup</h3>
                         <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
@@ -933,7 +1045,7 @@ export default function NewDesignContent() {
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                       <div className="space-y-6">
                         <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.3)] transition-all duration-300">
-                          <span className="material-symbols-outlined text-2xl">memory</span>
+                          <span className="material-symbols-outlined text-2xl text-[#EE2C3C]">memory</span>
                         </div>
                         <h3 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">Industry-Aligned AI Programs</h3>
                         <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
@@ -1075,32 +1187,29 @@ export default function NewDesignContent() {
                       </div>
                     </div>
 
-                    <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-                      {[
-                        { name: "Mudhoji Lab", type: "Robotics", icon: "precision_manufacturing", stats: "14 Nodes // Sync", tech: "ROS2, LiDAR" },
-                        { name: "Sakharwadi Lab", type: "AgriTech", icon: "agriculture", stats: "9 Nodes // Sync", tech: "Mesh, Multispectral" },
-                        { name: "Sant Tukaram", type: "Decentralized", icon: "hub", stats: "32 Nodes // Sync", tech: "IPFS, Custom Ledger" },
-                        { name: "Swami Ramanand", type: "Bio-Signals", icon: "biotech", stats: "11 Nodes // Sync", tech: "EEG, DSP Matrix" }
-                      ].map((item, i) => (
+                    <div className="lg:col-span-5 grid grid-cols-2 gap-4 mt-8 lg:mt-0">
+                      {labs.slice(0, 4).map((lab, i) => (
                         <div 
-                          key={i} 
+                          key={i}
                           onClick={() => navigateTo('labs')}
-                          className="p-5 md:p-6 glass-premium rounded-2xl border border-black/5 hover:border-primary/30 transition-all cursor-pointer group/item flex flex-col justify-between h-[160px] relative overflow-hidden"
+                          className="glass-premium p-3.5 rounded-[2rem] border border-black/5 hover:border-primary/25 hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between group/item h-auto relative overflow-hidden"
                         >
-                          <div className="flex justify-between items-start">
-                            <span className="material-symbols-outlined text-primary text-xl group-hover/item:scale-110 transition-transform">{item.icon}</span>
-                            <span className="text-[7px] font-mono text-emerald-500 font-bold uppercase tracking-wider flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                              Active
+                          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-black/5 bg-slate-100 shrink-0">
+                            <Image 
+                              src={lab.img} 
+                              alt={lab.name} 
+                              fill 
+                              className="object-cover group-hover/item:scale-105 transition-transform duration-500" 
+                              sizes="(max-width: 768px) 100vw, 200px" 
+                            />
+                          </div>
+                          <div className="space-y-1.5 flex flex-col justify-end flex-grow pt-3.5">
+                            <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-[7px] font-mono text-primary uppercase font-bold tracking-wider self-start">
+                              {lab.status}
                             </span>
-                          </div>
-                          <div>
-                            <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight leading-tight">{item.name}</div>
-                            <div className="text-[#1a1a2e]/30 text-[8px] font-mono uppercase tracking-widest mt-0.5">{item.type}</div>
-                          </div>
-                          <div className="pt-2 border-t border-black/5 flex flex-col gap-0.5 text-[6.5px] font-mono text-[#1a1a2e]/45">
-                            <div>TELEMETRY: {item.stats}</div>
-                            <div>STACK: {item.tech}</div>
+                            <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight line-clamp-1 group-hover/item:text-primary transition-colors">
+                              {lab.name}
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -1443,10 +1552,7 @@ export default function NewDesignContent() {
                   <div key={i} className="glass-premium p-5 rounded-3xl border border-black/5 border-t-4 border-t-primary group hover:border-primary/50 transition-all duration-500 relative overflow-hidden shadow-sm flex flex-col justify-between h-full">
                     <div className="scanning-line group-hover:translate-y-[380px] transition-transform duration-[3000ms] ease-linear"></div>
                     <div>
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="font-mono text-[10px] text-[#1a1a2e]/20 uppercase tracking-widest">LAB-{String(i + 1).padStart(2, '0')}</span>
-                        <span className="font-mono text-[8px] px-2 py-1 bg-primary/10 text-primary rounded border border-primary/20 uppercase tracking-widest">Operational</span>
-                      </div>
+
 
                       {/* Lab Centre Photo */}
                       <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-4 border border-black/5 bg-slate-100 shrink-0">
@@ -1462,12 +1568,12 @@ export default function NewDesignContent() {
                       <h4 className="text-lg font-headline font-bold mb-2 text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{lab.name}</h4>
                       <p className="text-xs text-[#1a1a2e]/40 leading-relaxed mb-4 h-16 overflow-hidden line-clamp-3 font-body">{lab.desc}</p>
                     </div>
-                    <div className="pt-4 border-t border-black/5 flex items-center justify-between font-mono mt-auto">
+                    <div className="pt-4 border-t border-black/5 flex items-center justify-between mt-auto">
                       <Link 
                         href={`/labs/${lab.slug}`}
-                        className="text-[10px] font-bold text-primary flex items-center gap-2 group/btn uppercase tracking-widest font-mono hover:text-[#EE2C3C] transition-colors"
+                        className="text-[11px] font-bold text-primary flex items-center gap-2 group/btn uppercase tracking-wider font-sans hover:text-[#EE2C3C] transition-colors"
                       >
-                        Launch Phase <span className="material-symbols-outlined text-xs transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+                        View Lab Details <span className="material-symbols-outlined text-xs transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
                       </Link>
                     </div>
                   </div>
@@ -1807,25 +1913,44 @@ export default function NewDesignContent() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {[
-                  { name: "AI KIT", price: "₹5,999", img: "/ai-kit.png", tag: "Hardware" },
-                  { name: "IOT KIT", price: "₹4,499", img: "/iot-kit.png", tag: "Hardware" },
-                  { name: "ROBOTICS KIT", price: "₹7,999", img: "/robotics-kit.png", tag: "Hardware" },
-                  { name: "DRONE KIT", price: "₹8,999", img: "/drone-kit.png", tag: "Hardware" }
+                  { name: "Touchless Hand Dispenser Kit", price: "₹999", img: "/products/product_1.jpeg", tag: "Hardware", desc: "to dispense sanitizer without physical contact. Using sensors and a microcontroller, the device detects the presence of a hand and activates the dispenser automatically, ensuring safe, hygienic, and efficient sanitiza..." },
+                  { name: "Smart Notice Board", price: "₹1,299", img: "/products/product_2.jpeg", tag: "Hardware", desc: "messages and notices to be displayed digitally using a microcontroller and wireless communication technology. Notices can be updated remotely through This project helps in fast information sharing, reduces paperwork, ..." },
+                  { name: "Smart Traffic Light System", price: "₹799", img: "/products/product_3.jpeg", tag: "Hardware", desc: "project that controls traffic signals intelligently using sensors and a microcontroller . The system monitors vehicle density on roads and adjusts the timing of traffic lights automati cally to improve traffic flow an..." },
+                  { name: "Temperature Monitoring System", price: "₹1,499", img: "/products/product_4.jpeg", tag: "Hardware", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." },
+                  { name: "Soil Moisture Monitoring System", price: "₹1,599", img: "/products/product_5.jpeg", tag: "Hardware", desc: "monitoring project used to measure the moisture level present in soil. It uses a soil moisture sensor to detect the water content in the soil and sends the data to a microcontroller for monitoring and control. The sys..." },
+                  { name: "Smart Dustbin System", price: "₹899", img: "/products/product_6.jpeg", tag: "Hardware", desc: "sensors and a microcontroller to open the dustbin lid without physical contact. When a person’s hand approaches the sensor, the system detects the motion and automatically opens th e lid using a servo motor. This proj..." },
+                  { name: "Rain Detection System Kit", price: "₹1,999", img: "/products/product_7.jpeg", tag: "Hardware", desc: "detects the presence of rain using a rain sensor module. When raindrops fall on the sensor surface, the system senses moisture and sends a signal to the microcontroller, which can ac tivate alarms, motors, or notifica..." },
+                  { name: "Smart Parking System", price: "₹599", img: "/products/product_8.jpeg", tag: "Hardware", desc: "to manage vehicle parking efficiently using sensors and a microcontroller. The system detects the availability of parking slots and provides real -time information through display s, LEDs, or IoT platforms. It helps r..." },
+                  { name: "Motion Detection Alert System", price: "₹699", img: "/products/product_9.jpeg", tag: "Hardware", desc: "detects human movement using a motion sensor and generates an alert through a buzzer, LED, or notification system. The sensor continuously monitors the surrounding area, and when m otion is detected, the microcontroll..." },
+                  { name: "Gas Leakage Detection System", price: "₹799", img: "/products/product_10.jpeg", tag: "Hardware", desc: "to detect the presence of harmful or combustible gases in the environment. It uses a gas sensor to continuously monitor gas levels and alerts users through a buzzer, LED, or notification system when gas concentration ..." },
+                  { name: "Automatic Street Light System", price: "₹499", img: "/products/product_11.jpeg", tag: "Hardware", desc: "controls street lights based on surrounding light intensity. It uses an LDR (Light Dependent Resistor) sensor to detect daylight and darkness. When the environment becomes dark, the system automatically turns ON the s..." },
+                  { name: "Water Level Indicator Kit", price: "₹1,099", img: "/products/product_12.jpeg", tag: "Hardware", desc: "indicate the level of water in a tank or container. It uses sensors and a microcontroller to monitor different water levels and provides alerts through LEDs, buzzers, or displa ys when the water reaches specific level..." },
+                  { name: "AIR G Polo T-Shirt", price: "₹599", img: "/products/product_13.jpeg", tag: "Merchandise", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." },
+                  { name: "AIR G Keychain", price: "₹199", img: "/products/product_14.jpeg", tag: "Merchandise", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." },
+                  { name: "Advanced Sensor Pack", price: "₹2,799", img: "/products/product_15.jpeg", tag: "Hardware", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." }
                 ].map((product, i) => (
-                  <div key={i} className="glass-premium rounded-[2rem] overflow-hidden border border-black/5 group hover:border-primary/50 transition-all flex flex-col h-full">
-                    <div className="relative w-full h-[420px] overflow-hidden">
+                  <div 
+                    key={i} 
+                    onClick={() => setSelectedProduct(product)}
+                    className="glass-premium rounded-[2rem] overflow-hidden border border-black/5 group hover:border-primary/50 transition-all flex flex-col h-full cursor-pointer hover:shadow-lg hover:-translate-y-1 duration-300"
+                  >
+                    <div className="relative w-full h-[280px] overflow-hidden bg-slate-50/50 p-6 flex items-center justify-center">
                       <img 
                         src={product.img} 
                         alt={product.name} 
-                        className={`w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 ${product.name === "DRONE KIT" ? "scale-[1.2]" : ""}`}
+                        className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <div className="p-8 flex flex-col flex-grow">
-                      <h4 className="text-lg font-headline font-black text-[#1a1a2e] mb-2 uppercase tracking-tight">{product.name}</h4>
+                      <h4 className="text-lg font-headline font-black text-[#1a1a2e] mb-2 uppercase tracking-tight group-hover:text-primary transition-colors">{product.name}</h4>
+                      <p className="text-xs text-[#1a1a2e]/55 font-sans mt-1.5 mb-3 line-clamp-3 leading-relaxed min-h-[48px]">{product.desc}</p>
                       <div className="flex justify-between items-center font-mono mt-auto pt-4">
                         <span className="text-primary font-bold">{product.price}</span>
                         <button 
-                          onClick={() => addToCart(product)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart(product);
+                          }}
                           className="text-[10px] font-bold text-[#1a1a2e] uppercase tracking-widest px-5 py-2.5 bg-black/5 rounded-lg hover:bg-primary transition-all font-mono"
                         >
                           Add to Bag
@@ -2552,6 +2677,12 @@ export default function NewDesignContent() {
       </div>
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setAuthModalOpen(false)} />
       <CertificateModal isOpen={isCertModalOpen} onClose={() => setIsCertModalOpen(false)} />
+      <ProductDetailModal 
+        product={selectedProduct} 
+        isOpen={!!selectedProduct} 
+        onClose={() => setSelectedProduct(null)} 
+        onAddToBag={(prod) => addToCart(prod)} 
+      />
 
       {/* CART DRAWER */}
       <AnimatePresence>
@@ -2667,297 +2798,37 @@ export default function NewDesignContent() {
       </AnimatePresence>
 
       {/* CHECKOUT MODAL */}
-      <AnimatePresence>
-        {isCheckoutOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => {
-                if (checkoutStep !== 'processing' && checkoutStep !== 'success') {
-                  setIsCheckoutOpen(false);
-                }
-              }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[130]"
-            />
-            {/* Modal Container */}
-            <div className="fixed inset-0 overflow-y-auto z-[140] flex items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="w-full max-w-lg bg-white rounded-[2.5rem] border border-black/5 overflow-hidden shadow-2xl flex flex-col relative"
-              >
-                {/* Header */}
-                <div className="p-8 border-b border-black/5 flex items-center justify-between">
-                  <div>
-                    <h3 className="font-headline text-2xl font-black uppercase text-[#1a1a2e]">Checkout</h3>
-                    <p className="text-xs text-[#1a1a2e]/40 font-mono uppercase mt-1 tracking-wider">Secure Payment Gateway</p>
-                  </div>
-                  {checkoutStep !== 'processing' && checkoutStep !== 'success' && (
-                    <button 
-                      onClick={() => setIsCheckoutOpen(false)}
-                      className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-[#1a1a2e]/60 hover:text-[#1a1a2e] hover:bg-black/10 transition-all"
-                    >
-                      <span className="material-symbols-outlined text-lg">close</span>
-                    </button>
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-8 flex-grow">
-                  {checkoutStep === 'details' && (
-                    <div className="space-y-6">
-                      <h4 className="font-headline text-sm font-bold uppercase text-[#1a1a2e]/80 tracking-wider">1. Shipping & Contact Details</h4>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="text-[10px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">Full Name</label>
-                          <input 
-                            type="text" 
-                            value={shippingDetails.name}
-                            onChange={(e) => setShippingDetails({ ...shippingDetails, name: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:border-primary text-sm transition-all" 
-                            placeholder="e.g. Rahul Sharma" 
-                          />
-                        </div>
-                        <div>
-                          <label className="text-[10px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">Email Address</label>
-                          <input 
-                            type="email" 
-                            value={shippingDetails.email}
-                            onChange={(e) => setShippingDetails({ ...shippingDetails, email: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:border-primary text-sm transition-all" 
-                            placeholder="e.g. rahul@example.com" 
-                          />
-                        </div>
-                        <div>
-                          <label className="text-[10px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">Shipping Address</label>
-                          <textarea 
-                            value={shippingDetails.address}
-                            onChange={(e) => setShippingDetails({ ...shippingDetails, address: e.target.value })}
-                            rows={3}
-                            className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:border-primary text-sm transition-all resize-none" 
-                            placeholder="Full address, PIN code, State" 
-                          />
-                        </div>
-                        <div>
-                          <label className="text-[10px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">Phone Number</label>
-                          <input 
-                            type="text" 
-                            value={shippingDetails.phone}
-                            onChange={(e) => setShippingDetails({ ...shippingDetails, phone: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl border border-black/10 focus:outline-none focus:border-primary text-sm transition-all" 
-                            placeholder="e.g. 9876543210" 
-                          />
-                        </div>
-                      </div>
-
-                      <button 
-                        onClick={() => {
-                          if (shippingDetails.name && shippingDetails.email && shippingDetails.address && shippingDetails.phone) {
-                            setCheckoutStep('payment');
-                          } else {
-                            alert("Please fill in all details to proceed.");
-                          }
-                        }}
-                        className="w-full bg-[#1a1a2e] text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#1a1a2e]/90 transition-all flex items-center justify-center gap-2 mt-6"
-                      >
-                        <span>Continue to Payment</span>
-                        <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                      </button>
-                    </div>
-                  )}
-
-                  {checkoutStep === 'payment' && (
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center">
-                        <h4 className="font-headline text-sm font-bold uppercase text-[#1a1a2e]/80 tracking-wider">2. Payment Method</h4>
-                        <button onClick={() => setCheckoutStep('details')} className="text-xs text-primary font-bold hover:underline">Edit Details</button>
-                      </div>
-
-                      {/* Payment Method Selector */}
-                      <div className="grid grid-cols-3 gap-3">
-                        {[
-                          { id: 'upi', name: 'UPI / QR', icon: 'qr_code_scanner' },
-                          { id: 'card', name: 'Card', icon: 'credit_card' },
-                          { id: 'netbanking', name: 'Net Banking', icon: 'account_balance' },
-                        ].map((method) => (
-                          <button
-                            key={method.id}
-                            onClick={() => setPaymentMethod(method.id as any)}
-                            className={`p-4 rounded-2xl border flex flex-col items-center justify-center gap-2 transition-all ${
-                              paymentMethod === method.id 
-                                ? 'border-primary bg-primary/5 text-primary' 
-                                : 'border-black/5 hover:border-black/20 text-[#1a1a2e]/60'
-                            }`}
-                          >
-                            <span className="material-symbols-outlined text-xl">{method.icon}</span>
-                            <span className="text-[10px] font-bold uppercase tracking-wider">{method.name}</span>
-                          </button>
-                        ))}
-                      </div>
-
-                      {/* Dynamic Payment Details */}
-                      <div className="p-6 rounded-2xl bg-black/5 border border-black/5 min-h-[160px] flex flex-col justify-center">
-                        {paymentMethod === 'upi' && (
-                          <div className="flex flex-col items-center text-center space-y-4">
-                            <div className="w-32 h-32 bg-white p-2 rounded-xl border border-black/10 flex items-center justify-center relative group">
-                              {/* QR Mock */}
-                              <div className="absolute inset-0 bg-[#1a1a2e]/5 backdrop-blur-[1px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span className="text-[9px] font-black uppercase text-[#1a1a2e] font-mono">Real Dynamic QR</span>
-                              </div>
-                              <img 
-                                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=airg@ybl%26pn=AIR%20G%20Ecosystem%26am=${getCartTotal()}%26cu=INR`}
-                                alt="Payment QR" 
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <p className="text-xs font-bold text-[#1a1a2e]">Scan to pay using any UPI App</p>
-                              <p className="text-[10px] text-[#1a1a2e]/40 font-mono">airg@ybl • Amount: ₹{getCartTotal().toLocaleString('en-IN')}</p>
-                            </div>
-                          </div>
-                        )}
-
-                        {paymentMethod === 'card' && (
-                          <div className="space-y-4">
-                            <div>
-                              <label className="text-[9px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">Card Number</label>
-                              <input 
-                                type="text" 
-                                className="w-full px-4 py-2.5 rounded-lg border border-black/10 text-sm focus:outline-none focus:border-primary font-mono" 
-                                placeholder="4111 2222 3333 4444" 
-                              />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <label className="text-[9px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">Expiry Date</label>
-                                <input 
-                                  type="text" 
-                                  className="w-full px-4 py-2.5 rounded-lg border border-black/10 text-sm focus:outline-none focus:border-primary font-mono" 
-                                  placeholder="MM/YY" 
-                                />
-                              </div>
-                              <div>
-                                <label className="text-[9px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block mb-1">CVV</label>
-                                <input 
-                                  type="password" 
-                                  className="w-full px-4 py-2.5 rounded-lg border border-black/10 text-sm focus:outline-none focus:border-primary font-mono" 
-                                  placeholder="***" 
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        )}
-
-                        {paymentMethod === 'netbanking' && (
-                          <div className="space-y-3">
-                            <label className="text-[9px] uppercase font-bold tracking-widest text-[#1a1a2e]/50 block">Select Popular Bank</label>
-                            <select className="w-full px-4 py-2.5 rounded-lg border border-black/10 text-sm bg-white focus:outline-none focus:border-primary">
-                              <option>State Bank of India</option>
-                              <option>HDFC Bank</option>
-                              <option>ICICI Bank</option>
-                              <option>Axis Bank</option>
-                              <option>Kotak Mahindra Bank</option>
-                            </select>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Pay Button */}
-                      <button 
-                        onClick={() => {
-                          const orderTotal = getCartTotal();
-                          if (userProfile.walletBalance < orderTotal) {
-                            alert(`Insufficient mock wallet balance. Total is ₹${orderTotal.toLocaleString('en-IN')}, but your wallet only has ₹${userProfile.walletBalance.toLocaleString('en-IN')}. Please open your Profile (person icon in header) to top up mock funds!`);
-                            return;
-                          }
-                          setCheckoutStep('processing');
-                          const orderId = `AIG-${Math.floor(100000 + Math.random() * 900000)}`;
-                          const newOrder = {
-                            id: orderId,
-                            date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-                            items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
-                            total: orderTotal,
-                            status: 'Shipped via AIG Logistics'
-                          };
-                          setTimeout(() => {
-                            setOrders(prev => {
-                              const updated = [newOrder, ...prev];
-                              localStorage.setItem('aig_orders', JSON.stringify(updated));
-                              return updated;
-                            });
-                            setUserProfile(prev => ({
-                              ...prev,
-                              walletBalance: prev.walletBalance - orderTotal
-                            }));
-                            setCheckoutStep('success');
-                            setCart([]); // clear cart
-                          }, 3000);
-                        }}
-                        className="w-full bg-[#EE2C3C] text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs glow-red hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 mt-6"
-                      >
-                        <span>Authorize Payment • ₹{getCartTotal().toLocaleString('en-IN')}</span>
-                      </button>
-                    </div>
-                  )}
-
-                  {checkoutStep === 'processing' && (
-                    <div className="py-12 flex flex-col items-center justify-center text-center space-y-6">
-                      <div className="relative w-20 h-20 flex items-center justify-center">
-                        <div className="absolute inset-0 rounded-full border-4 border-black/5" />
-                        <div className="absolute inset-0 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin" />
-                        <span className="material-symbols-outlined text-primary text-3xl">shield</span>
-                      </div>
-                      <div className="space-y-2">
-                        <h4 className="font-headline text-lg font-bold uppercase text-[#1a1a2e]">Processing Secure Transaction</h4>
-                        <p className="text-xs text-[#1a1a2e]/40 max-w-xs font-light">Please do not refresh the page or click back. We are communicating with your bank's secure host...</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {checkoutStep === 'success' && (
-                    <div className="py-8 flex flex-col items-center justify-center text-center space-y-6">
-                      <div className="w-20 h-20 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-500 animate-bounce">
-                        <span className="material-symbols-outlined text-4xl">check_circle</span>
-                      </div>
-                      <div className="space-y-2">
-                        <h4 className="font-headline text-2xl font-black uppercase text-[#1a1a2e]">Order Confirmed!</h4>
-                        <p className="text-xs text-green-600 font-bold uppercase tracking-wider font-mono">Thank you for your purchase, {shippingDetails.name}!</p>
-                        <p className="text-[10px] text-[#1a1a2e]/40 font-mono mt-1">Transaction ID: TXN-{Math.floor(100000 + Math.random() * 900000)}</p>
-                      </div>
-
-                      <div className="w-full p-6 rounded-2xl bg-black/5 border border-black/5 text-left space-y-3">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-[#1a1a2e]/50 font-bold uppercase">Customer</span>
-                          <span className="font-bold text-[#1a1a2e]">{shippingDetails.name}</span>
-                        </div>
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-[#1a1a2e]/50 font-bold uppercase">Delivery Destination</span>
-                          <span className="font-bold text-[#1a1a2e] line-clamp-1 max-w-[200px] text-right">{shippingDetails.address}</span>
-                        </div>
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-[#1a1a2e]/50 font-bold uppercase">Status</span>
-                          <span className="font-bold text-green-600 uppercase">Shipped via AIG Logistics</span>
-                        </div>
-                      </div>
-
-                      <button 
-                        onClick={() => setIsCheckoutOpen(false)}
-                        className="w-full bg-[#1a1a2e] text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#1a1a2e]/90 transition-all"
-                      >
-                        Return to Store
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          </>
-        )}
-      </AnimatePresence>
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        item={{
+          name: cart.map(i => `${i.name} (x${i.quantity})`).join(", "),
+          price: getCartTotal(),
+          category: "Store Cart"
+        }}
+        type="product"
+        onSuccess={(orderId, shippingDetails) => {
+          const orderTotal = getCartTotal();
+          const newOrder = {
+            id: orderId,
+            date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+            items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
+            total: orderTotal,
+            status: 'Shipped via AIG Logistics'
+          };
+          setOrders(prev => {
+            const updated = [newOrder, ...prev];
+            const ordersKey = user ? `aig_orders_${user.email}` : "aig_orders";
+            localStorage.setItem(ordersKey, JSON.stringify(updated));
+            return updated;
+          });
+          setUserProfile(prev => ({
+            ...prev,
+            walletBalance: prev.walletBalance - orderTotal
+          }));
+          setCart([]);
+        }}
+      />
 
       {/* ORDER HISTORY / TRACK ORDERS MODAL */}
       <AnimatePresence>
@@ -3079,14 +2950,25 @@ export default function NewDesignContent() {
                 <div className="p-8 border-b border-black/5 flex items-center justify-between flex-shrink-0">
                   <div>
                     <h3 className="font-headline text-2xl font-black uppercase text-[#1a1a2e]">Developer Profile</h3>
-                    <p className="text-xs text-[#1a1a2e]/40 font-mono uppercase mt-1 tracking-wider">AIR G Grid Node Management</p>
+                    <p className="text-xs text-[#1a1a2e]/40 font-mono uppercase mt-1 tracking-wider">AIR G Portal</p>
                   </div>
-                  <button 
-                    onClick={() => setIsProfileOpen(false)}
-                    className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-[#1a1a2e]/60 hover:text-[#1a1a2e] hover:bg-black/10 transition-all"
-                  >
-                    <span className="material-symbols-outlined text-lg">close</span>
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsProfileOpen(false);
+                      }}
+                      className="px-4 py-2 border border-red-500/20 hover:border-red-500 text-red-600 bg-red-500/5 hover:bg-red-500 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all"
+                    >
+                      Logout
+                    </button>
+                    <button 
+                      onClick={() => setIsProfileOpen(false)}
+                      className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-[#1a1a2e]/60 hover:text-[#1a1a2e] hover:bg-black/10 transition-all"
+                    >
+                      <span className="material-symbols-outlined text-lg">close</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Content */}
@@ -3095,7 +2977,14 @@ export default function NewDesignContent() {
                   <div className="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-3xl bg-black/5 border border-black/5">
                     <div className="w-20 h-20 rounded-2xl bg-primary flex items-center justify-center text-white text-3xl font-black shadow-lg relative group overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/20 animate-pulse"></div>
-                      <span>RS</span>
+                      <span>
+                        {userProfile.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .slice(0, 2)
+                          .toUpperCase()}
+                      </span>
                     </div>
                     <div className="text-center sm:text-left space-y-1">
                       <div className="flex flex-wrap justify-center sm:justify-start items-center gap-2">
@@ -3103,7 +2992,7 @@ export default function NewDesignContent() {
                         <span className="px-2.5 py-0.5 rounded-full border border-primary/20 bg-primary/5 text-[8px] font-black text-primary uppercase tracking-widest">{userProfile.role}</span>
                       </div>
                       <p className="text-xs text-[#1a1a2e]/60 font-mono">{userProfile.email}</p>
-                      <p className="text-[10px] text-[#1a1a2e]/40 font-mono uppercase tracking-wider">Member Since: {userProfile.memberSince} • Node: {userProfile.node}</p>
+                      <p className="text-[10px] text-[#1a1a2e]/40 font-mono uppercase tracking-wider">Member Since: {userProfile.memberSince}</p>
                     </div>
                   </div>
 
@@ -3122,7 +3011,11 @@ export default function NewDesignContent() {
                           {[1000, 5000, 10000].map((amt) => (
                             <button
                               key={amt}
-                              onClick={() => topUpWallet(amt)}
+                              onClick={() => {
+                                setPendingTopUpAmount(amt);
+                                setTopUpPaymentStep('options');
+                                setIsTopUpPaymentOpen(true);
+                              }}
                               className="px-3 py-2 bg-white/10 hover:bg-primary hover:text-[#1a1a2e] border border-white/5 hover:border-primary rounded-xl text-[10px] font-black font-mono transition-all"
                             >
                               +₹{amt.toLocaleString('en-IN')}
@@ -3134,21 +3027,21 @@ export default function NewDesignContent() {
                   </div>
 
                   {/* Dedicated App Download Link */}
-                  <div className="p-6 rounded-3xl bg-black/5 border border-black/5 flex items-center justify-between gap-4">
+                  <div className="p-6 rounded-3xl bg-[#0F172A] border border-white/10 flex items-center justify-between gap-4 shadow-md">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                        <span className="material-symbols-outlined text-2xl">rocket_launch</span>
+                      <div className="w-12 h-12 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(235,0,40,0.15)]">
+                        <span className="material-symbols-outlined text-2xl text-primary">rocket_launch</span>
                       </div>
                       <div>
-                        <h5 className="font-headline text-xs font-bold text-[#1a1a2e] uppercase tracking-wider">AIR G App (v2.0)</h5>
-                        <p className="text-[10px] text-[#1a1a2e]/40 font-mono">Download the official client terminal</p>
+                        <h5 className="font-headline text-xs font-bold text-white uppercase tracking-wider">AIR G App (v2.0)</h5>
+                        <p className="text-[10px] text-slate-400 font-mono">Download the official client terminal</p>
                       </div>
                     </div>
                     <a 
                       href="https://gurujiair.com/app"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 border border-black/10 hover:border-primary/50 text-[10px] uppercase tracking-widest font-black rounded-xl hover:bg-primary hover:text-white transition-all flex items-center gap-2"
+                      className="px-4 py-2 bg-white/5 border border-white/10 hover:border-primary text-slate-300 hover:text-white text-[10px] uppercase tracking-widest font-black rounded-xl hover:bg-primary transition-all flex items-center gap-2 shadow-sm"
                     >
                       <span>Download</span>
                       <span className="material-symbols-outlined text-[10px]">arrow_forward</span>
@@ -3199,6 +3092,203 @@ export default function NewDesignContent() {
         )}
       </AnimatePresence>
 
+      {/* WALLET TOP-UP PAYMENT GATEWAY MODAL */}
+      <AnimatePresence>
+        {isTopUpPaymentOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsTopUpPaymentOpen(false)}
+              className="fixed inset-0 bg-black/80 backdrop-blur-md z-[150]"
+            />
+            {/* Modal Container */}
+            <div className="fixed inset-0 overflow-y-auto z-[160] flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                className="w-full max-w-md bg-[#0F172A] rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl flex flex-col relative"
+              >
+                {/* Header */}
+                <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary text-xl animate-pulse">shield_lock</span>
+                    <div>
+                      <h3 className="text-sm font-headline font-black uppercase text-white tracking-wider">AIR G Secure Pay</h3>
+                      <p className="text-[9px] text-slate-400 font-mono uppercase tracking-wider">Authorized Gateway</p>
+                    </div>
+                  </div>
+                  {topUpPaymentStep === 'options' && (
+                    <button 
+                      onClick={() => setIsTopUpPaymentOpen(false)}
+                      className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all"
+                    >
+                      <span className="material-symbols-outlined text-sm">close</span>
+                    </button>
+                  )}
+                </div>
+
+                {/* Body */}
+                <div className="p-6 space-y-6">
+                  {topUpPaymentStep === 'options' && (
+                    <>
+                      {/* Merchant & Amount Info */}
+                      <div className="bg-slate-900/60 border border-white/5 rounded-2xl p-4 flex justify-between items-center">
+                        <div>
+                          <span className="text-[8px] uppercase tracking-wider text-slate-500 font-mono block">Merchant</span>
+                          <span className="text-xs font-bold text-white uppercase tracking-wider">AIR G International</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-[8px] uppercase tracking-wider text-slate-500 font-mono block">Amount</span>
+                          <span className="text-lg font-black text-primary font-mono">₹{pendingTopUpAmount.toLocaleString('en-IN')}</span>
+                        </div>
+                      </div>
+
+                      {/* Payment Method Selectors */}
+                      <div className="space-y-3">
+                        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block font-mono">Select Payment Method</label>
+                        <div className="grid grid-cols-3 gap-2">
+                          {[
+                            { id: 'upi', label: 'UPI', icon: 'qr_code_2' },
+                            { id: 'card', label: 'Card', icon: 'credit_card' },
+                            { id: 'netbanking', label: 'Net Banking', icon: 'account_balance' }
+                          ].map((method) => (
+                            <button
+                              key={method.id}
+                              onClick={() => setTopUpPaymentMethod(method.id as any)}
+                              className={`p-3 rounded-xl border flex flex-col items-center justify-center gap-1.5 transition-all ${
+                                topUpPaymentMethod === method.id 
+                                  ? 'border-primary bg-primary/5 text-primary' 
+                                  : 'border-white/5 bg-slate-900/40 text-slate-400 hover:border-white/10'
+                              }`}
+                            >
+                              <span className="material-symbols-outlined text-xl">{method.icon}</span>
+                              <span className="text-[9px] font-bold uppercase tracking-wider">{method.label}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Method Details (UPI, Card, Netbanking) */}
+                      <div className="min-h-[140px] flex items-center justify-center p-4 bg-slate-900/30 rounded-2xl border border-white/5">
+                        {topUpPaymentMethod === 'upi' && (
+                          <div className="flex flex-col items-center gap-3 text-center w-full">
+                            <div className="p-2 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center">
+                              <svg width="80" height="80" viewBox="0 0 100 100" className="fill-[#0F172A]">
+                                <rect width="25" height="25" />
+                                <rect x="75" width="25" height="25" />
+                                <rect y="75" width="25" height="25" />
+                                <rect x="35" y="35" width="30" height="30" />
+                                <rect x="10" y="45" width="15" height="15" />
+                                <rect x="45" y="10" width="15" height="15" />
+                                <rect x="75" y="45" width="15" height="15" />
+                                <rect x="45" y="75" width="15" height="15" />
+                              </svg>
+                            </div>
+                            <p className="text-[9px] text-slate-400 uppercase tracking-widest font-mono">Scan QR code using any UPI App</p>
+                          </div>
+                        )}
+
+                        {topUpPaymentMethod === 'card' && (
+                          <div className="w-full space-y-3">
+                            <div className="space-y-1">
+                              <span className="text-[7px] uppercase font-bold text-slate-500 tracking-widest font-mono block">Card Number</span>
+                              <input 
+                                type="text" 
+                                placeholder="4111 •••• •••• 1111" 
+                                className="w-full bg-slate-900/60 border border-white/5 rounded-lg py-2 px-3 text-xs focus:outline-none focus:border-primary/50 text-white font-mono" 
+                                disabled
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="space-y-1">
+                                <span className="text-[7px] uppercase font-bold text-slate-500 tracking-widest font-mono block">Expiry</span>
+                                <input 
+                                  type="text" 
+                                  placeholder="MM/YY" 
+                                  className="w-full bg-slate-900/60 border border-white/5 rounded-lg py-2 px-3 text-xs focus:outline-none focus:border-primary/50 text-white font-mono" 
+                                  disabled
+                                />
+                              </div>
+                              <div className="space-y-1">
+                                <span className="text-[7px] uppercase font-bold text-slate-500 tracking-widest font-mono block">CVV</span>
+                                <input 
+                                  type="password" 
+                                  placeholder="•••" 
+                                  className="w-full bg-slate-900/60 border border-white/5 rounded-lg py-2 px-3 text-xs focus:outline-none focus:border-primary/50 text-white font-mono" 
+                                  disabled
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {topUpPaymentMethod === 'netbanking' && (
+                          <div className="grid grid-cols-2 gap-2 w-full">
+                            {['SBI', 'HDFC', 'ICICI', 'Axis'].map((bank) => (
+                              <div key={bank} className="p-3 bg-slate-900/60 border border-white/5 hover:border-primary/30 rounded-xl flex items-center gap-2 cursor-pointer transition-colors">
+                                <span className="material-symbols-outlined text-sm text-primary">account_balance</span>
+                                <span className="text-[10px] font-bold text-slate-300 font-mono">{bank}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Pay Button */}
+                      <button
+                        onClick={() => {
+                          setTopUpPaymentStep('processing');
+                          setTimeout(() => {
+                            topUpWallet(pendingTopUpAmount);
+                            setTopUpPaymentStep('success');
+                            setTimeout(() => {
+                              setIsTopUpPaymentOpen(false);
+                            }, 1800);
+                          }, 2200);
+                        }}
+                        className="w-full py-4 bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-[#d61e2e] transition-all shadow-lg text-xs uppercase tracking-widest font-mono"
+                      >
+                        <span className="material-symbols-outlined text-sm">lock</span>
+                        <span>Pay ₹{pendingTopUpAmount.toLocaleString('en-IN')}</span>
+                      </button>
+                    </>
+                  )}
+
+                  {topUpPaymentStep === 'processing' && (
+                    <div className="py-12 flex flex-col items-center justify-center text-center space-y-4">
+                      <div className="relative flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full border-2 border-primary/20 border-t-2 border-t-primary animate-spin" />
+                        <span className="material-symbols-outlined text-primary text-xl absolute animate-pulse">lock_open</span>
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-black uppercase text-white tracking-widest font-mono">Securing Transaction…</h4>
+                        <p className="text-[9px] text-slate-400 font-mono uppercase">Please do not refresh or close this window.</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {topUpPaymentStep === 'success' && (
+                    <div className="py-12 flex flex-col items-center justify-center text-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.2)] animate-bounce">
+                        <span className="material-symbols-outlined text-3xl font-black">check</span>
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="text-xs font-black uppercase text-emerald-400 tracking-widest font-mono">Payment Successful!</h4>
+                        <p className="text-[9px] text-slate-400 font-mono uppercase">₹{pendingTopUpAmount.toLocaleString('en-IN')} added to your wallet.</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* FULLSCREEN MAP MODAL */}
       <AnimatePresence>
         {isMapFullscreen && (
@@ -3242,8 +3332,8 @@ export default function NewDesignContent() {
         )}
       </AnimatePresence>
       {/* Floating Pulse Call Button & Promo Widget */}
-      {showCallButton && (
-        <div className="fixed bottom-6 right-6 z-[9999] flex items-center gap-3">
+      {showCallButton && !isCartOpen && !isCheckoutOpen && !isAuthModalOpen && !isCertModalOpen && !selectedProduct && !selectedComp && !isOrdersOpen && !isProfileOpen && (
+        <div className="fixed bottom-6 right-6 z-[99] flex items-center gap-3">
           <style dangerouslySetInnerHTML={{__html: `
             @keyframes phone-ring {
               0%, 100% { transform: rotate(0) scale(1); }

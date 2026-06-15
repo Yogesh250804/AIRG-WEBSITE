@@ -206,6 +206,100 @@ export default async function LabDetailPage({ params }: PageProps) {
             </div>
           </div>
         </div>
+        {/* PDEA - AIR G GLOBAL AI TRANSFORMATION PROGRAM Section */}
+        <div className="mt-24 border-t border-black/5 pt-20 space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tight leading-none">
+              PDEA - AIR G <span className="text-primary text-glow-red">Global AI</span> Transformation Program
+            </h2>
+            <p className="text-xs md:text-sm text-primary font-bold tracking-[0.25em] uppercase font-mono">
+              Today's Learning, Tomorrow's Leaders!
+            </p>
+          </div>
+
+          {/* Curriculum / What Students Will Learn */}
+          <div className="space-y-6">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[#1a1a2e] flex items-center gap-2.5 font-mono justify-center">
+              <span className="material-symbols-outlined text-primary">school</span>
+              Students Will Learn
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {[
+                { title: "AI & Data", desc: "Understand and use AI to solve real problems", icon: "psychology" },
+                { title: "Drone Technology", desc: "Build, fly and program drones", icon: "flight_takeoff" },
+                { title: "VR Technology", desc: "Explore virtual worlds and learn by experience", icon: "vrpano" },
+                { title: "Robotics", desc: "Design, build and automate robots", icon: "precision_manufacturing" },
+                { title: "Innovation & Projects", desc: "Work on real-life projects and build solutions", icon: "hub" }
+              ].map((item, idx) => (
+                <div key={idx} className="glass-premium p-6 rounded-2xl border border-black/5 hover:border-primary/30 transition-all flex flex-col items-center text-center justify-between group h-full">
+                  <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                    <span className="material-symbols-outlined text-2xl">{item.icon}</span>
+                  </div>
+                  <div className="mt-4 flex-grow">
+                    <h4 className="text-sm font-bold text-[#1a1a2e] uppercase tracking-tight font-sans">{item.title}</h4>
+                    <p className="text-xs text-[#1a1a2e]/55 mt-2 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Two-Column Grid: Importance vs Good News */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            {/* Column 1: Why Is This Important? */}
+            <div className="glass-premium p-8 md:p-10 rounded-[2.5rem] border border-black/5 flex flex-col justify-between">
+              <div>
+                <h3 className="text-base font-bold uppercase tracking-widest text-[#1a1a2e] flex items-center gap-2.5 font-mono mb-8">
+                  <span className="w-1.5 h-6 bg-primary rounded-full" />
+                  Why Is This Important?
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    { text: "Future Ready Skills for the 21st Century", icon: "school" },
+                    { text: "Builds Confidence, Creativity & Innovation", icon: "person" },
+                    { text: "Better Career Opportunities", icon: "trending_up" },
+                    { text: "Prepares Students to Compete in a Global World", icon: "public" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4 items-start">
+                      <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <p className="text-sm text-[#1a1a2e]/70 leading-relaxed font-sans mt-1">
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Column 2: Good News for Parents */}
+            <div className="glass-premium p-8 md:p-10 rounded-[2.5rem] border border-black/5 flex flex-col justify-between">
+              <div>
+                <h3 className="text-base font-bold uppercase tracking-widest text-[#1a1a2e] flex items-center gap-2.5 font-mono mb-8">
+                  <span className="w-1.5 h-6 bg-emerald-500 rounded-full" />
+                  Good News for Parents
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    { num: "01", text: "Students learning cutting-edge technology at school" },
+                    { num: "02", text: "Being ready for the future" },
+                    { num: "03", text: "Learning coding, get certification & inspiration from school age" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4 items-start">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 font-mono font-bold text-xs shrink-0">
+                        {item.num}
+                      </div>
+                      <p className="text-sm text-[#1a1a2e]/70 leading-relaxed font-sans mt-1">
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
