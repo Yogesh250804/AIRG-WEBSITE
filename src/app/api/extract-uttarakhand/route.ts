@@ -27,12 +27,8 @@ export async function GET() {
     if (jsonStart === -1) {
       return NextResponse.json({ error: "No JSON found" }, { status: 400 });
     }
-    const pos = 107083;
-    const snippet = rawFile.substring(pos - 150, pos + 150);
-    return NextResponse.json({ 
-      length: rawFile.length, 
-      snippet 
-    });
+    const geojson = JSON.parse(rawFile);
+
 
     // Calculate GPS bounding box
     let gpsMinLon = Infinity;

@@ -1066,6 +1066,226 @@ export default function NewDesignContent() {
                 </div>
               </div>
 
+              {/* ACHIEVEMENTS, PARTNERS AND CLIENTS SECTION */}
+              <div className="w-full pt-12 pb-16 relative z-10 bg-white overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+                
+                <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 space-y-16">
+                  {/* Header */}
+                  <div className="relative max-w-3xl space-y-4">
+                    <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
+                      <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
+                    </div>
+                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // Global Networks</span>
+                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+                      Achievements, Partners & <span className="text-primary text-glow-red">Clients</span>
+                    </h2>
+                    <p className="text-sm md:text-base text-[#1a1a2e]/50 font-light leading-relaxed max-w-2xl">
+                      Collaborating with top ministries, global universities, and leading enterprises to democratize deep-tech education.
+                    </p>
+                  </div>
+
+                  {/* Partners Logos Grid */}
+                  <div className="glass-premium p-8 rounded-[2.5rem] border border-black/5">
+                    <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#1a1a2e]/40 mb-8 text-center font-bold">Trusted by Industry Leaders & Institutions</div>
+                    <div className="flex flex-wrap gap-8 items-center justify-center opacity-90">
+                      {[
+                        { name: "Ministry of Education", logo: "/logos/moe.png" },
+                        { name: "SYMBIOSIS", logo: "/logos/symbiosis.png" },
+                        { name: "Maha60", logo: "/logos/maha60.png" },
+                        { name: "Sharjah", logo: "/logos/sharjah.png" },
+                        { name: "UNESCO", logo: "/logos/unesco.png" },
+                        { name: "MIT-ADT", logo: "/logos/mitadt.png" },
+                        { name: "DYP", logo: "/logos/dyp.png" }
+                      ].map((partner, index) => (
+                        <div key={index} className="flex flex-col items-center justify-center group p-3 hover:bg-black/5 rounded-xl transition-all duration-300">
+                          <div className="w-24 h-24 rounded-lg bg-white flex items-center justify-center p-2 border border-black/5 shadow-sm overflow-hidden">
+                            <img 
+                              src={partner.logo} 
+                              alt={partner.name} 
+                              className="max-w-full max-h-full object-contain"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                if (target.src.includes(".png")) {
+                                  target.src = target.src.replace(".png", ".jpeg");
+                                } else if (target.src.includes(".jpeg")) {
+                                  target.src = target.src.replace(".jpeg", ".jpg");
+                                }
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Achievements Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Card 1: Kaduna State University, Nigeria */}
+                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                        <img 
+                          src="/cards/ng.png" 
+                          alt="Kaduna State University" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute bottom-4 left-6 z-20">
+                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
+                            Nigeria
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
+                            Kaduna State University
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                            Kaduna State University, Nigeria, collaborates with us to establish an innovation hub on campus, fostering creativity and technological advancement among students.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card 2: Awarded and Appreciated by MoE, India */}
+                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                        <img 
+                          src="/cards/media__1780295890933.png" 
+                          alt="Awarded by MoE India" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute bottom-4 left-6 z-20">
+                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
+                            National Recognition
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
+                            Awarded by MoE India
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                            Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card 3: IAIRESCO, Global Community */}
+                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                        <img 
+                          src="/cards/media__1780295525047.png" 
+                          alt="IAIRESCO Global Community" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute bottom-4 left-6 z-20">
+                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
+                            Global Partner
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
+                            IAIRESCO Partners
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                            IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card 4: AIR GURUJI International Presence */}
+                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                        <img 
+                          src="/cards/media__1780292353886.png" 
+                          alt="AIR GURUJI Presence Map" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute bottom-4 left-6 z-20">
+                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
+                            Presence Map
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
+                            Global Footprint
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                            Guruji AIR representatives across 7 countries are spreading technology education for schools, students, and universities, promoting innovation and skill development globally.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card 5: 6000+ African Students */}
+                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                        <img 
+                          src="/cards/media__1780295399899.png" 
+                          alt="African Students Impact" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute bottom-4 left-6 z-20">
+                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
+                            Africa Network
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
+                            6000+ African Students
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                            Spreading knowledge across African countries, we aim to empower students with essential skills and opportunities for growth and development.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card 6: Western International School, Cambodia */}
+                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
+                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                        <img 
+                          src="/cards/kh.png" 
+                          alt="Western International School Cambodia" 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                        />
+                        <div className="absolute bottom-4 left-6 z-20">
+                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
+                            Cambodia
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
+                            Western International School
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                            Western International School in Cambodia partners with us to set up a state-of-the-art hi-tech lab and integrate Hexobrain products into classrooms, enriching students' learning experiences.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* PREMIUM GRADIENT DIVIDER LINE */}
               <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
                 <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
