@@ -23,6 +23,7 @@ export interface User {
   streak?: number;
   lastVisit?: string;
   preferredLanguage?: string;
+  walletBalance?: number;
   metadata: {
     creationTime?: string;
     lastSignInTime?: string;
