@@ -437,36 +437,15 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                         {[
                           { 
                             name: 'GPay', 
-                            icon: (
-                              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full object-contain">
-                                <path d="M25.7 15.5c-1.2-1.2-3.1-1.2-4.2 0L10.9 26.1c-1.2 1.2-1.2 3.1 0 4.2l2.1 2.1c1.2 1.2 3.1 1.2 4.2 0L27.8 21.8c1.2-1.2 1.2-3.1 0-4.2l-2.1-2.1z" fill="#EA4335" />
-                                <path d="M30.1 7.2c-1.2-1.2-3.1-1.2-4.2 0L10.9 22.2c-1.2 1.2-1.2 3.1 0 4.2l2.1 2.1c1.2 1.2 3.1 1.2 4.2 0l15-15c1.2-1.2 1.2-3.1 0-4.2l-2.1-2.1z" fill="#4285F4" />
-                                <path d="M21.7 7.2c1.2-1.2 3.1-1.2 4.2 0l2.1 2.1c1.2 1.2 1.2 3.1 0 4.2L13 28.5c-1.2 1.2-3.1 1.2-4.2 0l-2.1-2.1c-1.2-1.2-1.2-3.1 0-4.2l15-15z" fill="#FBBC05" />
-                                <path d="M17.3 11.6l8.5-8.5c1.2-1.2 3.1-1.2 4.2 0l2.1 2.1c1.2 1.2 1.2 3.1 0 4.2l-8.5 8.5c-1.2 1.2-3.1 1.2-4.2 0l-2.1-2.1c-1.2-1.2-1.2-3.1 0-4.2z" fill="#34A853" />
-                              </svg>
-                            )
+                            icon: "/logos/gpay.png"
                           },
                           { 
                             name: 'PhonePe', 
-                            icon: (
-                              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full object-contain">
-                                <rect width="40" height="40" rx="10" fill="#5F259F" />
-                                <path d="M20 9c-5.5 0-10 4.5-10 10 0 5.2 4 9.5 9 10v-5.5c-2.5-.5-4-2.5-4-4.5 0-2.8 2.2-5 5-5s5 2.2 5 5c0 2-1.5 4-4 4.5V29c5-.5 9-4.8 9-10 0-5.5-4.5-10-10-10z" fill="white" />
-                                <circle cx="20" cy="19" r="2.5" fill="#FF9933" />
-                              </svg>
-                            )
+                            icon: "/logos/phonepe.png"
                           },
                           { 
                             name: 'Paytm', 
-                            icon: (
-                              <svg viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full object-contain">
-                                <path d="M8.2 3.5h-5v13h2.8v-4.2h2.2c2.6 0 4.6-1.8 4.6-4.4s-2-4.4-4.6-4.4zm-.2 6.1H6v-3.4h2c1.2 0 2 .8 2 1.7 0 1-.8 1.7-2 1.7z" fill="#002E6E" />
-                                <path d="M18 7.2c-1 0-1.8.6-2.1 1.4h4.2c-.3-.8-1.1-1.4-2.1-1.4zm0-2c2.2 0 3.8 1.4 4.2 3.5h-7.1c.2 1.3 1.2 2.1 2.5 2.1 1.1 0 1.9-.5 2.3-1.2l2.1.8c-.8 1.5-2.4 2.4-4.4 2.4-3.1 0-5.3-2.2-5.3-5.3 0-3.1 2.2-5.3 5.3-5.3z" fill="#002E6E" />
-                                <path d="M28.4 5.5l-3.3 8.3-3.3-8.3h-2.9l4.9 11.5c-.5 1.2-1.2 1.8-2.4 1.8h-.8v2.2h.9c2 0 3.3-1.1 4.1-2.9l5.8-12.6h-3z" fill="#002E6E" />
-                                <path d="M35.6 5.5v2.8h-1.8v5.5c0 .8.4 1.1 1.1 1.1h.7v2.6h-1.5c-2 0-3.1-1-3.1-3.2v-6H30v-2.8h1.1v-2h2.8v2h1.7z" fill="#00BAF2" />
-                                <path d="M39.6 5.5v2.2c.6-1.5 2.1-2.2 3.7-2.2 1.7 0 2.9.7 3.4 2 .8-1.3 2.1-2 3.7-2 2.4 0 3.9 1.6 3.9 4.3v6.7h-2.8v-6.3c0-1.3-.6-2.1-1.7-2.1-1 0-1.7.7-1.9 1.7v6.7H45v-6.3c0-1.3-.6-2.1-1.7-2.1-1.1 0-1.8.7-2 1.7v6.7h-2.8V5.5h2.9z" fill="#00BAF2" />
-                              </svg>
-                            )
+                            icon: "/logos/paytm.png"
                           },
                           { 
                             name: 'BHIM', 
@@ -486,7 +465,11 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                             className="flex items-center p-4 rounded-2xl border border-slate-100 hover:border-red-500 hover:bg-red-50/10 transition-all gap-4 group decoration-none"
                           >
                             <div className="h-10 w-10 rounded-xl bg-white flex items-center justify-center p-1.5 shadow-sm border border-slate-50 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
-                              {app.icon}
+                              {typeof app.icon === 'string' ? (
+                                <img src={app.icon} alt={app.name} className="h-full w-full object-contain" />
+                              ) : (
+                                app.icon
+                              )}
                             </div>
                             <span className="text-sm font-black text-slate-700">{app.name}</span>
                           </a>
