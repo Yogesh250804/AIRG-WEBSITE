@@ -190,8 +190,8 @@ export default function NewDesignContent() {
   useEffect(() => {
     if (user) {
       setUserProfile({
-        name: user.displayName || user.email.split("@")[0],
-        email: user.email,
+        name: user.displayName || (user.email ? user.email.split("@")[0] : "User"),
+        email: user.email || "",
         role: user.role || "Student",
         memberSince: user.metadata?.creationTime 
           ? new Date(user.metadata.creationTime).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
