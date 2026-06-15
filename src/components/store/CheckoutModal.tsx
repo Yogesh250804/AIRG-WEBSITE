@@ -163,15 +163,26 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
   }, []);
 
   const getUpiDeepLink = (app?: string) => {
-    const base = `upi://pay?pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&cu=INR`;
+    const params = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&cu=INR`;
+    const base = `upi://pay?${params}`;
     if (!app) return base;
     
     // Check for iOS
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     
     if (isIOS) {
-      // iOS only supports standard upi:// scheme
-      return base;
+      switch(app) {
+        case 'GPay': 
+          return `gpay://upi/pay?${params}`;
+        case 'PhonePe': 
+          return `phonepe://pay?${params}`;
+        case 'Paytm': 
+          return `paytmmp://pay?${params}`;
+        case 'BHIM': 
+          return `bhim://upi/pay?${params}`;
+        default: 
+          return base;
+      }
     }
 
     // Android-specific intent structures for better targeting
