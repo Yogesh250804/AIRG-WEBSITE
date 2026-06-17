@@ -1,5 +1,5 @@
 "use client";
-// Force recompile: 2
+// Force recompile: 3
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -161,10 +161,12 @@ export default function NewDesignContent() {
   const [selectedGlobalHub, setSelectedGlobalHub] = useState<any>(null);
   const [isMapFullscreen, setIsMapFullscreen] = useState(false);
 
-  // Cart state
+   // Cart state
   const [cart, setCart] = useState<{ name: string; price: string; img: string; tag: string; quantity: number }[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutItem, setCheckoutItem] = useState<{ name: string; price: number | string; category: string; image?: string } | null>(null);
+  const [showClickbaitPromo, setShowClickbaitPromo] = useState(true);
   const [checkoutStep, setCheckoutStep] = useState<'details' | 'payment' | 'processing' | 'success'>('details');
   const [shippingDetails, setShippingDetails] = useState({ name: '', email: '', address: '', phone: '' });
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
@@ -185,6 +187,9 @@ export default function NewDesignContent() {
   const [pendingTopUpAmount, setPendingTopUpAmount] = useState(0);
   const [topUpPaymentStep, setTopUpPaymentStep] = useState<'options' | 'processing' | 'success'>('options');
   const [topUpPaymentMethod, setTopUpPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
+  const [topUpUtr, setTopUpUtr] = useState("");
+  const [isTopUpVerifying, setIsTopUpVerifying] = useState(false);
+  const [topUpUtrError, setTopUpUtrError] = useState("");
 
   // Sync user info from auth state
   useEffect(() => {
@@ -228,6 +233,42 @@ export default function NewDesignContent() {
     }
   }, [user]);
 
+  // Load transactions dynamically based on current user session
+  const [transactions, setTransactions] = useState<{ id: string; date: string; amount: number; type: 'credit' | 'debit'; description: string; method: string; }[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const txKey = user ? `aig_transactions_${user.email}` : "aig_transactions";
+      const savedTx = localStorage.getItem(txKey);
+      if (savedTx) {
+        try {
+          setTransactions(JSON.parse(savedTx));
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        setTransactions([]);
+      }
+    }
+  }, [user]);
+
+  const recordTransaction = (amount: number, type: 'credit' | 'debit', description: string, method: string) => {
+    const newTx = {
+      id: "TXN" + Math.random().toString(36).substr(2, 9).toUpperCase(),
+      date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+      amount,
+      type,
+      description,
+      method
+    };
+    setTransactions(prev => {
+      const updated = [newTx, ...prev];
+      const txKey = user ? `aig_transactions_${user.email}` : "aig_transactions";
+      localStorage.setItem(txKey, JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   const handleLogout = async () => {
     await logout();
     addNotification("Logged out successfully.");
@@ -240,7 +281,84 @@ export default function NewDesignContent() {
   const [compInst, setCompInst] = useState("");
   const [isSubmittingComp, setIsSubmittingComp] = useState(false);
 
+  const getUpiDeepLink = (app?: string) => {
+    const MERCHANT_UPI = "9860779172-5@ybl";
+    const MERCHANT_NAME = "AIR G International";
+    const params = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&cu=INR`;
+    const base = `upi://pay?${params}`;
+    if (!app) return base;
+    
+    const isIOS = typeof navigator !== "undefined" && /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    
+    if (isIOS) {
+      switch(app) {
+        case 'GPay': return `gpay://upi/pay?${params}`;
+        case 'PhonePe': return `phonepe://pay?${params}`;
+        case 'Paytm': return `paytmmp://pay?${params}`;
+        case 'BHIM': return `bhim://upi/pay?${params}`;
+        default: return base;
+      }
+    }
+
+    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&cu=INR`;
+    switch(app) {
+      case 'GPay': 
+        return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+      case 'PhonePe': 
+        return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.phonepe.app;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+      case 'Paytm': 
+        return `intent://pay?${intentParams}#Intent;scheme=upi;package=net.one97.paytm;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+      default: 
+        return base;
+    }
+  };
+
+  const handleVerifyTopUpUtr = async () => {
+    if (!/^\d{12}$/.test(topUpUtr)) {
+      setTopUpUtrError("Please enter a valid 12-digit UTR number.");
+      return;
+    }
+    setTopUpUtrError("");
+    setIsTopUpVerifying(true);
+
+    try {
+      const res = await fetch("/api/payment/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          utr: topUpUtr,
+          amount: pendingTopUpAmount,
+          type: "recharge"
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success(data.message || "Payment verified successfully!");
+        recordTransaction(pendingTopUpAmount, 'credit', 'Wallet Top-Up', 'UPI');
+        setUserProfile(prev => ({
+          ...prev,
+          walletBalance: data.walletBalance
+        }));
+        setTopUpPaymentStep('success');
+        setTimeout(() => {
+          setIsTopUpPaymentOpen(false);
+          setTopUpUtr("");
+          setTopUpUtrError("");
+          setTopUpPaymentStep('options');
+        }, 1800);
+      } else {
+        setTopUpUtrError(data.message || data.error || "Payment verification failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      setTopUpUtrError("Error connecting to server. Please try again.");
+    } finally {
+      setIsTopUpVerifying(false);
+    }
+  };
+
   const topUpWallet = async (amount: number) => {
+    recordTransaction(amount, 'credit', 'Wallet Top-Up', topUpPaymentMethod.toUpperCase());
     if (user) {
       try {
         const res = await fetch("/api/auth/topup", {
@@ -440,6 +558,11 @@ export default function NewDesignContent() {
   };
 
   const navigateTo = (target: string) => {
+    if (target !== "hero" && !user) {
+      addNotification("Please login to access this section.");
+      setAuthModalOpen(true);
+      return;
+    }
     setActiveFace(target);
     if (target === "centres") {
       setActiveNetwork("india");
@@ -457,6 +580,13 @@ export default function NewDesignContent() {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
       if (hash && ["hero", "labs", "centres", "workshops", "learning", "store"].includes(hash)) {
+        if (hash !== "hero" && !user) {
+          addNotification("Please login to access this section.");
+          setAuthModalOpen(true);
+          setActiveFace("hero");
+          window.location.hash = "hero";
+          return;
+        }
         setActiveFace(hash);
         if (hash === "centres") {
           setActiveNetwork("india");
@@ -486,7 +616,7 @@ export default function NewDesignContent() {
       clearTimeout(timer);
       clearTimeout(callBtnTimer);
     };
-  }, []);
+  }, [user]);
 
   const getCubeClass = () => {
     switch (activeFace) {
@@ -608,7 +738,7 @@ export default function NewDesignContent() {
                 onClick={() => setAuthModalOpen(true)}
                 className="hidden md:block bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
               >
-                Connect Now
+                Login
               </button>
             )}
             {/* Mobile menu button */}
@@ -678,7 +808,7 @@ export default function NewDesignContent() {
                   }}
                   className="w-full bg-primary text-[#1a1a2e] py-4 rounded-xl font-bold text-xs uppercase tracking-widest glow-red text-center"
                 >
-                  Connect Now
+                  Login
                 </button>
               )}
 
@@ -747,11 +877,10 @@ export default function NewDesignContent() {
                   <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed">
                     Equipping students across India with hands-on robotics, AI, and deep-tech skills through our network of innovation labs and tactical training programs.
                   </p>
-
-                  <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
-                    <button className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" onClick={() => navigateTo('labs')}>
-                      <span className="relative z-10 flex items-center gap-3">Explore Labs <span className="material-symbols-outlined text-sm">bolt</span></span>
-                    </button>
+<div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
+                    <Link href="/achievements-partners" className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red inline-flex items-center">
+                      <span className="relative z-10 flex items-center gap-3">Explore Our Impact <span className="material-symbols-outlined text-sm">bolt</span></span>
+                    </Link>
                     <button className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2" onClick={() => navigateTo('workshops')}>
                       <span>View Workshops</span>
                       <span className="material-symbols-outlined text-sm">play_circle</span>
@@ -1066,230 +1195,7 @@ export default function NewDesignContent() {
                 </div>
               </div>
 
-              {/* ACHIEVEMENTS, PARTNERS AND CLIENTS SECTION */}
-              <div className="w-full pt-12 pb-16 relative z-10 bg-white overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-                
-                <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 space-y-16">
-                  {/* Header */}
-                  <div className="relative max-w-3xl space-y-4">
-                    <div className="absolute left-[-20px] top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
-                      <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
-                    </div>
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // Global Networks</span>
-                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
-                      Achievements, Partners & <span className="text-primary text-glow-red">Clients</span>
-                    </h2>
-                    <p className="text-sm md:text-base text-[#1a1a2e]/50 font-light leading-relaxed max-w-2xl">
-                      Collaborating with top ministries, global universities, and leading enterprises to democratize deep-tech education.
-                    </p>
-                  </div>
 
-                  {/* Partners Logos Grid */}
-                  <div className="glass-premium p-8 rounded-[2.5rem] border border-black/5">
-                    <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#1a1a2e]/40 mb-8 text-center font-bold">Trusted by Industry Leaders & Institutions</div>
-                    <div className="flex flex-wrap gap-8 items-center justify-center opacity-90">
-                      {[
-                        { name: "Ministry of Education", logo: "/logos/moe.png" },
-                        { name: "SYMBIOSIS", logo: "/logos/symbiosis.png" },
-                        { name: "Maha60", logo: "/logos/maha60.png" },
-                        { name: "Sharjah", logo: "/logos/sharjah.png" },
-                        { name: "UNESCO", logo: "/logos/unesco.png" },
-                        { name: "MIT-ADT", logo: "/logos/mitadt.png" },
-                        { name: "DYP", logo: "/logos/dyp.png" }
-                      ].map((partner, index) => (
-                        <div key={index} className="flex flex-col items-center justify-center group p-3 hover:bg-black/5 rounded-xl transition-all duration-300">
-                          <div className="w-24 h-24 rounded-lg bg-white flex items-center justify-center p-2 border border-black/5 shadow-sm overflow-hidden">
-                            <img 
-                              src={partner.logo} 
-                              alt={partner.name} 
-                              className="max-w-full max-h-full object-contain"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                if (target.src.includes(".png")) {
-                                  target.src = target.src.replace(".png", ".jpeg");
-                                } else if (target.src.includes(".jpeg")) {
-                                  target.src = target.src.replace(".jpeg", ".jpg");
-                                }
-                              }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Achievements Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {/* Card 1: Kaduna State University, Nigeria */}
-                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
-                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img 
-                          src="/cards/ng.png" 
-                          alt="Kaduna State University" 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                        <div className="absolute bottom-4 left-6 z-20">
-                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                            Nigeria
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
-                            Kaduna State University
-                          </h3>
-                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                            Kaduna State University, Nigeria, collaborates with us to establish an innovation hub on campus, fostering creativity and technological advancement among students.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card 2: Awarded and Appreciated by MoE, India */}
-                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
-                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img 
-                          src="/cards/media__1780295890933.png" 
-                          alt="Awarded by MoE India" 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                        <div className="absolute bottom-4 left-6 z-20">
-                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                            National Recognition
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
-                            Awarded by MoE India
-                          </h3>
-                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                            Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card 3: IAIRESCO, Global Community */}
-                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
-                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img 
-                          src="/cards/media__1780295525047.png" 
-                          alt="IAIRESCO Global Community" 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                        <div className="absolute bottom-4 left-6 z-20">
-                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                            Global Partner
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
-                            IAIRESCO Partners
-                          </h3>
-                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                            IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card 4: AIR GURUJI International Presence */}
-                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
-                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img 
-                          src="/cards/media__1780292353886.png" 
-                          alt="AIR GURUJI Presence Map" 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                        <div className="absolute bottom-4 left-6 z-20">
-                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                            Presence Map
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
-                            Global Footprint
-                          </h3>
-                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                            Guruji AIR representatives across 7 countries are spreading technology education for schools, students, and universities, promoting innovation and skill development globally.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card 5: 6000+ African Students */}
-                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
-                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img 
-                          src="/cards/media__1780295399899.png" 
-                          alt="African Students Impact" 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                        <div className="absolute bottom-4 left-6 z-20">
-                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                            Africa Network
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
-                            6000+ African Students
-                          </h3>
-                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                            Spreading knowledge across African countries, we aim to empower students with essential skills and opportunities for growth and development.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card 6: Western International School, Cambodia */}
-                    <div className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] transition-all duration-500 overflow-hidden flex flex-col justify-between h-full">
-                      <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-                        <img 
-                          src="/cards/kh.png" 
-                          alt="Western International School Cambodia" 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                        <div className="absolute bottom-4 left-6 z-20">
-                          <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                            Cambodia
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-8 space-y-4 flex-grow flex flex-col justify-between">
-                        <div className="space-y-2">
-                          <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">
-                            Western International School
-                          </h3>
-                          <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                            Western International School in Cambodia partners with us to set up a state-of-the-art hi-tech lab and integrate Hexobrain products into classrooms, enriching students' learning experiences.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* PREMIUM GRADIENT DIVIDER LINE */}
-              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
-                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
-              </div>
 
               {/* TRUSTED ACROSS INDIA SECTION */}
               <div className="w-full pt-10 pb-10 relative z-10 bg-white overflow-hidden">
@@ -2133,21 +2039,21 @@ export default function NewDesignContent() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {[
-                  { name: "Touchless Hand Dispenser Kit", price: "₹999", img: "/products/product_1.jpeg", tag: "Hardware", desc: "to dispense sanitizer without physical contact. Using sensors and a microcontroller, the device detects the presence of a hand and activates the dispenser automatically, ensuring safe, hygienic, and efficient sanitiza..." },
-                  { name: "Smart Notice Board", price: "₹1,299", img: "/products/product_2.jpeg", tag: "Hardware", desc: "messages and notices to be displayed digitally using a microcontroller and wireless communication technology. Notices can be updated remotely through This project helps in fast information sharing, reduces paperwork, ..." },
-                  { name: "Smart Traffic Light System", price: "₹799", img: "/products/product_3.jpeg", tag: "Hardware", desc: "project that controls traffic signals intelligently using sensors and a microcontroller . The system monitors vehicle density on roads and adjusts the timing of traffic lights automati cally to improve traffic flow an..." },
+                  { name: "Touchless Hand Dispenser Kit", price: "₹799", img: "/products/product_1.jpeg", tag: "Hardware", desc: "to dispense sanitizer without physical contact. Using sensors and a microcontroller, the device detects the presence of a hand and activates the dispenser automatically, ensuring safe, hygienic, and efficient sanitiza..." },
+                  { name: "Smart Notice Board", price: "₹1,499", img: "/products/product_2.jpeg", tag: "Hardware", desc: "messages and notices to be displayed digitally using a microcontroller and wireless communication technology. Notices can be updated remotely through This project helps in fast information sharing, reduces paperwork, ..." },
+                  { name: "Smart Traffic Light System", price: "₹1,499", img: "/products/product_3.jpeg", tag: "Hardware", desc: "project that controls traffic signals intelligently using sensors and a microcontroller . The system monitors vehicle density on roads and adjusts the timing of traffic lights automati cally to improve traffic flow an..." },
                   { name: "Temperature Monitoring System", price: "₹1,499", img: "/products/product_4.jpeg", tag: "Hardware", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." },
-                  { name: "Soil Moisture Monitoring System", price: "₹1,599", img: "/products/product_5.jpeg", tag: "Hardware", desc: "monitoring project used to measure the moisture level present in soil. It uses a soil moisture sensor to detect the water content in the soil and sends the data to a microcontroller for monitoring and control. The sys..." },
-                  { name: "Smart Dustbin System", price: "₹899", img: "/products/product_6.jpeg", tag: "Hardware", desc: "sensors and a microcontroller to open the dustbin lid without physical contact. When a person’s hand approaches the sensor, the system detects the motion and automatically opens th e lid using a servo motor. This proj..." },
-                  { name: "Rain Detection System Kit", price: "₹1,999", img: "/products/product_7.jpeg", tag: "Hardware", desc: "detects the presence of rain using a rain sensor module. When raindrops fall on the sensor surface, the system senses moisture and sends a signal to the microcontroller, which can ac tivate alarms, motors, or notifica..." },
-                  { name: "Smart Parking System", price: "₹599", img: "/products/product_8.jpeg", tag: "Hardware", desc: "to manage vehicle parking efficiently using sensors and a microcontroller. The system detects the availability of parking slots and provides real -time information through display s, LEDs, or IoT platforms. It helps r..." },
-                  { name: "Motion Detection Alert System", price: "₹699", img: "/products/product_9.jpeg", tag: "Hardware", desc: "detects human movement using a motion sensor and generates an alert through a buzzer, LED, or notification system. The sensor continuously monitors the surrounding area, and when m otion is detected, the microcontroll..." },
-                  { name: "Gas Leakage Detection System", price: "₹799", img: "/products/product_10.jpeg", tag: "Hardware", desc: "to detect the presence of harmful or combustible gases in the environment. It uses a gas sensor to continuously monitor gas levels and alerts users through a buzzer, LED, or notification system when gas concentration ..." },
-                  { name: "Automatic Street Light System", price: "₹499", img: "/products/product_11.jpeg", tag: "Hardware", desc: "controls street lights based on surrounding light intensity. It uses an LDR (Light Dependent Resistor) sensor to detect daylight and darkness. When the environment becomes dark, the system automatically turns ON the s..." },
-                  { name: "Water Level Indicator Kit", price: "₹1,099", img: "/products/product_12.jpeg", tag: "Hardware", desc: "indicate the level of water in a tank or container. It uses sensors and a microcontroller to monitor different water levels and provides alerts through LEDs, buzzers, or displa ys when the water reaches specific level..." },
-                  { name: "AIR G Polo T-Shirt", price: "₹599", img: "/products/product_13.jpeg", tag: "Merchandise", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." },
-                  { name: "AIR G Keychain", price: "₹199", img: "/products/product_14.jpeg", tag: "Merchandise", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." },
-                  { name: "Advanced Sensor Pack", price: "₹2,799", img: "/products/product_15.jpeg", tag: "Hardware", desc: "Exclusive learning kit and high-performance educational resource designed for technical training." }
+                  { name: "Soil Moisture Monitoring System", price: "₹999", img: "/products/product_5.jpeg", tag: "Hardware", desc: "monitoring project used to measure the moisture level present in soil. It uses a soil moisture sensor to detect the water content in the soil and sends the data to a microcontroller for monitoring and control. The sys..." },
+                  { name: "Smart Dustbin System", price: "₹1,999", img: "/products/product_6.jpeg", tag: "Hardware", desc: "sensors and a microcontroller to open the dustbin lid without physical contact. When a person’s hand approaches the sensor, the system detects the motion and automatically opens th e lid using a servo motor. This proj..." },
+                  { name: "Rain Detection System Kit", price: "₹699", img: "/products/product_7.jpeg", tag: "Hardware", desc: "detects the presence of rain using a rain sensor module. When raindrops fall on the sensor surface, the system senses moisture and sends a signal to the microcontroller, which can ac tivate alarms, motors, or notifica..." },
+                  { name: "Smart Parking System", price: "₹1,499", img: "/products/product_8.jpeg", tag: "Hardware", desc: "to manage vehicle parking efficiently using sensors and a microcontroller. The system detects the availability of parking slots and provides real -time information through display s, LEDs, or IoT platforms. It helps r..." },
+                  { name: "Motion Detection Alert System", price: "₹1,499", img: "/products/product_9.jpeg", tag: "Hardware", desc: "detects human movement using a motion sensor and generates an alert through a buzzer, LED, or notification system. The sensor continuously monitors the surrounding area, and when m otion is detected, the microcontroll..." },
+                  { name: "Gas Leakage Detection System", price: "₹1,499", img: "/products/product_10.jpeg", tag: "Hardware", desc: "to detect the presence of harmful or combustible gases in the environment. It uses a gas sensor to continuously monitor gas levels and alerts users through a buzzer, LED, or notification system when gas concentration ..." },
+                  { name: "Automatic Street Light System", price: "₹699", img: "/products/product_11.jpeg", tag: "Hardware", desc: "controls street lights based on surrounding light intensity. It uses an LDR (Light Dependent Resistor) sensor to detect daylight and darkness. When the environment becomes dark, the system automatically turns ON the s..." },
+                  { name: "Water Level Indicator Kit", price: "₹699", img: "/products/product_12.jpeg", tag: "Hardware", desc: "indicate the level of water in a tank or container. It uses sensors and a microcontroller to monitor different water levels and provides alerts through LEDs, buzzers, or displa ys when the water reaches specific level..." },
+                  { name: "Obstacle Avoiding Robot", price: "₹3,499", img: "/products/product_13.jpeg", tag: "Robotics", desc: "An autonomous robotic system that detects and avoids obstacles automatically using ultrasonic sensors and an Arduino Uno controller." },
+                  { name: "Line Following Robot", price: "₹3,499", img: "/products/product_14.jpeg", tag: "Robotics", desc: "An autonomous robotic system designed to follow a predefined path or line using infrared (IR) sensors and an Arduino Uno controller." },
+                  { name: "Bluetooth Controlled Car", price: "₹2,999", img: "/products/product_15.jpeg", tag: "Robotics", desc: "A wireless robotic vehicle controlled remotely using a smartphone via Bluetooth communication and an Arduino/NodeMCU system." }
                 ].map((product, i) => (
                   <div 
                     key={i} 
@@ -2263,8 +2169,109 @@ export default function NewDesignContent() {
                   Register for state-level engineering challenges, track active student nodes, and synchronize your curriculums via the official AIR G Learning App.
                 </p>
 
-                 {/* Free Training Courses Section (Full Width, 4 columns) */}
-              <div className="space-y-6 mb-16 pt-6">
+              {/* Premium Implant Training Program 2026 Section */}
+              <div className="space-y-6 mb-16 pt-6 relative">
+                {/* Ambient glow behind cards */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[120px] pointer-events-none z-0" />
+                
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 pb-4 relative z-10">
+                  <h3 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-2">
+                    <span className="material-symbols-outlined text-primary text-xl">military_tech</span>
+                    Premium Implant Training 2026
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+                  {/* Half Fee Card */}
+                  <div className="glass-premium p-8 rounded-[2.5rem] border-2 border-primary/20 hover:border-primary/45 transition-all duration-300 relative overflow-hidden group shadow-md flex flex-col justify-between h-full bg-white/80 backdrop-blur-sm">
+                    <div className="absolute top-0 right-0 px-4 py-1.5 bg-primary/10 border-b border-l border-primary/20 rounded-bl-2xl text-[8px] font-black font-mono text-primary uppercase tracking-widest">
+                      Installment Plan
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300 shrink-0">
+                          <span className="material-symbols-outlined text-2xl">event_repeat</span>
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-headline font-black text-[#1a1a2e] uppercase tracking-tight">Implant Training Program 2026</h4>
+                          <span style={{ backgroundColor: 'rgba(225, 27, 34, 0.1)', color: '#E11B22', borderColor: 'rgba(225, 27, 34, 0.2)' }} className="px-2.5 py-0.5 border rounded-full text-[9px] font-black font-mono uppercase tracking-widest mt-1 inline-block">Half Fee Enrollment</span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-light font-body pt-2">
+                        Get started with the official Implant Training Program by paying half of the course fee. Secure your batch slot and access phase 1 curriculum modules, live sessions, and hardware simulator workspaces. Remaining balance can be cleared mid-program.
+                      </p>
+                      <div className="pt-4">
+                        <div className="text-3xl font-black font-mono text-primary">₹3,000</div>
+                        <div className="text-[9px] font-mono text-[#1a1a2e]/30 uppercase tracking-widest mt-0.5">One-time registration installment</div>
+                      </div>
+                    </div>
+                    <div className="pt-6 mt-8 border-t border-black/5">
+                      <button 
+                        onClick={() => {
+                          setCheckoutItem({
+                            name: "Implant Training Program 2026 (Half Fee)",
+                            price: 3000,
+                            category: "Training Program",
+                            image: "/products/product_15.jpeg"
+                          });
+                          setIsCheckoutOpen(true);
+                        }}
+                        style={{ color: '#E11B22' }}
+                        className="w-full border-2 border-primary bg-transparent hover:bg-primary/5 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:scale-[1.01]"
+                      >
+                        <span className="material-symbols-outlined text-sm">payments</span>
+                        Pay Half Fee (₹3,000)
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Full Fee Card */}
+                  <div className="glass-premium p-8 rounded-[2.5rem] border-2 border-primary/40 hover:border-primary/75 transition-all duration-300 relative overflow-hidden group shadow-md flex flex-col justify-between h-full bg-white/80 backdrop-blur-sm">
+                    <div className="absolute top-0 right-0 px-4 py-1.5 bg-primary text-white rounded-bl-2xl text-[8px] font-black font-mono uppercase tracking-widest shadow-md">
+                      Best Value / Full Access
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white shrink-0 shadow-md">
+                          <span className="material-symbols-outlined text-2xl">workspace_premium</span>
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-headline font-black text-[#1a1a2e] uppercase tracking-tight">Implant Training Program 2026</h4>
+                          <span className="px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] font-black font-mono text-emerald-600 uppercase tracking-widest mt-1 inline-block">Full Fee Enrollment</span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-light font-body pt-2">
+                        Get full, unrestricted lifetime access to the complete Implant Training Program. Covers all advanced AI/Robotics curriculum phases, physical hardware development kits, certified program completions, priority doubt solving, and job placement assistance channels.
+                      </p>
+                      <div className="pt-4">
+                        <div className="text-3xl font-black font-mono text-primary">₹6,000</div>
+                        <div className="text-[9px] font-mono text-[#1a1a2e]/30 uppercase tracking-widest mt-0.5">Complete program fee coverage</div>
+                      </div>
+                    </div>
+                    <div className="pt-6 mt-8 border-t border-black/5">
+                      <button 
+                        onClick={() => {
+                          setCheckoutItem({
+                            name: "Implant Training Program 2026 (Full Fee)",
+                            price: 6000,
+                            category: "Training Program",
+                            image: "/products/product_15.jpeg"
+                          });
+                          setIsCheckoutOpen(true);
+                        }}
+                        style={{ color: '#1a1a2e' }}
+                        className="w-full bg-primary hover:bg-[#eb0028]/95 py-3.5 rounded-xl font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.01] glow-red"
+                      >
+                        <span className="material-symbols-outlined text-sm">payments</span>
+                        Pay Full Fee (₹6,000)
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+               {/* Free Training Courses Section (Full Width, 4 columns) */}
+               <div className="space-y-6 mb-16 pt-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 pb-4">
                   <h3 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-2">
                     <span className="material-symbols-outlined text-primary text-xl">menu_book</span>
@@ -2945,7 +2952,10 @@ export default function NewDesignContent() {
                     <span className="material-symbols-outlined text-[#1a1a2e]/10 text-6xl">shopping_bag</span>
                     <p className="text-[#1a1a2e]/40 font-light text-sm">Your bag is empty.</p>
                     <button 
-                      onClick={() => setIsCartOpen(false)}
+                      onClick={() => {
+                        navigateTo('store');
+                        setIsCartOpen(false);
+                      }}
                       className="px-6 py-2 border border-primary text-primary text-xs uppercase tracking-widest font-bold rounded-xl hover:bg-primary hover:text-white transition-all"
                     >
                       Browse Store
@@ -3020,33 +3030,55 @@ export default function NewDesignContent() {
       {/* CHECKOUT MODAL */}
       <CheckoutModal
         isOpen={isCheckoutOpen}
-        onClose={() => setIsCheckoutOpen(false)}
-        item={{
+        onClose={() => {
+          setIsCheckoutOpen(false);
+          setCheckoutItem(null);
+        }}
+        item={checkoutItem || {
           name: cart.map(i => `${i.name} (x${i.quantity})`).join(", "),
           price: getCartTotal(),
           category: "Store Cart"
         }}
-        type="product"
+        type={checkoutItem?.category === "Training Program" ? "plan" : "product"}
         onSuccess={(orderId, shippingDetails) => {
-          const orderTotal = getCartTotal();
+          const isTraining = checkoutItem?.category === "Training Program";
+          const orderTotal = isTraining 
+            ? (typeof checkoutItem.price === 'string' ? parseInt(checkoutItem.price.replace(/[^\d]/g, '')) || 0 : checkoutItem.price)
+            : getCartTotal();
+          
+          recordTransaction(
+            orderTotal, 
+            'debit', 
+            isTraining ? `${checkoutItem.name} Registration` : `Store Purchase (${cart.map(i => i.name).slice(0, 2).join(', ')}${cart.length > 2 ? '...' : ''})`, 
+            'WALLET'
+          );
+
           const newOrder = {
             id: orderId,
             date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-            items: cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
+            items: isTraining 
+              ? [{ name: checkoutItem.name, price: `₹${orderTotal}`, quantity: 1 }]
+              : cart.map(item => ({ name: item.name, price: item.price, quantity: item.quantity })),
             total: orderTotal,
-            status: 'Shipped via AIG Logistics'
+            status: isTraining ? 'Access Granted' : 'Shipped via AIG Logistics'
           };
+
           setOrders(prev => {
             const updated = [newOrder, ...prev];
             const ordersKey = user ? `aig_orders_${user.email}` : "aig_orders";
             localStorage.setItem(ordersKey, JSON.stringify(updated));
             return updated;
           });
+
           setUserProfile(prev => ({
             ...prev,
             walletBalance: prev.walletBalance - orderTotal
           }));
-          setCart([]);
+
+          if (!isTraining) {
+            setCart([]);
+          }
+          setCheckoutItem(null);
         }}
       />
 
@@ -3268,6 +3300,37 @@ export default function NewDesignContent() {
                     </a>
                   </div>
 
+                  {/* Transaction & Payment History */}
+                  <div className="space-y-4">
+                    <h4 className="font-headline text-sm font-bold uppercase text-[#1a1a2e]/80 tracking-wider">Transaction History ({transactions.length})</h4>
+                    {transactions.length === 0 ? (
+                      <div className="p-8 text-center rounded-2xl border border-dashed border-black/10 text-[#1a1a2e]/40 text-xs">
+                        No transactions or recharges recorded.
+                      </div>
+                    ) : (
+                      <div className="space-y-3 max-h-[200px] overflow-y-auto custom-scrollbar pr-2">
+                        {transactions.map((tx) => (
+                          <div key={tx.id} className="p-4 rounded-2xl bg-black/5 border border-black/5 flex justify-between items-center text-xs">
+                            <div className="space-y-1">
+                              <span className="font-mono font-bold text-[#1a1a2e] block">{tx.description}</span>
+                              <div className="flex gap-2 text-[9px] text-[#1a1a2e]/40 font-mono">
+                                <span>{tx.id}</span>
+                                <span>•</span>
+                                <span>{tx.date}</span>
+                              </div>
+                            </div>
+                            <div className="text-right space-y-1">
+                              <span className={`font-mono font-bold block ${tx.type === 'credit' ? 'text-green-600' : 'text-[#E82E32]'}`}>
+                                {tx.type === 'credit' ? '+' : '-'}₹{tx.amount.toLocaleString('en-IN')}
+                              </span>
+                              <span className="text-[8px] bg-slate-900/5 text-[#1a1a2e]/60 font-bold uppercase px-2 py-0.5 rounded-full">{tx.method}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* Recent Orders inside Profile */}
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
@@ -3330,151 +3393,140 @@ export default function NewDesignContent() {
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="w-full max-w-md bg-[#0F172A] rounded-[2.5rem] border border-white/5 overflow-hidden shadow-2xl flex flex-col relative"
+                className="w-full max-w-sm bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col relative"
               >
                 {/* Header */}
-                <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-xl animate-pulse">shield_lock</span>
-                    <div>
-                      <h3 className="text-sm font-headline font-black uppercase text-white tracking-wider">AIR G Secure Pay</h3>
-                      <p className="text-[9px] text-slate-400 font-mono uppercase tracking-wider">Authorized Gateway</p>
+                <div className="bg-[#E82E32] p-6 text-white relative">
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="flex items-center gap-2">
+                      <div className="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-[#E82E32] font-black text-xl shadow-lg shadow-black/10">A</div>
+                      <div>
+                        <h3 className="font-black text-sm tracking-tight text-white">AIR G International</h3>
+                        <div className="flex items-center gap-1 opacity-80">
+                          <span className="material-symbols-outlined text-[10px] text-white">verified</span>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-white">Elite Verified Business</span>
+                        </div>
+                      </div>
+                    </div>
+                    {topUpPaymentStep === 'options' && (
+                      <button 
+                        onClick={() => setIsTopUpPaymentOpen(false)}
+                        className="hover:bg-white/10 p-2 rounded-full transition-colors text-white border-none bg-transparent"
+                      >
+                        <span className="material-symbols-outlined text-sm">close</span>
+                      </button>
+                    )}
+                  </div>
+                  
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-widest opacity-80 text-white">Recharge Amount</p>
+                    <div className="flex items-baseline justify-between">
+                      <h2 className="text-3xl font-black text-white">₹{pendingTopUpAmount.toLocaleString('en-IN')}</h2>
+                      <div className="flex items-center gap-1 opacity-80 font-bold">
+                        <span className="material-symbols-outlined text-[12px]">lock</span>
+                        <span className="text-[10px] text-white">Secured by AIR G Pay</span>
+                      </div>
                     </div>
                   </div>
-                  {topUpPaymentStep === 'options' && (
-                    <button 
-                      onClick={() => setIsTopUpPaymentOpen(false)}
-                      className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all"
-                    >
-                      <span className="material-symbols-outlined text-sm">close</span>
-                    </button>
-                  )}
                 </div>
 
                 {/* Body */}
-                <div className="p-6 space-y-6">
+                <div className="p-4 space-y-4">
                   {topUpPaymentStep === 'options' && (
                     <>
-                      {/* Merchant & Amount Info */}
-                      <div className="bg-slate-900/60 border border-white/5 rounded-2xl p-4 flex justify-between items-center">
-                        <div>
-                          <span className="text-[8px] uppercase tracking-wider text-slate-500 font-mono block">Merchant</span>
-                          <span className="text-xs font-bold text-white uppercase tracking-wider">AIR G International</span>
-                        </div>
-                        <div className="text-right">
-                          <span className="text-[8px] uppercase tracking-wider text-slate-500 font-mono block">Amount</span>
-                          <span className="text-lg font-black text-primary font-mono">₹{pendingTopUpAmount.toLocaleString('en-IN')}</span>
-                        </div>
-                      </div>
-
-                      {/* Payment Method Selectors */}
-                      <div className="space-y-3">
-                        <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block font-mono">Select Payment Method</label>
-                        <div className="grid grid-cols-3 gap-2">
-                          {[
-                            { id: 'upi', label: 'UPI', icon: 'qr_code_2' },
-                            { id: 'card', label: 'Card', icon: 'credit_card' },
-                            { id: 'netbanking', label: 'Net Banking', icon: 'account_balance' }
-                          ].map((method) => (
-                            <button
-                              key={method.id}
-                              onClick={() => setTopUpPaymentMethod(method.id as any)}
-                              className={`p-3 rounded-xl border flex flex-col items-center justify-center gap-1.5 transition-all ${
-                                topUpPaymentMethod === method.id 
-                                  ? 'border-primary bg-primary/5 text-primary' 
-                                  : 'border-white/5 bg-slate-900/40 text-slate-400 hover:border-white/10'
-                              }`}
-                            >
-                              <span className="material-symbols-outlined text-xl">{method.icon}</span>
-                              <span className="text-[9px] font-bold uppercase tracking-wider">{method.label}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Method Details (UPI, Card, Netbanking) */}
-                      <div className="min-h-[140px] flex items-center justify-center p-4 bg-slate-900/30 rounded-2xl border border-white/5">
-                        {topUpPaymentMethod === 'upi' && (
-                          <div className="flex flex-col items-center gap-3 text-center w-full">
-                            <div className="p-2 bg-white rounded-xl shadow-md border border-slate-100 flex items-center justify-center">
-                              <svg width="80" height="80" viewBox="0 0 100 100" className="fill-[#0F172A]">
-                                <rect width="25" height="25" />
-                                <rect x="75" width="25" height="25" />
-                                <rect y="75" width="25" height="25" />
-                                <rect x="35" y="35" width="30" height="30" />
-                                <rect x="10" y="45" width="15" height="15" />
-                                <rect x="45" y="10" width="15" height="15" />
-                                <rect x="75" y="45" width="15" height="15" />
-                                <rect x="45" y="75" width="15" height="15" />
-                              </svg>
+                      {/* Method Details (UPI Only) */}
+                      <div className="min-h-[140px] flex items-center justify-center p-4 bg-white rounded-2xl border border-slate-100">
+                        <div className="flex flex-col gap-4 w-full">
+                          <div className="space-y-3">
+                            <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest text-left font-mono">Select UPI App to pay:</h4>
+                            <div className="grid grid-cols-2 gap-3 text-left">
+                              {[
+                                { name: 'GPay', icon: "/logos/gpay.png" },
+                                { name: 'PhonePe', icon: "/logos/phonepe.png" },
+                                { name: 'Paytm', icon: "/logos/paytm.png" },
+                                { 
+                                  name: 'BHIM', 
+                                  icon: (
+                                    <svg viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full object-contain">
+                                      <path d="M3 2l8 8-8 8V2z" fill="#FF9933" />
+                                      <path d="M12 2l-8 8 8 8V2z" fill="#138808" opacity="0.8" />
+                                      <text x="18" y="16" fontFamily="sans-serif" fontWeight="900" fontSize="15" fill="#F05A28">BH</text>
+                                      <text x="41" y="16" fontFamily="sans-serif" fontWeight="900" fontSize="15" fill="#0A7A4C">IM</text>
+                                    </svg>
+                                  )
+                                }
+                              ].map((app) => (
+                                <a 
+                                  key={app.name} 
+                                  href={getUpiDeepLink(app.name)}
+                                  className="flex items-center p-4 rounded-2xl border border-slate-100 hover:border-red-500 hover:bg-red-50/10 transition-all gap-4 group decoration-none bg-white"
+                                >
+                                  <div className="h-8 w-8 rounded-xl bg-white flex items-center justify-center p-1.5 shadow-sm border border-slate-100 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
+                                    {typeof app.icon === 'string' ? (
+                                      <img src={app.icon} alt={app.name} className="h-full w-full object-contain" />
+                                    ) : (
+                                      app.icon
+                                    )}
+                                  </div>
+                                  <span className="text-xs font-black text-slate-700">{app.name}</span>
+                                </a>
+                              ))}
                             </div>
-                            <p className="text-[9px] text-slate-400 uppercase tracking-widest font-mono">Scan QR code using any UPI App</p>
                           </div>
-                        )}
-
-                        {topUpPaymentMethod === 'card' && (
-                          <div className="w-full space-y-3">
-                            <div className="space-y-1">
-                              <span className="text-[7px] uppercase font-bold text-slate-500 tracking-widest font-mono block">Card Number</span>
-                              <input 
-                                type="text" 
-                                placeholder="4111 •••• •••• 1111" 
-                                className="w-full bg-slate-900/60 border border-white/5 rounded-lg py-2 px-3 text-xs focus:outline-none focus:border-primary/50 text-white font-mono" 
-                                disabled
+                          
+                          {/* Scanning section */}
+                          <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4 text-left">
+                            <div className="h-20 w-20 bg-white rounded-xl p-1 shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                              <img 
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`upi://pay?pa=9860779172-5@ybl&pn=AIR%20G%20International&am=${pendingTopUpAmount}&cu=INR`)}`} 
+                                alt="UPI QR Code" 
+                                className="w-full h-full object-contain"
                               />
                             </div>
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="space-y-1">
-                                <span className="text-[7px] uppercase font-bold text-slate-500 tracking-widest font-mono block">Expiry</span>
-                                <input 
-                                  type="text" 
-                                  placeholder="MM/YY" 
-                                  className="w-full bg-slate-900/60 border border-white/5 rounded-lg py-2 px-3 text-xs focus:outline-none focus:border-primary/50 text-white font-mono" 
-                                  disabled
-                                />
-                              </div>
-                              <div className="space-y-1">
-                                <span className="text-[7px] uppercase font-bold text-slate-500 tracking-widest font-mono block">CVV</span>
-                                <input 
-                                  type="password" 
-                                  placeholder="•••" 
-                                  className="w-full bg-slate-900/60 border border-white/5 rounded-lg py-2 px-3 text-xs focus:outline-none focus:border-primary/50 text-white font-mono" 
-                                  disabled
-                                />
-                              </div>
+                            <div className="space-y-1">
+                              <span className="text-[10px] font-black text-slate-900 block">Verified Merchant</span>
+                              <p className="text-[9px] text-slate-400 leading-tight font-sans">Scan this QR code using any UPI app to top up ₹{pendingTopUpAmount.toLocaleString('en-IN')} instantly.</p>
                             </div>
                           </div>
-                        )}
-
-                        {topUpPaymentMethod === 'netbanking' && (
-                          <div className="grid grid-cols-2 gap-2 w-full">
-                            {['SBI', 'HDFC', 'ICICI', 'Axis'].map((bank) => (
-                              <div key={bank} className="p-3 bg-slate-900/60 border border-white/5 hover:border-primary/30 rounded-xl flex items-center gap-2 cursor-pointer transition-colors">
-                                <span className="material-symbols-outlined text-sm text-primary">account_balance</span>
-                                <span className="text-[10px] font-bold text-slate-300 font-mono">{bank}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                        </div>
                       </div>
 
-                      {/* Pay Button */}
-                      <button
-                        onClick={() => {
-                          setTopUpPaymentStep('processing');
-                          setTimeout(() => {
-                            topUpWallet(pendingTopUpAmount);
-                            setTopUpPaymentStep('success');
-                            setTimeout(() => {
-                              setIsTopUpPaymentOpen(false);
-                            }, 1800);
-                          }, 2200);
-                        }}
-                        className="w-full py-4 bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-[#d61e2e] transition-all shadow-lg text-xs uppercase tracking-widest font-mono"
-                      >
-                        <span className="material-symbols-outlined text-sm">lock</span>
-                        <span>Pay ₹{pendingTopUpAmount.toLocaleString('en-IN')}</span>
-                      </button>
+                      {/* UTR Verification Section */}
+                      <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3 mt-3">
+                        <div className="space-y-1 text-left">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono block">Enter 12-Digit UTR/Transaction ID</label>
+                          <input 
+                            type="text"
+                            placeholder="e.g. 123456789012" 
+                            maxLength={12}
+                            value={topUpUtr}
+                            onChange={(e) => {
+                              const val = e.target.value.replace(/\D/g, '');
+                              if (val.length <= 12) setTopUpUtr(val);
+                            }}
+                            className="w-full bg-white border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-red-500/50 text-slate-700 font-mono h-10"
+                          />
+                        </div>
+
+                        {topUpUtrError && (
+                          <p className="text-[9px] font-black text-red-500 font-mono leading-tight text-left">{topUpUtrError}</p>
+                        )}
+
+                        <button 
+                          onClick={handleVerifyTopUpUtr}
+                          disabled={topUpUtr.length !== 12 || isTopUpVerifying}
+                          className="w-full h-11 bg-[#E82E32] hover:bg-red-600 disabled:opacity-50 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl font-bold text-xs uppercase tracking-widest font-mono transition-all flex items-center justify-center gap-2 border-none"
+                        >
+                          {isTopUpVerifying ? (
+                            <>
+                              <div className="h-4 w-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                              <span>Verifying...</span>
+                            </>
+                          ) : (
+                            <span>Confirm & Verify Payment</span>
+                          )}
+                        </button>
+                      </div>
                     </>
                   )}
 
@@ -3586,6 +3638,13 @@ export default function NewDesignContent() {
               white-space: nowrap;
               animation: marquee-bounce 8s ease-in-out infinite;
             }
+            @keyframes bounce-subtle {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-8px); }
+            }
+            .animate-bounce-subtle {
+              animation: bounce-subtle 4s ease-in-out infinite;
+            }
           `}} />
           <div className="bg-white/95 backdrop-blur-md border border-[#EE2C3C]/30 rounded-full px-5 hidden sm:flex animate-border-glow select-none h-12 items-center justify-center w-[380px] min-w-[380px] text-[10px] font-black uppercase tracking-widest whitespace-nowrap gap-3 shadow-lg">
             <span className="text-[#1a1a2e] font-extrabold tracking-widest">Launch an AI Lab</span>
@@ -3605,6 +3664,63 @@ export default function NewDesignContent() {
             <span className="absolute inset-0 rounded-full bg-[#EE2C3C]/40 animate-ping pointer-events-none" />
             <span className="material-symbols-outlined text-2xl relative z-10 text-white">call</span>
           </a>
+        </div>
+      )}
+
+      {/* Clickbait Floating Promo Card for CEO Payments */}
+      {showClickbaitPromo && (
+        <div className="fixed bottom-6 left-6 z-[120] w-[340px] bg-slate-900 border-2 border-primary rounded-3xl p-5 shadow-[0_20px_50px_rgba(238,44,60,0.3)] animate-bounce-subtle flex flex-col gap-4 text-white overflow-hidden text-left">
+          {/* Subtle glowing animated border */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 animate-pulse"></div>
+          
+          <div className="flex justify-between items-center">
+            <h4 className="text-sm font-black tracking-tight text-[#EE2C3C] uppercase font-headline">IMPLANT TRAINING 2026</h4>
+            <button 
+              onClick={() => setShowClickbaitPromo(false)} 
+              className="text-white/40 hover:text-white p-1 rounded-full transition-colors bg-transparent border-none cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-sm">close</span>
+            </button>
+          </div>
+
+          <div className="space-y-1">
+            <p className="text-[10.5px] text-white/70 leading-relaxed font-light font-body">
+              🔥 School slot allocations are closing tonight. Select your registration fee option below to secure immediate enrollment:
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <button 
+              onClick={() => {
+                setCheckoutItem({
+                  name: "Implant Training Program 2026 (Full Fee)",
+                  price: 6000,
+                  category: "Training Program",
+                  image: "/products/product_15.jpeg"
+                });
+                setIsCheckoutOpen(true);
+              }}
+              className="w-full bg-[#EE2C3C] hover:bg-[#d61e2e] text-white py-2.5 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(238,44,60,0.4)] active:scale-95"
+            >
+              <span className="material-symbols-outlined text-xs">workspace_premium</span>
+              Pay Full Fee (₹6,000)
+            </button>
+            <button 
+              onClick={() => {
+                setCheckoutItem({
+                  name: "Implant Training Program 2026 (Half Fee)",
+                  price: 3000,
+                  category: "Training Program",
+                  image: "/products/product_15.jpeg"
+                });
+                setIsCheckoutOpen(true);
+              }}
+              className="w-full bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 border border-white/25"
+            >
+              <span className="material-symbols-outlined text-xs">payments</span>
+              Pay Half Fee (₹3,000)
+            </button>
+          </div>
         </div>
       )}
     </div>

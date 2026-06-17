@@ -66,7 +66,7 @@ export function Navbar() {
                 onClick={() => setAuthModalOpen(true)}
                 className="bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
               >
-                Connect Now
+                Login
               </button>
             )}
 

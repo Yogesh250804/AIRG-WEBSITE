@@ -21,6 +21,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/auth-context";
 import { toast } from "sonner";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -42,6 +43,14 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
   const [timeLeft, setTimeLeft] = useState(300);
   const [useCredits, setUseCredits] = useState(false);
   const [orderId, setOrderId] = useState("");
+  const [utrNumber, setUtrNumber] = useState("");
+  const [isVerifyingUtr, setIsVerifyingUtr] = useState(false);
+  const [utrError, setUtrError] = useState("");
+  const [otpInput, setOtpInput] = useState("");
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+  const [otpError, setOtpError] = useState("");
+  const [devOtpCode, setDevOtpCode] = useState("");
   
   const [shippingDetails, setShippingDetails] = useState({
     street: "",
@@ -69,6 +78,58 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
   const calculateDiscount = () => Math.min(rawPrice * 0.1, credits);
   const finalPrice = Math.max(0, rawPrice - (useCredits ? calculateDiscount() : 0));
 
+  const isValidContact = (phone: string, email: string) => {
+    if (phone.length !== 10) {
+      return { valid: false, error: "Phone number must be exactly 10 digits." };
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return { valid: false, error: "Please enter a valid email address." };
+    }
+    if (!/^[6-9]/.test(phone)) {
+      return { valid: false, error: "Invalid phone number. Indian mobile numbers must start with 6, 7, 8, or 9." };
+    }
+    if (/^(.)\1{9}$/.test(phone)) {
+      return { valid: false, error: "Repetitive numbers are not allowed." };
+    }
+    const sequential = "1234567890 0987654321 9876543210";
+    if (sequential.includes(phone)) {
+      return { valid: false, error: "Sequential phone numbers are not allowed." };
+    }
+    const fakeDomains = ["test.com", "example.com", "fake.com", "temp.com", "tempmail.com", "mock.com", "abc.com", "xyz.com"];
+    const domain = email.split("@")[1]?.toLowerCase();
+    if (fakeDomains.includes(domain)) {
+      return { valid: false, error: "Mock or temporary email domains are not allowed." };
+    }
+    return { valid: true };
+  };
+
+  const phoneError = (() => {
+    const p = shippingDetails.phone;
+    if (!p) return "";
+    if (p.length > 0 && p.length < 10) return "Phone number must be exactly 10 digits.";
+    if (p.length === 10) {
+      if (!/^[6-9]/.test(p)) return "Indian numbers must start with 6, 7, 8, or 9.";
+      if (/^(.)\1{9}$/.test(p)) return "Repetitive numbers are not allowed.";
+      const sequential = "1234567890 0987654321 9876543210";
+      if (sequential.includes(p)) return "Sequential numbers are not allowed.";
+    }
+    return "";
+  })();
+
+  const emailError = (() => {
+    const e = shippingDetails.email;
+    if (!e) return "";
+    if (!e.includes('@')) return "";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e)) return "Please enter a valid email address.";
+    const fakeDomains = ["test.com", "example.com", "fake.com", "temp.com", "tempmail.com", "mock.com", "abc.com", "xyz.com"];
+    const domain = e.split("@")[1]?.toLowerCase();
+    if (fakeDomains.includes(domain)) return "Temporary/fake email domains are not allowed.";
+    return "";
+  })();
+
+
   useEffect(() => {
     if (user) {
       setShippingDetails(prev => ({
@@ -82,13 +143,18 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
   // Reset checkout state when modal is opened or item changes
   useEffect(() => {
     if (isOpen) {
-      setCheckoutStep(1);
+      if (type === "plan") {
+        setCheckoutStep(2);
+        setOrderId(Math.random().toString(36).substr(2, 9).toUpperCase());
+      } else {
+        setCheckoutStep(1);
+        setOrderId("");
+      }
       setPaymentSubStep("contact");
       setTimeLeft(300);
-      setOrderId("");
       setVerificationMessage("Verifying Payment...");
     }
-  }, [isOpen, item]);
+  }, [isOpen, item, type]);
 
   useEffect(() => {
     if (isOpen && checkoutStep === 2 && timeLeft > 0) {
@@ -101,6 +167,59 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleSendOtp = async () => {
+    setIsSendingOtp(true);
+    setOtpError("");
+    setOtpInput("");
+    try {
+      const res = await fetch("/api/auth/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: shippingDetails.email })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success(data.message);
+        if (data.otp) {
+          setDevOtpCode(data.otp);
+        } else {
+          setDevOtpCode("");
+        }
+        setPaymentSubStep("otp");
+      } else {
+        toast.error(data.error || "Failed to send OTP.");
+      }
+    } catch (err: any) {
+      toast.error("Error sending OTP code.");
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    setIsVerifyingOtp(true);
+    setOtpError("");
+    try {
+      const res = await fetch("/api/auth/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: shippingDetails.email, otp: otpInput })
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Email verified successfully!");
+        setPaymentSubStep("upi");
+      } else {
+        setOtpError(data.error || "Invalid OTP code.");
+        toast.error(data.error || "Verification failed.");
+      }
+    } catch (err: any) {
+      setOtpError("Error verifying OTP.");
+    } finally {
+      setIsVerifyingOtp(false);
+    }
   };
 
   const handlePurchase = () => {
@@ -144,6 +263,41 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
       toast.error(error.message || "Payment initiation failed");
       setIsVerifying(false);
       setVerificationMessage("Verifying Payment...");
+    }
+  };
+
+  const handleVerifyUtr = async (enteredUtr = utrNumber) => {
+    if (!/^\d{12}$/.test(enteredUtr)) {
+      setUtrError("Please enter a valid 12-digit UTR number.");
+      return;
+    }
+    setUtrError("");
+    setIsVerifyingUtr(true);
+
+    try {
+      const res = await fetch("/api/payment/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          utr: enteredUtr,
+          amount: finalPrice,
+          type: "checkout",
+          orderId,
+          shippingDetails
+        })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success(data.message || "Payment verified successfully!");
+        setCheckoutStep(3);
+      } else {
+        setUtrError(data.message || data.error || "Payment verification failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      setUtrError("Error connecting to server. Please try again.");
+    } finally {
+      setIsVerifyingUtr(false);
     }
   };
 
@@ -215,10 +369,10 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => {
-                    if (paymentSubStep === "card" || paymentSubStep === "upi") setPaymentSubStep("methods");
-                    else if (paymentSubStep === "methods") setPaymentSubStep("contact");
+                    if (paymentSubStep === "upi") setPaymentSubStep("contact");
+                    else if (type === "plan") onClose();
                     else setCheckoutStep(1);
-                  }} 
+                  }}
                   className="mr-2 hover:bg-white/10 p-1 rounded-lg transition-colors text-white border-none bg-transparent"
                 >
                   <ChevronRight className="h-5 w-5 rotate-180" />
@@ -335,91 +489,121 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                               const val = e.target.value.replace(/\D/g, '');
                               if (val.length <= 10) setShippingDetails({...shippingDetails, phone: val});
                             }}
-                            className="flex-1 h-14 rounded-xl font-black bg-white border-slate-200 focus:border-[#E82E32] focus:ring-0 px-6 text-lg"
+                            className={`flex-1 h-14 rounded-xl font-black bg-white focus:ring-0 px-6 text-lg transition-colors ${
+                              phoneError ? "border-red-500 focus:border-red-500 text-red-600 bg-red-50/10" : "border-slate-200 focus:border-[#E82E32]"
+                            }`}
                             placeholder="9876543210"
                           />
                         </div>
+                        {phoneError && (
+                          <p className="text-xs font-black text-red-500 mt-2 px-1">{phoneError}</p>
+                        )}
                       </div>
                       <div className="relative">
                         <Label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-black text-[#E82E32] z-10">Email Address</Label>
                         <Input 
                           value={shippingDetails.email} 
                           onChange={(e) => setShippingDetails({...shippingDetails, email: e.target.value})}
-                          className="w-full h-14 rounded-xl font-black bg-white border-slate-200 focus:border-[#E82E32] focus:ring-0 px-6 text-lg"
+                          className={`w-full h-14 rounded-xl font-black bg-white focus:ring-0 px-6 text-lg transition-colors ${
+                            emailError ? "border-red-500 focus:border-red-500 text-red-600 bg-red-50/10" : "border-slate-200 focus:border-[#E82E32]"
+                          }`}
                         />
+                        {emailError && (
+                          <p className="text-xs font-black text-red-500 mt-2 px-1">{emailError}</p>
+                        )}
                       </div>
                     </div>
-                    <div className="pt-12">
+                    <div>
                       <Button 
-                        onClick={() => setPaymentSubStep("methods")}
-                        disabled={shippingDetails.phone.length !== 10 || !shippingDetails.email.includes('@')}
-                        className="w-full h-14 bg-[#E82E32] hover:bg-red-600 disabled:opacity-50 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl font-black text-lg shadow-xl shadow-red-100 transition-all"
+                        onClick={() => {
+                          const check = isValidContact(shippingDetails.phone, shippingDetails.email);
+                          if (!check.valid) {
+                            toast.error(check.error || "Invalid details");
+                            return;
+                          }
+                          handleSendOtp();
+                        }}
+                        disabled={shippingDetails.phone.length !== 10 || !shippingDetails.email.includes('@') || !!phoneError || !!emailError || isSendingOtp}
+                        className="w-full h-14 bg-[#E82E32] hover:bg-red-600 disabled:opacity-50 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl font-black text-lg shadow-xl shadow-red-100 transition-all border-none flex items-center justify-center gap-2"
                       >
-                        {shippingDetails.phone.length === 10 ? "Proceed to Methods" : "Enter 10-digit Number"}
+                        {isSendingOtp ? (
+                          <>
+                            <div className="h-5 w-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                            <span>Sending Code...</span>
+                          </>
+                        ) : (
+                          "Proceed to Payment"
+                        )}
                       </Button>
-                    </div>
-                  </motion.div>
-                )}
-                
-                {paymentSubStep === "methods" && (
-                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6 py-4">
-                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">All Payment Options</h4>
-                    <div className="space-y-3">
-                      <button onClick={() => setPaymentSubStep("card")} className="w-full p-6 rounded-2xl border border-slate-100 hover:border-[#E82E32] hover:bg-red-50/10 flex items-center justify-between group transition-all bg-transparent">
-                        <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#E82E32] transition-colors"><CreditCard className="h-6 w-6" /></div>
-                          <span className="font-black text-slate-700">Pay using Card</span>
-                        </div>
-                        <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-[#E82E32]" />
-                      </button>
-                      <button onClick={() => setPaymentSubStep("upi")} className="w-full p-6 rounded-2xl border border-slate-100 hover:border-[#E82E32] hover:bg-red-50/10 flex items-center justify-between group transition-all bg-transparent">
-                        <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 bg-slate-50 rounded-xl flex items-center justify-center text-slate-400 group-hover:text-[#E82E32] transition-colors"><Zap className="h-6 w-6" /></div>
-                          <span className="font-black text-slate-700">Pay using UPI</span>
-                        </div>
-                        <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-[#E82E32]" />
-                      </button>
                     </div>
                   </motion.div>
                 )}
 
-                {paymentSubStep === "card" && (
-                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6 py-4">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-                      <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">All cards supported</h4>
-                    </div>
-                    <div className="space-y-6 pt-4">
-                      <div className="relative">
-                        <Label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-black text-[#E82E32] z-10">Card Number</Label>
-                        <Input placeholder="0000 0000 0000 0000" value={paymentDetails.cardNumber} onChange={(e) => setPaymentDetails({...paymentDetails, cardNumber: e.target.value})} className="w-full h-14 rounded-xl font-black bg-white border-slate-200 focus:border-[#E82E32] focus:ring-0 px-6 text-lg" />
+                {paymentSubStep === "otp" && (
+                  <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6 py-4 flex flex-col items-center">
+                    <div className="w-full text-left space-y-2">
+                      <div className="flex items-center gap-2 text-slate-900 font-black text-sm">
+                        <Lock className="h-5 w-5 text-[#E82E32]" />
+                        <span>Email Verification</span>
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="relative">
-                          <Label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-black text-[#E82E32] z-10">Expiry</Label>
-                          <Input placeholder="MM/YY" value={paymentDetails.expiry} onChange={(e) => setPaymentDetails({...paymentDetails, expiry: e.target.value})} className="w-full h-14 rounded-xl font-black bg-white border-slate-200 focus:border-[#E82E32] focus:ring-0 px-6" />
-                        </div>
-                        <div className="relative">
-                          <Label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-black text-[#E82E32] z-10">CVV</Label>
-                          <Input type="password" placeholder="123" value={paymentDetails.cvv} onChange={(e) => setPaymentDetails({...paymentDetails, cvv: e.target.value})} className="w-full h-14 rounded-xl font-black bg-white border-slate-200 focus:border-[#E82E32] focus:ring-0 px-6" />
-                        </div>
-                      </div>
+                      <p className="text-xs font-medium text-slate-400">
+                        We have sent a 6-digit verification code to <span className="font-black text-slate-700">{shippingDetails.email}</span>.
+                      </p>
                     </div>
-                    <div className="pt-6">
-                      <Button 
-                        onClick={handleEasebuzzPayment} 
-                        disabled={isVerifying}
-                        className="w-full h-14 bg-[#E82E32] hover:bg-red-600 text-white rounded-xl font-black text-lg shadow-xl shadow-red-100"
+
+                    <div className="my-2">
+                      <InputOTP
+                        maxLength={6}
+                        value={otpInput}
+                        onChange={(val) => setOtpInput(val)}
                       >
-                        {isVerifying ? (
-                          <div className="flex items-center gap-2">
+                        <InputOTPGroup className="gap-2">
+                          {[0, 1, 2, 3, 4, 5].map((index) => (
+                            <InputOTPSlot 
+                              key={index} 
+                              index={index} 
+                              className="w-10 h-12 rounded-xl border border-slate-200 bg-white font-black text-lg text-slate-800 focus:border-[#E82E32] focus:ring-0 shadow-sm"
+                            />
+                          ))}
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </div>
+
+                    {otpError && (
+                      <p className="text-xs font-black text-red-500 text-center font-mono leading-tight">{otpError}</p>
+                    )}
+
+                    <div className="w-full space-y-3 pt-4">
+                      <Button
+                        onClick={() => handleVerifyOtp()}
+                        disabled={otpInput.length !== 6 || isVerifyingOtp}
+                        className="w-full h-14 bg-[#E82E32] hover:bg-red-600 disabled:opacity-50 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl font-black text-lg shadow-xl shadow-red-100 transition-all border-none flex items-center justify-center gap-2"
+                      >
+                        {isVerifyingOtp ? (
+                          <>
                             <div className="h-5 w-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                             <span>Verifying...</span>
-                          </div>
+                          </>
                         ) : (
-                          `Pay Now ₹${finalPrice.toLocaleString()}`
+                          "Verify & Continue"
                         )}
                       </Button>
+
+                      <div className="flex justify-between items-center px-1 text-xs">
+                        <button
+                          onClick={() => setPaymentSubStep("contact")}
+                          className="font-black text-slate-400 hover:text-slate-600 transition-colors uppercase tracking-wider text-[10px] cursor-pointer"
+                        >
+                          Change Email
+                        </button>
+                        <button
+                          onClick={() => handleSendOtp()}
+                          disabled={isSendingOtp}
+                          className="font-black text-[#E82E32] hover:text-red-600 disabled:opacity-50 transition-colors uppercase tracking-wider text-[10px] cursor-pointer"
+                        >
+                          Resend Code
+                        </button>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -506,25 +690,42 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                       </div>
                     </div>
 
-                    <div className="relative">
-                      <Label className="absolute -top-2 left-4 bg-white px-2 text-[10px] font-black text-[#E82E32] z-10">Or Enter UPI ID</Label>
-                      <Input placeholder="e.g. 9876543210@okaxis" value={paymentDetails.upiId} onChange={(e) => setPaymentDetails({...paymentDetails, upiId: e.target.value})} className="w-full h-10 rounded-xl font-black bg-white border-slate-200 focus:border-[#E82E32] focus:ring-0 px-4 text-sm" />
-                    </div>
-                    <div className="pt-2">
-                       <Button 
-                        onClick={handleEasebuzzPayment} 
-                        disabled={isVerifying}
-                        className="w-full h-10 bg-[#E82E32] hover:bg-red-600 text-white rounded-xl font-black text-sm shadow-lg"
-                       >
-                        {isVerifying ? (
-                          <div className="flex items-center gap-2">
-                            <div className="h-3 w-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                            <span>{verificationMessage}</span>
-                          </div>
+                    {/* UTR Verification Section */}
+                    <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
+                      <div className="space-y-1">
+                        <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono block">Enter 12-Digit UTR/Transaction ID</Label>
+                        <Input 
+                          placeholder="e.g. 123456789012" 
+                          maxLength={12}
+                          value={utrNumber}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, '');
+                            if (val.length <= 12) setUtrNumber(val);
+                          }}
+                          className="w-full bg-white border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-red-500/50 text-slate-700 font-mono h-10"
+                        />
+                      </div>
+
+                      {utrError && (
+                        <p className="text-[9px] font-black text-red-500 font-mono leading-tight">{utrError}</p>
+                      )}
+
+                      <Button 
+                        onClick={() => handleVerifyUtr()}
+                        disabled={utrNumber.length !== 12 || isVerifyingUtr}
+                        className="w-full h-11 bg-[#E82E32] hover:bg-red-600 disabled:opacity-50 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl font-black text-xs uppercase tracking-widest font-mono transition-all flex items-center justify-center gap-2 border-none"
+                      >
+                        {isVerifyingUtr ? (
+                          <>
+                            <div className="h-4 w-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                            <span>Verifying...</span>
+                          </>
                         ) : (
-                          "Confirm Payment"
+                          <>
+                            <span>Confirm & Verify Payment</span>
+                          </>
                         )}
-                       </Button>
+                      </Button>
                     </div>
                   </motion.div>
                 )}
