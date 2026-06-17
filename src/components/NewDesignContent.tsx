@@ -877,10 +877,20 @@ export default function NewDesignContent() {
                   <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed">
                     Equipping students across India with hands-on robotics, AI, and deep-tech skills through our network of innovation labs and tactical training programs.
                   </p>
-<div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
-                    <Link href="/achievements-partners" className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red inline-flex items-center">
+                  <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
+                    <button 
+                      onClick={() => {
+                        if (!user) {
+                          addNotification("Please login to access this section.");
+                          setAuthModalOpen(true);
+                        } else {
+                          window.location.href = "/achievements-partners";
+                        }
+                      }}
+                      className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red inline-flex items-center"
+                    >
                       <span className="relative z-10 flex items-center gap-3">Explore Our Impact <span className="material-symbols-outlined text-sm">bolt</span></span>
-                    </Link>
+                    </button>
                     <button className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2" onClick={() => navigateTo('workshops')}>
                       <span>View Workshops</span>
                       <span className="material-symbols-outlined text-sm">play_circle</span>
@@ -3646,7 +3656,15 @@ export default function NewDesignContent() {
               animation: bounce-subtle 4s ease-in-out infinite;
             }
           `}} />
-          <div className="bg-white/95 backdrop-blur-md border border-[#EE2C3C]/30 rounded-full px-5 hidden sm:flex animate-border-glow select-none h-12 items-center justify-center w-[380px] min-w-[380px] text-[10px] font-black uppercase tracking-widest whitespace-nowrap gap-3 shadow-lg">
+          <div 
+            onClick={() => {
+              if (!user) {
+                addNotification("Please login to access this option.");
+                setAuthModalOpen(true);
+              }
+            }}
+            className="bg-white/95 backdrop-blur-md border border-[#EE2C3C]/30 rounded-full px-5 hidden sm:flex animate-border-glow select-none h-12 items-center justify-center w-[380px] min-w-[380px] text-[10px] font-black uppercase tracking-widest whitespace-nowrap gap-3 shadow-lg cursor-pointer"
+          >
             <span className="text-[#1a1a2e] font-extrabold tracking-widest">Launch an AI Lab</span>
             <span className="text-[#EE2C3C]/40 font-light">|</span>
             <span className="text-[#EE2C3C] flex items-center gap-1.5 animate-pulse font-extrabold">
@@ -3654,9 +3672,16 @@ export default function NewDesignContent() {
             </span>
           </div>
           <a 
-            href="https://wa.me/919860779172" 
-            target="_blank"
-            rel="noopener noreferrer"
+            href={user ? "https://wa.me/919860779172" : undefined}
+            onClick={(e) => {
+              if (!user) {
+                e.preventDefault();
+                addNotification("Please login to access this option.");
+                setAuthModalOpen(true);
+              }
+            }}
+            target={user ? "_blank" : undefined}
+            rel={user ? "noopener noreferrer" : undefined}
             className="w-14 h-14 bg-[#EE2C3C] text-white rounded-full flex items-center justify-center shadow-[0_0_25px_rgba(238,44,60,0.8)] hover:bg-[#d61e2e] hover:scale-110 active:scale-95 transition-all duration-300 relative group shrink-0 animate-phone-ring"
             aria-label="Contact Us on WhatsApp"
             id="floating-call-btn"
@@ -3668,7 +3693,7 @@ export default function NewDesignContent() {
       )}
 
       {/* Clickbait Floating Promo Card for CEO Payments */}
-      {showClickbaitPromo && (
+      {showClickbaitPromo && user && (
         <div className="fixed bottom-6 left-6 z-[120] w-[340px] bg-slate-900 border-2 border-primary rounded-3xl p-5 shadow-[0_20px_50px_rgba(238,44,60,0.3)] animate-bounce-subtle flex flex-col gap-4 text-white overflow-hidden text-left">
           {/* Subtle glowing animated border */}
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 animate-pulse"></div>
