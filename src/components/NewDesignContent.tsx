@@ -333,7 +333,7 @@ export default function NewDesignContent() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        toast.success(data.message || "Payment verified successfully!");
+        addNotification(data.message || "Payment verified successfully!");
         recordTransaction(pendingTopUpAmount, 'credit', 'Wallet Top-Up', 'UPI');
         setUserProfile(prev => ({
           ...prev,
