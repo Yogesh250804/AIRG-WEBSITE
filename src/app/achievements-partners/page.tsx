@@ -98,7 +98,7 @@ export default function AchievementsPartners() {
       <Navbar />
 
       {/* SECTION 1: HERO */}
-      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 pt-16 pb-20 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 pt-32 pb-20 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <div className="lg:col-span-6 space-y-8 relative pl-6 sm:pl-8">
           <div className="absolute left-0 top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
             <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
@@ -176,7 +176,7 @@ export default function AchievementsPartners() {
           >
             <div className="animate-marquee-left gap-6 pr-6">
               {[...row1, ...row1, ...row1].map((partner, index) => (
-                <div key={index} className="flex-shrink-0 w-52 h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div key={index} className="flex-shrink-0 w-32 h-16 sm:w-52 sm:h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-xl sm:rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
                   <img 
                     src={partner.logo} 
                     alt={partner.name} 
@@ -206,7 +206,7 @@ export default function AchievementsPartners() {
           >
             <div className="animate-marquee-right gap-6 pr-6">
               {[...row2, ...row2, ...row2].map((partner, index) => (
-                <div key={index} className="flex-shrink-0 w-52 h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
+                <div key={index} className="flex-shrink-0 w-32 h-16 sm:w-52 sm:h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-xl sm:rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
                   <img 
                     src={partner.logo} 
                     alt={partner.name} 

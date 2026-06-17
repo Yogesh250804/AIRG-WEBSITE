@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import Preloader from "./Preloader";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 
 const InteractiveIndiaMap = dynamic(() => import("./InteractiveIndiaMap"), {
   ssr: false,
@@ -139,6 +140,7 @@ const ButterySmoothA = ({
 export default function NewDesignContent() {
   const { isAuthModalOpen, setAuthModalOpen, addNotification } = useAppContext();
   const { user, logout } = useAuth();
+  const router = useRouter();
   const [activeFace, setActiveFace] = useState("hero");
   const [previousFace, setPreviousFace] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -884,7 +886,7 @@ export default function NewDesignContent() {
                           addNotification("Please login to access this section.");
                           setAuthModalOpen(true);
                         } else {
-                          window.location.href = "/achievements-partners";
+                          router.push("/achievements-partners");
                         }
                       }}
                       className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red inline-flex items-center"
