@@ -19,7 +19,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   useEffect(() => {
     // Fire onComplete after animations finish
-    const timer = setTimeout(finish, 1800);
+    const timer = setTimeout(finish, 2200);
     return () => clearTimeout(timer);
   }, [finish]);
 
