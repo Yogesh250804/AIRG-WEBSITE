@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
               const filePath = path.join(dirPath, fileName);
               fs.writeFileSync(filePath, buffer);
               screenshotUrl = `/uploads/receipts/${fileName}`;
-            } catch (fsErr) {
+            } catch (fsErr: any) {
               console.warn("Local storage is read-only (expected on Vercel). Skipping local write. Error:", fsErr.message);
             }
           }
@@ -140,7 +140,7 @@ export async function POST(req: NextRequest) {
               const filePath = path.join(dirPath, fileName);
               fs.writeFileSync(filePath, buffer);
               screenshotUrl = `/uploads/receipts/${fileName}`;
-            } catch (fsErr) {
+            } catch (fsErr: any) {
               console.warn("Local storage is read-only (expected on Vercel). Skipping local write. Error:", fsErr.message);
             }
           }
