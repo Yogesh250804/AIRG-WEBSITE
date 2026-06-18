@@ -19,6 +19,11 @@ export async function GET(req: NextRequest) {
       status: "pending"
     }).sort({ createdAt: -1 });
 
+    const rejectedOrder = await Order.findOne({
+      userId: sessionCookie.value,
+      status: "rejected"
+    }).sort({ createdAt: -1 });
+
     const completedOrder = await Order.findOne({
       userId: sessionCookie.value,
       status: "completed"
@@ -27,10 +32,16 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       enrolled: !!completedOrder,
       pending: !!pendingOrder,
+      rejected: !!rejectedOrder && !pendingOrder && !completedOrder,
       pendingDetails: pendingOrder ? {
         orderId: pendingOrder.orderId,
         amount: pendingOrder.amount,
         createdAt: pendingOrder.createdAt
+      } : null,
+      rejectedDetails: rejectedOrder ? {
+        orderId: rejectedOrder.orderId,
+        amount: rejectedOrder.amount,
+        createdAt: rejectedOrder.createdAt
       } : null
     });
 

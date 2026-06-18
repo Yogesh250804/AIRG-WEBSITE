@@ -183,10 +183,12 @@ export default function NewDesignContent() {
   const [orders, setOrders] = useState<{ id: string; date: string; items: { name: string; price: string; quantity: number }[]; total: number; status: string }[]>([]);
   const [isOrdersOpen, setIsOrdersOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState<{ enrolled: boolean; pending: boolean; pendingDetails: any }>({
+  const [paymentStatus, setPaymentStatus] = useState<{ enrolled: boolean; pending: boolean; rejected: boolean; pendingDetails: any; rejectedDetails: any }>({
     enrolled: false,
     pending: false,
-    pendingDetails: null
+    rejected: false,
+    pendingDetails: null,
+    rejectedDetails: null
   });
 
   const fetchPaymentStatus = () => {
@@ -198,13 +200,15 @@ export default function NewDesignContent() {
             setPaymentStatus({
               enrolled: data.enrolled,
               pending: data.pending,
-              pendingDetails: data.pendingDetails
+              rejected: data.rejected || false,
+              pendingDetails: data.pendingDetails,
+              rejectedDetails: data.rejectedDetails || null
             });
           }
         })
         .catch((err) => console.error("Error loading payment status:", err));
     } else {
-      setPaymentStatus({ enrolled: false, pending: false, pendingDetails: null });
+      setPaymentStatus({ enrolled: false, pending: false, rejected: false, pendingDetails: null, rejectedDetails: null });
     }
   };
 
@@ -2267,6 +2271,25 @@ export default function NewDesignContent() {
                     </div>
                     <span className="px-4 py-2 bg-emerald-500 text-white rounded-full text-[10px] font-black uppercase tracking-widest font-mono shadow-md">
                       Enrolled
+                    </span>
+                  </div>
+                )}
+
+                {paymentStatus.rejected && (
+                  <div className="relative z-10 p-6 rounded-[2rem] border border-rose-500/25 bg-rose-50/5 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-12 w-12 rounded-2xl bg-rose-500/10 flex items-center justify-center text-rose-600 shrink-0">
+                        <span className="material-symbols-outlined text-2xl text-rose-500">cancel</span>
+                      </div>
+                      <div className="space-y-1 text-left">
+                        <h4 className="font-headline font-black text-sm text-[#E82E32] uppercase tracking-wider">Payment Verification Failed</h4>
+                        <p className="text-xs text-[#1a1a2e]/60 font-medium">
+                          Your details for Order ID <span className="font-black text-[#E82E32]">{paymentStatus.rejectedDetails?.orderId}</span> were rejected. Please check your UTR number or upload a valid screenshot.
+                        </p>
+                      </div>
+                    </div>
+                    <span className="px-4 py-2 bg-rose-500 text-white rounded-full text-[10px] font-black uppercase tracking-widest font-mono shadow-md">
+                      Rejected
                     </span>
                   </div>
                 )}

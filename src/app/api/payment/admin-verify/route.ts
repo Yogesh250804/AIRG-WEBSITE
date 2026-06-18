@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     } else if (status === "Rejected" || status === "Pending") {
       // If moving back from completed to pending/rejected, optionally deduct balance (sanity check)
       if (previousStatus === "completed") {
-        order.status = status === "Rejected" ? "pending" : "pending"; // Or keep it trackable
+        order.status = status === "Rejected" ? "rejected" : "pending";
         await order.save();
 
         const isRecharge = orderId.startsWith("RECHARGE-") || order.shippingDetails?.street === "Wallet Recharge Request";
@@ -62,8 +62,8 @@ export async function POST(req: NextRequest) {
           }
         }
       } else {
-        // If not completed previously, just update the status (or do nothing)
-        order.status = "pending";
+        // If not completed previously, just update the status
+        order.status = status === "Rejected" ? "rejected" : "pending";
         await order.save();
       }
     }

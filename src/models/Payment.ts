@@ -11,7 +11,7 @@ const OrderSchema = new Schema({
   orderId: { type: String, required: true, unique: true, index: true },
   userId: { type: String, required: true },
   amount: { type: Number, required: true },
-  status: { type: String, enum: ["pending", "completed"], default: "pending" },
+  status: { type: String, enum: ["pending", "completed", "rejected"], default: "pending" },
   screenshot: { type: String, default: "" },
   shippingDetails: {
     street: { type: String, default: "" },
