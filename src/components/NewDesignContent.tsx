@@ -183,6 +183,35 @@ export default function NewDesignContent() {
   const [orders, setOrders] = useState<{ id: string; date: string; items: { name: string; price: string; quantity: number }[]; total: number; status: string }[]>([]);
   const [isOrdersOpen, setIsOrdersOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState<{ enrolled: boolean; pending: boolean; pendingDetails: any }>({
+    enrolled: false,
+    pending: false,
+    pendingDetails: null
+  });
+
+  const fetchPaymentStatus = () => {
+    if (user) {
+      fetch("/api/payment/status")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            setPaymentStatus({
+              enrolled: data.enrolled,
+              pending: data.pending,
+              pendingDetails: data.pendingDetails
+            });
+          }
+        })
+        .catch((err) => console.error("Error loading payment status:", err));
+    } else {
+      setPaymentStatus({ enrolled: false, pending: false, pendingDetails: null });
+    }
+  };
+
+  useEffect(() => {
+    fetchPaymentStatus();
+  }, [user]);
+
   const [userProfile, setUserProfile] = useState({
     name: "Rahul Sharma",
     email: "rahul.sharma@airg.com",
@@ -2201,6 +2230,45 @@ export default function NewDesignContent() {
                   </h3>
                 </div>
 
+                {/* Status Banners */}
+                {paymentStatus.pending && (
+                  <div className="relative z-10 p-6 rounded-[2rem] border border-blue-500/25 bg-blue-50/5 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-12 w-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 shrink-0">
+                        <span className="material-symbols-outlined animate-pulse text-2xl">sync_saved_locally</span>
+                      </div>
+                      <div className="space-y-1 text-left">
+                        <h4 className="font-headline font-black text-sm text-[#1a1a2e] uppercase tracking-wider">Payment Verification Pending</h4>
+                        <p className="text-xs text-[#1a1a2e]/60 font-medium">
+                          Your details for Order ID <span className="font-black text-[#E82E32]">{paymentStatus.pendingDetails?.orderId}</span> are under review. We will notify you via email/SMS once confirmed.
+                        </p>
+                      </div>
+                    </div>
+                    <span className="px-4 py-2 bg-blue-500 text-white rounded-full text-[10px] font-black uppercase tracking-widest font-mono shadow-md animate-pulse">
+                      Under Review
+                    </span>
+                  </div>
+                )}
+
+                {paymentStatus.enrolled && (
+                  <div className="relative z-10 p-6 rounded-[2rem] border border-emerald-500/25 bg-emerald-50/5 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
+                        <span className="material-symbols-outlined text-2xl">verified</span>
+                      </div>
+                      <div className="space-y-1 text-left">
+                        <h4 className="font-headline font-black text-sm text-[#1a1a2e] uppercase tracking-wider">Enrollment Active</h4>
+                        <p className="text-xs text-[#1a1a2e]/60 font-medium">
+                          You have full access to the Implant Training Program. Go to your learning dashboard to begin.
+                        </p>
+                      </div>
+                    </div>
+                    <span className="px-4 py-2 bg-emerald-500 text-white rounded-full text-[10px] font-black uppercase tracking-widest font-mono shadow-md">
+                      Enrolled
+                    </span>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
                   {/* Half Fee Card */}
                   <div className="glass-premium p-8 rounded-[2.5rem] border-2 border-primary/20 hover:border-primary/45 transition-all duration-300 relative overflow-hidden group shadow-md flex flex-col justify-between h-full bg-white/80 backdrop-blur-sm">
@@ -2236,8 +2304,9 @@ export default function NewDesignContent() {
                           });
                           setIsCheckoutOpen(true);
                         }}
+                        disabled={paymentStatus.pending || paymentStatus.enrolled}
                         style={{ color: '#E11B22' }}
-                        className="w-full border-2 border-primary bg-transparent hover:bg-primary/5 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:scale-[1.01]"
+                        className="w-full border-2 border-primary bg-transparent hover:bg-primary/5 py-3.5 rounded-xl font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:scale-[1.01] disabled:opacity-50 disabled:pointer-events-none"
                       >
                         <span className="material-symbols-outlined text-sm">payments</span>
                         Pay Half Fee (₹3,000)
@@ -2279,8 +2348,9 @@ export default function NewDesignContent() {
                           });
                           setIsCheckoutOpen(true);
                         }}
+                        disabled={paymentStatus.pending || paymentStatus.enrolled}
                         style={{ color: '#1a1a2e' }}
-                        className="w-full bg-primary hover:bg-[#eb0028]/95 py-3.5 rounded-xl font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.01] glow-red"
+                        className="w-full bg-primary hover:bg-[#eb0028]/95 py-3.5 rounded-xl font-black uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.01] glow-red disabled:opacity-50 disabled:pointer-events-none"
                       >
                         <span className="material-symbols-outlined text-sm">payments</span>
                         Pay Full Fee (₹6,000)
@@ -3099,6 +3169,7 @@ export default function NewDesignContent() {
             setCart([]);
           }
           setCheckoutItem(null);
+          fetchPaymentStatus();
         }}
       />
 
@@ -3719,9 +3790,19 @@ export default function NewDesignContent() {
           </div>
 
           <div className="space-y-1">
-            <p className="text-[10.5px] text-white/70 leading-relaxed font-light font-body">
-              🔥 School slot allocations are closing tonight. Select your registration fee option below to secure immediate enrollment:
-            </p>
+            {paymentStatus.pending ? (
+              <p className="text-[10.5px] text-blue-400 font-bold uppercase tracking-wider leading-relaxed">
+                ⏳ Verification Pending (Order ID: {paymentStatus.pendingDetails?.orderId})
+              </p>
+            ) : paymentStatus.enrolled ? (
+              <p className="text-[10.5px] text-emerald-400 font-bold uppercase tracking-wider leading-relaxed">
+                ✅ Enrollment Active
+              </p>
+            ) : (
+              <p className="text-[10.5px] text-white/70 leading-relaxed font-light font-body">
+                🔥 School slot allocations are closing tonight. Select your registration fee option below to secure immediate enrollment:
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-2">
@@ -3735,7 +3816,8 @@ export default function NewDesignContent() {
                 });
                 setIsCheckoutOpen(true);
               }}
-              className="w-full bg-[#EE2C3C] hover:bg-[#d61e2e] text-white py-2.5 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(238,44,60,0.4)] active:scale-95"
+              disabled={paymentStatus.pending || paymentStatus.enrolled}
+              className="w-full bg-[#EE2C3C] hover:bg-[#d61e2e] text-white py-2.5 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(238,44,60,0.4)] active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
             >
               <span className="material-symbols-outlined text-xs">workspace_premium</span>
               Pay Full Fee (₹6,000)
@@ -3750,7 +3832,8 @@ export default function NewDesignContent() {
                 });
                 setIsCheckoutOpen(true);
               }}
-              className="w-full bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 border border-white/25"
+              disabled={paymentStatus.pending || paymentStatus.enrolled}
+              className="w-full bg-white/10 hover:bg-white/20 text-white py-2.5 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95 border border-white/25 disabled:opacity-50 disabled:pointer-events-none"
             >
               <span className="material-symbols-outlined text-xs">payments</span>
               Pay Half Fee (₹3,000)
