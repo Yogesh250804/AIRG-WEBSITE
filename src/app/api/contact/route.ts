@@ -5,24 +5,29 @@ export async function POST(request: Request) {
   try {
     const { firstName, lastName, email, subject, message } = await request.json();
 
-    // Create a transporter using environment variables or a default configuration
+    const smtpUser = process.env.SMTP_USER || "airgdatalab@gmail.com";
+    const smtpPass = process.env.SMTP_PASS;
+
+    // Create a transporter using secure TLS on port 465
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
-        user: process.env.SMTP_USER || "airgdatalab@gmail.com",
-        pass: process.env.SMTP_PASS, // App password
+        user: smtpUser,
+        pass: smtpPass,
       },
     });
 
     const mailOptions = {
-      from: `"${firstName} ${lastName}" <${email}>`,
+      from: `"AIR G Contact Form" <${smtpUser}>`,
       to: "airgdatalab@gmail.com",
       replyTo: email,
       subject: `Contact Form: ${subject}`,
       text: `Name: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`,
     };
 
-    if (process.env.SMTP_PASS) {
+    if (smtpPass) {
       await transporter.sendMail(mailOptions);
       return NextResponse.json({ success: true, message: "Email sent successfully" });
     } else {
