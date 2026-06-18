@@ -12,6 +12,7 @@ const OrderSchema = new Schema({
   userId: { type: String, required: true },
   amount: { type: Number, required: true },
   status: { type: String, enum: ["pending", "completed"], default: "pending" },
+  screenshot: { type: String, default: "" },
   shippingDetails: {
     street: { type: String, default: "" },
     city: { type: String, default: "" },

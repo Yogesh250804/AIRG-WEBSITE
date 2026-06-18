@@ -13,7 +13,9 @@ import {
   User,
   Lock,
   MapPin,
-  CreditCard
+  CreditCard,
+  Upload,
+  Image as ImageIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,6 +62,30 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     phone: "",
     email: ""
   });
+
+  const [screenshotBase64, setScreenshotBase64] = useState("");
+  const [screenshotPreview, setScreenshotPreview] = useState("");
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("File size must be less than 5MB");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setScreenshotPreview(reader.result as string);
+        setScreenshotBase64(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeScreenshot = () => {
+    setScreenshotPreview("");
+    setScreenshotBase64("");
+  };
 
   const [paymentDetails, setPaymentDetails] = useState({
     upiId: "",
@@ -283,7 +309,8 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
           amount: finalPrice,
           type: "checkout",
           orderId,
-          shippingDetails
+          shippingDetails,
+          screenshot: screenshotBase64
         })
       });
       const data = await res.json();
@@ -704,6 +731,31 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                           }}
                           className="w-full bg-white border border-slate-200 rounded-xl py-2 px-3 text-xs focus:outline-none focus:border-red-500/50 text-slate-700 font-mono h-10"
                         />
+                      </div>
+
+                      {/* Screenshot Upload Block */}
+                      <div className="space-y-1">
+                        <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono block">Upload Payment Screenshot (Optional)</Label>
+                        {!screenshotPreview ? (
+                          <label className="flex flex-col items-center justify-center w-full h-20 border border-dashed border-slate-200 bg-white rounded-xl cursor-pointer hover:bg-red-50/10 hover:border-red-500/50 transition-all">
+                            <div className="flex flex-col items-center justify-center pt-2 pb-2">
+                              <Upload className="h-4 w-4 text-slate-400 mb-1" />
+                              <p className="text-[9px] text-slate-400 font-black uppercase tracking-wider">Choose File or Drag & Drop</p>
+                              <p className="text-[7px] text-slate-300">PNG, JPG up to 5MB</p>
+                            </div>
+                            <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+                          </label>
+                        ) : (
+                          <div className="relative w-full h-24 rounded-xl border border-slate-100 overflow-hidden bg-white flex items-center justify-center p-1 group">
+                            <img src={screenshotPreview} alt="Payment Proof" className="h-full object-contain rounded-lg" />
+                            <button
+                              onClick={removeScreenshot}
+                              className="absolute top-1 right-1 h-5 w-5 rounded-full bg-slate-900/80 hover:bg-red-500 text-white flex items-center justify-center border-none p-0 cursor-pointer transition-colors"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
+                          </div>
+                        )}
                       </div>
 
                       {utrError && (

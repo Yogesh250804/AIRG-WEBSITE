@@ -58,7 +58,15 @@ const ButterySmoothA = ({
   isTransitioning: boolean; 
   currentLetter?: string; 
 }) => {
-  const layers = isTransitioning ? 2 : 12;
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 768);
+    }
+  }, []);
+
+  const layers = isTransitioning ? 2 : (isMobile ? 4 : 12);
   
   return (
     <div 
@@ -73,7 +81,7 @@ const ButterySmoothA = ({
         const isFront = i === layers - 1;
         const isBack = i === 0;
         const isFace = isFront || isBack;
-        const depthZ = i * 3.5 - (layers * 1.75);
+        const depthZ = i * (isMobile ? 8 : 3.5) - (layers * (isMobile ? 4 : 1.75));
         
         return (
           <div 
