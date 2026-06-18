@@ -4,7 +4,7 @@
  */
 
 // CONFIGURATION: Set your website's deployed Vercel URL and the shared verification token.
-var WEBSITE_URL = "https://aig-website.vercel.app"; // Change this to your live website URL
+var WEBSITE_URL = "https://airg-website-delta.vercel.app"; // Change this to your live website URL
 var VERIFY_SECRET = "aig_sheet_verify_secret_2026_key"; // Must match PAYMENT_VERIFY_SECRET in your website's environment variables (.env)
 
 function doPost(e) {

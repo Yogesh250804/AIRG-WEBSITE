@@ -147,7 +147,7 @@ const ButterySmoothA = ({
 
 export default function NewDesignContent() {
   const { isAuthModalOpen, setAuthModalOpen, addNotification } = useAppContext();
-  const { user, logout } = useAuth();
+  const { user, logout, loading } = useAuth();
   const router = useRouter();
   const [activeFace, setActiveFace] = useState("hero");
   const [previousFace, setPreviousFace] = useState("");
@@ -616,6 +616,8 @@ export default function NewDesignContent() {
   };
 
   useEffect(() => {
+    if (loading) return;
+    
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
       if (hash && ["hero", "labs", "centres", "workshops", "learning", "store"].includes(hash)) {
@@ -655,7 +657,7 @@ export default function NewDesignContent() {
       clearTimeout(timer);
       clearTimeout(callBtnTimer);
     };
-  }, [user]);
+  }, [user, loading]);
 
   const getCubeClass = () => {
     switch (activeFace) {
