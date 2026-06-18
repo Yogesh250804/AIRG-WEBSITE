@@ -25,35 +25,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid amount." }, { status: 400 });
     }
 
-    const isTestUtr = utr === "999999999999";
-    let payment = null;
-
-    if (!isTestUtr) {
-      // Look up matching unclaimed payment in DB
-      payment = await ReceivedPayment.findOne({
-        utr,
-        amount,
-        status: "unclaimed"
-      });
-
-      if (!payment) {
-        return NextResponse.json({ 
-          success: false, 
-          message: "We haven't received confirmation from the bank yet. This verification can take 1-2 minutes. Retrying..." 
-        });
-      }
-    }
-
     // Retrieve user
     const dbUser = await User.findById(sessionCookie.value);
     if (!dbUser) {
       return NextResponse.json({ error: "User not found" }, { status: 401 });
-    }
-
-    if (payment) {
-      // Update payment status to matched to prevent double-spending
-      payment.status = "matched";
-      await payment.save();
     }
 
     // Trigger notifications asynchronously so they don't block the API response
@@ -78,25 +53,73 @@ export async function POST(req: NextRequest) {
     });
 
     if (type === "recharge") {
-      // Top up the wallet
-      dbUser.walletBalance = (dbUser.walletBalance || 0) + amount;
-      await dbUser.save();
+      const rechargeId = `RECHARGE-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+      
+      let screenshotUrl = "";
+      if (screenshot) {
+        try {
+          const matches = screenshot.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+          if (matches && matches.length === 3) {
+            const fileType = matches[1];
+            const extension = fileType.split("/")[1] || "png";
+            const buffer = Buffer.from(matches[2], "base64");
+            
+            const dirPath = path.join(process.cwd(), "public", "uploads", "receipts");
+            if (!fs.existsSync(dirPath)) {
+              fs.mkdirSync(dirPath, { recursive: true });
+            }
+            
+            const fileName = `${rechargeId}.${extension}`;
+            const filePath = path.join(dirPath, fileName);
+            fs.writeFileSync(filePath, buffer);
+            
+            screenshotUrl = `/uploads/receipts/${fileName}`;
+          }
+        } catch (uploadError) {
+          console.error("Error saving payment screenshot:", uploadError);
+        }
+      }
+
+      // Create a pending Order to represent the recharge request
+      await Order.findOneAndUpdate(
+        { orderId: rechargeId },
+        { 
+          orderId: rechargeId, 
+          userId: dbUser._id, 
+          amount, 
+          status: "pending", 
+          shippingDetails: {
+            phone: shippingDetails?.phone || "",
+            email: dbUser.email,
+            street: "Wallet Recharge Request",
+            city: "",
+            state: "",
+            pincode: ""
+          }, 
+          screenshot: screenshotUrl,
+          createdAt: new Date() 
+        },
+        { upsert: true, new: true }
+      );
 
       // Log to Google Sheet
+      const origin = req.nextUrl.origin;
+      const fullScreenshotUrl = screenshotUrl ? `${origin}${screenshotUrl}` : "";
+
       logPaymentToGoogleSheet({
         email: dbUser.email,
         phone: shippingDetails?.phone,
         amount,
         utr,
+        orderId: rechargeId,
         customerName: dbUser.displayName,
-        screenshot: ""
+        screenshot: fullScreenshotUrl
       }).catch(err => console.error("Sheet logging error:", err));
 
       return NextResponse.json({
         success: true,
         type: "recharge",
-        walletBalance: dbUser.walletBalance,
-        message: "Payment verified! Wallet topped up successfully."
+        message: "Details submitted successfully. Please wait for confirmation."
       });
     } else if (type === "checkout" && orderId) {
       let screenshotUrl = "";
@@ -124,14 +147,14 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      // Create or update the order
+      // Create or update the order in pending status
       await Order.findOneAndUpdate(
         { orderId },
         { 
           orderId, 
           userId: dbUser._id, 
           amount, 
-          status: "completed", 
+          status: "pending", 
           shippingDetails, 
           screenshot: screenshotUrl,
           createdAt: new Date() 
@@ -156,7 +179,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         success: true,
         type: "checkout",
-        message: "Payment verified! Order placed successfully."
+        message: "Details submitted successfully. Please wait for confirmation."
       });
     }
 

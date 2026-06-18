@@ -38,7 +38,7 @@ export async function sendEmailReceipt(details: ReceiptDetails) {
         <div style="padding: 20px 0;">
           <p style="font-size: 16px; color: #1e293b; margin: 0 0 10px 0;">Hello <strong>${customerName || "Customer"}</strong>,</p>
           <p style="font-size: 14px; color: #475569; line-height: 1.5; margin: 0 0 20px 0;">
-            We have successfully verified your payment of <strong>₹${amount.toLocaleString()}</strong>. Your ${isRecharge ? "wallet recharge has been credited" : "order has been placed successfully"}.
+            Your payment details of <strong>₹${amount.toLocaleString()}</strong> have been successfully submitted for verification. We are currently reviewing your transaction. You will receive another notification once your payment is confirmed and credited.
           </p>
           
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
@@ -60,14 +60,14 @@ export async function sendEmailReceipt(details: ReceiptDetails) {
               <td style="text-align: right; padding: 10px; border: 1px solid #e2e8f0; font-size: 16px; font-weight: bold; color: #0f172a;">₹${amount.toLocaleString()}</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #e2e8f0; font-size: 14px; color: #1e293b;">Status</td>
-              <td style="text-align: right; padding: 10px; border: 1px solid #e2e8f0; font-size: 12px; font-weight: bold; color: #10b981; text-transform: uppercase;">SUCCESS</td>
+              <td style="padding: 10px; border: 1px solid #e2e8f0; font-size: 14px; color: #1e293b;">Verification Status</td>
+              <td style="text-align: right; padding: 10px; border: 1px solid #e2e8f0; font-size: 12px; font-weight: bold; color: #0284c7; text-transform: uppercase;">PENDING</td>
             </tr>
           </table>
         </div>
         
         <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; text-align: center; color: #94a3b8; font-size: 11px;">
-          <p style="margin: 0 0 5px 0;">This is an automated notification of payment success.</p>
+          <p style="margin: 0 0 5px 0;">This is an automated notification of payment receipt.</p>
           <p style="margin: 0;">&copy; ${new Date().getFullYear()} AIR G International. All rights reserved.</p>
         </div>
       </div>
@@ -113,7 +113,7 @@ export async function sendSmsReceipt(details: ReceiptDetails) {
     formattedPhone = `+${formattedPhone}`;
   }
 
-  const messageText = `AIR G: Payment of Rs.${amount} verified successfully. UTR: ${utr}. ${orderId ? `Order ID: ${orderId}.` : "Wallet recharge success."} Thank you!`;
+  const messageText = `AIR G: Payment details of Rs.${amount} received. UTR: ${utr}. Under verification. You will be notified once confirmed.`;
 
   // 1. Twilio Integration
   if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN) {

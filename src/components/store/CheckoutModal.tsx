@@ -784,13 +784,16 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
               </div>
             ) : (
               <div className="py-12 text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <div className="h-24 w-24 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto shadow-xl shadow-emerald-100 relative">
+                <div className="h-24 w-24 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mx-auto shadow-xl shadow-blue-100 relative">
                   <CheckCircle2 className="h-12 w-12" />
-                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} className="absolute -top-2 -right-2 bg-emerald-500 text-white p-2 rounded-full shadow-lg"><ShieldCheck className="h-4 w-4" /></motion.div>
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.5 }} className="absolute -top-2 -right-2 bg-blue-500 text-white p-2 rounded-full shadow-lg"><ShieldCheck className="h-4 w-4" /></motion.div>
                 </div>
                 <div>
-                  <h4 className="text-3xl font-black text-slate-900 mb-2 tracking-tight">Mission Accomplished</h4>
+                  <h4 className="text-3xl font-black text-slate-900 mb-2 tracking-tight">Details Submitted</h4>
                   <p className="text-sm font-bold text-slate-400">Order ID: <span className="text-[#E82E32]">{orderId}</span></p>
+                  <p className="text-xs font-semibold text-slate-400 max-w-[280px] mx-auto mt-2">
+                    Your payment details have been submitted. You will be notified via email/SMS after verification is complete.
+                  </p>
                 </div>
                 <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 text-left space-y-4">
                   <div className="space-y-1">
@@ -799,11 +802,11 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                     <p className="text-base font-black text-slate-700">{shippingDetails.city}, {shippingDetails.pincode}</p>
                   </div>
                   <div className="pt-4 border-t border-slate-200 flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-emerald-600 font-black text-xs">
-                      <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                      {type === "product" ? "Ready for dispatch" : "Subscription Active"}
+                    <div className="flex items-center gap-2 text-blue-600 font-black text-xs">
+                      <div className="h-2 w-2 rounded-full bg-blue-500" />
+                      Verification Pending
                     </div>
-                    <p className="text-[10px] font-black text-slate-400">{type === "product" ? "Estimated: 3-5 Days" : "Instant Access"}</p>
+                    <p className="text-[10px] font-black text-slate-400">Under Review</p>
                   </div>
                 </div>
                 <Button onClick={() => { onSuccess?.(orderId, shippingDetails); onClose(); }} className="w-full h-14 bg-[#0F172A] text-white rounded-2xl font-black text-lg">Continue</Button>
