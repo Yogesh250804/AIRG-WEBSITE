@@ -1,20 +1,5 @@
 /**
- * Google Apps Script to automatically log payments from your website.
- * 
- * HOW TO DEPLOY:
- * 1. Open a Google Sheet (blank or existing).
- * 2. Click "Extensions" > "Apps Script".
- * 3. Delete any code in the editor and paste this script.
- * 4. Click the "Save" icon (or Ctrl+S).
- * 5. Click "Deploy" (top right) > "New deployment".
- * 6. Select type: "Web app".
- * 7. Set settings:
- *    - Description: "Payment Logger API"
- *    - Execute as: "Me" (your email)
- *    - Who has access: "Anyone" (crucial so your website backend can call it)
- * 8. Click "Deploy" and authorize permissions when prompted.
- * 9. Copy the "Web app URL" (looks like https://script.google.com/macros/s/.../exec)
- * 10. Paste this URL into your website's .env file as `GOOGLE_SHEET_WEBAPP_URL`.
+ * Google Apps Script to log payments and upload screenshots to Google Drive.
  */
 
 function doPost(e) {
@@ -36,7 +21,6 @@ function doPost(e) {
         "UTR / Ref Number", 
         "Screenshot URL"
       ]);
-      // Format headers bold
       sheet.getRange(1, 1, 1, 8).setFontWeight("bold").setBackground("#e82e32").setFontColor("#ffffff");
     }
     
@@ -47,7 +31,33 @@ function doPost(e) {
     var phone = data.phone || "N/A";
     var amount = data.amount || 0;
     var utr = data.utr || "N/A";
-    var screenshot = data.screenshot || "";
+    var screenshotUrl = "";
+    
+    // If screenshot contains Base64 image data, upload it to Google Drive
+    if (data.screenshot && data.screenshot.indexOf("data:") === 0) {
+      try {
+        var parts = data.screenshot.split(",");
+        var meta = parts[0]; // e.g. "data:image/png;base64"
+        var base64Data = parts[1];
+        
+        var contentType = meta.split(":")[1].split(";")[0];
+        var extension = contentType.split("/")[1] || "png";
+        
+        var decoded = Utilities.base64Decode(base64Data);
+        var blob = Utilities.newBlob(decoded, contentType, (data.orderId || "payment") + "_" + utr + "." + extension);
+        
+        // Save to your Google Drive root folder (or you can create a specific folder)
+        var file = DriveApp.createFile(blob);
+        
+        // Enable sharing so anyone with link can view the receipt screenshot
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        screenshotUrl = file.getUrl();
+      } catch (uploadError) {
+        screenshotUrl = "Upload Error: " + uploadError.toString();
+      }
+    } else {
+      screenshotUrl = data.screenshot || "";
+    }
     
     // Add the payment row
     sheet.appendRow([
@@ -58,10 +68,10 @@ function doPost(e) {
       phone,
       amount,
       utr,
-      screenshot
+      screenshotUrl
     ]);
     
-    return ContentService.createTextOutput(JSON.stringify({ success: true, message: "Logged to sheet successfully" }))
+    return ContentService.createTextOutput(JSON.stringify({ success: true, message: "Logged to sheet and uploaded successfully" }))
                          .setMimeType(ContentService.MimeType.JSON);
                          
   } catch (error) {

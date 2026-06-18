@@ -65,18 +65,21 @@ export async function POST(req: NextRequest) {
             const buffer = Buffer.from(matches[2], "base64");
             
             const dirPath = path.join(process.cwd(), "public", "uploads", "receipts");
-            if (!fs.existsSync(dirPath)) {
-              fs.mkdirSync(dirPath, { recursive: true });
+            // Check read-only environment safely
+            try {
+              if (!fs.existsSync(dirPath)) {
+                fs.mkdirSync(dirPath, { recursive: true });
+              }
+              const fileName = `${rechargeId}.${extension}`;
+              const filePath = path.join(dirPath, fileName);
+              fs.writeFileSync(filePath, buffer);
+              screenshotUrl = `/uploads/receipts/${fileName}`;
+            } catch (fsErr) {
+              console.warn("Local storage is read-only (expected on Vercel). Skipping local write. Error:", fsErr.message);
             }
-            
-            const fileName = `${rechargeId}.${extension}`;
-            const filePath = path.join(dirPath, fileName);
-            fs.writeFileSync(filePath, buffer);
-            
-            screenshotUrl = `/uploads/receipts/${fileName}`;
           }
         } catch (uploadError) {
-          console.error("Error saving payment screenshot:", uploadError);
+          console.error("Error parsing payment screenshot:", uploadError);
         }
       }
 
@@ -96,16 +99,13 @@ export async function POST(req: NextRequest) {
             state: "",
             pincode: ""
           }, 
-          screenshot: screenshotUrl,
+          screenshot: screenshotUrl, // Remains empty if read-only, but saved to Drive below
           createdAt: new Date() 
         },
         { upsert: true, new: true }
       );
 
-      // Log to Google Sheet
-      const origin = req.nextUrl.origin;
-      const fullScreenshotUrl = screenshotUrl ? `${origin}${screenshotUrl}` : "";
-
+      // Log to Google Sheet (includes base64 upload to Google Drive)
       logPaymentToGoogleSheet({
         email: dbUser.email,
         phone: shippingDetails?.phone,
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
         utr,
         orderId: rechargeId,
         customerName: dbUser.displayName,
-        screenshot: fullScreenshotUrl
+        screenshot: screenshot // Send the base64 string to Apps Script to store in Drive
       }).catch(err => console.error("Sheet logging error:", err));
 
       return NextResponse.json({
@@ -132,18 +132,20 @@ export async function POST(req: NextRequest) {
             const buffer = Buffer.from(matches[2], "base64");
             
             const dirPath = path.join(process.cwd(), "public", "uploads", "receipts");
-            if (!fs.existsSync(dirPath)) {
-              fs.mkdirSync(dirPath, { recursive: true });
+            try {
+              if (!fs.existsSync(dirPath)) {
+                fs.mkdirSync(dirPath, { recursive: true });
+              }
+              const fileName = `${orderId}.${extension}`;
+              const filePath = path.join(dirPath, fileName);
+              fs.writeFileSync(filePath, buffer);
+              screenshotUrl = `/uploads/receipts/${fileName}`;
+            } catch (fsErr) {
+              console.warn("Local storage is read-only (expected on Vercel). Skipping local write. Error:", fsErr.message);
             }
-            
-            const fileName = `${orderId}.${extension}`;
-            const filePath = path.join(dirPath, fileName);
-            fs.writeFileSync(filePath, buffer);
-            
-            screenshotUrl = `/uploads/receipts/${fileName}`;
           }
         } catch (uploadError) {
-          console.error("Error saving payment screenshot:", uploadError);
+          console.error("Error parsing payment screenshot:", uploadError);
         }
       }
 
@@ -162,10 +164,7 @@ export async function POST(req: NextRequest) {
         { upsert: true, new: true }
       );
 
-      // Log to Google Sheet with full clickable screenshot URL
-      const origin = req.nextUrl.origin;
-      const fullScreenshotUrl = screenshotUrl ? `${origin}${screenshotUrl}` : "";
-      
+      // Log to Google Sheet (includes base64 upload to Google Drive)
       logPaymentToGoogleSheet({
         email: shippingDetails?.email || dbUser.email,
         phone: shippingDetails?.phone,
@@ -173,7 +172,7 @@ export async function POST(req: NextRequest) {
         utr,
         orderId,
         customerName: dbUser.displayName,
-        screenshot: fullScreenshotUrl
+        screenshot: screenshot // Send the base64 string to Apps Script to store in Drive
       }).catch(err => console.error("Sheet logging error:", err));
 
       return NextResponse.json({
