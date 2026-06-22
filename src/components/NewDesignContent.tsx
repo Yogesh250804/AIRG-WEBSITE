@@ -601,11 +601,6 @@ export default function NewDesignContent() {
   };
 
   const navigateTo = (target: string) => {
-    if (target !== "hero" && !user) {
-      addNotification("Please login to access this section.");
-      setAuthModalOpen(true);
-      return;
-    }
     setActiveFace(target);
     if (target === "centres") {
       setActiveNetwork("india");
@@ -625,13 +620,6 @@ export default function NewDesignContent() {
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
       if (hash && ["hero", "labs", "centres", "workshops", "learning", "store"].includes(hash)) {
-        if (hash !== "hero" && !user) {
-          addNotification("Please login to access this section.");
-          setAuthModalOpen(true);
-          setActiveFace("hero");
-          window.location.hash = "hero";
-          return;
-        }
         setActiveFace(hash);
         if (hash === "centres") {
           setActiveNetwork("india");
@@ -2068,7 +2056,19 @@ export default function NewDesignContent() {
                   <h3 className="text-3xl font-headline text-[#1a1a2e] mb-4 uppercase tracking-tighter">Request a <span className="text-primary">Custom Showcase</span></h3>
                   <p className="text-[#1a1a2e]/40 text-sm font-light">Bring AIR G's tactical technology and innovation labs to your institution or corporate event.</p>
                 </div>
-                <button className="bg-primary text-[#1a1a2e] px-12 py-6 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap hover:scale-105 transition-all">Inquire for Collaboration</button>
+                <button 
+                  onClick={() => {
+                    if (!user) {
+                      addNotification("Please login to inquire for collaboration.");
+                      setAuthModalOpen(true);
+                    } else {
+                      addNotification("Inquiry form will be sent to your email.");
+                    }
+                  }}
+                  className="bg-primary text-[#1a1a2e] px-12 py-6 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap hover:scale-105 transition-all"
+                >
+                  Inquire for Collaboration
+                </button>
               </div>
             </div>
           </section>
@@ -2147,7 +2147,19 @@ export default function NewDesignContent() {
                   <h3 className="text-3xl font-headline text-[#1a1a2e] mb-4">Bulk Institutional Orders</h3>
                   <p className="text-[#1a1a2e]/40 text-sm">We provide specialized hardware kits and curricula for schools and colleges across Maharashtra. Connect with our procurement team for volume licensing.</p>
                 </div>
-                <button className="bg-primary text-[#1a1a2e] px-10 py-5 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap">Contact Sales</button>
+                <button 
+                  onClick={() => {
+                    if (!user) {
+                      addNotification("Please login to contact sales.");
+                      setAuthModalOpen(true);
+                    } else {
+                      addNotification("Sales inquiry ticket created. We will email you shortly.");
+                    }
+                  }}
+                  className="bg-primary text-[#1a1a2e] px-10 py-5 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap"
+                >
+                  Contact Sales
+                </button>
               </div>
 
               <footer className="mt-40 pt-20 border-t border-black/5 grid grid-cols-1 md:grid-cols-5 gap-12 pb-10">
@@ -2466,7 +2478,17 @@ export default function NewDesignContent() {
                       
                       <div className="pt-4 mt-6 border-t border-black/5 flex justify-between items-center">
                         <span className="text-[9px] font-mono text-[#1a1a2e]/30 uppercase tracking-wider">Self-Paced / Online</span>
-                        <button className="text-[10px] font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors uppercase tracking-widest font-mono">
+                        <button 
+                          onClick={() => {
+                            if (!user) {
+                              addNotification("Please login to enroll in this course.");
+                              setAuthModalOpen(true);
+                            } else {
+                              addNotification(`Starting course: ${course.title}`);
+                            }
+                          }}
+                          className="text-[10px] font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors uppercase tracking-widest font-mono"
+                        >
                           Start Learning
                           <span className="material-symbols-outlined text-[11px]">arrow_forward</span>
                         </button>
@@ -3126,9 +3148,15 @@ export default function NewDesignContent() {
                   </div>
                   <button 
                     onClick={() => {
-                      setIsCartOpen(false);
-                      setIsCheckoutOpen(true);
-                      setCheckoutStep('details');
+                      if (!user) {
+                        addNotification("Please login to proceed with your purchase.");
+                        setAuthModalOpen(true);
+                        setIsCartOpen(false);
+                      } else {
+                        setIsCartOpen(false);
+                        setIsCheckoutOpen(true);
+                        setCheckoutStep('details');
+                      }
                     }}
                     className="w-full bg-primary text-white py-4 rounded-2xl font-bold uppercase tracking-widest glow-red text-xs hover:scale-[1.02] transition-transform flex items-center justify-center gap-2"
                   >
