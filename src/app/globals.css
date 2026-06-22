@@ -449,29 +449,35 @@ button, a, [role="button"], .cursor-pointer, .nav-link, .cube-face button {
 
 /* ── Preloader CSS Fallback Animations ─────────────────── */
 @keyframes preloader-slide-down {
-  0% { transform: translateY(0%); }
-  100% { transform: translateY(100%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, 100%, 0); }
 }
 @keyframes preloader-fade-out {
   0% { opacity: 1; }
   100% { opacity: 0; pointer-events: none; visibility: hidden; }
 }
 @keyframes preloader-text-up {
-  0% { transform: translateY(105%); }
-  100% { transform: translateY(0%); }
+  0% { transform: translate3d(0, 105%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 .preloader-wrapper {
+  will-change: opacity;
   animation: preloader-fade-out 0.3s ease forwards;
   animation-delay: 1.8s;
 }
 .preloader-col {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
   animation: preloader-slide-down 0.5s ease-in-out forwards;
 }
 .preloader-text-char {
-  transform: translateY(105%);
+  display: inline-block;
+  will-change: transform;
+  transform: translate3d(0, 105%, 0);
   animation: preloader-text-up 0.3s ease-out both;
 }
 .preloader-text-container {
+  will-change: opacity, transform;
   animation: preloader-fade-out 0.3s ease forwards;
   animation-delay: 0.9s;
 }

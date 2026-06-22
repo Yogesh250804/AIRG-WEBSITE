@@ -121,7 +121,7 @@ export async function sendSmsReceipt(details: ReceiptDetails) {
       const accountSid = process.env.TWILIO_ACCOUNT_SID;
       const authToken = process.env.TWILIO_AUTH_TOKEN;
       const twilioNumber = process.env.TWILIO_PHONE_NUMBER || "whatsapp:+14155238886"; // Can use a standard SMS sender or WhatsApp sender
-      
+
       const isWhatsApp = twilioNumber.startsWith("whatsapp:");
       const toRecipient = isWhatsApp ? `whatsapp:${formattedPhone}` : formattedPhone;
 
@@ -209,30 +209,39 @@ export async function logPaymentToGoogleSheet(details: {
   screenshot?: string;
 }) {
   const webappUrl = process.env.GOOGLE_SHEET_WEBAPP_URL;
+
   if (!webappUrl) {
     console.warn("GOOGLE_SHEET_WEBAPP_URL is not set. Google Sheet logging skipped.");
     return { success: false, error: "URL not set" };
   }
 
   try {
+    console.log("Sending to Google Sheet:", webappUrl);
+
     const response = await fetch(webappUrl, {
       method: "POST",
+      redirect: "follow",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(details),
     });
 
-    const data = await response.json();
-    if (response.ok && data.success) {
-      console.log("Logged payment to Google Sheet successfully");
-      return { success: true };
-    } else {
-      console.error("Google Sheet Logging Error:", data);
-      return { success: false, error: data.error || "Failed" };
-    }
+    const text = await response.text();
+
+    console.log("Google Sheet Status:", response.status);
+    console.log("Google Sheet Response:", text);
+
+    return {
+      success: response.ok,
+      response: text,
+    };
   } catch (err: any) {
     console.error("Failed to connect to Google Sheet webapp URL:", err);
-    return { success: false, error: err.message };
+
+    return {
+      success: false,
+      error: err?.message || String(err),
+    };
   }
 }
