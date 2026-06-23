@@ -689,6 +689,32 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                       </div>
                     </div>
 
+                    {/* Fallback Copy UPI ID Section */}
+                    <div className="p-4 bg-red-50/50 rounded-2xl border border-[#E82E32]/10 space-y-2 text-left">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[9px] font-black text-[#E82E32] uppercase tracking-widest">Fallback Method (100% Working)</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard.writeText(MERCHANT_UPI);
+                            toast.success("UPI ID copied to clipboard!");
+                          }}
+                          className="px-2.5 py-1 bg-white hover:bg-slate-100 text-[#E82E32] text-[9px] font-black uppercase rounded-lg border border-[#E82E32]/20 transition-all flex items-center gap-1 cursor-pointer"
+                        >
+                          Copy UPI ID
+                        </button>
+                      </div>
+                      <p className="text-[9.5px] leading-relaxed text-slate-500 font-medium">
+                        If automatic redirect is blocked or declines for security reasons:
+                        <br />
+                        <span className="font-bold text-slate-700">1. Copy UPI ID:</span> <span className="font-mono text-[11px] font-black text-slate-800 bg-white px-1.5 py-0.5 rounded border border-black/5">{MERCHANT_UPI}</span>
+                        <br />
+                        <span className="font-bold text-slate-700">2.</span> Open GPay, PhonePe, or Paytm manually.
+                        <br />
+                        <span className="font-bold text-slate-700">3.</span> Choose <span className="font-bold">Pay UPI ID / VPA</span>, paste it, and pay <span className="font-bold text-red-600">₹{finalPrice.toLocaleString()}</span>.
+                      </p>
+                    </div>
+
                     {/* Dynamic QR Code for scanning */}
                     <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                       <div className="flex items-center gap-4">
