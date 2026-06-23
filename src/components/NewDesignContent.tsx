@@ -338,23 +338,23 @@ export default function NewDesignContent() {
 
     if (isIOS) {
       switch(app) {
-        case 'GPay': return `gpay://upi/pay?${baseParams}`;
+        case 'GPay': return `gpay://`;
         case 'PhonePe': return `phonepe://`;
-        case 'Paytm': return `paytmmp://upi/pay?${baseParams}`;
-        case 'BHIM': return `bhim://upi/pay?${baseParams}`;
-        default: return `upi://pay?${baseParams}`;
+        case 'Paytm': return `paytmmp://`;
+        case 'BHIM': return `bhim://`;
+        default: return `upi://`;
       }
     }
 
     switch(app) {
       case 'GPay': 
-        return `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+        return `intent:#Intent;package=com.google.android.apps.nbu.paisa.user;end`;
       case 'PhonePe': 
         return `intent:#Intent;package=com.phonepe.app;end`;
       case 'Paytm': 
-        return `paytmmp://upi/pay?${baseParams}`;
+        return `intent:#Intent;package=net.one97.paytm;end`;
       case 'BHIM':
-        return `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`;
+        return `intent:#Intent;package=in.org.npci.upiapp;end`;
       default: 
         return `upi://pay?${baseParams}`;
     }
@@ -369,19 +369,17 @@ export default function NewDesignContent() {
     let specificUrl = "";
     if (isIOS) {
       switch(appName) {
-        case 'GPay': specificUrl = `gpay://upi/pay?${baseParams}`; break;
+        case 'GPay': specificUrl = `gpay://`; break;
         case 'PhonePe': specificUrl = `phonepe://`; break;
-        case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
-        case 'BHIM': specificUrl = `bhim://upi/pay?${baseParams}`; break;
+        case 'Paytm': specificUrl = `paytmmp://`; break;
+        case 'BHIM': specificUrl = `bhim://`; break;
       }
     } else {
       switch(appName) {
-        case 'GPay': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`; break;
-        case 'PhonePe': 
-          specificUrl = `intent:#Intent;package=com.phonepe.app;end`; 
-          break;
-        case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
-        case 'BHIM': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`; break;
+        case 'GPay': specificUrl = `intent:#Intent;package=com.google.android.apps.nbu.paisa.user;end`; break;
+        case 'PhonePe': specificUrl = `intent:#Intent;package=com.phonepe.app;end`; break;
+        case 'Paytm': specificUrl = `intent:#Intent;package=net.one97.paytm;end`; break;
+        case 'BHIM': specificUrl = `intent:#Intent;package=in.org.npci.upiapp;end`; break;
       }
     }
 
@@ -392,14 +390,6 @@ export default function NewDesignContent() {
       window.location.href = targetUrl;
     } catch (e) {
       window.location.href = universalUrl;
-    }
-
-    if (appName !== 'PhonePe') {
-      setTimeout(() => {
-        try {
-          window.location.href = universalUrl;
-        } catch (e) {}
-      }, 1200);
     }
   };
 

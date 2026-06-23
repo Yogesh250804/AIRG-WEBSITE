@@ -378,28 +378,28 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     if (isIOS) {
       switch(app) {
         case 'GPay': 
-          return `gpay://upi/pay?${baseParams}`;
+          return `gpay://`;
         case 'PhonePe': 
           return `phonepe://`;
         case 'Paytm': 
-          return `paytmmp://upi/pay?${baseParams}`;
+          return `paytmmp://`;
         case 'BHIM': 
-          return `bhim://upi/pay?${baseParams}`;
+          return `bhim://`;
         default: 
-          return `upi://pay?${baseParams}`;
+          return `upi://`;
       }
     }
 
     // Android-specific intent structures to launch app and handle upi VPA target
     switch(app) {
       case 'GPay': 
-        return `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
+        return `intent:#Intent;package=com.google.android.apps.nbu.paisa.user;end`;
       case 'PhonePe': 
         return `intent:#Intent;package=com.phonepe.app;end`;
       case 'Paytm': 
-        return `paytmmp://upi/pay?${baseParams}`;
+        return `intent:#Intent;package=net.one97.paytm;end`;
       case 'BHIM':
-        return `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`;
+        return `intent:#Intent;package=in.org.npci.upiapp;end`;
       default: 
         return `upi://pay?${baseParams}`;
     }
@@ -412,20 +412,17 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     let specificUrl = "";
     if (isIOS) {
       switch(appName) {
-        case 'GPay': specificUrl = `gpay://upi/pay?${baseParams}`; break;
+        case 'GPay': specificUrl = `gpay://`; break;
         case 'PhonePe': specificUrl = `phonepe://`; break;
-        case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
-        case 'BHIM': specificUrl = `bhim://upi/pay?${baseParams}`; break;
+        case 'Paytm': specificUrl = `paytmmp://`; break;
+        case 'BHIM': specificUrl = `bhim://`; break;
       }
     } else {
       switch(appName) {
-        case 'GPay': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`; break;
-        case 'PhonePe': 
-          // Open PhonePe app directly without parameters
-          specificUrl = `intent:#Intent;package=com.phonepe.app;end`; 
-          break;
-        case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
-        case 'BHIM': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`; break;
+        case 'GPay': specificUrl = `intent:#Intent;package=com.google.android.apps.nbu.paisa.user;end`; break;
+        case 'PhonePe': specificUrl = `intent:#Intent;package=com.phonepe.app;end`; break;
+        case 'Paytm': specificUrl = `intent:#Intent;package=net.one97.paytm;end`; break;
+        case 'BHIM': specificUrl = `intent:#Intent;package=in.org.npci.upiapp;end`; break;
       }
     }
 
@@ -436,16 +433,6 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
       window.location.href = targetUrl;
     } catch (e) {
       window.location.href = universalUrl;
-    }
-
-    // Fallback: if the app is not installed or url is blocked, trigger the universal app chooser
-    // Skip fallback timer for PhonePe since the user specifically requested to ONLY open the app
-    if (appName !== 'PhonePe') {
-      setTimeout(() => {
-        try {
-          window.location.href = universalUrl;
-        } catch (e) {}
-      }, 1200);
     }
   };
 
