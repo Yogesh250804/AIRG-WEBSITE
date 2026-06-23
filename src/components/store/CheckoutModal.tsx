@@ -380,7 +380,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
         case 'GPay': 
           return `gpay://upi/pay?${baseParams}`;
         case 'PhonePe': 
-          return `phonepe://pay?${baseParams}`;
+          return `phonepe://`;
         case 'Paytm': 
           return `paytmmp://upi/pay?${baseParams}`;
         case 'BHIM': 
@@ -395,7 +395,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
       case 'GPay': 
         return `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
       case 'PhonePe': 
-        return `phonepe://pay?${baseParams}`;
+        return `intent:#Intent;package=com.phonepe.app;end`;
       case 'Paytm': 
         return `paytmmp://upi/pay?${baseParams}`;
       case 'BHIM':
@@ -413,7 +413,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     if (isIOS) {
       switch(appName) {
         case 'GPay': specificUrl = `gpay://upi/pay?${baseParams}`; break;
-        case 'PhonePe': specificUrl = `phonepe://pay?${baseParams}`; break;
+        case 'PhonePe': specificUrl = `phonepe://`; break;
         case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
         case 'BHIM': specificUrl = `bhim://upi/pay?${baseParams}`; break;
       }
@@ -421,8 +421,8 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
       switch(appName) {
         case 'GPay': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`; break;
         case 'PhonePe': 
-          // Use PhonePe direct scheme on Android as well
-          specificUrl = `phonepe://pay?${baseParams}`; 
+          // Open PhonePe app directly without parameters
+          specificUrl = `intent:#Intent;package=com.phonepe.app;end`; 
           break;
         case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
         case 'BHIM': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`; break;
@@ -439,11 +439,14 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     }
 
     // Fallback: if the app is not installed or url is blocked, trigger the universal app chooser
-    setTimeout(() => {
-      try {
-        window.location.href = universalUrl;
-      } catch (e) {}
-    }, 1200);
+    // Skip fallback timer for PhonePe since the user specifically requested to ONLY open the app
+    if (appName !== 'PhonePe') {
+      setTimeout(() => {
+        try {
+          window.location.href = universalUrl;
+        } catch (e) {}
+      }, 1200);
+    }
   };
 
   if (!isOpen || !item) return null;
