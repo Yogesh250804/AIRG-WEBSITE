@@ -336,24 +336,25 @@ export default function NewDesignContent() {
     
     if (isIOS) {
       switch(app) {
-        case 'GPay': return `gpay://upi/pay?${params}`;
-        case 'PhonePe': return `phonepe://pay?${params}`;
-        case 'Paytm': return `paytmmp://pay?${params}`;
-        case 'BHIM': return `bhim://upi/pay?${params}`;
-        default: return base;
+        case 'GPay': return `gpay://`;
+        case 'PhonePe': return `phonepe://`;
+        case 'Paytm': return `paytmmp://`;
+        case 'BHIM': return `bhim://`;
+        default: return `upi://`;
       }
     }
 
-    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&tr=${txnRef}&tn=${encodeURIComponent("Wallet Topup")}&mc=5411&mode=02&cu=INR`;
     switch(app) {
       case 'GPay': 
-        return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+        return `intent://#Intent;scheme=gpay;package=com.google.android.apps.nbu.paisa.user;end`;
       case 'PhonePe': 
-        return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.phonepe.app;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+        return `intent://#Intent;scheme=phonepe;package=com.phonepe.app;end`;
       case 'Paytm': 
-        return `intent://pay?${intentParams}#Intent;scheme=upi;package=net.one97.paytm;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+        return `intent://#Intent;scheme=paytmmp;package=net.one97.paytm;end`;
+      case 'BHIM':
+        return `intent://#Intent;scheme=bhim;package=in.org.npci.upiapp;end`;
       default: 
-        return base;
+        return `upi://`;
     }
   };
 

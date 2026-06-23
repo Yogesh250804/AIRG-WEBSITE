@@ -88,36 +88,24 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
   };
 
   const handleCopyText = (text: string) => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text)
-        .then(() => toast.success("UPI ID copied successfully!"))
-        .catch(() => handleFallbackCopy(text));
-    } else {
-      handleFallbackCopy(text);
-    }
-  };
-
-  const handleFallbackCopy = (text: string) => {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.position = "fixed";
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.opacity = "0";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
     try {
-      const successful = document.execCommand('copy');
-      if (successful) {
-        toast.success("UPI ID copied to clipboard!");
+      const input = document.createElement("input");
+      input.value = text;
+      input.style.position = "absolute";
+      input.style.left = "-9999px";
+      document.body.appendChild(input);
+      input.select();
+      input.setSelectionRange(0, 99999);
+      const success = document.execCommand("copy");
+      document.body.removeChild(input);
+      if (success) {
+        alert("UPI ID Copied to Clipboard: " + text);
       } else {
-        toast.error("Failed to copy. Please copy manually.");
+        alert("Please manually copy the UPI ID: " + text);
       }
     } catch (err) {
-      toast.error("Failed to copy. Please copy manually.");
+      alert("Please manually copy the UPI ID: " + text);
     }
-    document.body.removeChild(textArea);
   };
 
   const [paymentDetails, setPaymentDetails] = useState({
@@ -388,30 +376,30 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     if (isIOS) {
       switch(app) {
         case 'GPay': 
-          return `gpay://upi/pay?${params}`;
+          return `gpay://`;
         case 'PhonePe': 
-          return `phonepe://pay?${params}`;
+          return `phonepe://`;
         case 'Paytm': 
-          return `paytmmp://pay?${params}`;
+          return `paytmmp://`;
         case 'BHIM': 
-          return `bhim://upi/pay?${params}`;
+          return `bhim://`;
         default: 
-          return base;
+          return `upi://`;
       }
     }
 
-    // Android-specific intent structures for better targeting
-    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&tr=${txnRef}&tn=${encodeURIComponent("Order Payment")}&mc=5411&mode=02&cu=INR`;
-    
+    // Android-specific intent structures to JUST open the app
     switch(app) {
       case 'GPay': 
-        return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+        return `intent://#Intent;scheme=gpay;package=com.google.android.apps.nbu.paisa.user;end`;
       case 'PhonePe': 
-        return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.phonepe.app;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+        return `intent://#Intent;scheme=phonepe;package=com.phonepe.app;end`;
       case 'Paytm': 
-        return `intent://pay?${intentParams}#Intent;scheme=upi;package=net.one97.paytm;S.browser_fallback_url=${encodeURIComponent(base)};end`;
+        return `intent://#Intent;scheme=paytmmp;package=net.one97.paytm;end`;
+      case 'BHIM':
+        return `intent://#Intent;scheme=bhim;package=in.org.npci.upiapp;end`;
       default: 
-        return base;
+        return `upi://`;
     }
   };
 
