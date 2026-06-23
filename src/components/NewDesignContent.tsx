@@ -328,7 +328,7 @@ export default function NewDesignContent() {
     const MERCHANT_UPI = "9860779172-5@ybl";
     const MERCHANT_NAME = "AIR G International";
     const txnRef = "TXN" + Math.random().toString(36).substr(2, 9).toUpperCase();
-    const params = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${pendingTopUpAmount}&tr=${txnRef}&tn=${encodeURIComponent("Wallet Topup")}&mc=5411&mode=02&cu=INR`;
+    const params = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&tr=${txnRef}&tn=${encodeURIComponent("Wallet Topup")}&mc=5411&mode=02&cu=INR`;
     const base = `upi://pay?${params}`;
     if (!app) return base;
     
@@ -344,7 +344,7 @@ export default function NewDesignContent() {
       }
     }
 
-    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${pendingTopUpAmount}&tr=${txnRef}&tn=${encodeURIComponent("Wallet Topup")}&mc=5411&mode=02&cu=INR`;
+    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&tr=${txnRef}&tn=${encodeURIComponent("Wallet Topup")}&mc=5411&mode=02&cu=INR`;
     switch(app) {
       case 'GPay': 
         return `intent://pay?${intentParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;S.browser_fallback_url=${encodeURIComponent(base)};end`;

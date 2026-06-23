@@ -345,7 +345,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
 
   const getUpiDeepLink = (app?: string) => {
     const txnRef = orderId || 'TXN' + Math.random().toString(36).substr(2, 9).toUpperCase();
-    const params = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${finalPrice}&tr=${txnRef}&tn=${encodeURIComponent("Order Payment")}&mc=5411&mode=02&cu=INR`;
+    const params = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&tr=${txnRef}&tn=${encodeURIComponent("Order Payment")}&mc=5411&mode=02&cu=INR`;
     const base = `upi://pay?${params}`;
     if (!app) return base;
     
@@ -368,7 +368,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     }
 
     // Android-specific intent structures for better targeting
-    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${finalPrice}&tr=${txnRef}&tn=${encodeURIComponent("Order Payment")}&mc=5411&mode=02&cu=INR`;
+    const intentParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}&tr=${txnRef}&tn=${encodeURIComponent("Order Payment")}&mc=5411&mode=02&cu=INR`;
     
     switch(app) {
       case 'GPay': 
