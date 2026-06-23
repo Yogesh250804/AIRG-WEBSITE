@@ -87,6 +87,39 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     setScreenshotBase64("");
   };
 
+  const handleCopyText = (text: string) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => toast.success("UPI ID copied successfully!"))
+        .catch(() => handleFallbackCopy(text));
+    } else {
+      handleFallbackCopy(text);
+    }
+  };
+
+  const handleFallbackCopy = (text: string) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        toast.success("UPI ID copied to clipboard!");
+      } else {
+        toast.error("Failed to copy. Please copy manually.");
+      }
+    } catch (err) {
+      toast.error("Failed to copy. Please copy manually.");
+    }
+    document.body.removeChild(textArea);
+  };
+
   const [paymentDetails, setPaymentDetails] = useState({
     upiId: "",
     cardNumber: "",
@@ -643,76 +676,42 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                       <div className="text-[10px] font-black text-red-500 bg-red-50 px-2 py-1 rounded-lg">Expires in {formatTime(timeLeft)}</div>
                     </div>
 
-                    <div className="space-y-3">
-                      <h4 className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Select UPI App to pay:</h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { 
-                            name: 'GPay', 
-                            icon: "/logos/gpay.png"
-                          },
-                          { 
-                            name: 'PhonePe', 
-                            icon: "/logos/phonepe.png"
-                          },
-                          { 
-                            name: 'Paytm', 
-                            icon: "/logos/paytm.png"
-                          },
-                          { 
-                            name: 'BHIM', 
-                            icon: (
-                              <svg viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full object-contain">
-                                <path d="M3 2l8 8-8 8V2z" fill="#FF9933" />
-                                <path d="M12 2l-8 8 8 8V2z" fill="#138808" opacity="0.8" />
-                                <text x="18" y="16" fontFamily="sans-serif" fontWeight="900" fontSize="15" fill="#F05A28">BH</text>
-                                <text x="41" y="16" fontFamily="sans-serif" fontWeight="900" fontSize="15" fill="#0A7A4C">IM</text>
-                              </svg>
-                            )
-                          }
-                        ].map((app) => (
-                          <a 
-                            key={app.name} 
-                            href={getUpiDeepLink(app.name)}
-                            className="flex items-center p-4 rounded-2xl border border-slate-100 hover:border-red-500 hover:bg-red-50/10 transition-all gap-4 group decoration-none"
-                          >
-                            <div className="h-10 w-10 rounded-xl bg-white flex items-center justify-center p-1.5 shadow-sm border border-slate-50 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
-                              {typeof app.icon === 'string' ? (
-                                <img src={app.icon} alt={app.name} className="h-full w-full object-contain" />
-                              ) : (
-                                app.icon
-                              )}
-                            </div>
-                            <span className="text-sm font-black text-slate-700">{app.name}</span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
+                    <div className="space-y-4">
+                      {/* Open Default App Button */}
+                      <a 
+                        href={getUpiDeepLink()}
+                        className="w-full h-12 bg-[#E82E32] text-white hover:bg-red-600 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 decoration-none shadow-md"
+                      >
+                        <span className="material-symbols-outlined text-sm">open_in_new</span>
+                        Open Default UPI App
+                      </a>
 
-                    {/* Fallback Copy UPI ID Section */}
-                    <div className="p-4 bg-red-50/50 rounded-2xl border border-[#E82E32]/10 space-y-2 text-left">
-                      <div className="flex justify-between items-center">
-                        <span className="text-[9px] font-black text-[#E82E32] uppercase tracking-widest">Fallback Method (100% Working)</span>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            navigator.clipboard.writeText(MERCHANT_UPI);
-                            toast.success("UPI ID copied to clipboard!");
-                          }}
-                          className="px-2.5 py-1 bg-white hover:bg-slate-100 text-[#E82E32] text-[9px] font-black uppercase rounded-lg border border-[#E82E32]/20 transition-all flex items-center gap-1 cursor-pointer"
-                        >
-                          Copy UPI ID
-                        </button>
+                      {/* Fallback Copy UPI ID Section */}
+                      <div className="p-4 bg-red-50/50 rounded-2xl border border-[#E82E32]/15 space-y-3.5 text-left">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[9px] font-black text-[#E82E32] uppercase tracking-widest">Copy UPI ID (Recommended)</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopyText(MERCHANT_UPI)}
+                            className="px-3 py-1.5 bg-white hover:bg-slate-100 text-[#E82E32] text-[10px] font-black uppercase rounded-lg border border-[#E82E32]/25 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                          >
+                            Copy ID
+                          </button>
+                        </div>
+                        <div className="space-y-1 bg-white p-3 rounded-xl border border-black/5 flex items-center justify-between">
+                          <span className="font-mono text-xs font-black text-slate-800 tracking-tight">{MERCHANT_UPI}</span>
+                          <span className="text-[7.5px] uppercase font-bold text-slate-300 tracking-widest">Active VPA</span>
+                        </div>
+                        <p className="text-[9.5px] leading-relaxed text-slate-500 font-medium">
+                          If automatic redirect declines or is blocked:
+                          <br />
+                          <span className="font-bold text-slate-700">1.</span> Click <span className="font-bold">Copy ID</span> to copy the address.
+                          <br />
+                          <span className="font-bold text-slate-700">2.</span> Open GPay, PhonePe, or Paytm.
+                          <br />
+                          <span className="font-bold text-slate-700">3.</span> Send <span className="font-bold text-red-600">₹{finalPrice.toLocaleString()}</span> to the copied UPI ID.
+                        </p>
                       </div>
-                      <p className="text-[9.5px] leading-relaxed text-slate-500 font-medium">
-                        If automatic redirect is blocked or declines for security reasons:
-                        <br />
-                        <span className="font-bold text-slate-700">1. Copy UPI ID:</span> <span className="font-mono text-[11px] font-black text-slate-800 bg-white px-1.5 py-0.5 rounded border border-black/5">{MERCHANT_UPI}</span>
-                        <br />
-                        <span className="font-bold text-slate-700">2.</span> Open GPay, PhonePe, or Paytm manually.
-                        <br />
-                        <span className="font-bold text-slate-700">3.</span> Choose <span className="font-bold">Pay UPI ID / VPA</span>, paste it, and pay <span className="font-bold text-red-600">₹{finalPrice.toLocaleString()}</span>.
-                      </p>
                     </div>
 
                     {/* Dynamic QR Code for scanning */}
