@@ -786,7 +786,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
 
                       {/* Screenshot Upload Block */}
                       <div className="space-y-1">
-                        <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono block">Upload Payment Screenshot (Optional)</Label>
+                        <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest font-mono block">Upload Payment Screenshot (Required)</Label>
                         {!screenshotPreview ? (
                           <label className="flex flex-col items-center justify-center w-full h-20 border border-dashed border-slate-200 bg-white rounded-xl cursor-pointer hover:bg-red-50/10 hover:border-red-500/50 transition-all">
                             <div className="flex flex-col items-center justify-center pt-2 pb-2">
@@ -815,7 +815,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
 
                       <Button 
                         onClick={() => handleVerifyUtr()}
-                        disabled={utrNumber.length !== 12 || isVerifyingUtr}
+                        disabled={utrNumber.length !== 12 || isVerifyingUtr || !screenshotBase64}
                         className="w-full h-11 bg-[#E82E32] hover:bg-red-600 disabled:opacity-50 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl font-black text-xs uppercase tracking-widest font-mono transition-all flex items-center justify-center gap-2 border-none"
                       >
                         {isVerifyingUtr ? (
