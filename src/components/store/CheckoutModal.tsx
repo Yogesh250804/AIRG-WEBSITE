@@ -373,34 +373,77 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
     // Check for iOS
     const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     
+    const baseParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}`;
+
     if (isIOS) {
       switch(app) {
         case 'GPay': 
-          return `gpay://`;
+          return `gpay://upi/pay?${baseParams}`;
         case 'PhonePe': 
-          return `phonepe://`;
+          return `phonepe://pay?${baseParams}`;
         case 'Paytm': 
-          return `paytmmp://`;
+          return `paytmmp://upi/pay?${baseParams}`;
         case 'BHIM': 
-          return `bhim://`;
+          return `bhim://upi/pay?${baseParams}`;
         default: 
-          return `upi://`;
+          return `upi://pay?${baseParams}`;
       }
     }
 
-    // Android-specific intent structures to JUST open the app
+    // Android-specific intent structures to launch app and handle upi VPA target
     switch(app) {
       case 'GPay': 
-        return `intent://#Intent;scheme=gpay;package=com.google.android.apps.nbu.paisa.user;end`;
+        return `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`;
       case 'PhonePe': 
-        return `intent://#Intent;scheme=phonepe;package=com.phonepe.app;end`;
+        return `phonepe://pay?${baseParams}`;
       case 'Paytm': 
-        return `intent://#Intent;scheme=paytmmp;package=net.one97.paytm;end`;
+        return `paytmmp://upi/pay?${baseParams}`;
       case 'BHIM':
-        return `intent://#Intent;scheme=bhim;package=in.org.npci.upiapp;end`;
+        return `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`;
       default: 
-        return `upi://`;
+        return `upi://pay?${baseParams}`;
     }
+  };
+
+  const handleUpiRoute = (appName: string) => {
+    const baseParams = `pa=${MERCHANT_UPI}&pn=${encodeURIComponent(MERCHANT_NAME)}`;
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    
+    let specificUrl = "";
+    if (isIOS) {
+      switch(appName) {
+        case 'GPay': specificUrl = `gpay://upi/pay?${baseParams}`; break;
+        case 'PhonePe': specificUrl = `phonepe://pay?${baseParams}`; break;
+        case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
+        case 'BHIM': specificUrl = `bhim://upi/pay?${baseParams}`; break;
+      }
+    } else {
+      switch(appName) {
+        case 'GPay': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end`; break;
+        case 'PhonePe': 
+          // Use PhonePe direct scheme on Android as well
+          specificUrl = `phonepe://pay?${baseParams}`; 
+          break;
+        case 'Paytm': specificUrl = `paytmmp://upi/pay?${baseParams}`; break;
+        case 'BHIM': specificUrl = `intent://pay?${baseParams}#Intent;scheme=upi;package=in.org.npci.upiapp;end`; break;
+      }
+    }
+
+    const universalUrl = `upi://pay?${baseParams}`;
+    const targetUrl = specificUrl || universalUrl;
+
+    try {
+      window.location.href = targetUrl;
+    } catch (e) {
+      window.location.href = universalUrl;
+    }
+
+    // Fallback: if the app is not installed or url is blocked, trigger the universal app chooser
+    setTimeout(() => {
+      try {
+        window.location.href = universalUrl;
+      } catch (e) {}
+    }, 1200);
   };
 
   if (!isOpen || !item) return null;
@@ -693,10 +736,10 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                               )
                             }
                           ].map((app) => (
-                            <a 
+                            <button 
                               key={app.name} 
-                              href={getUpiDeepLink(app.name)}
-                              className="flex items-center p-4 rounded-2xl border border-slate-100 hover:border-red-500 hover:bg-red-50/10 transition-all gap-4 group decoration-none"
+                              onClick={() => handleUpiRoute(app.name)}
+                              className="flex items-center p-4 rounded-2xl border border-slate-100 hover:border-red-500 hover:bg-red-50/10 transition-all gap-4 group decoration-none bg-white text-left w-full cursor-pointer"
                             >
                               <div className="h-10 w-10 rounded-xl bg-white flex items-center justify-center p-1.5 shadow-sm border border-slate-50 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
                                 {typeof app.icon === 'string' ? (
@@ -706,7 +749,7 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                                 )}
                               </div>
                               <span className="text-sm font-black text-slate-700">{app.name}</span>
-                            </a>
+                            </button>
                           ))}
                         </div>
                       </div>
