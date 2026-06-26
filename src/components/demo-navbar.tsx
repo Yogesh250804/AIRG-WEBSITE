@@ -20,7 +20,15 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Learning", href: "/#learning" },
+    { 
+      name: "Learning", 
+      href: "/#learning",
+      dropdown: [
+        { name: "Overview", href: "/#learning" },
+        { name: "PDET Lab", href: "/learning/pdet-lab" },
+        { name: "AI Infrastructures", href: "/learning/ai-infrastructures" }
+      ]
+    },
     { name: "Store", href: "/#store" },
     { name: "Innovation Labs", href: "/#labs" },
     { name: "Workshops", href: "/#workshops" },
@@ -47,13 +55,30 @@ export function Navbar() {
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex gap-6 xl:gap-8 items-center mr-auto">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href} 
-                className="nav-link font-semibold transition-colors text-xs uppercase tracking-widest text-[#1a1a2e]/40 hover:text-[#1a1a2e]"
-              >
-                {link.name}
-              </Link>
+              <div key={link.name} className="relative group py-6">
+                <Link 
+                  href={link.href} 
+                  className="nav-link font-semibold transition-colors text-xs uppercase tracking-widest text-[#1a1a2e]/40 hover:text-[#1a1a2e] flex items-center"
+                >
+                  {link.name}
+                  {link.dropdown && (
+                    <span className="material-symbols-outlined ml-1 text-[16px]">expand_more</span>
+                  )}
+                </Link>
+                {link.dropdown && (
+                  <div className="absolute left-0 top-full mt-0 hidden group-hover:flex flex-col bg-white/95 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.1)] rounded-xl border border-black/5 overflow-hidden w-56 z-50 transition-all">
+                    {link.dropdown.map((sublink) => (
+                      <Link
+                        key={sublink.name}
+                        href={sublink.href}
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap"
+                      >
+                        {sublink.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -143,16 +168,31 @@ export function Navbar() {
               transition={{ duration: 0.2 }}
               className="absolute inset-x-0 top-20 z-[99] lg:hidden bg-white/95 backdrop-blur-lg border-b border-black/5 shadow-lg p-6 flex flex-col gap-6"
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="text-left py-2 font-bold text-sm uppercase tracking-widest border-b border-black/5 transition-colors text-[#1a1a2e]/60 hover:text-[#1a1a2e]"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
+                  <div key={link.name} className="flex flex-col border-b border-black/5">
+                    <Link
+                      href={link.href}
+                      className="py-3 font-bold text-sm uppercase tracking-widest transition-colors text-[#1a1a2e]/60 hover:text-[#1a1a2e]"
+                      onClick={() => !link.dropdown && setMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                    {link.dropdown && (
+                      <div className="flex flex-col pl-4 pb-2 gap-2 border-l-2 border-primary/20 ml-2 mb-2">
+                        {link.dropdown.map((sublink) => (
+                          <Link
+                            key={sublink.name}
+                            href={sublink.href}
+                            className="py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {sublink.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
               

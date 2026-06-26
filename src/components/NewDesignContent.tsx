@@ -735,6 +735,41 @@ export default function NewDesignContent() {
                 workshops: 'Workshops',
                 centres: 'Global Centres'
               };
+              
+              if (item === 'learning') {
+                return (
+                  <div key={item} className="relative group py-6">
+                    <button
+                      className={`nav-link font-semibold transition-colors text-xs uppercase tracking-widest flex items-center ${activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/40 hover:text-[#1a1a2e]'}`}
+                      onClick={() => navigateTo(item)}
+                    >
+                      {labels[item]}
+                      <span className="material-symbols-outlined ml-1 text-[16px]">expand_more</span>
+                    </button>
+                    <div className="absolute left-0 top-full mt-0 hidden group-hover:flex flex-col bg-white/95 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.1)] rounded-xl border border-black/5 overflow-hidden w-56 z-50 transition-all text-left">
+                      <button
+                        onClick={() => navigateTo('learning')}
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left"
+                      >
+                        Overview
+                      </button>
+                      <Link
+                        href="/learning/pdet-lab"
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
+                      >
+                        PDET Lab
+                      </Link>
+                      <Link
+                        href="/learning/ai-infrastructures"
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
+                      >
+                        AI Infrastructures
+                      </Link>
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <button
                   key={item}
@@ -843,6 +878,49 @@ export default function NewDesignContent() {
                     workshops: 'Workshops',
                     centres: 'Global Centres'
                   };
+                  
+                  if (item === 'learning') {
+                    return (
+                      <div key={item} className="flex flex-col border-b border-black/5">
+                        <button
+                          className={`text-left py-2 font-bold text-sm uppercase tracking-widest transition-colors ${
+                            activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/60 hover:text-[#1a1a2e]'
+                          }`}
+                          onClick={() => {
+                            navigateTo(item);
+                          }}
+                        >
+                          {labels[item]}
+                        </button>
+                        <div className="flex flex-col pl-4 pb-2 gap-2 border-l-2 border-primary/20 ml-2 mb-2">
+                          <button
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
+                            onClick={() => {
+                              navigateTo('learning');
+                              setIsMobileMenuOpen(false);
+                            }}
+                          >
+                            Overview
+                          </button>
+                          <Link
+                            href="/learning/pdet-lab"
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            PDET Lab
+                          </Link>
+                          <Link
+                            href="/learning/ai-infrastructures"
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            AI Infrastructures
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  }
+
                   return (
                     <button
                       key={item}
