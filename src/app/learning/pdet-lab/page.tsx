@@ -2,120 +2,192 @@
 
 import { Navbar } from "@/components/demo-navbar";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function PDETLabPage() {
   const [activeZone, setActiveZone] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const zones = [
+  const labImages = [
+    "/indian_pdet_lab.png"
+  ];
+
+  useEffect(() => {
+    if (labImages.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % labImages.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [labImages.length]);
+
+  useEffect(() => {
+    fetch("/api/copy-pdet-image").catch(() => {});
+  }, []);
+
+  // Initialize state with default items and unit costs to calculate totals dynamically
+  const [zones, setZones] = useState([
     {
       name: "Electronics & IoT Development Zone",
       icon: "memory",
+      image: "/lab-electronics.png",
       items: [
-        { name: "Arduino Development Kits (Nano, Uno, Mega)", qty: 40, cost: "90,000" },
-        { name: "IoT Development Boards (ESP8266 to ESP32)", qty: 30, cost: "35,000" },
-        { name: "Raspberry Pi 4 Kits", qty: 10, cost: "80,000" },
-        { name: "Sensor Kits (Multiple Sensors)", qty: 20, cost: "95,000" },
-        { name: "Basic Electronic Components & Tools", qty: "1 Lot", cost: "50,000" }
-      ],
-      total: "3,50,000"
+        { name: "Arduino Development Kits (Nano, Uno, Mega)", qty: 40, unitCost: 2250, isLot: false },
+        { name: "IoT Development Boards (ESP8266 to ESP32)", qty: 30, unitCost: 1166, isLot: false },
+        { name: "Raspberry Pi 4 Kits", qty: 10, unitCost: 8000, isLot: false },
+        { name: "Sensor Kits (Multiple Sensors)", qty: 20, unitCost: 4750, isLot: false },
+        { name: "Basic Electronic Components & Tools", qty: 1, unitCost: 50000, isLot: true }
+      ]
     },
     {
       name: "3D Printing & Product Development Zone",
       icon: "print",
+      image: "/lab-3dprinting.png",
       items: [
-        { name: "FDM 3D Printers (Creality Ender/Prusa)", qty: 3, cost: "1,20,000" },
-        { name: "Resin 3D Printer (Anycubic/Elegoo)", qty: 1, cost: "60,000" },
-        { name: "Filaments & Resins (PLA, ABS, TPU)", qty: "1 Lot", cost: "40,000" },
-        { name: "Post-Processing Tools", qty: "1 Lot", cost: "25,000" }
-      ],
-      total: "2,45,000"
+        { name: "FDM 3D Printers (Creality Ender/Prusa)", qty: 3, unitCost: 40000, isLot: false },
+        { name: "Resin 3D Printer (Anycubic/Elegoo)", qty: 1, unitCost: 60000, isLot: false },
+        { name: "Filaments & Resins (PLA, ABS, TPU)", qty: 1, unitCost: 40000, isLot: true },
+        { name: "Post-Processing Tools", qty: 1, unitCost: 25000, isLot: true }
+      ]
     },
     {
       name: "Drone Technology Zone",
       icon: "flight",
+      image: "/lab-drone.png",
       items: [
-        { name: "Custom Drone Assembly Kits", qty: 5, cost: "1,50,000" },
-        { name: "DJI Tello EDU Drones", qty: 5, cost: "80,000" },
-        { name: "Spare Parts (Motors, Props, Batteries)", qty: "1 Lot", cost: "40,000" },
-        { name: "Flight Controllers & Transmitters", qty: "1 Lot", cost: "50,000" }
-      ],
-      total: "3,20,000"
+        { name: "Custom Drone Assembly Kits", qty: 5, unitCost: 30000, isLot: false },
+        { name: "DJI Tello EDU Drones", qty: 5, unitCost: 16000, isLot: false },
+        { name: "Spare Parts (Motors, Props, Batteries)", qty: 1, unitCost: 40000, isLot: true },
+        { name: "Flight Controllers & Transmitters", qty: 1, unitCost: 50000, isLot: true }
+      ]
     },
     {
       name: "Virtual Reality & Computer Vision",
       icon: "visibility",
+      image: "/lab-vr.png",
       items: [
-        { name: "Meta Quest 3 VR Headsets", qty: 2, cost: "1,10,000" },
-        { name: "High-Performance Workstations", qty: 2, cost: "2,50,000" },
-        { name: "Intel RealSense Depth Cameras", qty: 2, cost: "70,000" },
-        { name: "Software Licenses & Assets", qty: "1 Lot", cost: "50,000" }
-      ],
-      total: "4,80,000"
+        { name: "Meta Quest 3 VR Headsets", qty: 2, unitCost: 55000, isLot: false },
+        { name: "High-Performance Workstations", qty: 2, unitCost: 125000, isLot: false },
+        { name: "Intel RealSense Depth Cameras", qty: 2, unitCost: 35000, isLot: false },
+        { name: "Software Licenses & Assets", qty: 1, unitCost: 50000, isLot: true }
+      ]
     },
     {
       name: "Artificial Intelligence Zone",
       icon: "smart_toy",
+      image: "/lab-ai.png",
       items: [
-        { name: "NVIDIA Jetson Nano Kits", qty: 10, cost: "1,50,000" },
-        { name: "NVIDIA Jetson Orin Nano", qty: 2, cost: "90,000" },
-        { name: "AI Edge Computing Nodes", qty: 2, cost: "1,20,000" },
-        { name: "Cloud GPU Credits", qty: "1 Lot", cost: "50,000" }
-      ],
-      total: "4,10,000"
+        { name: "NVIDIA Jetson Nano Kits", qty: 10, unitCost: 15000, isLot: false },
+        { name: "NVIDIA Jetson Orin Nano", qty: 2, unitCost: 45000, isLot: false },
+        { name: "AI Edge Computing Nodes", qty: 2, unitCost: 60000, isLot: false },
+        { name: "Cloud GPU Credits", qty: 1, unitCost: 50000, isLot: true }
+      ]
     },
     {
       name: "Robotics & Automation Zone",
       icon: "precision_manufacturing",
+      image: "/lab-robotics.png",
       items: [
-        { name: "Dobot Magician Robotic Arm", qty: 1, cost: "1,80,000" },
-        { name: "TurtleBot3 Burger/Waffle", qty: 2, cost: "1,50,000" },
-        { name: "Custom Rover Chassis & Motors", qty: 5, cost: "1,00,000" },
-        { name: "Pneumatic & Automation Kits", qty: "1 Lot", cost: "80,000" }
-      ],
-      total: "5,10,000"
+        { name: "Dobot Magician Robotic Arm", qty: 1, unitCost: 180000, isLot: false },
+        { name: "TurtleBot3 Burger/Waffle", qty: 2, unitCost: 75000, isLot: false },
+        { name: "Custom Rover Chassis & Motors", qty: 5, unitCost: 20000, isLot: false },
+        { name: "Pneumatic & Automation Kits", qty: 1, unitCost: 80000, isLot: true }
+      ]
     },
     {
       name: "Innovation & Smart Learning Zone",
       icon: "lightbulb",
+      image: "/lab-smartlearning.png",
       items: [
-        { name: "Interactive Smart Panel (86”)", qty: 1, cost: "1,60,000" },
-        { name: "Lab Branding & Posters", qty: "1 Lot", cost: "50,000" }
-      ],
-      total: "2,10,000"
+        { name: "Interactive Smart Panel (86”)", qty: 1, unitCost: 160000, isLot: false },
+        { name: "Lab Branding & Posters", qty: 1, unitCost: 50000, isLot: true }
+      ]
     }
-  ];
+  ]);
+
+  const updateQuantity = (zoneIdx: number, itemIdx: number, delta: number) => {
+    setZones(prevZones => {
+      const newZones = JSON.parse(JSON.stringify(prevZones));
+      const item = newZones[zoneIdx].items[itemIdx];
+      item.qty = Math.max(0, item.qty + delta);
+      return newZones;
+    });
+  };
+
+  const calculateZoneTotal = (zoneIdx: number) => {
+    return zones[zoneIdx].items.reduce((sum, item) => sum + (item.qty * item.unitCost), 0);
+  };
+
+  const calculateGrandTotal = () => {
+    return zones.reduce((sum, _, zoneIdx) => sum + calculateZoneTotal(zoneIdx), 0);
+  };
+
+  const formatCurrency = (amount: number) => {
+    return amount.toLocaleString("en-IN");
+  };
 
   const processSteps = [
     {
       step: "01",
       title: "Consultation & Lab Design",
-      desc: "We analyze your campus space and tailor a custom lab architecture to fit your institution's specific goals."
+      desc: "We analyze your campus space and tailor a custom lab architecture to fit your institution's specific goals.",
+      image: "/lab-robotics.png"
     },
     {
       step: "02",
       title: "Hardware Procurement",
-      desc: "Our team sources and delivers premium, industry-standard equipment directly to your campus."
+      desc: "Our team sources and delivers premium, industry-standard equipment directly to your campus.",
+      image: "/robotics-kit.png"
     },
     {
       step: "03",
       title: "Installation & Setup",
-      desc: "AIR G engineers install all hardware, networking, and software, ensuring a seamless plug-and-play environment."
+      desc: "AIR G engineers install all hardware, networking, and software, ensuring a seamless plug-and-play environment.",
+      image: "/lab-electronics.png"
     },
     {
       step: "04",
       title: "Faculty Training",
-      desc: "We conduct hands-on training for your faculty to ensure they can confidently deliver the Industry 4.0 curriculum."
+      desc: "We conduct hands-on training for your faculty to ensure they can confidently deliver the Industry 4.0 curriculum.",
+      image: "/indian_pdet_lab.png"
     }
   ];
 
   return (
-    <main className="min-h-screen bg-white selection:bg-primary/20 selection:text-primary overflow-x-hidden text-[#111827]">
+    <main className="relative min-h-screen bg-white selection:bg-primary/20 selection:text-primary overflow-x-hidden text-[#111827]">
       <Navbar />
+
+      {/* Scattered Technical HUD Telemetry Decors on Left & Right Margins */}
+      <div className="absolute left-6 top-[20%] font-mono text-[9px] text-primary/30 uppercase tracking-[0.25em] space-y-4 select-none pointer-events-none hidden xl:block z-20">
+        <div className="space-y-1">
+          <div>[ DEPLOYMENT ACTIVE ]</div>
+          <div className="text-[#111827]/25">// LAT_COORD: 28.6139° N</div>
+          <div className="text-[#111827]/25">// LONG_COORD: 77.2090° E</div>
+        </div>
+        <div className="h-[100px] w-[1px] bg-gradient-to-b from-primary/30 to-transparent ml-2" />
+        <div className="space-y-1">
+          <div>[ HUB STATE: ONLINE ]</div>
+          <div className="text-[#111827]/25">NODE ID: AIG-DEL-04</div>
+          <div className="text-[#111827]/25">FREQ: 5.8 GHZ</div>
+        </div>
+      </div>
+
+      <div className="absolute right-6 top-[35%] font-mono text-[9px] text-[#1a1a2e]/30 uppercase tracking-[0.25em] space-y-4 select-none pointer-events-none hidden xl:block z-20">
+        <div className="space-y-1 text-right">
+          <div>[ SYSTEM STATUS ]</div>
+          <div className="text-[#111827]/20">CPU: 42.8% @ 4.2GHZ</div>
+          <div className="text-[#111827]/20">MEM: 12.4GB / 32GB</div>
+        </div>
+        <div className="h-[100px] w-[1px] bg-gradient-to-b from-[#1a1a2e]/20 to-transparent mr-2 ml-auto" />
+        <div className="space-y-1 text-right">
+          <div>[ TELEMETRY NETWORK ]</div>
+          <div className="text-[#111827]/20">PACKETS: 99.4% OK</div>
+          <div className="text-[#111827]/20">LINK: SECURE SSH</div>
+        </div>
+      </div>
       
       {/* Hero Section */}
       <div className="pt-32 pb-24 relative overflow-hidden bg-[#fafafa]">
-        <div className="max-w-[1200px] mx-auto px-6 relative z-10">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             
             {/* Left Content */}
@@ -130,16 +202,16 @@ export default function PDETLabPage() {
                   Premium Offering
                 </div>
                 
-                <h1 className="text-5xl md:text-6xl lg:text-[72px] font-black tracking-tighter leading-[1.05] mb-8 text-[#0a0a14]">
-                  PROTOTYPE <br/>
-                  DEVELOPMENT & <br/>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#ff4b5c]">EMERGING TECH</span> LAB
+                <h1 className="font-headline text-5xl md:text-6xl lg:text-[72px] font-black tracking-tighter leading-[0.95] mb-8 uppercase text-[#0a0a14] text-left">
+                  Prototype <br/>
+                  Development &amp; <br/>
+                  <span className="text-primary text-glow-red">Emerging Tech Lab</span>
                 </h1>
                 
                 <p className="text-xl md:text-2xl text-[#111827]/60 font-medium leading-relaxed mb-10 max-w-xl">
                   A state-of-the-art laboratory designed to transform innovative ideas into real-world industrial prototypes.
                 </p>
-
+ 
                 <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-[#111827]/40">
                   <span>Design</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
@@ -151,21 +223,42 @@ export default function PDETLabPage() {
                 </div>
               </motion.div>
             </div>
-
-            {/* Right Graphic (AI Generated Image) */}
+ 
+            {/* Right Graphic (Dynamic Indian Lab Slideshow) */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 w-full relative"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent mix-blend-overlay z-10 pointer-events-none" />
-                <img 
-                  src="/pdet-hero.png" 
-                  alt="Futuristic AI Lab" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative bg-gray-100">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-overlay z-10 pointer-events-none" />
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={currentImageIndex}
+                    src={labImages[currentImageIndex]} 
+                    alt="AIR G Indian Innovation Lab" 
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+                {/* Dots indicator at the bottom */}
+                {labImages.length > 1 && (
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                    {labImages.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentImageIndex(idx)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          currentImageIndex === idx ? "bg-primary w-5" : "bg-white/50 hover:bg-white"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
@@ -174,126 +267,300 @@ export default function PDETLabPage() {
 
       {/* Vision Statement */}
       <div className="py-32 bg-[#0a0a14] text-white text-center px-6 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/20 rounded-full blur-[120px] pointer-events-none" />
-        <div className="max-w-[900px] mx-auto relative z-10">
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
+        {/* Glowing background shapes */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-10 left-10 w-[200px] h-[200px] bg-[#ff4b5c]/5 rounded-full blur-[80px] pointer-events-none" />
+        
+        {/* Honeycomb grid overlay */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+          backgroundImage: `radial-gradient(circle, rgba(238,44,60,0.15) 1px, transparent 1px), 
+                            linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px), 
+                            linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px)`,
+          backgroundSize: '24px 24px, 48px 48px, 48px 48px'
+        }}></div>
+
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold leading-tight"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="glass-premium border border-white/10 bg-white/[0.04] backdrop-blur-md p-10 md:p-16 rounded-[3.5rem] relative overflow-hidden shadow-2xl group text-left"
           >
-            "The PDET Lab provides students with hands-on exposure to Industry 4.0 and 5.0 technologies, enabling them to transform innovative ideas into real-world prototypes while developing problem-solving and entrepreneurship skills."
-          </motion.h2>
+            {/* Top diagnostic element */}
+            <div className="flex justify-between items-center mb-10 font-mono text-[9px] text-white/40 uppercase tracking-widest border-b border-white/5 pb-4 select-none">
+              <div>// OBJECTIVE: SKILLS TRANSFORMATION</div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                <span>ENGAGEMENT ACTIVE</span>
+              </div>
+            </div>
+            
+            <h2 className="text-2xl md:text-3.5xl lg:text-[38px] font-black leading-[1.4] tracking-tight text-white/95 relative z-10 font-headline">
+              "The <span className="text-primary text-glow-red font-black">PDET Lab</span> provides students with hands-on exposure to <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#ff4b5c] font-black">Industry 4.0 and 5.0</span> technologies, enabling them to transform innovative ideas into <span className="text-white font-black border-b-2 border-primary/60 pb-1">real-world prototypes</span> while developing <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-primary/80 font-black">problem-solving &amp; entrepreneurship</span> skills."
+            </h2>
+
+            {/* Bottom Accent lines */}
+            <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+          </motion.div>
         </div>
       </div>
 
-      {/* The 7 Innovation Zones (Interactive Sidebar Layout) */}
-      <div className="py-24 bg-white border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-6">
+      {/* The 7 Innovation Zones — Immersive Dark Experience */}
+      <div className="relative py-28 overflow-hidden" style={{ background: 'linear-gradient(165deg, #0a0a14 0%, #111827 40%, #1a1028 70%, #0f172a 100%)' }}>
+        {/* Ambient Background Effects */}
+        <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[150px] pointer-events-none animate-pulse" />
+        <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-indigo-500/6 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-400/4 rounded-full blur-[100px] pointer-events-none" />
+        
+        {/* Grid Pattern Overlay */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }}
+        />
+
+        <div className="max-w-[1650px] mx-auto px-6 md:px-16 relative z-10">
+          {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">The 7 Innovation Zones</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-[#ff4b5c] mx-auto rounded-full" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-primary text-xs font-bold uppercase tracking-[0.2em] mb-6">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                Lab Infrastructure
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase font-headline">The 7 Innovation Zones</h2>
+              <p className="text-white/40 text-lg font-medium max-w-xl mx-auto">Select a zone to explore its equipment and customize quantities for your lab</p>
+            </motion.div>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-12">
-            {/* Sidebar */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-2">
+          {/* Grid Layout: Left sidebar selector, Right content viewer */}
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Left Column: Vertical Selector Grid (lg:col-span-4) */}
+            <div className="lg:col-span-4 space-y-3.5 max-h-[700px] overflow-y-auto pr-2 custom-scrollbar">
               {zones.map((zone, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActiveZone(idx)}
-                  className={`text-left px-6 py-5 rounded-2xl flex items-center gap-4 transition-all ${
-                    activeZone === idx 
-                      ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-[1.02]' 
-                      : 'hover:bg-gray-50 bg-white border border-gray-100 text-[#111827]/70 hover:text-[#111827]'
+                  className={`w-full group relative flex items-center gap-4 p-4.5 rounded-[2rem] text-left transition-all duration-300 border select-none ${
+                    activeZone === idx
+                      ? 'bg-primary text-white border-primary shadow-[0_0_30px_rgba(225,27,34,0.25)] scale-[1.02]'
+                      : 'bg-white/[0.03] text-white/60 border-white/[0.05] hover:bg-white/[0.07] hover:text-white hover:border-white/10'
                   }`}
                 >
-                  <span className={`material-symbols-outlined text-2xl ${activeZone === idx ? 'text-white' : 'text-primary'}`}>
-                    {zone.icon}
-                  </span>
-                  <span className={`font-bold text-sm md:text-base leading-snug ${activeZone === idx ? 'text-white' : 'text-[#111827]'}`}>
-                    {zone.name}
-                  </span>
+                  {/* Glowing selection indicator */}
+                  {activeZone === idx && (
+                    <div className="absolute right-4 w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+                  )}
+
+                  {/* Icon Panel */}
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors shrink-0 ${
+                    activeZone === idx ? 'bg-white/15 text-white' : 'bg-white/[0.06] text-primary group-hover:bg-white/10'
+                  }`}>
+                    <span className="material-symbols-outlined text-xl">{zone.icon}</span>
+                  </div>
+
+                  {/* Zone text */}
+                  <div>
+                    <span className={`font-mono text-[8px] uppercase tracking-widest font-black block mb-0.5 ${
+                      activeZone === idx ? 'text-white/60' : 'text-primary'
+                    }`}>
+                      Zone {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="font-bold text-sm tracking-tight leading-snug">{zone.name}</h3>
+                  </div>
                 </button>
               ))}
             </div>
 
-            {/* Content Area */}
-            <div className="w-full lg:w-2/3">
+            {/* Right Column: Immersive Content Viewer (lg:col-span-8) */}
+            <div className="lg:col-span-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeZone}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-[#fafafa] border border-gray-100 rounded-3xl p-8 md:p-10"
+                  initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -16, scale: 0.98 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="w-full"
                 >
-                  <div className="flex items-center gap-4 mb-10">
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
-                      <span className="material-symbols-outlined text-4xl">{zones[activeZone].icon}</span>
+                  {/* Zone Image Banner */}
+                  <div className="relative rounded-[2.5rem] overflow-hidden mb-8 aspect-[21/9] group border border-white/5">
+                    <img 
+                      src={zones[activeZone].image} 
+                      alt={zones[activeZone].name}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 flex items-end gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/90 backdrop-blur-sm flex items-center justify-center shadow-lg shrink-0">
+                        <span className="material-symbols-outlined text-white text-2xl">{zones[activeZone].icon}</span>
+                      </div>
+                      <div className="text-left">
+                        <h3 className="text-xl md:text-2xl font-black text-white tracking-tight drop-shadow-lg uppercase font-headline">{zones[activeZone].name}</h3>
+                        <p className="text-white/60 text-xs font-medium mt-0.5">{zones[activeZone].items.length} items configured · Customize quantities below</p>
+                      </div>
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-bold">{zones[activeZone].name}</h3>
                   </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="border-b-2 border-gray-200">
-                          <th className="py-4 px-4 font-bold text-gray-500 uppercase tracking-wider text-sm">Equipment</th>
-                          <th className="py-4 px-4 font-bold text-gray-500 uppercase tracking-wider text-sm w-24">Qty</th>
-                          <th className="py-4 px-4 font-bold text-gray-500 uppercase tracking-wider text-sm w-32 text-right">Cost (₹)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {zones[activeZone].items.map((item, i) => (
-                          <tr key={i} className="border-b border-gray-100 hover:bg-white transition-colors">
-                            <td className="py-5 px-4 font-medium text-gray-900">{item.name}</td>
-                            <td className="py-5 px-4 text-gray-600 font-medium">{item.qty}</td>
-                            <td className="py-5 px-4 text-right font-bold text-gray-900">{item.cost}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                      <tfoot>
-                        <tr className="bg-primary/5">
-                          <td colSpan={2} className="py-6 px-4 font-bold text-lg text-primary uppercase tracking-wider">Estimated Zone Total</td>
-                          <td className="py-6 px-4 text-right font-black text-xl text-primary">₹{zones[activeZone].total}</td>
-                        </tr>
-                      </tfoot>
-                    </table>
+                  {/* Equipment Items Table */}
+                  <div className="space-y-3">
+                    {zones[activeZone].items.map((item, i) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.35, delay: i * 0.05 }}
+                        className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/20 transition-all duration-300 overflow-hidden"
+                      >
+                        {/* Hover Glow Effect */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                          <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-primary/5 to-transparent" />
+                        </div>
+
+                        <div className="relative z-10 flex items-center justify-between gap-4 p-5 md:p-6 text-left">
+                          {/* Left: Number Badge + Name */}
+                          <div className="flex items-center gap-4 min-w-0">
+                            <div className="w-9 h-9 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center shrink-0">
+                              <span className="text-white/30 text-xs font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                            </div>
+                            <div className="min-w-0">
+                              <span className="font-semibold text-white/90 text-[15px] leading-snug block truncate">
+                                {item.name}
+                              </span>
+                              {item.isLot && (
+                                <span className="text-xs text-primary/60 font-medium mt-0.5 block">Bundled Package</span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Right: Quantity Control */}
+                          <div className="flex items-center gap-0 shrink-0 rounded-xl border border-white/[0.08] bg-white/[0.03] overflow-hidden">
+                            <button
+                              onClick={() => updateQuantity(activeZone, i, -1)}
+                              className="w-11 h-11 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200 select-none active:scale-90 border-r border-white/[0.06]"
+                            >
+                              <span className="material-symbols-outlined text-lg">remove</span>
+                            </button>
+                            <span className="w-16 text-center font-bold text-white text-sm tabular-nums px-2">
+                              {item.isLot ? `${item.qty} Lot${item.qty > 1 ? 's' : ''}` : item.qty}
+                            </span>
+                            <button
+                              onClick={() => updateQuantity(activeZone, i, 1)}
+                              className="w-11 h-11 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200 select-none active:scale-90 border-l border-white/[0.06]"
+                            >
+                              <span className="material-symbols-outlined text-lg">add</span>
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Zone Checkout Summary Panel */}
+                  <div className="mt-8 flex justify-end">
+                    <button 
+                      onClick={() => {
+                        const target = document.getElementById("proposal-section");
+                        if (target) {
+                          target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="w-full sm:w-auto px-10 py-5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-2xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-3 select-none"
+                    >
+                      <span>Checkout Configuration</span>
+                      <span className="material-symbols-outlined text-sm">shopping_cart</span>
+                    </button>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
+
           </div>
         </div>
       </div>
 
+
+
       {/* Deployment Process Timeline */}
-      <div className="py-24 bg-[#fafafa]">
-        <div className="max-w-[1000px] mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">The AIR G Deployment Process</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-[#ff4b5c] mx-auto rounded-full" />
-            <p className="mt-6 text-gray-500 font-medium max-w-2xl mx-auto">A fully managed, white-glove service from procurement to curriculum integration.</p>
+      <div className="py-32 bg-[#fafafa] relative overflow-hidden">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{
+          backgroundImage: `radial-gradient(circle, #EE2C3C 1px, transparent 1px)`,
+          backgroundSize: '24px 24px'
+        }}></div>
+
+        <div className="max-w-[1550px] mx-auto px-6 md:px-16 relative z-10">
+          <div className="text-center mb-24 space-y-4">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em] mb-2">
+              <span className="w-2 h-2 rounded-full bg-primary" />
+              IMPLEMENTATION ROADMAP
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-[#0a0a14] tracking-tight uppercase font-headline">
+              The AIR G <span className="text-primary text-glow-red">Deployment</span> Process
+            </h2>
+            <p className="text-[#111827]/50 font-medium max-w-xl mx-auto">
+              A fully managed, white-glove service from procurement to curriculum integration.
+            </p>
           </div>
 
           <div className="relative">
-            {/* Vertical Line */}
-            <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 md:-translate-x-1/2 rounded-full" />
+            {/* High-tech Gradient Timeline Line */}
+            <div className="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#ff4b5c]/50 to-[#EE2C3C]/10 md:-translate-x-1/2 rounded-full" />
             
-            <div className="space-y-12">
+            <div className="space-y-16">
               {processSteps.map((step, idx) => (
-                <div key={idx} className={`flex flex-col md:flex-row gap-8 items-start md:items-center relative z-10 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                  <div className="w-14 h-14 shrink-0 bg-primary rounded-full flex items-center justify-center text-white font-black shadow-lg shadow-primary/30 border-4 border-[#fafafa] relative md:absolute md:left-1/2 md:-translate-x-1/2">
-                    {step.step}
+                <div key={idx} className={`flex flex-col md:flex-row gap-6 md:gap-0 items-center relative z-10 ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                  
+                  {/* Text Card Section */}
+                  <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${idx % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                    <motion.div 
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? 30 : -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: idx * 0.05 }}
+                      className="glass-premium p-8 md:p-10 rounded-[2.5rem] border border-black/5 bg-white hover:border-primary/20 hover:shadow-[0_20px_40px_rgba(238,44,60,0.04)] transition-all duration-300 relative group text-left"
+                    >
+                      {/* Interactive edge glow */}
+                      <div className="absolute inset-y-0 w-[4px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-full" style={{
+                        left: idx % 2 === 0 ? 'auto' : '0px',
+                        right: idx % 2 === 0 ? '0px' : 'auto'
+                      }} />
+                      
+                      <div className="space-y-3">
+                        <span className="font-mono text-[9px] text-primary tracking-widest uppercase font-black">// STAGE {step.step}</span>
+                        <h3 className="text-xl md:text-2xl font-black text-[#0a0a14] uppercase tracking-tight font-headline">{step.title}</h3>
+                        <p className="text-sm text-[#111827]/50 font-light leading-relaxed">{step.desc}</p>
+                      </div>
+                    </motion.div>
                   </div>
-                  <div className={`w-full md:w-1/2 pl-20 md:pl-0 ${idx % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                      <h3 className="text-2xl font-bold mb-3">{step.title}</h3>
-                      <p className="text-gray-500 leading-relaxed">{step.desc}</p>
-                    </div>
+
+                  {/* Glowing Node Badge (Center) */}
+                  <div className="absolute left-[28px] md:left-1/2 w-14 h-14 shrink-0 bg-[#0a0a14] text-white rounded-full flex items-center justify-center font-mono font-bold shadow-[0_0_20px_rgba(238,44,60,0.15)] border-[3px] border-[#EE2C3C] md:-translate-x-1/2 z-20">
+                    <span className="text-[#EE2C3C] text-glow-red text-sm font-black">{step.step}</span>
                   </div>
+
+                  {/* Image Card Section (Opposite side) */}
+                  <div className={`w-full md:w-1/2 pl-16 md:pl-0 ${idx % 2 === 0 ? 'md:pl-16' : 'md:pr-16'} mt-4 md:mt-0`}>
+                    <motion.div
+                      initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: idx * 0.1 }}
+                      className="aspect-[16/9] rounded-[2.5rem] overflow-hidden shadow-lg border border-black/5 hover:border-primary/20 transition-all duration-300 group bg-gray-50 relative"
+                    >
+                      <img 
+                        src={step.image} 
+                        alt={step.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+                    </motion.div>
+                  </div>
+
                 </div>
               ))}
             </div>
@@ -302,8 +569,8 @@ export default function PDETLabPage() {
       </div>
 
       {/* ROI & Proposal Section */}
-      <div className="py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-6">
+      <div id="proposal-section" className="py-24 bg-white">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16">
           <div className="bg-[#0a0a14] rounded-[40px] overflow-hidden flex flex-col md:flex-row">
             <div className="p-12 md:p-16 flex-1 flex flex-col justify-center">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why This Investment Matters</h2>
@@ -324,9 +591,9 @@ export default function PDETLabPage() {
               </ul>
             </div>
             
-            <div className="bg-primary p-12 md:p-16 md:w-[400px] flex flex-col justify-center text-center text-white">
+            <div className="bg-primary p-12 md:p-16 md:w-[420px] flex flex-col justify-center text-center text-white">
               <span className="uppercase tracking-widest text-sm font-bold opacity-80 mb-4">Total Estimated Investment</span>
-              <div className="text-5xl font-black mb-2">₹25.2 L</div>
+              <div className="text-4xl font-black mb-2 whitespace-nowrap">₹{formatCurrency(calculateGrandTotal())}</div>
               <span className="opacity-80 mb-10 text-sm">Excluding taxes & logistics</span>
               
               <button 
