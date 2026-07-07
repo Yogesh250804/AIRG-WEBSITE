@@ -1764,10 +1764,10 @@ export default function NewDesignContent() {
                         
                         {/* Static Footer - always visible, never transitions */}
                         <div className="flex justify-end gap-3 pt-8 border-t border-black/5 mt-6">
-                          <a href="/global-centres" className="group px-6 py-3 border border-black/10 hover:border-[#1a1a2e] hover:bg-slate-50 text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2">
+                          <button onClick={() => navigateTo('centres')} className="group px-6 py-3 border border-black/10 hover:border-[#1a1a2e] hover:bg-slate-50 text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2">
                             <span>See on Map</span>
                             <MapPin size={14} />
-                          </a>
+                          </button>
                           <a href="https://wa.me/919860779172?text=Hello%2C%20I%20am%20interested%20in%20setting%20up%20an%20AIR%20G%20Hub.%20Please%20share%20more%20details." target="_blank" rel="noopener noreferrer" className="group px-6 py-3 bg-[#1a1a2e] hover:bg-primary !text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2">
                             <span className="!text-white">Request Hub Setup</span>
                             <ArrowRight size={14} className="!text-white group-hover:translate-x-1 transition-transform" />
@@ -2025,13 +2025,13 @@ export default function NewDesignContent() {
                     </p>
 
                     <div className="flex flex-wrap gap-4 justify-center pt-4">
-                      <Link href="/#contact" className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" style={{ color: '#ffffff' }}>
+                      <Link href="/contact" className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" style={{ color: '#ffffff' }}>
                         <span className="relative z-10 flex items-center gap-2">Become A Partner</span>
                       </Link>
-                      <Link href="/#contact" className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2">
+                      <a href="https://wa.me/919860779172?text=Hello%2C%20I%20am%20interested%20in%20partnering%20with%20AIR%20G%20International.%20Please%20share%20more%20details." target="_blank" rel="noopener noreferrer" className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2">
                         <span>Talk To Our Team</span>
                         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </section>
@@ -2039,58 +2039,7 @@ export default function NewDesignContent() {
 
 
 
-              {/* TRUSTED ACROSS INDIA SECTION */}
-              <div className="w-full pt-10 pb-10 relative z-10 bg-white overflow-hidden">
-                {/* Soft futuristic grid background */}
-                <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '30px 30px' }}></div>
-                
-                <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 space-y-12">
-                  {/* Header */}
-                  <div className="relative text-center max-w-3xl mx-auto space-y-3">
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // National Credibility</span>
-                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
-                      Trusted Across <span className="text-primary text-glow-red">India</span>
-                    </h2>
-                    <p className="text-sm md:text-base text-[#1a1a2e]/50 font-light leading-relaxed max-w-2xl mx-auto">
-                      Building future-ready institutions through AI, Robotics, Innovation Labs, and industry-focused learning programs.
-                    </p>
-                  </div>
 
-                  {/* 4 Stats Cards */}
-                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                    {[
-                      { val: 50000, suffix: "+", label: "Students Trained" },
-                      { val: 25, suffix: "+", label: "Innovation Labs" },
-                      { val: 3, suffix: "", label: "States Covered" },
-                      { val: 100, suffix: "+", label: "Workshops Conducted" }
-                    ].map((stat, i) => (
-                      <div key={i} className="group relative glass-premium p-6 sm:p-8 rounded-[2rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_15px_30px_rgba(238,44,60,0.04)] transition-all duration-300 flex flex-col items-center justify-center text-center overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                        <div className="relative z-10 space-y-2">
-                          <span className="block text-4xl sm:text-5xl font-headline font-black text-[#EE2C3C] tracking-tighter group-hover:scale-105 transition-transform duration-300 text-glow-red">
-                            <CountUpNumber value={stat.val} suffix={stat.suffix} />
-                          </span>
-                          <span className="block text-[10px] sm:text-xs uppercase tracking-widest font-black text-[#1a1a2e]/60 font-mono">
-                            {stat.label}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Bottom CTA Button */}
-                  <div className="flex justify-center pt-4">
-                    <button className="group relative px-8 py-4 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red" onClick={() => window.location.href = '/contact'}>
-                      <span className="relative z-10 flex items-center gap-3">Get Free Consultation <span className="material-symbols-outlined text-sm">bolt</span></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* PREMIUM GRADIENT DIVIDER LINE */}
-              <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 relative z-10 bg-white">
-                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/30 to-transparent" />
-              </div>
 
               {/* GALLERY / SLIDING IMAGES (Full Width Section) */}
               <div className="w-full py-6 space-y-8 relative z-10 bg-white">
