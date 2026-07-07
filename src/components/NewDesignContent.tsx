@@ -1339,6 +1339,102 @@ export default function NewDesignContent() {
                   </motion.div>
                 </div>
               </div>
+              {/* SECTION 3: TRUSTED BY INDUSTRY & ACADEMIA — Right after hero */}
+              <section className="w-full relative z-10 max-w-[1440px] mx-auto py-20 space-y-16 overflow-hidden bg-white">
+                <div className="text-center max-w-3xl mx-auto space-y-3 px-6 md:px-20">
+                  <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">02 // Partner Network</span>
+                  <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+                    Trusted By Industry & <span className="text-primary text-glow-red">Academia</span>
+                  </h2>
+                  <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
+                    We work closely with global leaders and state institutions to develop standardized deep tech models.
+                  </p>
+                </div>
+
+                {/* Custom CSS for seamless marquee movement */}
+                <style dangerouslySetInnerHTML={{__html: `
+                  @keyframes marquee-left {
+                    0% { transform: translateX(0%); }
+                    100% { transform: translateX(-50%); }
+                  }
+                  @keyframes marquee-right {
+                    0% { transform: translateX(-50%); }
+                    100% { transform: translateX(0%); }
+                  }
+                  .animate-marquee-left {
+                    display: flex;
+                    width: max-content;
+                    animation: marquee-left 30s linear infinite;
+                  }
+                  .animate-marquee-right {
+                    display: flex;
+                    width: max-content;
+                    animation: marquee-right 30s linear infinite;
+                  }
+                `}} />
+
+                <div className="space-y-8 relative py-4">
+                  {/* Row 1: Moving Left */}
+                  <div 
+                    className="flex overflow-hidden w-full"
+                    style={{
+                      WebkitMaskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)",
+                      maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)"
+                    }}
+                  >
+                    <div className="animate-marquee-left gap-6 pr-6">
+                      {[...row1, ...row1, ...row1].map((partner, index) => (
+                        <div key={index} className="flex-shrink-0 w-32 h-16 sm:w-52 sm:h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-xl sm:rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
+                          <img 
+                            src={partner.logo} 
+                            alt={partner.name} 
+                            style={{ transform: `scale(${partner.scaleVal || 1.18})` }}
+                            className="max-w-[95%] max-h-[90%] object-contain transition-all duration-300"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              if (target.src.includes(".png")) {
+                                target.src = target.src.replace(".png", ".jpeg");
+                              } else if (target.src.includes(".jpeg")) {
+                                target.src = target.src.replace(".jpeg", ".jpg");
+                              }
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Row 2: Moving Right */}
+                  <div 
+                    className="flex overflow-hidden w-full"
+                    style={{
+                      WebkitMaskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)",
+                      maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)"
+                    }}
+                  >
+                    <div className="animate-marquee-right gap-6 pr-6">
+                      {[...row2, ...row2, ...row2].map((partner, index) => (
+                        <div key={index} className="flex-shrink-0 w-32 h-16 sm:w-52 sm:h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-xl sm:rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
+                          <img 
+                            src={partner.logo} 
+                            alt={partner.name} 
+                            style={{ transform: `scale(${partner.scaleVal || 1.18})` }}
+                            className="max-w-[95%] max-h-[90%] object-contain transition-all duration-300"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              if (target.src.includes(".png")) {
+                                target.src = target.src.replace(".png", ".jpeg");
+                              } else if (target.src.includes(".jpeg")) {
+                                target.src = target.src.replace(".jpeg", ".jpg");
+                              }
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
 
               {/* EXPLORE OUR IMPACT / ACHIEVEMENTS & PARTNERS CONTENT */}
               <div className="w-full pt-10 pb-8 relative z-10 bg-white overflow-hidden text-left">
@@ -1370,113 +1466,6 @@ export default function NewDesignContent() {
                   </div>
                 </section>
 
-                {/* PREMIUM GRADIENT DIVIDER LINE */}
-                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
-                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
-                </div>
-
-                {/* SECTION 3: TRUSTED BY INDUSTRY & ACADEMIA */}
-                <section className="relative z-10 w-full max-w-[1440px] mx-auto py-24 space-y-16 overflow-hidden">
-                  <div className="text-center max-w-3xl mx-auto space-y-3 px-6 md:px-20">
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">02 // Partner Network</span>
-                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
-                      Trusted By Industry & <span className="text-primary text-glow-red">Academia</span>
-                    </h2>
-                    <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
-                      We work closely with global leaders and state institutions to develop standardized deep tech models.
-                    </p>
-                  </div>
-
-                  {/* Custom CSS for seamless marquee movement */}
-                  <style dangerouslySetInnerHTML={{__html: `
-                    @keyframes marquee-left {
-                      0% { transform: translateX(0%); }
-                      100% { transform: translateX(-50%); }
-                    }
-                    @keyframes marquee-right {
-                      0% { transform: translateX(-50%); }
-                      100% { transform: translateX(0%); }
-                    }
-                    .animate-marquee-left {
-                      display: flex;
-                      width: max-content;
-                      animation: marquee-left 30s linear infinite;
-                    }
-                    .animate-marquee-right {
-                      display: flex;
-                      width: max-content;
-                      animation: marquee-right 30s linear infinite;
-                    }
-                  `}} />
-
-                  <div className="space-y-8 relative py-4">
-                    {/* Row 1: Moving Left */}
-                    <div 
-                      className="flex overflow-hidden w-full"
-                      style={{
-                        WebkitMaskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)",
-                        maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)"
-                      }}
-                    >
-                      <div className="animate-marquee-left gap-6 pr-6">
-                        {[...row1, ...row1, ...row1].map((partner, index) => (
-                          <div key={index} className="flex-shrink-0 w-32 h-16 sm:w-52 sm:h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-xl sm:rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-                            <img 
-                              src={partner.logo} 
-                              alt={partner.name} 
-                              style={{ transform: `scale(${partner.scaleVal || 1.18})` }}
-                              className="max-w-[95%] max-h-[90%] object-contain transition-all duration-300"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                if (target.src.includes(".png")) {
-                                  target.src = target.src.replace(".png", ".jpeg");
-                                } else if (target.src.includes(".jpeg")) {
-                                  target.src = target.src.replace(".jpeg", ".jpg");
-                                }
-                              }}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Row 2: Moving Right */}
-                    <div 
-                      className="flex overflow-hidden w-full"
-                      style={{
-                        WebkitMaskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)",
-                        maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)"
-                      }}
-                    >
-                      <div className="animate-marquee-right gap-6 pr-6">
-                        {[...row2, ...row2, ...row2].map((partner, index) => (
-                          <div key={index} className="flex-shrink-0 w-32 h-16 sm:w-52 sm:h-28 bg-white flex items-center justify-center p-1.5 border border-black/5 shadow-sm rounded-xl sm:rounded-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-                            <img 
-                              src={partner.logo} 
-                              alt={partner.name} 
-                              style={{ transform: `scale(${partner.scaleVal || 1.18})` }}
-                              className="max-w-[95%] max-h-[90%] object-contain transition-all duration-300"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                if (target.src.includes(".png")) {
-                                  target.src = target.src.replace(".png", ".jpeg");
-                                } else if (target.src.includes(".jpeg")) {
-                                  target.src = target.src.replace(".jpeg", ".jpg");
-                                }
-                              }}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* PREMIUM GRADIENT DIVIDER LINE */}
-                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
-                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
-                </div>
-
                 {/* SECTION 4: STRATEGIC PARTNERSHIPS */}
                 <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 space-y-16">
                   <div className="relative max-w-3xl space-y-4 pl-6 sm:pl-8">
@@ -1498,32 +1487,32 @@ export default function NewDesignContent() {
                         title: "Technology Partner",
                         name: "Microsoft Azure",
                         desc: "Provides standard cloud technologies, cognitive service nodes, and AI ecosystem infrastructure for our curriculum deployment.",
-                        icon: Database
+                        logo: "/logos/azure.jpeg"
                       },
                       {
                         title: "Academic Partner",
                         name: "MIT ADT University",
                         desc: "Collaborates on deep-tech curriculum design, student credits alignment, and joint academic certifications.",
-                        icon: GraduationCap
+                        logo: "/logos/mitadt.png"
                       },
                       {
                         title: "Innovation Partner",
                         name: "Symbiosis TBI",
                         desc: "Supports tech incubation, student startup pipelines, hardware accelerator workshops, and research grants.",
-                        icon: Lightbulb
+                        logo: "/logos/symbiosis.png"
                       },
                       {
                         title: "Global Education Partner",
                         name: "Western University",
                         desc: "Enables cross-border knowledge exchange, global tech integration, and international lab setups.",
-                        icon: Globe
+                        logo: "/logos/western.png"
                       }
                     ].map((item, i) => (
                       <div key={i} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                         <div className="space-y-6 text-left">
-                          <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.2)] transition-all duration-300">
-                            <item.icon className="w-6 h-6 text-primary" />
+                          <div className="w-16 h-16 rounded-2xl bg-white border border-black/5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.1)] transition-all duration-300 p-2">
+                            <img src={item.logo} alt={item.name} className="w-full h-full object-contain" />
                           </div>
                           <div className="space-y-2">
                             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#1a1a2e]/40 font-bold block">{item.title}</span>
@@ -1620,25 +1609,25 @@ export default function NewDesignContent() {
                       {
                         title: "Kaduna State University, Nigeria",
                         desc: "Kaduna State University, Nigeria, collaborates with us to establish an innovation hub on campus, fostering creativity and technological advancement among students.",
-                        img: "/cards/ng.png",
+                        img: "/cards/kaduna-state-uni.jpg",
                         tag: "Nigeria"
                       },
                       {
                         title: "Ministry Recognition (MoE, India)",
                         desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
-                        img: "/cards/media__1780295890933.png",
+                        img: "/cards/ministry-of-education.jpeg",
                         tag: "National Recognition"
                       },
                       {
                         title: "IAIRESCO Global Community",
                         desc: "IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.",
-                        img: "/cards/media__1780295525047.png",
+                        img: "/cards/symbiosis-tbi.png",
                         tag: "Global Partner"
                       },
                       {
                         title: "Western International School, Cambodia",
                         desc: "Western International School in Cambodia partners with us to set up a state-of-the-art hi-tech lab and integrate Hexobrain products into classrooms, enriching students' learning experiences.",
-                        img: "/cards/kh.png",
+                        img: "/cards/western-cambodia.jpg",
                         tag: "Cambodia"
                       }
                     ].map((story, idx) => (
@@ -1721,21 +1710,21 @@ export default function NewDesignContent() {
                       </div>
 
                       {/* Interactive Details Card */}
-                      <div className="lg:col-span-8">
-                        <AnimatePresence mode="wait">
-                          {selectedCountry && (() => {
-                            const current = countries.find(c => c.name === selectedCountry);
-                            if (!current) return null;
-                            return (
-                              <motion.div
-                                key={current.name}
-                                initial={{ opacity: 0, y: 15 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -15 }}
-                                transition={{ duration: 0.3 }}
-                                className="glass-premium p-10 rounded-[3rem] border border-black/5 shadow-xl space-y-8 min-h-[420px] flex flex-col justify-between bg-white text-left"
-                              >
-                                <div className="space-y-6">
+                      <div className="lg:col-span-8 glass-premium p-10 rounded-[3rem] border border-black/5 shadow-xl min-h-[440px] flex flex-col justify-between bg-white text-left">
+                        <div className="flex-1">
+                          <AnimatePresence mode="wait">
+                            {selectedCountry && (() => {
+                              const current = countries.find(c => c.name === selectedCountry);
+                              if (!current) return null;
+                              return (
+                                <motion.div
+                                  key={current.name}
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -10 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="space-y-6"
+                                >
                                   <div className="flex items-center justify-between border-b border-black/5 pb-6">
                                     <div className="flex items-center gap-3">
                                       <MapPin className="text-primary w-6 h-6" />
@@ -1767,19 +1756,25 @@ export default function NewDesignContent() {
                                       <p className="text-sm text-[#1a1a2e]/70 font-semibold">{current.coordinates}</p>
                                     </div>
                                   </div>
-                                </div>
-
-                                <div className="flex justify-end pt-4">
-                                  <Link href="/#contact" className="group px-6 py-3 bg-[#1a1a2e] hover:bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2" style={{ color: '#ffffff' }}>
-                                    <span>Initiate Program Here</span>
-                                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                                  </Link>
-                                </div>
-                              </motion.div>
-                            );
-                          })()}
-                        </AnimatePresence>
+                                </motion.div>
+                              );
+                            })()}
+                          </AnimatePresence>
+                        </div>
+                        
+                        {/* Static Footer - always visible, never transitions */}
+                        <div className="flex justify-end gap-3 pt-8 border-t border-black/5 mt-6">
+                          <a href="/global-centres" className="group px-6 py-3 border border-black/10 hover:border-[#1a1a2e] hover:bg-slate-50 text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2">
+                            <span>See on Map</span>
+                            <MapPin size={14} />
+                          </a>
+                          <a href="https://wa.me/919860779172?text=Hello%2C%20I%20am%20interested%20in%20setting%20up%20an%20AIR%20G%20Hub.%20Please%20share%20more%20details." target="_blank" rel="noopener noreferrer" className="group px-6 py-3 bg-[#1a1a2e] hover:bg-primary !text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2">
+                            <span className="!text-white">Request Hub Setup</span>
+                            <ArrowRight size={14} className="!text-white group-hover:translate-x-1 transition-transform" />
+                          </a>
+                        </div>
                       </div>
+
                     </div>
                   </div>
                 </section>
@@ -1817,27 +1812,32 @@ export default function NewDesignContent() {
                       {[
                         { name: "Mr. Pratap Pawar", role: "CEO — India", img: "/extracted-members/page_11_img_2_694.png", bio: "Visionary leader driving AIR G International's pan-India operations, academic partnerships, and strategic growth across emerging markets." },
                         { name: "Mr. Abdulrazaq Chubado", role: "Managing Director — Saudi Arabia", img: "/extracted-members/page_11_img_1_691.png", bio: "Spearheading AIR G's Middle East expansion, forging key government and institutional partnerships across the Gulf region." },
-                        { name: "Mr. Yeabsira Mekshak", role: "Managing Director — Ethiopia", img: "/extracted-members/page_11_img_3_697.png", bio: "Leading AIR G's African growth strategy, building technology education infrastructure and partnerships across East Africa." }
+                        { name: "Mr. Yeabsira Mekshak", role: "Managing Director — Ethiopia", img: "/extracted-members/yeabsira-mekasha.png", bio: "Leading AIR G's African growth strategy, building technology education infrastructure and partnerships across East Africa." }
                       ].map((leader, i) => (
-                        <div key={i} className="group rounded-2xl bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/[0.06] transition-all duration-400 hover:-translate-y-1 overflow-hidden">
-                          {/* Square Photo */}
-                          <div className="aspect-[3/4] overflow-hidden bg-slate-100 relative">
+                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
+                          {/* Animated Left Accent Bar */}
+                          <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+                          
+                          {/* Dotted texture background inside card */}
+                          <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(235, 0, 40, 0.03) 1.2px, transparent 1px)', backgroundSize: '16px 16px' }} />
+
+                          {/* Left: Clean Framed Portrait */}
+                          <div className="w-28 h-28 rounded-2xl overflow-hidden bg-slate-50 border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
                             <img 
                               src={leader.img} 
                               alt={leader.name} 
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              className="w-full h-full object-cover"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400";
                               }}
                             />
-                            {/* Subtle gradient at bottom */}
-                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                           </div>
-                          {/* Info */}
-                          <div className="p-6 space-y-2">
-                            <h4 className="font-headline text-base font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{leader.name}</h4>
-                            <p className="text-[11px] text-primary font-bold uppercase tracking-wider">{leader.role}</p>
-                            <p className="text-xs text-[#1a1a2e]/45 font-light leading-relaxed pt-1">{leader.bio}</p>
+
+                          {/* Right: Info */}
+                          <div className="space-y-1.5 flex-1 relative z-10">
+                            <h4 className="font-headline text-base font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{leader.name}</h4>
+                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{leader.role}</p>
+                            <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{leader.bio}</p>
                           </div>
                         </div>
                       ))}
@@ -1855,35 +1855,36 @@ export default function NewDesignContent() {
                         <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                       {[
-                        { name: "Mr. Haggai Mosses", role: "CEO", country: "Kenya", img: "/kenya-founder-v2.png", bio: "Leading digital literacy and future-skills initiatives across Kenya's educational institutions." },
-                        { name: "Mr. Yassin Adam", role: "CEO", country: "Sudan", img: "/sudan-founder.png", bio: "Driving technology education and AIR Lab deployments to empower Sudanese youth." },
-                        { name: "Mr. Aniket Singh", role: "CEO", country: "Nepal", img: "/nepal-founder.png", bio: "Building Nepal's AI and robotics education ecosystem through academic partnerships." },
-                        { name: "Mr. Murhib Alahmar", role: "CEO", country: "Yemen", img: "/yemen-founder.png", bio: "Pioneering STEM infrastructure and innovation hubs for Yemeni students and educators." }
+                        { name: "Mr. Haggai Mosses", role: "CEO", country: "Kenya", img: "/haggai-mosses.jpeg", bio: "Leading digital literacy and future-skills initiatives across Kenya's educational institutions." },
+                        { name: "Mr. Yassin Adam", role: "CEO", country: "Sudan", img: "/yassin-adam.jpeg", bio: "Driving technology education and AIR Lab deployments to empower Sudanese youth." },
+                        { name: "Mr. Murhib Alahmar", role: "CEO", country: "Yemen", img: "/murhib-alahmar.jpeg", bio: "Pioneering STEM infrastructure and innovation hubs for Yemeni students and educators." }
                       ].map((hub, i) => (
-                        <div key={i} className="group rounded-2xl bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 overflow-hidden">
-                          {/* Square Photo */}
-                          <div className="aspect-square overflow-hidden bg-slate-100 relative">
+                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
+                          {/* Animated Left Accent Bar */}
+                          <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+
+                          {/* Dotted red texture background inside card */}
+                          <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(235, 0, 40, 0.03) 1.2px, transparent 1px)', backgroundSize: '16px 16px' }} />
+
+                          {/* Left: Clean Framed Portrait */}
+                          <div className="w-28 h-28 rounded-2xl overflow-hidden bg-slate-50 border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
                             <img 
                               src={hub.img} 
                               alt={hub.name} 
-                              className="w-[220%] h-[220%] max-w-none object-cover transition-transform duration-700 group-hover:scale-105"
-                              style={{ objectPosition: "78% 47%" }}
+                              className="w-full h-full object-cover"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400";
                               }}
                             />
-                            {/* Country badge overlay */}
-                            <div className="absolute top-4 right-4 px-3 py-1.5 rounded-lg bg-white/90 backdrop-blur-sm border border-black/5 shadow-sm">
-                              <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{hub.country}</span>
-                            </div>
                           </div>
-                          {/* Info */}
-                          <div className="p-5 space-y-1.5">
-                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{hub.name}</h4>
-                            <p className="text-[11px] text-primary font-bold uppercase tracking-wider">{hub.role} — {hub.country} Hub</p>
-                            <p className="text-[11px] text-[#1a1a2e]/40 font-light leading-relaxed pt-0.5">{hub.bio}</p>
+
+                          {/* Right: Info */}
+                          <div className="space-y-1.5 flex-1 relative z-10">
+                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{hub.name}</h4>
+                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{hub.role} — {hub.country} Hub</p>
+                            <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{hub.bio}</p>
                           </div>
                         </div>
                       ))}
@@ -1903,30 +1904,41 @@ export default function NewDesignContent() {
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                       {[
-                        { name: "Mr. Aashish Banka", role: "CEO, Symbiosis TBI", img: "/extracted-members/page_11_img_4_700.png", bio: "Incubation and startup ecosystem expert leading Symbiosis Technology Business Incubator." },
-                        { name: "Mr. Sapptarishi Ghosh", role: "MD, Edelweiss Mutual", img: "/extracted-members/page_11_img_5_703.png", bio: "Financial services leader with deep expertise in fund management and strategic investments." },
-                        { name: "Mr. Tushar Agarwal", role: "CFO, AIR G International", img: "/extracted-members/page_11_img_6_709.png", bio: "Overseeing financial strategy, budgeting, and fiscal operations across all AIR G global hubs." },
-                        { name: "Mr. Vijay Trimbake", role: "Ex. COO, Microficial", img: "/extracted-members/page_11_img_7_712.png", bio: "Operations and manufacturing specialist with experience scaling technology hardware production." },
-                        { name: "Mr. Tushar Suryawanshi", role: "CEO, Goosebumps.biz", img: "/extracted-members/page_11_img_8_715.png", bio: "Digital transformation leader driving innovation in experiential marketing and technology solutions." },
+                        { name: "Mr. Saptparishi Ghosh", role: "CEO, Symbiosis TBI", img: "/extracted-members/page_11_img_4_700.png", bio: "Incubation and startup ecosystem expert leading Symbiosis Technology Business Incubator." },
+                        { name: "Mr. Aashish Banka", role: "CEO, Goosebumps.biz", img: "/extracted-members/page_11_img_5_703.png", bio: "Digital transformation leader driving experiential marketing and technology solutions." },
+                        { name: "Mr. Tushar Agarwal", role: "MD, Edelweiss Mutual", img: "/extracted-members/page_11_img_6_709.png", bio: "Financial services leader with deep expertise in fund management and strategic investments." },
+                        { name: "Mr. Tushar Suryawanshi", role: "Ex. COO, Microficial", img: "/extracted-members/page_11_img_7_712.png", bio: "Operations specialist with experience scaling technology hardware production and operations.", scale: 0.88, objectPosition: "center 10%" },
+                        { name: "Mr. Vijay Trimbake", role: "CFO, AIR G International", img: "/extracted-members/page_11_img_8_715.png", bio: "Overseeing financial strategy, budgeting, and fiscal operations across all AIR G global hubs.", objectPosition: "center 12%" },
                         { name: "Mr. Chakravarti Gupta", role: "Chief Technology Advisor", img: "/extracted-members/page_11_img_9_731.png", bio: "Senior technology strategist advising on AI infrastructure architecture and enterprise systems." }
                       ].map((member, i) => (
-                        <div key={i} className="group rounded-2xl bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 overflow-hidden">
-                          {/* Square Photo */}
-                          <div className="aspect-square overflow-hidden bg-slate-100">
+                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
+                          {/* Animated Left Accent Bar */}
+                          <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+
+                          {/* Dotted red texture background inside card */}
+                          <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(235, 0, 40, 0.03) 1.2px, transparent 1px)', backgroundSize: '16px 16px' }} />
+
+                          {/* Left: Clean Framed Portrait */}
+                          <div className="w-28 h-28 rounded-2xl overflow-hidden bg-white border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
                             <img 
                               src={member.img} 
                               alt={member.name} 
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              className="w-full h-full object-cover"
+                              style={{ 
+                                objectPosition: (member as any).objectPosition || "center",
+                                transform: (member as any).scale ? `scale(${(member as any).scale})` : undefined
+                              }}
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400";
                               }}
                             />
                           </div>
-                          {/* Info */}
-                          <div className="p-5 space-y-1.5">
-                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{member.name}</h4>
+
+                          {/* Right: Info */}
+                          <div className="space-y-1.5 flex-1 relative z-10">
+                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{member.name}</h4>
                             <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{member.role}</p>
-                            <p className="text-[11px] text-[#1a1a2e]/40 font-light leading-relaxed pt-0.5">{member.bio}</p>
+                            <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{member.bio}</p>
                           </div>
                         </div>
                       ))}

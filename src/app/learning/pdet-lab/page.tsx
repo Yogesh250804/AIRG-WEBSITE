@@ -27,18 +27,18 @@ export default function PDETLabPage() {
     fetch("/api/copy-pdet-image").catch(() => {});
   }, []);
 
-  // Initialize state with default items and unit costs to calculate totals dynamically
+  // Initialize state with default items and unit costs to calculate totals dynamically (starts at 0)
   const [zones, setZones] = useState([
     {
       name: "Electronics & IoT Development Zone",
       icon: "memory",
       image: "/lab-electronics.png",
       items: [
-        { name: "Arduino Development Kits (Nano, Uno, Mega)", qty: 40, unitCost: 2250, isLot: false },
-        { name: "IoT Development Boards (ESP8266 to ESP32)", qty: 30, unitCost: 1166, isLot: false },
-        { name: "Raspberry Pi 4 Kits", qty: 10, unitCost: 8000, isLot: false },
-        { name: "Sensor Kits (Multiple Sensors)", qty: 20, unitCost: 4750, isLot: false },
-        { name: "Basic Electronic Components & Tools", qty: 1, unitCost: 50000, isLot: true }
+        { name: "Arduino Development Kits (Nano, Uno, Mega)", qty: 0, unitCost: 2250, isLot: false },
+        { name: "IoT Development Boards (ESP8266 to ESP32)", qty: 0, unitCost: 1166, isLot: false },
+        { name: "Raspberry Pi 4 Kits", qty: 0, unitCost: 8000, isLot: false },
+        { name: "Sensor Kits (Multiple Sensors)", qty: 0, unitCost: 4750, isLot: false },
+        { name: "Basic Electronic Components & Tools", qty: 0, unitCost: 50000, isLot: true }
       ]
     },
     {
@@ -46,10 +46,10 @@ export default function PDETLabPage() {
       icon: "print",
       image: "/lab-3dprinting.png",
       items: [
-        { name: "FDM 3D Printers (Creality Ender/Prusa)", qty: 3, unitCost: 40000, isLot: false },
-        { name: "Resin 3D Printer (Anycubic/Elegoo)", qty: 1, unitCost: 60000, isLot: false },
-        { name: "Filaments & Resins (PLA, ABS, TPU)", qty: 1, unitCost: 40000, isLot: true },
-        { name: "Post-Processing Tools", qty: 1, unitCost: 25000, isLot: true }
+        { name: "FDM 3D Printers (Creality Ender/Prusa)", qty: 0, unitCost: 40000, isLot: false },
+        { name: "Resin 3D Printer (Anycubic/Elegoo)", qty: 0, unitCost: 60000, isLot: false },
+        { name: "Filaments & Resins (PLA, ABS, TPU)", qty: 0, unitCost: 40000, isLot: true },
+        { name: "Post-Processing Tools", qty: 0, unitCost: 25000, isLot: true }
       ]
     },
     {
@@ -57,10 +57,10 @@ export default function PDETLabPage() {
       icon: "flight",
       image: "/lab-drone.png",
       items: [
-        { name: "Custom Drone Assembly Kits", qty: 5, unitCost: 30000, isLot: false },
-        { name: "DJI Tello EDU Drones", qty: 5, unitCost: 16000, isLot: false },
-        { name: "Spare Parts (Motors, Props, Batteries)", qty: 1, unitCost: 40000, isLot: true },
-        { name: "Flight Controllers & Transmitters", qty: 1, unitCost: 50000, isLot: true }
+        { name: "Custom Drone Assembly Kits", qty: 0, unitCost: 30000, isLot: false },
+        { name: "DJI Tello EDU Drones", qty: 0, unitCost: 16000, isLot: false },
+        { name: "Spare Parts (Motors, Props, Batteries)", qty: 0, unitCost: 40000, isLot: true },
+        { name: "Flight Controllers & Transmitters", qty: 0, unitCost: 50000, isLot: true }
       ]
     },
     {
@@ -68,10 +68,10 @@ export default function PDETLabPage() {
       icon: "visibility",
       image: "/lab-vr.png",
       items: [
-        { name: "Meta Quest 3 VR Headsets", qty: 2, unitCost: 55000, isLot: false },
-        { name: "High-Performance Workstations", qty: 2, unitCost: 125000, isLot: false },
-        { name: "Intel RealSense Depth Cameras", qty: 2, unitCost: 35000, isLot: false },
-        { name: "Software Licenses & Assets", qty: 1, unitCost: 50000, isLot: true }
+        { name: "Meta Quest 3 VR Headsets", qty: 0, unitCost: 55000, isLot: false },
+        { name: "High-Performance Workstations", qty: 0, unitCost: 125000, isLot: false },
+        { name: "Intel RealSense Depth Cameras", qty: 0, unitCost: 35000, isLot: false },
+        { name: "Software Licenses & Assets", qty: 0, unitCost: 50000, isLot: true }
       ]
     },
     {
@@ -79,10 +79,10 @@ export default function PDETLabPage() {
       icon: "smart_toy",
       image: "/lab-ai.png",
       items: [
-        { name: "NVIDIA Jetson Nano Kits", qty: 10, unitCost: 15000, isLot: false },
-        { name: "NVIDIA Jetson Orin Nano", qty: 2, unitCost: 45000, isLot: false },
-        { name: "AI Edge Computing Nodes", qty: 2, unitCost: 60000, isLot: false },
-        { name: "Cloud GPU Credits", qty: 1, unitCost: 50000, isLot: true }
+        { name: "NVIDIA Jetson Nano Kits", qty: 0, unitCost: 15000, isLot: false },
+        { name: "NVIDIA Jetson Orin Nano", qty: 0, unitCost: 45000, isLot: false },
+        { name: "AI Edge Computing Nodes", qty: 0, unitCost: 60000, isLot: false },
+        { name: "Cloud GPU Credits", qty: 0, unitCost: 50000, isLot: true }
       ]
     },
     {
@@ -90,10 +90,10 @@ export default function PDETLabPage() {
       icon: "precision_manufacturing",
       image: "/lab-robotics.png",
       items: [
-        { name: "Dobot Magician Robotic Arm", qty: 1, unitCost: 180000, isLot: false },
-        { name: "TurtleBot3 Burger/Waffle", qty: 2, unitCost: 75000, isLot: false },
-        { name: "Custom Rover Chassis & Motors", qty: 5, unitCost: 20000, isLot: false },
-        { name: "Pneumatic & Automation Kits", qty: 1, unitCost: 80000, isLot: true }
+        { name: "Dobot Magician Robotic Arm", qty: 0, unitCost: 180000, isLot: false },
+        { name: "TurtleBot3 Burger/Waffle", qty: 0, unitCost: 75000, isLot: false },
+        { name: "Custom Rover Chassis & Motors", qty: 0, unitCost: 20000, isLot: false },
+        { name: "Pneumatic & Automation Kits", qty: 0, unitCost: 80000, isLot: true }
       ]
     },
     {
@@ -101,8 +101,8 @@ export default function PDETLabPage() {
       icon: "lightbulb",
       image: "/lab-smartlearning.png",
       items: [
-        { name: "Interactive Smart Panel (86”)", qty: 1, unitCost: 160000, isLot: false },
-        { name: "Lab Branding & Posters", qty: 1, unitCost: 50000, isLot: true }
+        { name: "Interactive Smart Panel (86”)", qty: 0, unitCost: 160000, isLot: false },
+        { name: "Lab Branding & Posters", qty: 0, unitCost: 50000, isLot: true }
       ]
     }
   ]);
@@ -159,6 +159,7 @@ export default function PDETLabPage() {
     <main className="relative min-h-screen bg-white selection:bg-primary/20 selection:text-primary overflow-x-hidden text-[#111827]">
       <Navbar />
 
+      <div id="pdet-page-content-wrapper" className="print:hidden">
       {/* Scattered Technical HUD Telemetry Decors on Left & Right Margins */}
       <div className="absolute left-6 top-[20%] font-mono text-[9px] text-primary/30 uppercase tracking-[0.25em] space-y-4 select-none pointer-events-none hidden xl:block z-20">
         <div className="space-y-1">
@@ -544,22 +545,18 @@ export default function PDETLabPage() {
                       </div>
                       <button 
                         onClick={() => {
-                          const itemsSummary = zones
-                            .flatMap(z => z.items.filter(item => item.qty > 0))
-                            .map(item => `${item.name} (x${item.qty})`)
-                            .join(", ");
-                          setCheckoutItem({
-                            name: itemsSummary || "PDET Lab Setup",
-                            price: calculateGrandTotal(),
-                            category: "Lab Infrastructure",
-                            image: "/indian_pdet_lab.png"
-                          });
-                          setIsCheckoutOpen(true);
+                          // Only trigger receipt PDF download — no checkout modal
+                          const hasItems = zones.some(z => z.items.some(item => item.qty > 0));
+                          if (!hasItems) {
+                            alert("Please add at least one item before generating a receipt.");
+                            return;
+                          }
+                          window.print();
                         }}
                         className="w-full sm:w-auto px-10 py-4 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 flex items-center justify-center gap-3 select-none hover:scale-[1.03] active:scale-95"
                       >
-                        <span>Checkout Configuration</span>
-                        <span className="material-symbols-outlined text-sm">shopping_cart</span>
+                        <span>Download Receipt</span>
+                        <span className="material-symbols-outlined text-sm">download</span>
                       </button>
                     </div>
                   </div>
@@ -716,6 +713,8 @@ export default function PDETLabPage() {
         </div>
       </div>
 
+      </div>
+
       {isCheckoutOpen && (
         <CheckoutModal
           isOpen={isCheckoutOpen}
@@ -727,6 +726,122 @@ export default function PDETLabPage() {
           type="product"
         />
       )}
+
+      {/* PRINT-ONLY RECEIPT COMPONENT */}
+      <div id="pdet-receipt-print-root" style={{ display: 'none' }}>
+        <style dangerouslySetInnerHTML={{__html: `
+          @page {
+            size: A4;
+            margin: 15mm;
+          }
+          @media print {
+            #pdet-page-content-wrapper,
+            nav,
+            .print\\:hidden {
+              display: none !important;
+            }
+            #pdet-receipt-print-root {
+              display: block !important;
+              position: absolute !important;
+              left: 0 !important;
+              top: 0 !important;
+              width: 100% !important;
+              background: white !important;
+              color: black !important;
+              font-family: Arial, Helvetica, sans-serif !important;
+              font-size: 11px !important;
+              line-height: 1.5 !important;
+            }
+            #pdet-receipt-print-root * {
+              color-adjust: exact !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+          }
+        `}} />
+        
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '3px solid #EE2C3C', paddingBottom: '16px', marginBottom: '20px' }}>
+          <div>
+            <div style={{ fontSize: '22px', fontWeight: 900, color: '#EE2C3C', letterSpacing: '-0.5px' }}>AIR G INTERNATIONAL</div>
+            <div style={{ fontSize: '10px', color: '#666', marginTop: '4px' }}>Prototype Development & Emerging Tech Lab (PDET)</div>
+            <div style={{ fontSize: '10px', color: '#666' }}>Official Infrastructure Setup Quotation</div>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: '16px', fontWeight: 700, color: '#333' }}>ESTIMATE / RECEIPT</div>
+            <div style={{ fontSize: '10px', color: '#666', marginTop: '4px' }}>Date: {new Date().toLocaleDateString("en-IN")}</div>
+          </div>
+        </div>
+
+        {/* Zone Tables */}
+        {zones.map((zone, zIdx) => {
+          const selectedItems = zone.items.filter(item => item.qty > 0);
+          if (selectedItems.length === 0) return null;
+
+          return (
+            <div key={zIdx} style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '12px', marginBottom: '16px', pageBreakInside: 'avoid' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#EE2C3C', borderBottom: '1px solid #eee', paddingBottom: '8px', marginBottom: '8px' }}>
+                Zone {String(zIdx + 1).padStart(2, '0')}: {zone.name}
+              </div>
+              <table style={{ width: '100%', fontSize: '11px', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ borderBottom: '1px solid #ccc' }}>
+                    <th style={{ textAlign: 'left', paddingBottom: '6px', color: '#555', fontWeight: 600 }}>Equipment Item</th>
+                    <th style={{ width: '60px', textAlign: 'center', paddingBottom: '6px', color: '#555', fontWeight: 600 }}>Qty</th>
+                    <th style={{ width: '100px', textAlign: 'right', paddingBottom: '6px', color: '#555', fontWeight: 600 }}>Unit Price</th>
+                    <th style={{ width: '110px', textAlign: 'right', paddingBottom: '6px', color: '#555', fontWeight: 600 }}>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedItems.map((item, iIdx) => (
+                    <tr key={iIdx} style={{ borderBottom: '1px solid #f0f0f0' }}>
+                      <td style={{ padding: '6px 0', color: '#333' }}>{item.name}</td>
+                      <td style={{ padding: '6px 0', textAlign: 'center', color: '#444' }}>{item.isLot ? `${item.qty} Lot` : item.qty}</td>
+                      <td style={{ padding: '6px 0', textAlign: 'right', color: '#444' }}>₹{formatCurrency(item.unitCost)}</td>
+                      <td style={{ padding: '6px 0', textAlign: 'right', fontWeight: 600, color: '#222' }}>₹{formatCurrency(item.qty * item.unitCost)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div style={{ textAlign: 'right', marginTop: '8px', fontSize: '12px', fontWeight: 700, color: '#333' }}>
+                Zone Subtotal: ₹{formatCurrency(calculateZoneTotal(zIdx))}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* ═══════ GRAND TOTAL ═══════ */}
+        <div style={{ marginTop: '24px', borderTop: '3px solid #EE2C3C', paddingTop: '20px', pageBreakInside: 'avoid' }}>
+          <table style={{ width: '100%', fontSize: '12px' }}>
+            <tbody>
+              <tr>
+                <td style={{ fontWeight: 700, fontSize: '16px', color: '#111' }}>GRAND TOTAL COST</td>
+                <td style={{ textAlign: 'right', fontWeight: 900, fontSize: '28px', color: '#EE2C3C', letterSpacing: '-1px' }}>
+                  ₹{formatCurrency(calculateGrandTotal())}
+                </td>
+              </tr>
+              <tr>
+                <td style={{ color: '#888', fontSize: '10px' }}>All {zones.filter(z => z.items.some(i => i.qty > 0)).length} zone(s) included</td>
+                <td style={{ textAlign: 'right', color: '#888', fontSize: '10px' }}>Excludes local taxes & duties</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Terms & Footer */}
+        <div style={{ marginTop: '24px', paddingTop: '12px', borderTop: '1px solid #eee', fontSize: '9px', color: '#999', pageBreakInside: 'avoid' }}>
+          <div style={{ fontWeight: 700, color: '#555', marginBottom: '4px' }}>Terms & Conditions:</div>
+          <div>1. This PDF estimate is generated based on selected lab customizations.</div>
+          <div>2. Final pricing is subject to shipping, taxes, and installation logistics.</div>
+          <div>3. Standard setup is fully managed and deployed by certified AIR G International engineers.</div>
+          <div>4. Valid for 30 days from generation date.</div>
+        </div>
+
+        <div style={{ marginTop: '20px', paddingTop: '12px', borderTop: '1px solid #eee', textAlign: 'center', fontSize: '9px', color: '#aaa' }}>
+          <div>AIR G International — Designing, Building, and Empowering Industry 4.0 Ecosystems Globally.</div>
+          <div style={{ marginTop: '2px' }}>For support or proposal requests, contact: support@airg.international</div>
+        </div>
+      </div>
     </main>
   );
 }

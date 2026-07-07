@@ -517,8 +517,8 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                   <div className="h-2 w-2 rounded-full bg-red-400 animate-pulse" />
                   <span className="text-[10px] font-black">{formatTime(timeLeft)}</span>
                 </div>
-                <button onClick={onClose} className="hover:bg-white/10 p-2 rounded-full transition-colors text-white border-none bg-transparent">
-                  <X className="h-5 w-5" />
+                <button onClick={onClose} className="hover:bg-white/20 p-2 rounded-full transition-colors text-white border-none bg-transparent">
+                  <X className="h-5 w-5 stroke-[2.5px]" />
                 </button>
               </div>
             </div>
@@ -544,8 +544,8 @@ export function CheckoutModal({ isOpen, onClose, item, type = "product", onSucce
                 {checkoutStep === 1 ? "Checkout" : "Success"}
               </h3>
             </div>
-            <button onClick={onClose} className="h-8 w-8 rounded-full hover:bg-slate-200 flex items-center justify-center text-slate-400 transition-colors border-none bg-transparent">
-              <X className="h-5 w-5" />
+            <button onClick={onClose} className="h-8 w-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors border-none">
+              <X className="h-4 w-4 stroke-[3px]" />
             </button>
           </div>
         )}
