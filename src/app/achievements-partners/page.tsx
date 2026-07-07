@@ -70,7 +70,7 @@ export default function AchievementsPartners() {
     { name: "Cummins", logo: "/logos/cummins.png", scaleVal: 1.6 },
     { name: "Partner 5", logo: "/logos/left_5.jpg" },
     { name: "Partner 6", logo: "/logos/left_6.jpg", scaleVal: 0.7 },
-    { name: "Partner 7", logo: "/logos/left_7.jpg" },
+    { name: "Partner 7", logo: "/logos/left_7.jpg", scaleVal: 0.8 },
     { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.4 }
   ];
 

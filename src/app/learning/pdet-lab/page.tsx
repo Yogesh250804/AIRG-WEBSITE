@@ -3,10 +3,13 @@
 import { Navbar } from "@/components/demo-navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { CheckoutModal } from "@/components/store/CheckoutModal";
 
 export default function PDETLabPage() {
   const [activeZone, setActiveZone] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutItem, setCheckoutItem] = useState<{ name: string; price: number; image?: string; category?: string } | null>(null);
 
   const labImages = [
     "/indian_pdet_lab.png"
@@ -136,7 +139,7 @@ export default function PDETLabPage() {
       step: "02",
       title: "Hardware Procurement",
       desc: "Our team sources and delivers premium, industry-standard equipment directly to your campus.",
-      image: "/robotics-kit.png"
+      image: "/hardware-procurement.png"
     },
     {
       step: "03",
@@ -192,27 +195,67 @@ export default function PDETLabPage() {
             
             {/* Left Content */}
             <div className="flex-1 w-full text-left">
-              <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-widest mb-8">
-                  <span className="w-2 h-2 rounded-full bg-primary" />
+              <div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-widest mb-8"
+                >
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                   Premium Offering
-                </div>
+                </motion.div>
                 
                 <h1 className="font-headline text-5xl md:text-6xl lg:text-[72px] font-black tracking-tighter leading-[0.95] mb-8 uppercase text-[#0a0a14] text-left">
-                  Prototype <br/>
-                  Development &amp; <br/>
-                  <span className="text-primary text-glow-red">Emerging Tech Lab</span>
+                  <span className="block overflow-hidden py-1">
+                    <motion.span 
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                      className="block"
+                    >
+                      Prototype
+                    </motion.span>
+                  </span>
+                  <span className="block overflow-hidden py-1">
+                    <motion.span 
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                      className="block"
+                    >
+                      Development &amp;
+                    </motion.span>
+                  </span>
+                  <span className="block overflow-hidden py-1.5">
+                    <motion.span 
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                      className="block text-primary text-glow-red"
+                    >
+                      Emerging Tech Lab
+                    </motion.span>
+                  </span>
                 </h1>
                 
-                <p className="text-xl md:text-2xl text-[#111827]/60 font-medium leading-relaxed mb-10 max-w-xl">
-                  A state-of-the-art laboratory designed to transform innovative ideas into real-world industrial prototypes.
-                </p>
+                <div className="overflow-hidden mb-10 max-w-xl">
+                  <motion.p 
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                    className="text-xl md:text-2xl text-[#111827]/60 font-medium leading-relaxed"
+                  >
+                    A state-of-the-art laboratory designed to transform innovative ideas into real-world industrial prototypes.
+                  </motion.p>
+                </div>
  
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-[#111827]/40">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-[0.2em] text-[#111827]/40"
+                >
                   <span>Design</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
                   <span>Build</span>
@@ -220,8 +263,8 @@ export default function PDETLabPage() {
                   <span>Prototype</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
                   <span>Innovate</span>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
  
             {/* Right Graphic (Dynamic Indian Lab Slideshow) */}
@@ -460,20 +503,65 @@ export default function PDETLabPage() {
                     ))}
                   </div>
 
-                  {/* Zone Checkout Summary Panel */}
-                  <div className="mt-8 flex justify-end">
-                    <button 
-                      onClick={() => {
-                        const target = document.getElementById("proposal-section");
-                        if (target) {
-                          target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                      }}
-                      className="w-full sm:w-auto px-10 py-5 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-2xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-3 select-none"
-                    >
-                      <span>Checkout Configuration</span>
-                      <span className="material-symbols-outlined text-sm">shopping_cart</span>
-                    </button>
+                  {/* Zone Checkout Summary Panel with Live Totals */}
+                  <div className="mt-8 rounded-[2rem] border border-white/[0.08] bg-white/[0.03] backdrop-blur-md overflow-hidden">
+                    {/* Zone Subtotal Row */}
+                    <div className="px-6 md:px-8 py-5 flex items-center justify-between border-b border-white/[0.06]">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
+                          <span className="material-symbols-outlined text-primary text-base">category</span>
+                        </div>
+                        <div>
+                          <span className="text-white/40 text-[10px] font-mono uppercase tracking-widest block">Zone {String(activeZone + 1).padStart(2, '0')} Subtotal</span>
+                          <span className="text-white/70 text-xs font-medium">{zones[activeZone].name}</span>
+                        </div>
+                      </div>
+                      <span className="text-white font-bold text-lg tabular-nums font-headline tracking-tight">₹{formatCurrency(calculateZoneTotal(activeZone))}</span>
+                    </div>
+
+                    {/* Items Breakdown Mini Summary */}
+                    <div className="px-6 md:px-8 py-3 border-b border-white/[0.04] flex flex-wrap gap-x-4 gap-y-1">
+                      {zones[activeZone].items.filter(item => item.qty > 0).map((item, i) => (
+                        <span key={i} className="text-[10px] text-white/30 font-mono">
+                          {item.name.split(' ')[0]}…×{item.qty} = ₹{formatCurrency(item.qty * item.unitCost)}
+                        </span>
+                      ))}
+                      {zones[activeZone].items.filter(item => item.qty > 0).length === 0 && (
+                        <span className="text-[10px] text-white/20 font-mono italic">No items selected in this zone</span>
+                      )}
+                    </div>
+
+                    {/* Grand Total + Checkout Button Row */}
+                    <div className="px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.02]">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center">
+                          <span className="material-symbols-outlined text-primary text-xl">receipt_long</span>
+                        </div>
+                        <div>
+                          <span className="text-white/40 text-[10px] font-mono uppercase tracking-widest block">All Zones · Grand Total</span>
+                          <span className="text-white font-extrabold text-2xl tabular-nums font-headline tracking-tighter">₹{formatCurrency(calculateGrandTotal())}</span>
+                        </div>
+                      </div>
+                      <button 
+                        onClick={() => {
+                          const itemsSummary = zones
+                            .flatMap(z => z.items.filter(item => item.qty > 0))
+                            .map(item => `${item.name} (x${item.qty})`)
+                            .join(", ");
+                          setCheckoutItem({
+                            name: itemsSummary || "PDET Lab Setup",
+                            price: calculateGrandTotal(),
+                            category: "Lab Infrastructure",
+                            image: "/indian_pdet_lab.png"
+                          });
+                          setIsCheckoutOpen(true);
+                        }}
+                        className="w-full sm:w-auto px-10 py-4 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 flex items-center justify-center gap-3 select-none hover:scale-[1.03] active:scale-95"
+                      >
+                        <span>Checkout Configuration</span>
+                        <span className="material-symbols-outlined text-sm">shopping_cart</span>
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -569,43 +657,76 @@ export default function PDETLabPage() {
       </div>
 
       {/* ROI & Proposal Section */}
-      <div id="proposal-section" className="py-24 bg-white">
+      <div id="proposal-section" className="py-24 bg-white relative">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16">
-          <div className="bg-[#0a0a14] rounded-[40px] overflow-hidden flex flex-col md:flex-row">
-            <div className="p-12 md:p-16 flex-1 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why This Investment Matters</h2>
-              <ul className="space-y-6">
+          <div className="bg-gradient-to-br from-[#0c0c1e] to-[#05050f] rounded-[40px] overflow-hidden flex flex-col lg:flex-row border border-white/5 shadow-2xl relative">
+            
+            {/* Left side: Why Investment Matters */}
+            <div className="p-10 md:p-16 flex-1 flex flex-col justify-center relative">
+              {/* Background ambient red glow */}
+              <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+              
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-8 tracking-tight font-headline">
+                Why This <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#ff5c6c]">Investment</span> Matters
+              </h2>
+              
+              <ul className="space-y-6 relative z-10">
                 {[
                   "Attract top-tier students with cutting-edge facilities",
                   "Enable deep tech research and industrial prototyping",
                   "Prepare students for high-paying Industry 4.0 roles",
                   "Unlock government & corporate research grants"
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0 mt-1">
-                      <span className="material-symbols-outlined text-white text-sm">check</span>
+                  <li key={i} className="flex items-start gap-4 group">
+                    <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 mt-1 transition-all duration-300 group-hover:bg-primary/20 group-hover:border-primary/40">
+                      <span className="material-symbols-outlined text-primary text-base font-bold">check</span>
                     </div>
-                    <span className="text-lg text-white/80">{item}</span>
+                    <span className="text-base md:text-lg text-white/80 font-medium group-hover:text-white transition-colors duration-200">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             
-            <div className="bg-primary p-12 md:p-16 md:w-[420px] flex flex-col justify-center text-center text-white">
-              <span className="uppercase tracking-widest text-sm font-bold opacity-80 mb-4">Total Estimated Investment</span>
-              <div className="text-4xl font-black mb-2 whitespace-nowrap">₹{formatCurrency(calculateGrandTotal())}</div>
-              <span className="opacity-80 mb-10 text-sm">Excluding taxes & logistics</span>
+            {/* Right side: Pricing & Call to action */}
+            <div className="bg-gradient-to-br from-primary to-[#9f0019] p-10 md:p-16 lg:w-[460px] flex flex-col justify-center text-center text-white relative overflow-hidden shrink-0 border-t lg:border-t-0 lg:border-l border-white/10">
+              {/* Geometric background patterns */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+                backgroundImage: `radial-gradient(circle, #ffffff 1px, transparent 1px)`,
+                backgroundSize: '16px 16px'
+              }}></div>
+              
+              <span className="uppercase tracking-[0.2em] text-xs font-black text-white/80 mb-3 block font-mono">// TOTAL ESTIMATED INVESTMENT</span>
+              
+              <div className="text-4xl md:text-5xl font-black mb-2 tracking-tighter drop-shadow-md text-white whitespace-nowrap font-headline">
+                ₹{formatCurrency(calculateGrandTotal())}
+              </div>
+              
+              <span className="text-white/70 mb-10 text-xs font-mono tracking-wider">Excluding taxes & logistics</span>
               
               <button 
                 onClick={() => window.location.href = "/learning/ai-infrastructures"}
-                className="bg-white text-primary px-8 py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-gray-50 transition-colors shadow-lg"
+                className="w-full bg-white hover:bg-gray-50 px-8 py-4 rounded-2xl font-black uppercase tracking-widest transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-[1.03] active:scale-95 cursor-pointer !text-[#EB0028]"
+                style={{ color: '#EB0028' }}
               >
                 Request Proposal
               </button>
             </div>
+            
           </div>
         </div>
       </div>
+
+      {isCheckoutOpen && (
+        <CheckoutModal
+          isOpen={isCheckoutOpen}
+          onClose={() => {
+            setIsCheckoutOpen(false);
+            setCheckoutItem(null);
+          }}
+          item={checkoutItem}
+          type="product"
+        />
+      )}
     </main>
   );
 }

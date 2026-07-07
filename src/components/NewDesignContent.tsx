@@ -97,7 +97,7 @@ const row2 = [
   { name: "Western University", logo: "/logos/western.png" },
   { name: "Pratham", logo: "/logos/pratham.png", scaleVal: 1.3 },
   { name: "Cummins", logo: "/logos/cummins.png", scaleVal: 1.6 },
-  { name: "Partner 7", logo: "/logos/left_7.jpg" },
+  { name: "Partner 7", logo: "/logos/left_7.jpg", scaleVal: 0.8 },
   { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.4 }
 ];
 
@@ -1784,9 +1784,159 @@ export default function NewDesignContent() {
                   </div>
                 </section>
 
+                {/* SECTION 7.5: GLOBAL LEADERSHIP & MANAGEMENT */}
+                <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-32 bg-[#fafbfc] text-left">
+                  
+                  {/* Section Header — centered, clean */}
+                  <div className="text-center max-w-3xl mx-auto mb-20 space-y-5">
+                    <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/15 bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-[0.3em]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                      Leadership
+                    </span>
+                    <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
+                      Our <span className="text-primary">Management</span> Team
+                    </h2>
+                    <p className="text-sm md:text-base text-[#1a1a2e]/45 font-light leading-relaxed max-w-xl mx-auto">
+                      Meet the directors and industry experts driving AIR G International&apos;s global mission across continents.
+                    </p>
+                    <div className="w-16 h-[2px] bg-gradient-to-r from-primary to-primary/30 mx-auto rounded-full" />
+                  </div>
+
+                  {/* Tier 1A: Core Leadership — large square portrait cards */}
+                  <div className="mb-20">
+                    <div className="flex items-center gap-4 mb-10">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center shrink-0">
+                        <span className="material-symbols-outlined text-primary text-lg">groups</span>
+                      </div>
+                      <div>
+                        <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-wide">Core Leadership</h3>
+                        <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                      {[
+                        { name: "Mr. Pratap Pawar", role: "CEO — India", img: "/extracted-members/page_11_img_2_694.png", bio: "Visionary leader driving AIR G International's pan-India operations, academic partnerships, and strategic growth across emerging markets." },
+                        { name: "Mr. Abdulrazaq Chubado", role: "Managing Director — Saudi Arabia", img: "/extracted-members/page_11_img_1_691.png", bio: "Spearheading AIR G's Middle East expansion, forging key government and institutional partnerships across the Gulf region." },
+                        { name: "Mr. Yeabsira Mekshak", role: "Managing Director — Ethiopia", img: "/extracted-members/page_11_img_3_697.png", bio: "Leading AIR G's African growth strategy, building technology education infrastructure and partnerships across East Africa." }
+                      ].map((leader, i) => (
+                        <div key={i} className="group rounded-2xl bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/[0.06] transition-all duration-400 hover:-translate-y-1 overflow-hidden">
+                          {/* Square Photo */}
+                          <div className="aspect-[3/4] overflow-hidden bg-slate-100 relative">
+                            <img 
+                              src={leader.img} 
+                              alt={leader.name} 
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400";
+                              }}
+                            />
+                            {/* Subtle gradient at bottom */}
+                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                          </div>
+                          {/* Info */}
+                          <div className="p-6 space-y-2">
+                            <h4 className="font-headline text-base font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{leader.name}</h4>
+                            <p className="text-[11px] text-primary font-bold uppercase tracking-wider">{leader.role}</p>
+                            <p className="text-xs text-[#1a1a2e]/45 font-light leading-relaxed pt-1">{leader.bio}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tier 1B: Global Hub Directors — square photo cards with country */}
+                  <div className="mb-20">
+                    <div className="flex items-center gap-4 mb-10">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center shrink-0">
+                        <span className="material-symbols-outlined text-primary text-lg">public</span>
+                      </div>
+                      <div>
+                        <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-wide">Global Hub Directors</h3>
+                        <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {[
+                        { name: "Mr. Haggai Mosses", role: "CEO", country: "Kenya", img: "/kenya-founder-v2.png", bio: "Leading digital literacy and future-skills initiatives across Kenya's educational institutions." },
+                        { name: "Mr. Yassin Adam", role: "CEO", country: "Sudan", img: "/sudan-founder.png", bio: "Driving technology education and AIR Lab deployments to empower Sudanese youth." },
+                        { name: "Mr. Aniket Singh", role: "CEO", country: "Nepal", img: "/nepal-founder.png", bio: "Building Nepal's AI and robotics education ecosystem through academic partnerships." },
+                        { name: "Mr. Murhib Alahmar", role: "CEO", country: "Yemen", img: "/yemen-founder.png", bio: "Pioneering STEM infrastructure and innovation hubs for Yemeni students and educators." }
+                      ].map((hub, i) => (
+                        <div key={i} className="group rounded-2xl bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 overflow-hidden">
+                          {/* Square Photo */}
+                          <div className="aspect-square overflow-hidden bg-slate-100 relative">
+                            <img 
+                              src={hub.img} 
+                              alt={hub.name} 
+                              className="w-[220%] h-[220%] max-w-none object-cover transition-transform duration-700 group-hover:scale-105"
+                              style={{ objectPosition: "78% 47%" }}
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400";
+                              }}
+                            />
+                            {/* Country badge overlay */}
+                            <div className="absolute top-4 right-4 px-3 py-1.5 rounded-lg bg-white/90 backdrop-blur-sm border border-black/5 shadow-sm">
+                              <span className="text-[10px] font-bold text-primary uppercase tracking-wider">{hub.country}</span>
+                            </div>
+                          </div>
+                          {/* Info */}
+                          <div className="p-5 space-y-1.5">
+                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{hub.name}</h4>
+                            <p className="text-[11px] text-primary font-bold uppercase tracking-wider">{hub.role} — {hub.country} Hub</p>
+                            <p className="text-[11px] text-[#1a1a2e]/40 font-light leading-relaxed pt-0.5">{hub.bio}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tier 2: Advisory Board & Industry Experts — square photos with bios */}
+                  <div>
+                    <div className="flex items-center gap-4 mb-10">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/15 flex items-center justify-center shrink-0">
+                        <span className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
+                      </div>
+                      <div>
+                        <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-wide">Advisory Board & Industry Experts</h3>
+                        <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                      {[
+                        { name: "Mr. Aashish Banka", role: "CEO, Symbiosis TBI", img: "/extracted-members/page_11_img_4_700.png", bio: "Incubation and startup ecosystem expert leading Symbiosis Technology Business Incubator." },
+                        { name: "Mr. Sapptarishi Ghosh", role: "MD, Edelweiss Mutual", img: "/extracted-members/page_11_img_5_703.png", bio: "Financial services leader with deep expertise in fund management and strategic investments." },
+                        { name: "Mr. Tushar Agarwal", role: "CFO, AIR G International", img: "/extracted-members/page_11_img_6_709.png", bio: "Overseeing financial strategy, budgeting, and fiscal operations across all AIR G global hubs." },
+                        { name: "Mr. Vijay Trimbake", role: "Ex. COO, Microficial", img: "/extracted-members/page_11_img_7_712.png", bio: "Operations and manufacturing specialist with experience scaling technology hardware production." },
+                        { name: "Mr. Tushar Suryawanshi", role: "CEO, Goosebumps.biz", img: "/extracted-members/page_11_img_8_715.png", bio: "Digital transformation leader driving innovation in experiential marketing and technology solutions." },
+                        { name: "Mr. Chakravarti Gupta", role: "Chief Technology Advisor", img: "/extracted-members/page_11_img_9_731.png", bio: "Senior technology strategist advising on AI infrastructure architecture and enterprise systems." }
+                      ].map((member, i) => (
+                        <div key={i} className="group rounded-2xl bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 overflow-hidden">
+                          {/* Square Photo */}
+                          <div className="aspect-square overflow-hidden bg-slate-100">
+                            <img 
+                              src={member.img} 
+                              alt={member.name} 
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400";
+                              }}
+                            />
+                          </div>
+                          {/* Info */}
+                          <div className="p-5 space-y-1.5">
+                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{member.name}</h4>
+                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{member.role}</p>
+                            <p className="text-[11px] text-[#1a1a2e]/40 font-light leading-relaxed pt-0.5">{member.bio}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
                 {/* PREMIUM GRADIENT DIVIDER LINE */}
                 <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
-                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/15 to-transparent" />
                 </div>
 
                 {/* SECTION 8: WHY ORGANIZATIONS WORK WITH AIR G */}

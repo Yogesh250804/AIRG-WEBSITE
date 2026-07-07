@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const brainDir = 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\53135b68-8372-41bf-bd41-1766a873e4da';
+    const brainDir = 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\3cdb48ab-3a89-422e-9bab-8ba893d63a04';
     const publicDir = path.join(process.cwd(), 'public');
 
     const copyOperations = [
@@ -19,7 +19,8 @@ export async function GET() {
       { src: 'indian_lab_robot_1782718731297.png', dest: 'lab-robotics.png' },
       { src: 'indian_pdet_lab_1782714591811.png', dest: 'lab-smartlearning.png' },
       { src: 'media__1782715454517.png', dest: 'logos/moe.png' },
-      { src: 'media__1782715454517.png', dest: 'logos/moe.jpeg' }
+      { src: 'media__1782715454517.png', dest: 'logos/moe.jpeg' },
+      { src: 'air_lab_about_1783061799646.png', dest: 'air-lab-about.png' }
     ];
     
     if (!fs.existsSync(brainDir)) {
