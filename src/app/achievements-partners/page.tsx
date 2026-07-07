@@ -251,13 +251,13 @@ export default function AchievementsPartners() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
-              title: "Technology Partner",
+              title: "Cloud Infrastructure Partner",
               name: "Microsoft Azure",
               desc: "Provides standard cloud technologies, cognitive service nodes, and AI ecosystem infrastructure for our curriculum deployment.",
               icon: Database
             },
             {
-              title: "Academic Partner",
+              title: "Curriculum & Certification Partner",
               name: "MIT ADT University",
               desc: "Collaborates on deep-tech curriculum design, student credits alignment, and joint academic certifications.",
               icon: GraduationCap
@@ -333,6 +333,10 @@ export default function AchievementsPartners() {
               {
                 title: "Government Engagements",
                 desc: "Working with municipal corporations, schools councils, and central departments to build sustainable future skills laboratories."
+              },
+              {
+                title: "Corporate CSR Partnerships (Aditya Birla Carbon)",
+                desc: "Collaboration to deploy state-of-the-art tech labs and hands-on robotics workshops as part of corporate community empowerment programs."
               }
             ].map((item, i) => (
               <div key={i} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden bg-white">
@@ -382,7 +386,7 @@ export default function AchievementsPartners() {
             {
               title: "Ministry Recognition (MoE, India)",
               desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
-              img: "/cards/media__1780295890933.png",
+              img: "/extracted-images/page_19_img_1_105.jpeg",
               tag: "National Recognition"
             },
             {
@@ -399,7 +403,7 @@ export default function AchievementsPartners() {
             }
           ].map((story, idx) => (
             <div key={idx} className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full">
-              <div className="relative w-full md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden bg-slate-900">
+              <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
                 <img 
                   src={story.img} 

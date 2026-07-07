@@ -1484,13 +1484,13 @@ export default function NewDesignContent() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {[
                       {
-                        title: "Technology Partner",
+                        title: "Cloud Infrastructure Partner",
                         name: "Microsoft Azure",
                         desc: "Provides standard cloud technologies, cognitive service nodes, and AI ecosystem infrastructure for our curriculum deployment.",
                         logo: "/logos/azure.jpeg"
                       },
                       {
-                        title: "Academic Partner",
+                        title: "Curriculum & Certification Partner",
                         name: "MIT ADT University",
                         desc: "Collaborates on deep-tech curriculum design, student credits alignment, and joint academic certifications.",
                         logo: "/logos/mitadt.png"
@@ -1566,6 +1566,10 @@ export default function NewDesignContent() {
                         {
                           title: "Government Engagements",
                           desc: "Working with municipal corporations, schools councils, and central departments to build sustainable future skills laboratories."
+                        },
+                        {
+                          title: "Corporate CSR Partnerships (Aditya Birla Carbon)",
+                          desc: "Collaboration to deploy state-of-the-art tech labs and hands-on robotics workshops as part of corporate community empowerment programs."
                         }
                       ].map((item, i) => (
                         <div key={i} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden bg-white text-left">
@@ -1615,7 +1619,7 @@ export default function NewDesignContent() {
                       {
                         title: "Ministry Recognition (MoE, India)",
                         desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
-                        img: "/cards/ministry-of-education.jpeg",
+                        img: "/extracted-images/page_19_img_1_105.jpeg",
                         tag: "National Recognition"
                       },
                       {
@@ -1632,7 +1636,7 @@ export default function NewDesignContent() {
                       }
                     ].map((story, idx) => (
                       <div key={idx} className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full text-left">
-                        <div className="relative w-full md:w-1/2 aspect-[16/10] md:aspect-auto overflow-hidden bg-slate-900">
+                         <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0">
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
                           <img 
                             src={story.img} 
@@ -1851,7 +1855,7 @@ export default function NewDesignContent() {
                         <span className="material-symbols-outlined text-primary text-lg">public</span>
                       </div>
                       <div>
-                        <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-wide">Global Hub Directors</h3>
+                        <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-wide">Global Hub Heads</h3>
                         <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
                       </div>
                     </div>
@@ -2282,12 +2286,12 @@ export default function NewDesignContent() {
                     <div className="lg:col-span-5 order-2 lg:order-1">
                       <div 
                         onClick={() => navigateTo('store')}
-                        className="relative w-full h-[320px] rounded-[2.5rem] border border-black/5 shadow-2xl overflow-hidden group/storecard cursor-pointer bg-slate-900"
+                        className="relative w-full h-[320px] rounded-[2.5rem] border border-black/5 shadow-2xl overflow-hidden group/storecard cursor-pointer bg-[#f8fafc]"
                       >
                         <img 
-                          src="/drone-kit-elite.png" 
-                          alt="Drone Kit - Full Setup" 
-                          className="w-full h-full object-cover group-hover/storecard:scale-105 transition-transform duration-500"
+                          src="/products/product_9.jpeg" 
+                          alt="Motion Detection Alert System" 
+                          className="w-full h-full object-contain p-4 group-hover/storecard:scale-103 transition-transform duration-500"
                         />
                       </div>
                     </div>

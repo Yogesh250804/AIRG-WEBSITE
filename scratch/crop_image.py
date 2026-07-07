@@ -1,33 +1,30 @@
-import os
 from PIL import Image
 
-image_path = "Y:\\PROJECTS\\AIG-WEBSITE\\public\\extracted-members\\page_10_img_3_388.png"
-output_path = "Y:\\PROJECTS\\AIG-WEBSITE\\public\\extracted-members\\page_10_img_3_388_cropped.png"
+img_path = r"y:\PROJECTS\AIG-WEBSITE\public\extracted-images\page_5_img_1_53.png"
+img = Image.open(img_path)
+width, height = img.size
+print(f"Image dimensions: {width}x{height}")
 
-if not os.path.exists(image_path):
-    print(f"Error: {image_path} does not exist.")
-    exit(1)
+# Let's crop the three server box renders from the slide.
+# In a 1920x1080 slide:
+# School Edition box is on the left
+# Professional Edition box is in the middle
+# Enterprise Edition box is on the right
 
-img = Image.open(image_path)
-print(f"Original image size: {img.size}")
+# Let's crop regions around the server box renders:
+# School box:
+# Left box: x around 200 to 500, y around 400 to 800
+school_box = img.crop((int(width * 0.05), int(height * 0.40), int(width * 0.22), int(height * 0.65)))
+school_box.save(r"y:\PROJECTS\AIG-WEBSITE\public\extracted-images\school_server_box.png")
 
-# Convert to grayscale to find non-black bounding box
-gray_img = img.convert("L")
-# Find bbox of pixels with intensity > 5 (solid black background is 0, but allow slight noise)
-bbox = gray_img.getbbox()
+# Professional box:
+# Middle box: x around 700 to 1000, y around 400 to 800
+pro_box = img.crop((int(width * 0.36), int(height * 0.44), int(width * 0.52), int(height * 0.65)))
+pro_box.save(r"y:\PROJECTS\AIG-WEBSITE\public\extracted-images\pro_server_box.png")
 
-if bbox:
-    print(f"Detected bounding box: {bbox}")
-    # Add a tiny padding to the bounding box if possible
-    left, top, right, bottom = bbox
-    padding = 10
-    left = max(0, left - padding)
-    top = max(0, top - padding)
-    right = min(img.width, right + padding)
-    bottom = min(img.height, bottom + padding)
-    
-    cropped_img = img.crop((left, top, right, bottom))
-    cropped_img.save(output_path)
-    print(f"Cropped image saved successfully to: {output_path} (Size: {cropped_img.size})")
-else:
-    print("No bounding box detected (image might be completely black).")
+# Enterprise box:
+# Right box: x around 1200 to 1500, y around 400 to 800
+enterprise_box = img.crop((int(width * 0.66), int(height * 0.40), int(width * 0.82), int(height * 0.65)))
+enterprise_box.save(r"y:\PROJECTS\AIG-WEBSITE\public\extracted-images\enterprise_server_box.png")
+
+print("Cropped images saved!")

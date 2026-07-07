@@ -20,7 +20,7 @@ export default function AIInfrastructuresB2BPage() {
     {
       name: "Bharat AI Engine",
       icon: "dns",
-      image: "/extracted-members/page_10_img_3_388.png",
+      image: "/extracted-images/page_1_img_1_39.png",
       description: "BHARAT AI ENGINE™ is a device-grade Edge AI infrastructure system designed to convert existing computers into a full-fledged AI Ecosystem — without replacing computers, without cloud dependency, and without complex installations. It operates as a central AI engine that delivers real-time artificial intelligence capabilities to multiple computers simultaneously over a local network.",
       stats: { type: "Edge AI", network: "Local MESH", setup: "Zero Cloud" },
       items: [
@@ -225,16 +225,10 @@ export default function AIInfrastructuresB2BPage() {
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative bg-[#f5f5f8] border border-black/5">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-overlay z-10 pointer-events-none" />
                 <img
-                  src="/air-lab-about.png"
-                  alt="AIR G Lab Infrastructure"
+                  src="/extracted-images/page_1_img_1_39.png"
+                  alt="Bharat AI Engine"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-
-                {/* Embedded HUD telemetry on image */}
-                <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md border border-black/5 rounded-2xl p-4 text-left z-20 shadow-lg">
-                  <div className="text-[10px] font-mono text-primary font-bold uppercase tracking-widest">// CAMPUS MODEL: INTEGRATED</div>
-                  <div className="text-[#1a1a2e] font-extrabold text-lg mt-1">Interactive Innovation Nodes</div>
-                </div>
               </div>
             </motion.div>
           </div>
@@ -308,6 +302,92 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
+      {/* ========== SECTION: THE SECURITY PROBLEM ========== */}
+      <div className="pt-20 pb-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
+          <div className="text-center mb-16 space-y-4">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]">
+              THE SECURITY PROBLEM
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] tracking-tight uppercase font-headline">
+              The AI Revolution Has a <span className="text-primary">Security Problem</span>
+            </h2>
+            <p className="text-[#1a1a2e]/55 text-lg font-medium max-w-3xl mx-auto">
+              Organizations want AI power, but not at the cost of losing control of their data, privacy, and business.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-stretch">
+            {/* The Old Way: Public AI Platforms */}
+            <div className="bg-red-50/50 rounded-[2.5rem] border border-red-100 p-8 md:p-12 flex flex-col justify-between text-left">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="material-symbols-outlined text-red-600 text-3xl">gpp_maybe</span>
+                  <h3 className="text-2xl font-black text-red-900 uppercase font-headline">Public AI Platforms</h3>
+                </div>
+                <p className="text-red-700/80 text-sm font-medium mb-8">
+                  Cloud-dependent platforms store, analyze, and use your sensitive data to train their models.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { label: "Not User Data Oriented", desc: "Data is generalized, risking public leakage." },
+                    { label: "Wrong or Generic Answers", desc: "Hallucinations and lack of specific institutional knowledge." },
+                    { label: "Shared Data with Third Parties", desc: "No true boundaries for corporate or student privacy." },
+                    { label: "Data Privacy at Risk", desc: "Cloud servers store chat logs and private uploads indefinitely." }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4 items-start">
+                      <span className="material-symbols-outlined text-red-500 mt-0.5">cancel</span>
+                      <div>
+                        <h4 className="font-bold text-red-950 text-sm">{item.label}</h4>
+                        <p className="text-red-700/70 text-xs font-light mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-10 p-5 rounded-2xl bg-red-100/50 border border-red-200 text-red-900 text-xs font-bold flex gap-3 items-center">
+                <span className="material-symbols-outlined shrink-0 text-red-600">warning</span>
+                <span>Warning: Your institutional documents may be crawled and exposed in future public training cycles.</span>
+              </div>
+            </div>
+
+            {/* The New Way: Bharat AI Engine */}
+            <div className="bg-[#1a1a2e] text-white rounded-[2.5rem] border border-[#2d2d4d] p-8 md:p-12 flex flex-col justify-between text-left relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="material-symbols-outlined text-primary text-3xl">verified_user</span>
+                  <h3 className="text-2xl font-black text-white uppercase font-headline">Bharat AI Engine</h3>
+                </div>
+                <p className="text-slate-300/80 text-sm font-medium mb-8">
+                  Private. Secure. Yours. A fully on-premise localized AI infrastructure cluster.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { label: "100% Data Sovereignty", desc: "All data stays inside India, completely under your physical control." },
+                    { label: "On-Premise Private AI Engine", desc: "Run powerful offline LLMs and pipelines with zero cloud reliance." },
+                    { label: "Private & Secure by Design", desc: "Local documents and research data are encrypted and locked." },
+                    { label: "Full Enterprise Control", desc: "Allows fine-tuning on custom databases without external leaks." }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4 items-start">
+                      <span className="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+                      <div>
+                        <h4 className="font-bold text-white text-sm">{item.label}</h4>
+                        <p className="text-slate-400 text-xs font-light mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-10 p-5 rounded-2xl bg-[#252542] border border-[#3b3b61] text-xs font-bold flex gap-3 items-center">
+                <span className="material-symbols-outlined shrink-0 text-primary">security</span>
+                <span className="text-slate-200">Result: Absolute security. No data leaves. No compromise.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ========== Infrastructure Showcase ========== */}
       <div id="facility-showcase" className="pt-16 pb-20 relative overflow-hidden bg-white">
         {/* Ambient glow effects */}
@@ -342,122 +422,141 @@ export default function AIInfrastructuresB2BPage() {
 
           {/* Infrastructure Zones (Downwards, 1 by 1) */}
           <div className="space-y-24">
-            {zones.map((zone, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="relative text-left"
-              >
-                {/* Large Hero Image Card */}
-                <div className="relative rounded-[2.5rem] overflow-hidden mb-8 group border border-black/[0.06] shadow-xl">
-                  <div className="aspect-[21/9] relative">
-                    <img
-                      src={zone.image}
-                      alt={zone.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    {/* Overlay gradients */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e]/90 via-[#1a1a2e]/40 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a2e]/60 to-transparent" />
+            {zones.map((zone, idx) => {
+              const isShowcase = zone.name === "Hexobrain.AI";
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative text-left"
+                >
+                  {/* Large Hero Image Card */}
+                  <div className="relative rounded-[2.5rem] overflow-hidden mb-8 group border border-black/[0.06] shadow-xl">
+                    <div className="aspect-[21/9] relative">
+                      <img
+                        src={zone.image}
+                        alt={zone.name}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      {/* Overlay gradients */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e]/90 via-[#1a1a2e]/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a2e]/60 to-transparent" />
 
-                    {/* HUD corner markers */}
-                    <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-primary/40 rounded-tl-lg pointer-events-none" />
-                    <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg pointer-events-none" />
-                    <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-white/20 rounded-bl-lg pointer-events-none" />
-                    <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-white/20 rounded-br-lg pointer-events-none" />
+                      {/* HUD corner markers */}
+                      <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-primary/40 rounded-tl-lg pointer-events-none" />
+                      <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg pointer-events-none" />
+                      <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-white/20 rounded-bl-lg pointer-events-none" />
+                      <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-white/20 rounded-br-lg pointer-events-none" />
 
-                    {/* Top-right HUD badge */}
-                    <div className="absolute top-6 right-14 font-mono text-[9px] text-white/40 uppercase tracking-widest pointer-events-none select-none text-right">
-                      <div className="text-primary/60">STATUS: ACTIVE</div>
-                    </div>
+                      {/* Top-right HUD badge */}
+                      <div className="absolute top-6 right-14 font-mono text-[9px] text-white/40 uppercase tracking-widest pointer-events-none select-none text-right">
+                        <div className="text-primary/60">STATUS: {isShowcase ? "SHOWCASE" : "ACTIVE"}</div>
+                      </div>
 
-                    {/* Bottom content overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-                      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                        <div className="max-w-2xl text-left">
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className="w-12 h-12 rounded-xl bg-primary/90 backdrop-blur-md flex items-center justify-center shadow-lg shadow-primary/20">
-                              <span className="material-symbols-outlined text-white text-2xl">{zone.icon}</span>
+                      {/* Bottom content overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                          <div className="max-w-2xl text-left">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="w-12 h-12 rounded-xl bg-primary/90 backdrop-blur-md flex items-center justify-center shadow-lg shadow-primary/20">
+                                <span className="material-symbols-outlined text-white text-2xl">{zone.icon}</span>
+                              </div>
                             </div>
+                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight drop-shadow-lg uppercase font-headline leading-tight mb-3">
+                              {zone.name}
+                            </h3>
+                            <p className="text-white/60 text-sm md:text-base max-w-xl leading-relaxed">
+                              {zone.description}
+                            </p>
                           </div>
-                          <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight drop-shadow-lg uppercase font-headline leading-tight mb-3">
-                            {zone.name}
-                          </h3>
-                          <p className="text-white/60 text-sm md:text-base max-w-xl leading-relaxed">
-                            {zone.description}
-                          </p>
-                        </div>
 
-                        {/* Stats badges */}
-                        <div className="flex flex-wrap gap-3 shrink-0">
-                          {Object.entries(zone.stats).map(([key, value]) => (
-                            <div key={key} className="bg-white/15 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5 text-center min-w-[90px]">
-                              <span className="text-white font-bold text-sm block">{value}</span>
-                              <span className="text-white/40 text-[9px] font-mono uppercase tracking-wider">{key}</span>
-                            </div>
-                          ))}
+                          {/* Stats badges */}
+                          <div className="flex flex-wrap gap-3 shrink-0">
+                            {Object.entries(zone.stats).map(([key, value]) => (
+                              <div key={key} className="bg-white/15 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5 text-center min-w-[90px]">
+                                <span className="text-white font-bold text-sm block">{value}</span>
+                                <span className="text-white/40 text-[9px] font-mono uppercase tracking-wider">{key}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Equipment Items Table with plus/minus controls */}
-                <div className="space-y-3 mb-6">
-                  {zone.items.map((item, i) => (
-                    <div
-                      key={item.name}
-                      className="group relative rounded-2xl border border-black/[0.06] bg-[#f8f8fb] hover:bg-white hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 overflow-hidden"
-                    >
-                      <div className="relative z-10 flex items-center justify-between gap-4 p-5 md:p-6 text-left">
-                        {/* Left: Number Badge + Name */}
-                        <div className="flex items-center gap-4 min-w-0">
-                          <div className="w-9 h-9 rounded-lg bg-black/[0.04] border border-black/[0.08] flex items-center justify-center shrink-0">
-                            <span className="text-[#1a1a2e]/30 text-xs font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-                          </div>
-                          <div className="min-w-0">
-                            <span className="font-semibold text-[#1a1a2e]/90 text-[15px] leading-snug block truncate">
-                              {item.name}
-                            </span>
-                            {item.isLot && (
-                              <span className="text-xs text-primary/60 font-medium mt-0.5 block">Bundled Package</span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Right: Quantity Control */}
-                        <div className="flex items-center gap-0 shrink-0 rounded-xl border border-black/[0.08] bg-black/[0.03] overflow-hidden">
-                          <button
-                            onClick={() => updateQuantity(idx, i, -1)}
-                            className="w-11 h-11 flex items-center justify-center text-[#1a1a2e]/40 hover:text-white hover:bg-primary transition-all duration-200 select-none active:scale-90 border-r border-black/[0.06]"
-                          >
-                            <span className="material-symbols-outlined text-lg">remove</span>
-                          </button>
-                          <span className="w-16 text-center font-bold text-[#1a1a2e] text-sm tabular-nums px-2">
-                            {item.isLot ? `${item.qty} Lot${item.qty > 1 ? 's' : ''}` : item.qty}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(idx, i, 1)}
-                            className="w-11 h-11 flex items-center justify-center text-[#1a1a2e]/40 hover:text-white hover:bg-primary transition-all duration-200 select-none active:scale-90 border-l border-black/[0.06]"
-                          >
-                            <span className="material-symbols-outlined text-lg">add</span>
-                          </button>
-                        </div>
+                  {isShowcase ? (
+                    <div className="p-8 rounded-[2rem] border border-dashed border-primary/25 bg-primary/5 flex flex-col sm:flex-row items-center justify-between gap-6 text-left">
+                      <div className="space-y-1">
+                        <h4 className="font-bold text-[#1a1a2e] text-base uppercase tracking-tight font-headline">Technology Showcase Only</h4>
+                        <p className="text-[#1a1a2e]/60 text-xs font-light leading-relaxed max-w-xl">
+                          Hexobrain.AI is a Made-in-India proprietary hardware innovation module currently under development. Blueprints and laboratory pilot systems are shown for institutional reference and are not yet available for direct B2B configuration or purchase.
+                        </p>
                       </div>
+                      <span className="px-5 py-2.5 bg-primary text-white text-[10px] font-mono font-bold uppercase tracking-[0.15em] rounded-xl shrink-0 select-none">
+                        Coming Soon
+                      </span>
                     </div>
-                  ))}
-                </div>
+                  ) : (
+                    <>
+                      {/* Equipment Items Table with plus/minus controls */}
+                      <div className="space-y-3 mb-6">
+                        {zone.items.map((item, i) => (
+                          <div
+                            key={item.name}
+                            className="group relative rounded-2xl border border-black/[0.06] bg-[#f8f8fb] hover:bg-white hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 overflow-hidden"
+                          >
+                            <div className="relative z-10 flex items-center justify-between gap-4 p-5 md:p-6 text-left">
+                              {/* Left: Number Badge + Name */}
+                              <div className="flex items-center gap-4 min-w-0">
+                                <div className="w-9 h-9 rounded-lg bg-black/[0.04] border border-black/[0.08] flex items-center justify-center shrink-0">
+                                  <span className="text-[#1a1a2e]/30 text-xs font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                                </div>
+                                <div className="min-w-0">
+                                  <span className="font-semibold text-[#1a1a2e]/90 text-[15px] leading-snug block truncate">
+                                    {item.name}
+                                  </span>
+                                  {item.isLot && (
+                                    <span className="text-xs text-primary/60 font-medium mt-0.5 block">Bundled Package</span>
+                                  )}
+                                </div>
+                              </div>
 
-                {/* Subtotal summary for this zone */}
-                <div className="mt-4 p-6 rounded-2xl border border-black/[0.06] bg-[#f8f8fb] flex items-center justify-between">
-                  <span className="text-sm font-semibold text-[#1a1a2e]/60">{zone.name} Subtotal:</span>
-                  <span className="font-bold text-[#1a1a2e] text-lg">₹{formatCurrency(calculateZoneTotal(idx))}</span>
-                </div>
-              </motion.div>
-            ))}
+                              {/* Right: Quantity Control */}
+                              <div className="flex items-center gap-0 shrink-0 rounded-xl border border-black/[0.08] bg-black/[0.03] overflow-hidden">
+                                <button
+                                  onClick={() => updateQuantity(idx, i, -1)}
+                                  className="w-11 h-11 flex items-center justify-center text-[#1a1a2e]/40 hover:text-white hover:bg-primary transition-all duration-200 select-none active:scale-90 border-r border-black/[0.06]"
+                                >
+                                  <span className="material-symbols-outlined text-lg">remove</span>
+                                </button>
+                                <span className="w-16 text-center font-bold text-[#1a1a2e] text-sm tabular-nums px-2">
+                                  {item.isLot ? `${item.qty} Lot${item.qty > 1 ? 's' : ''}` : item.qty}
+                                </span>
+                                <button
+                                  onClick={() => updateQuantity(idx, i, 1)}
+                                  className="w-11 h-11 flex items-center justify-center text-[#1a1a2e]/40 hover:text-white hover:bg-primary transition-all duration-200 select-none active:scale-90 border-l border-black/[0.06]"
+                                >
+                                  <span className="material-symbols-outlined text-lg">add</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Subtotal summary for this zone */}
+                      <div className="mt-4 p-6 rounded-2xl border border-black/[0.06] bg-[#f8f8fb] flex items-center justify-between">
+                        <span className="text-sm font-semibold text-[#1a1a2e]/60">{zone.name} Subtotal:</span>
+                        <span className="font-bold text-[#1a1a2e] text-lg">₹{formatCurrency(calculateZoneTotal(idx))}</span>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Bottom CTA & Live Pricing checkout config bar */}
@@ -495,36 +594,51 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
-      {/* About AIR Lab Section */}
-      <div className="pt-16 pb-20 bg-[#f8f8fb] relative">
+      {/* ========== SECTION: BHARAT AI SPECIFICATIONS (Slide 17) ========== */}
+      <div className="pt-20 pb-24 bg-[#f8f8fb] relative">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16 z-10 relative">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
+            
             {/* Left Content */}
             <div className="flex-1 text-left space-y-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-widest">
-                // EDUCATION EVOLUTION
+                // SYSTEM ARCHITECTURE
               </span>
               <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] font-headline uppercase leading-tight">
-                About Bharat AI <span className="text-primary">(भारत AI)</span>
+                Inside the Bharat AI <span className="text-primary">Engine</span>
               </h2>
-              <h3 className="text-xl md:text-2xl text-[#1a1a2e]/80 font-bold">
-                Advanced Artificial Intelligence Infrastructure
-              </h3>
-              <p className="text-[#1a1a2e]/55 text-lg leading-relaxed font-light">
-                Our AI infrastructure programs deliver hands-on, forward-thinking artificial intelligence training and computing environments straight to your institution. Centered around the Bharat AI Engine, our setups allow students, researchers, and developers to explore advanced deep learning models, natural language processing, computer vision, and edge computing without the burden of cloud subscription costs.
+              <p className="text-[#1a1a2e]/65 text-base leading-relaxed font-light">
+                An industrial-grade localized server node precision-built to run intensive artificial intelligence workflows on-premise without cloud latency, subscription fees, or data leak risks.
               </p>
+              
+              <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                {[
+                  { title: "Runs AI at the Edge", desc: "No internet required. Operates completely offline." },
+                  { title: "Uses School/Office PCs", desc: "Leverage existing infrastructure via Gigabit MESH." },
+                  { title: "128GB NVMe SSD", desc: "High-speed cache memory for localized large language models." },
+                  { title: "Gigabit Ethernet Switch", desc: "Handles multiple high-bandwidth active query streams." },
+                  { title: "Dual AI Cameras Included", desc: "For computer vision, face tracking, and live sensing labs." },
+                  { title: "UPS 1000VA Power Backup", desc: "Protects hardware and active model checkpoints." }
+                ].map((spec, i) => (
+                  <div key={i} className="flex gap-3">
+                    <span className="material-symbols-outlined text-primary shrink-0">check_circle</span>
+                    <div>
+                      <h4 className="font-bold text-[#1a1a2e] text-sm">{spec.title}</h4>
+                      <p className="text-[#1a1a2e]/55 text-xs font-medium mt-0.5">{spec.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Right Image */}
+            {/* Right Image - Detailed Server closeup */}
             <div className="flex-1 w-full">
-              <div className="aspect-[16/10] rounded-[2.5rem] overflow-hidden border border-black/5 shadow-2xl relative bg-[#f5f5f8]">
+              <div className="rounded-[2.5rem] overflow-hidden border border-black/5 shadow-2xl relative bg-[#f5f5f8] aspect-[4/3]">
                 <img 
-                  src="/extracted-members/page_10_img_3_388.png" 
-                  alt="Bharat AI Engine" 
-                  className="w-full h-full object-cover"
-                  style={{ transform: 'scale(1.35) translateX(-8%)', transformOrigin: '95% 50%' }}
+                  src="/extracted-images/page_17_img_1_94.png" 
+                  alt="Bharat AI Engine Technical Specifications" 
+                  className="w-full h-full object-contain p-4"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
@@ -536,67 +650,29 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
-      {/* What the AIR Lab Will Deliver (5 Card Grid) */}
-      <div className="pt-16 pb-20 bg-white relative overflow-hidden">
-        {/* Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/3 rounded-full blur-[140px] pointer-events-none" />
-
+      {/* ========== SECTION: THREE POWERFUL EDITIONS (Slide 5) ========== */}
+      <div className="pt-20 pb-24 bg-white relative overflow-hidden">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
-          <div className="text-center mb-20 space-y-4">
+
+
+          <div className="text-center mb-16 space-y-4">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]">
-              CORE OBJECTIVES
+              OUR SOLUTIONS
             </span>
             <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] tracking-tight uppercase font-headline">
-              Our AI Infrastructure <span className="text-primary">will:</span>
+              Three Powerful Editions. <span className="text-primary">One Secure Ecosystem.</span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-[#ff4b5c] mx-auto rounded-full mt-4" />
+            <p className="text-[#1a1a2e]/55 text-lg font-medium max-w-2xl mx-auto">
+              Custom-built setups optimized for schools, professional firms, and enterprise deployment.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {[
-              {
-                title: "Offer AI Modeling Support",
-                desc: "Deliver applied modules in core neural networks, machine learning, and deep learning engineering.",
-                icon: "school"
-              },
-              {
-                title: "Provide Edge GPU Compute",
-                desc: "Train students using local, high-compute AI hardware accelerators without subscription costs.",
-                icon: "memory"
-              },
-              {
-                title: "Promote Ethical & Safe AI",
-                desc: "Integrate responsible, private, and secure offline deployment guidelines into every project.",
-                icon: "verified_user"
-              },
-              {
-                title: "Serve as AI R&D Hub",
-                desc: "Host student projects focusing on conversational AI agents, predictive modeling, and computer vision.",
-                icon: "hub"
-              },
-              {
-                title: "Forge Strategic Tech Partnering",
-                desc: "Connect campuses directly to local AI innovation networks and corporate anchors.",
-                icon: "handshake"
-              }
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="bg-white border border-black/5 rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col justify-between text-left group"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300">
-                    <span className="material-symbols-outlined text-2xl" style={{ color: '#eb0028' }}>{card.icon}</span>
-                  </div>
-                  <h4 className="text-lg font-bold text-[#1a1a2e] mb-3 tracking-tight">{card.title}</h4>
-                </div>
-                <p className="text-[#1a1a2e]/75 text-sm font-medium leading-relaxed mt-2">{card.desc}</p>
-              </motion.div>
-            ))}
+          <div className="max-w-[1250px] mx-auto">
+            <img 
+              src="/extracted-images/page_5_no_header.png" 
+              alt="Bharat AI Engine: Three Powerful Editions" 
+              className="w-full h-auto object-contain block"
+            />
           </div>
         </div>
       </div>
@@ -606,58 +682,180 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
-      {/* Vision & Mission Sections */}
-      <div className="pt-16 pb-20 bg-[#f8f8fb] text-center px-6 relative overflow-hidden">
-        <div className="absolute top-10 left-10 w-[200px] h-[200px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+      {/* ========== SECTION: SIA INTERFACE SHOWCASE (Slides 15 & 16) ========== */}
+      <div className="pt-20 pb-24 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
+        
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-16 items-center">
+            
+            {/* Left Column: SIA workspace preview image */}
+            <div className="flex-1 w-full order-2 lg:order-1">
+              <div className="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative bg-[#090a12] aspect-[4/3]">
+                <img 
+                  src="/extracted-images/page_16_img_1_91.jpeg" 
+                  alt="SIA Smart Intelligent Assistant Workspace login" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
 
-        <div className="max-w-[1400px] mx-auto relative z-10 text-left">
-          {/* Vision */}
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] tracking-tight uppercase font-headline">Vision</h2>
-            <p className="text-[#1a1a2e]/60 text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto text-center">
-              To build world-class interdisciplinary tech environments that empower academic and corporate institutions to understand, innovate, and lead in the rapidly evolving world of Artificial Intelligence and Robotics.
+            {/* Right Column: SIA Details */}
+            <div className="flex-1 text-left space-y-6 order-1 lg:order-2">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest">
+                // PRIVACY-FIRST WORKSPACE
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-white font-headline uppercase leading-tight">
+                SIA: Smart Intelligent <span className="text-primary text-glow-red">Assistant</span>
+              </h2>
+              <p className="text-slate-300/80 text-base leading-relaxed font-light">
+                Powering secure, on-premise business and academic operations. Access your secure AI workspace with 100% private models, end-to-end local encryption, and role-based clearance.
+              </p>
+              
+              <div className="space-y-4 pt-4">
+                {[
+                  { label: "Local AI Server Connected", desc: "No connections, queries, or logs exit your local office building." },
+                  { label: "Data Encryption Active", desc: "All system queries, vectors, and weights are encrypted locally." },
+                  { label: "Organization Workspace Secured", desc: "Dedicated student and employee workspace hubs under total IT control." }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-3">
+                    <span className="material-symbols-outlined text-primary shrink-0">check_circle</span>
+                    <div>
+                      <h4 className="font-bold text-white text-sm">{item.label}</h4>
+                      <p className="text-slate-400 text-xs mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
+      </div>
+
+      {/* ========== SECTION: GOVERNMENT ENDORSEMENT & VISION (Slide 19) ========== */}
+      <div className="pt-24 pb-28 bg-[#090a10] text-white relative overflow-hidden">
+        {/* Soft patriotic ambient backdrops */}
+        <div className="absolute top-1/4 left-[-10%] w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[160px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[160px] pointer-events-none" />
+        
+        {/* Fine grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+        />
+
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
+          
+          {/* Header */}
+          <div className="text-center mb-20 space-y-4">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/5 text-amber-400 text-xs font-bold uppercase tracking-[0.2em] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
+              National Pride & Collaborations
+            </span>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight uppercase font-headline">
+              Government Partnerships & <span className="text-primary text-glow-red">Vision</span>
+            </h2>
+            <div className="w-36 h-[3px] bg-gradient-to-r from-orange-500 via-white to-emerald-500 mx-auto rounded-full mt-4" />
+            <p className="text-slate-400 text-lg font-light max-w-3xl mx-auto pt-2">
+              Privileged to collaborate with senior governance nodes and education leaders to scale advanced technical learning facilities nationally.
             </p>
           </div>
 
-          {/* Mission Red Block */}
-          <div className="border border-primary/10 bg-white rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-xl shadow-primary/5 hover:border-primary/20 transition-all duration-300">
-
-
-            <h3 className="text-3xl font-black text-[#1a1a2e] uppercase font-headline mb-10 text-center">Mission</h3>
-
-            <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-              {[
-                {
-                  title: "Deploy Local AI Infrastructure",
-                  desc: "Assemble device-grade edge computing nodes, GPU accelerators, and localized model environments directly in the institution."
-                },
-                {
-                  title: "Cultivate Ethical & Entrepreneurial Leadership",
-                  desc: "Integrate frameworks that inspire students to design AI solutions addressing real-world economic, social, and industrial challenges."
-                },
-                {
-                  title: "Foster AI-First Innovation",
-                  desc: "Encourage critical thinking, cross-department collaboration, and creative research breakthroughs using offline AI models."
-                },
-                {
-                  title: "Empower Members with Practical AI Skills",
-                  desc: "Deliver hands-on curriculum templates, training materials, and placement linkages for sustainable professional growth."
-                }
-              ].map((item, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 mt-1">
-                    <span className="material-symbols-outlined text-primary text-base font-bold">check</span>
+          <div className="grid lg:grid-cols-12 gap-16 items-center text-left">
+            
+            {/* Left side text and awards */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="space-y-3">
+                <span className="text-sm font-bold font-mono text-primary tracking-wider uppercase block">// IMPACT STATISTICS</span>
+                <h3 className="text-3xl md:text-4.5xl font-black text-white uppercase font-headline leading-none">
+                  25,000+ <br />
+                  <span className="text-slate-400">Students Impacted</span>
+                </h3>
+                <p className="text-slate-400 text-base leading-relaxed font-light pt-2">
+                  AIR G International is in active discussions and operational deployments with state government departments, police forces, and CM secretariats to scale offline AI and electronics education frameworks.
+                </p>
+              </div>
+              
+              {/* Premium Gold Border Recognition Box */}
+              <div className="relative rounded-[2rem] border border-amber-500/20 bg-amber-500/[0.02] p-8 space-y-4 overflow-hidden shadow-[inset_0_0_30px_rgba(245,158,11,0.02)]">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-amber-400 text-2xl">workspace_premium</span>
+                  <span className="text-xs font-mono text-amber-400 uppercase font-black tracking-widest block">Institutional Recognition</span>
+                </div>
+                <div className="space-y-3 border-l-2 border-amber-500/20 pl-4">
+                  <div>
+                    <h4 className="text-sm font-bold text-white leading-tight">Ministry of Education</h4>
+                    <p className="text-[10px] text-slate-400 font-medium">Government of India</p>
                   </div>
                   <div>
-                    <h4 className="font-bold text-[#1a1a2e] text-base mb-1">{item.title}</h4>
-                    <p className="text-[#1a1a2e]/55 text-xs font-light leading-relaxed">{item.desc}</p>
+                    <h4 className="text-sm font-bold text-white leading-tight">Hon. Education Minister of India</h4>
+                    <p className="text-[10px] text-slate-400 font-medium">Official Acknowledgment & Scaling Support</p>
                   </div>
                 </div>
-              ))}
+              </div>
+
+              <div className="flex flex-wrap gap-2.5">
+                {["Best AI Education Innovation", "EdTech Excellence", "National Innovation Award"].map((tag, idx) => (
+                  <span key={idx} className="px-3.5 py-1.5 bg-[#1e293b] border border-slate-700 text-slate-300 text-[10px] font-mono uppercase font-bold rounded-lg hover:border-primary/40 transition-colors duration-300">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            {/* Bottom Accent line */}
-            <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            {/* Right side government photos - Structured like a prestigious gallery */}
+            <div className="lg:col-span-7 grid grid-cols-2 gap-6 md:gap-8">
+              
+              {/* Photo 1: DGP Discussion */}
+              <div className="group relative rounded-[2.5rem] overflow-hidden border border-slate-800 hover:border-amber-500/30 shadow-2xl transition-all duration-500 bg-slate-900 aspect-[3/4]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent z-10 pointer-events-none" />
+                <img 
+                  src="/extracted-images/page_19_img_1_105.jpeg" 
+                  alt="Government discussion with DGP Sadanand Date and Chief Minister OSD Chandrashekhar Vaze" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                
+                {/* HUD Overlay details */}
+                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
+                  DGP & CM OSD
+                </div>
+                
+                <div className="absolute bottom-6 left-6 right-6 z-20">
+                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// STATE SECURE CAPABILITIES</div>
+                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date & CM OSD C. Vaze</h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-1">In discussion on state police & cyber-security infrastructure integrations.</p>
+                </div>
+              </div>
+
+              {/* Photo 2: CM Devendra Fadnavis */}
+              <div className="group relative rounded-[2.5rem] overflow-hidden border border-slate-800 hover:border-amber-500/30 shadow-2xl transition-all duration-500 bg-slate-900 aspect-[3/4]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent z-10 pointer-events-none" />
+                <img 
+                  src="/extracted-images/page_19_img_2_106.png" 
+                  alt="Government consultation with Chief Minister Devendra Fadnavis" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                
+                {/* HUD Overlay details */}
+                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
+                  CM MEETING
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6 z-20">
+                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// EXECUTIVE SECRETARIAT</div>
+                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Devendra Fadnavis</h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-1">Reviewing the blueprint of Bharat AI Engine implementation for regional schools.</p>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>
