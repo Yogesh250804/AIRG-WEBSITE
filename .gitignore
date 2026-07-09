@@ -41,3 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# Local downloads and temporary scripts
+/pics/
+/scratch/
+*.zip
+*.crdownload

@@ -32,6 +32,11 @@ export async function GET() {
         isAbsolute: true
       },
       {
+        src: 'y:\\PROJECTS\\AIG-WEBSITE\\AIR G INTERNATIONAL PDEA.pdf',
+        dest: 'brochure.pdf',
+        isAbsolute: true
+      },
+      {
         src: 'y:\\PROJECTS\\AIG-WEBSITE\\scratch\\pmo_all_extracted\\page_4_img_1_xref_254.jpeg',
         dest: 'extracted-images/kaduna_uni.png',
         isAbsolute: true

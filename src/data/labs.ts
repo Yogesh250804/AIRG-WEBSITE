@@ -219,10 +219,13 @@ export const labsData: Lab[] = [
     "desc": "Microcontrollers & Displays. Coding LED pixel panels and running simple games on Arduino.",
     "detailedDesc": "Koteshwar Vidyaly Lab in Wai focuses on embedded software. Students connect microchips with LED matrices, programming basic snake games, countdown timers, and scrolling message displays.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/1b6ad0f0-e1bb-4ef7-b799-60d07bbc9800.jpeg",
+    "img": "/extracted-images/koteshwar/koteshwar_0.jpeg",
     "images": [
-      "/extracted-hi/1b6ad0f0-e1bb-4ef7-b799-60d07bbc9800.jpeg",
-      "/extracted-hi/d4e1f097-6287-480b-a416-68daa23276ee.jpeg"
+      "/extracted-images/koteshwar/koteshwar_0.jpeg",
+      "/extracted-images/koteshwar/koteshwar_1.jpeg",
+      "/extracted-images/koteshwar/koteshwar_2.jpeg",
+      "/extracted-images/koteshwar/koteshwar_3.jpeg",
+      "/extracted-images/koteshwar/koteshwar_4.jpeg"
     ],
     "techStack": [
       "Arduino Nano",
@@ -532,10 +535,13 @@ export const labsData: Lab[] = [
     "desc": "Immersive VR Education. Navigating solar systems and organic cells in virtual headsets.",
     "detailedDesc": "Located at Holy Convent in Karad, this lab utilizes VR to teach complex sciences. Students take virtual field trips to space, examine microscopic cells, and manipulate virtual organs to bring textbooks to life.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/71604ee3-d3a6-4fa5-af0a-3d7ea92a82e6.jpeg",
+    "img": "/extracted-images/holy_convent/holy_convent_0.jpeg",
     "images": [
-      "/extracted-hi/71604ee3-d3a6-4fa5-af0a-3d7ea92a82e6.jpeg",
-      "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg"
+      "/extracted-images/holy_convent/holy_convent_0.jpeg",
+      "/extracted-images/holy_convent/holy_convent_1.jpeg",
+      "/extracted-images/holy_convent/holy_convent_2.jpeg",
+      "/extracted-images/holy_convent/holy_convent_3.jpeg",
+      "/extracted-images/holy_convent/holy_convent_4.jpeg"
     ],
     "techStack": [
       "VR Educational Suites",
@@ -571,10 +577,13 @@ export const labsData: Lab[] = [
     "desc": "Coding & Algorithms. Basic Python workshops and logic puzzles to teach computational thinking.",
     "detailedDesc": "EON Hub focuses on computer programming fundamentals. Through solving logic puzzles, writing basic Python algorithms, and sorting lists, students develop strong computational thinking skills.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg",
+    "img": "/extracted-images/eon/eon_0.jpeg",
     "images": [
-      "/extracted-hi/8b0e6f42-c5bd-4113-8726-4a5eed2c1842.jpeg",
-      "/extracted-hi/acdaffd4-7572-43c2-8b34-2a0df298aca1.jpeg"
+      "/extracted-images/eon/eon_0.jpeg",
+      "/extracted-images/eon/eon_1.jpeg",
+      "/extracted-images/eon/eon_2.jpeg",
+      "/extracted-images/eon/eon_3.jpeg",
+      "/extracted-images/eon/eon_4.jpeg"
     ],
     "techStack": [
       "Python 3",

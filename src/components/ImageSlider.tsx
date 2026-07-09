@@ -13,7 +13,7 @@ interface ImageSliderProps {
 export default function ImageSlider({ 
   images, 
   name, 
-  className = "relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-sm border border-black/5 bg-slate-100 group select-none" 
+  className = "relative w-full aspect-[16/9] rounded-3xl overflow-hidden shadow-sm border border-black/5 bg-slate-100 group select-none" 
 }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
@@ -72,7 +72,7 @@ export default function ImageSlider({
               src={images[currentIndex]}
               alt={`${name} classroom view ${currentIndex + 1}`}
               fill
-              className="object-cover"
+              className="object-contain bg-[#1a1a2e]"
               sizes="100vw"
               priority
             />

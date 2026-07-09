@@ -9,7 +9,8 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { 
   Globe, Award, Database, GraduationCap, MapPin, 
-  Lightbulb, ChevronRight, ArrowRight
+  Lightbulb, ChevronRight, ArrowRight,
+  Bot, Sprout, Rocket, Shield
 } from "lucide-react";
 
 // CountUp Component for premium statistical animations
@@ -3348,6 +3349,182 @@ export default function NewDesignContent() {
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Comprehensive School STEM Education Showcase */}
+              <div className="space-y-12 mb-16 relative z-10 text-left">
+                {/* Section Header */}
+                <div className="text-center space-y-4 max-w-3xl mx-auto">
+                  <span className="text-xs font-bold font-mono text-primary uppercase tracking-widest block">// COMPLETE SCHOOL LAB ECOSYSTEM</span>
+                  <h3 className="font-headline text-3xl md:text-4xl font-black text-[#1a1a2e] uppercase tracking-tight">
+                    Empowering the Next Generation of Innovators
+                  </h3>
+                  <p className="text-sm text-[#1a1a2e]/60 font-light max-w-2xl mx-auto leading-relaxed">
+                    We set up physical AI Innovation Labs on school campuses. We handle the entire deployment: installing localized GPU servers (Bharat AI Engine), providing electronics & robotics hardware kits, integrating school-syllabus coding classes, and training teachers.
+                  </p>
+                </div>
+
+                {/* 4-Column Grid: What Students Learn */}
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[
+                    {
+                      title: "School Robotics & Coding",
+                      desc: "From basic scratch block coding to programming C++ logic on Arduino. Students build autonomous robots, line followers, and logic circuits.",
+                      icon: Bot,
+                      color: "#1D4ED8", // Darker premium blue (blue-700)
+                      bg: "from-blue-500/10 to-transparent",
+                      border: "hover:border-blue-500/30"
+                    },
+                    {
+                      title: "IoT & Smart Farming",
+                      desc: "Real-world telemetry learning. Students interface soil sensors with automated water pumps, building telemetry units and weather trackers.",
+                      icon: Sprout,
+                      color: "#047857", // Darker premium emerald (emerald-700)
+                      bg: "from-emerald-500/10 to-transparent",
+                      border: "hover:border-emerald-500/30"
+                    },
+                    {
+                      title: "Space & Aerodynamics",
+                      desc: "Building model gliders and launching educational rockets. Students explore aerodynamics, airflow simulations, and core physics in action.",
+                      icon: Rocket,
+                      color: "#C2410C", // Darker premium orange (orange-700)
+                      bg: "from-orange-500/10 to-transparent",
+                      border: "hover:border-orange-500/30"
+                    },
+                    {
+                      title: "Cyber Safe & Web Basics",
+                      desc: "Teaching HTML/CSS web design alongside safe browsing habits, cryptography principles, and computing system infrastructure basics.",
+                      icon: Shield,
+                      color: "#6D28D9", // Darker premium purple (purple-700)
+                      bg: "from-purple-500/10 to-transparent",
+                      border: "hover:border-purple-500/30"
+                    }
+                  ].map((pillar, idx) => (
+                    <div key={idx} className={`glass-premium p-6 rounded-[2rem] border border-black/5 bg-gradient-to-br ${pillar.bg} transition-all duration-300 ${pillar.border} hover:shadow-md flex flex-col justify-between h-full`}>
+                      <div className="space-y-4">
+                        <span className="w-10 h-10 rounded-2xl bg-white/80 shadow-sm border border-black/5 flex items-center justify-center">
+                          <pillar.icon size={20} color={pillar.color} fill={`${pillar.color}40`} />
+                        </span>
+                        <h4 className="font-bold text-[#1a1a2e] text-base uppercase tracking-tight">{pillar.title}</h4>
+                        <p className="text-xs text-[#1a1a2e]/55 leading-relaxed font-light">{pillar.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Detailed Info & Brochure Download */}
+                <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+                  {/* Left: Detailed Info about Bharat AI & School Labs */}
+                  <div className="lg:col-span-7 glass-premium p-6 md:p-8 rounded-[2.5rem] border border-black/5 flex flex-col justify-between space-y-6">
+                    <div className="space-y-4">
+                      <span className="text-[10px] font-mono text-primary uppercase font-bold tracking-widest block">
+                        // UNDER THE HOOD
+                      </span>
+                      <h4 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight">
+                        Localized AI Power for School Labs
+                      </h4>
+                      <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-light font-sans text-justify">
+                        Traditional AI applications rely heavily on high-speed internet and expensive cloud servers, which are impractical for school labs with limited bandwidth. The <strong>Bharat AI Engine</strong> resolves this by bringing high-performance edge hardware directly into the school.
+                      </p>
+                    </div>
+
+                    {/* Features grid */}
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 text-primary">
+                          <span className="material-symbols-outlined text-base">dns</span>
+                          <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-tight">Offline Edge Server</h5>
+                        </div>
+                        <p className="text-[#1a1a2e]/55 text-[10px] leading-relaxed">
+                          A central localized server is set up inside the computer lab, enabling students to run complex LLM logic and code compilations offline.
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 text-primary">
+                          <span className="material-symbols-outlined text-base">wifi_off</span>
+                          <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-tight">Zero Internet Required</h5>
+                        </div>
+                        <p className="text-[#1a1a2e]/55 text-[10px] leading-relaxed">
+                          All AI workloads, speech generation, and robotics programming run strictly over the local LAN, protecting students from external web risks.
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 text-primary">
+                          <span className="material-symbols-outlined text-base">code_blocks</span>
+                          <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-tight">Hardware Integration SDK</h5>
+                        </div>
+                        <p className="text-[#1a1a2e]/55 text-[10px] leading-relaxed">
+                          Direct libraries to program microchips, drones, and autonomous robotic models using local GPU resources.
+                        </p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 text-primary">
+                          <span className="material-symbols-outlined text-base">school</span>
+                          <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-tight">Certified Instructor FDP</h5>
+                        </div>
+                        <p className="text-[#1a1a2e]/55 text-[10px] leading-relaxed">
+                          We run training bootcamps (Faculty Development Programs) to equip and certify school computer teachers to run the lab syllabus.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right: Download Brochure / Curriculum */}
+                  <div className="lg:col-span-5 glass-premium p-6 md:p-8 rounded-[2.5rem] border-2 border-primary/20 bg-gradient-to-b from-primary/[0.04] to-transparent flex flex-col justify-between relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
+                    
+                    <div className="space-y-5">
+                      <div className="flex justify-between items-start">
+                        <span className="px-2.5 py-1 bg-primary/10 border border-primary/20 rounded-lg text-[9px] font-mono text-primary uppercase font-bold tracking-wider inline-block">
+                          Official Curriculum
+                        </span>
+                        <span className="material-symbols-outlined text-primary text-xl">menu_book</span>
+                      </div>
+                      
+                      <h4 className="font-headline text-xl font-black text-[#1a1a2e] uppercase tracking-tight">
+                        School Lab Syllabus & Brochure
+                      </h4>
+                      <p className="text-xs text-[#1a1a2e]/55 leading-relaxed font-light">
+                        Download the comprehensive curriculum proposal and equipment catalog designed for schools:
+                      </p>
+                      
+                      <ul className="space-y-3 text-[11px] text-[#1a1a2e]/60 font-light">
+                        <li className="flex items-center gap-2.5">
+                          <span className="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                          Complete Grade 5th to 12th Syllabus
+                        </li>
+                        <li className="flex items-center gap-2.5">
+                          <span className="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                          Hardware Kits & Robotics Catalog
+                        </li>
+                        <li className="flex items-center gap-2.5">
+                          <span className="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                          Edge Server & GPU Lab Architecture
+                        </li>
+                        <li className="flex items-center gap-2.5">
+                          <span className="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                          FDP (Teacher Certification) Timelines
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* PDF Brochure Download Action Card */}
+                    <div className="mt-8 pt-6 border-t border-black/5">
+                      <a 
+                        href="/brochure.pdf" 
+                        download="AIR_G_School_Labs_Brochure.pdf"
+                        onClick={() => addNotification("Downloading educational brochure PDF...")}
+                        className="w-full py-4 rounded-2xl bg-gradient-to-r from-primary to-red-600 hover:from-primary/90 hover:to-red-600/90 text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer active:scale-[0.98] text-center"
+                      >
+                        <span className="material-symbols-outlined text-lg">download</span>
+                        Download School Labs Brochure
+                      </a>
                     </div>
                   </div>
                 </div>
