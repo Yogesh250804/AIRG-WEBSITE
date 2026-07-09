@@ -886,7 +886,7 @@ export default function AIInfrastructuresB2BPage() {
               <div className="space-y-3">
                 <span className="text-sm font-bold font-mono text-primary tracking-wider uppercase block">// IMPACT STATISTICS</span>
                 <h3 className="text-3xl md:text-4.5xl font-black text-white uppercase font-headline leading-none">
-                  25,000+ <br />
+                  50,000+ <br />
                   <span className="text-slate-400">Students Impacted</span>
                 </h3>
                 <p className="text-slate-400 text-base leading-relaxed font-light pt-2">
