@@ -66,7 +66,6 @@ export default function AchievementsPartners() {
   const row2 = [
     { name: "DYP", logo: "/logos/dyp.png", scaleVal: 1.3 },
     { name: "Western University", logo: "/logos/western.png" },
-    { name: "Pratham", logo: "/logos/pratham.png", scaleVal: 1.3 },
     { name: "Cummins", logo: "/logos/cummins.png", scaleVal: 1.6 },
     { name: "Partner 5", logo: "/logos/left_5.jpg" },
     { name: "Partner 6", logo: "/logos/left_6.jpg", scaleVal: 0.7 },
@@ -75,7 +74,7 @@ export default function AchievementsPartners() {
   ];
 
   const countries = [
-    { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 15+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
+    { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 25+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
     { name: "Saudi Arabia", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
     { name: "Ethiopia", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
     { name: "Nigeria", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
@@ -120,7 +119,7 @@ export default function AchievementsPartners() {
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <CountUp value={50000} label="Students+" subtitle="Empowered through global tech programs and interactive labs." />
           <CountUp value={7} label="Countries+" subtitle="Active learning programs deployed across multiple continents." />
-          <CountUp value={15} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
+          <CountUp value={25} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
           <CountUp value={50} label="Partners+" subtitle="Academic institutions, state incubation centers, & industry leaders." />
         </div>
       </section>

@@ -95,14 +95,13 @@ const row1 = [
 const row2 = [
   { name: "DYP", logo: "/logos/dyp.png", scaleVal: 1.3 },
   { name: "Western University", logo: "/logos/western.png" },
-  { name: "Pratham", logo: "/logos/pratham.png", scaleVal: 1.3 },
   { name: "Cummins", logo: "/logos/cummins.png", scaleVal: 1.6 },
   { name: "Partner 7", logo: "/logos/left_7.jpg", scaleVal: 0.8 },
   { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.4 }
 ];
 
 const countries = [
-  { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 15+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
+  { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 25+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
   { name: "Saudi Arabia", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
   { name: "Ethiopia", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
   { name: "Nigeria", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
@@ -156,10 +155,12 @@ const Logo = () => (
 // Optimized 3D Brand Emblem Component (Declared globally to prevent React unmounting lag)
 const ButterySmoothA = ({ 
   isTransitioning, 
-  currentLetter = "A"
+  currentLetter = "A",
+  isMirrored = false
 }: { 
   isTransitioning: boolean; 
   currentLetter?: string; 
+  isMirrored?: boolean;
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   
@@ -169,7 +170,7 @@ const ButterySmoothA = ({
     }
   }, []);
 
-  const layers = isTransitioning ? 2 : (isMobile ? 4 : 12);
+  const layers = isTransitioning ? 2 : (isMobile ? 3 : 8);
   
   return (
     <div 
@@ -184,7 +185,7 @@ const ButterySmoothA = ({
         const isFront = i === layers - 1;
         const isBack = i === 0;
         const isFace = isFront || isBack;
-        const depthZ = i * (isMobile ? 8 : 3.5) - (layers * (isMobile ? 4 : 1.75));
+        const depthZ = i * (isMobile ? 10.5 : 5.25) - (layers * (isMobile ? 5.25 : 2.625));
         
         return (
           <div 
@@ -222,7 +223,7 @@ const ButterySmoothA = ({
                 strokeWidth={isFace ? "2.5" : "0"}
                 strokeLinejoin="round"
                 style={{ filter: isFace ? `url(#neon-glow-${i})` : 'none' }}
-                className={isFace ? "backdrop-blur-md" : ""}
+                className=""
               />
 
               {/* Stylized Geometric Letter inside Hexagon */}
@@ -237,6 +238,7 @@ const ButterySmoothA = ({
                 fontWeight="900"
                 fontFamily="var(--font-headline)"
                 opacity="0.9"
+                transform={isMirrored ? "translate(100, 0) scale(-1, 1)" : undefined}
               >
                 {currentLetter}
               </text>
@@ -274,6 +276,20 @@ export default function NewDesignContent() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>("India");
   const [selectedGlobalHub, setSelectedGlobalHub] = useState<any>(null);
   const [isMapFullscreen, setIsMapFullscreen] = useState(false);
+
+  // Animated words in hero
+  const [wordIndex, setWordIndex] = useState(0);
+  const heroWords = ["STUDENTS", "PROFESSIONALS", "EXPLORERS"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % heroWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [currentEmblemLetter, setCurrentEmblemLetter] = useState("A");
+  const [isEmblemMirrored, setIsEmblemMirrored] = useState(false);
 
    // Cart state
   const [cart, setCart] = useState<{ name: string; price: string; img: string; tag: string; quantity: number }[]>([]);
@@ -691,17 +707,8 @@ export default function NewDesignContent() {
       if (cycle !== lastCycleRef.current) {
         lastCycleRef.current = cycle;
         const index = ((cycle % letters.length) + letters.length) % letters.length;
-        
-        // Direct DOM update for instant frame-perfect text swap
-        const elements = document.querySelectorAll(".emblem-text-layer");
-        elements.forEach((el) => {
-          el.textContent = letters[index];
-          if (cycle % 2 !== 0) {
-            el.setAttribute("transform", "translate(100, 0) scale(-1, 1)");
-          } else {
-            el.removeAttribute("transform");
-          }
-        });
+        setCurrentEmblemLetter(letters[index]);
+        setIsEmblemMirrored(cycle % 2 !== 0);
       }
 
       animationFrame = requestAnimationFrame(animate);
@@ -1127,8 +1134,19 @@ export default function NewDesignContent() {
                     <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-[#EE2C3C] whitespace-nowrap">
                       The Next Gen
                     </span>
-                    <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-[#1a1a2e]/30">
-                      Innovators
+                    <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black text-[#1a1a2e]/30 overflow-hidden h-[1.15em] relative">
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={wordIndex}
+                          initial={{ x: "-100%", opacity: 0 }}
+                          animate={{ x: "0%", opacity: 1 }}
+                          exit={{ x: "100%", opacity: 0 }}
+                          transition={{ duration: 0.5, ease: "easeInOut" }}
+                          className="absolute left-0 top-0 w-full block whitespace-nowrap"
+                        >
+                          {heroWords[wordIndex]}
+                        </motion.span>
+                      </AnimatePresence>
                     </span>
                   </h1>
                   
@@ -1333,7 +1351,8 @@ export default function NewDesignContent() {
                     >
                       <ButterySmoothA 
                         isTransitioning={isTransitioning} 
-                        currentLetter="A"
+                        currentLetter={currentEmblemLetter}
+                        isMirrored={isEmblemMirrored}
                       />
                     </motion.div>
                   </motion.div>
