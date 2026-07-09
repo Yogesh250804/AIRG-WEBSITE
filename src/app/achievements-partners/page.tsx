@@ -75,7 +75,7 @@ export default function AchievementsPartners() {
   ];
 
   const countries = [
-    { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "30,000+ students, 15+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
+    { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 15+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
     { name: "Saudi Arabia", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
     { name: "Ethiopia", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
     { name: "Nigeria", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
@@ -118,7 +118,7 @@ export default function AchievementsPartners() {
 
         {/* Right side stats grid */}
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <CountUp value={30000} label="Students+" subtitle="Empowered through global tech programs and interactive labs." />
+          <CountUp value={50000} label="Students+" subtitle="Empowered through global tech programs and interactive labs." />
           <CountUp value={7} label="Countries+" subtitle="Active learning programs deployed across multiple continents." />
           <CountUp value={15} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
           <CountUp value={50} label="Partners+" subtitle="Academic institutions, state incubation centers, & industry leaders." />
@@ -465,14 +465,16 @@ export default function AchievementsPartners() {
                   onClick={() => setSelectedCountry(country.name)}
                   className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 flex items-center justify-between ${
                     selectedCountry === country.name
-                      ? "bg-[#1a1a2e] border-primary text-white shadow-lg"
+                      ? "bg-[#1a1a2e] border-primary text-white-force shadow-lg"
                       : "glass-premium border-black/5 text-[#1a1a2e] hover:border-black/20 bg-white"
                   }`}
                 >
                   <div>
-                    <h4 className="font-headline font-black uppercase text-sm tracking-wide">{country.name}</h4>
+                    <h4 className={`font-headline font-black uppercase text-sm tracking-wide ${
+                      selectedCountry === country.name ? "text-white-force" : "text-[#1a1a2e]"
+                    }`}>{country.name}</h4>
                     <span className={`text-[10px] font-mono tracking-wider uppercase ${selectedCountry === country.name ? "text-primary" : "text-[#1a1a2e]/40"}`}>
-                      {country.reach.split(",")[0]}
+                      {country.reach.split(", ")[0]}
                     </span>
                   </div>
                   <ChevronRight size={16} className={selectedCountry === country.name ? "text-primary" : "text-[#1a1a2e]/40"} />
