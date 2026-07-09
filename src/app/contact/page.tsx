@@ -148,7 +148,7 @@ export default function ContactPage() {
                       <p className="text-[#1a1a2e]/40 font-light max-w-sm mx-auto">
                         Thank you for reaching out. Our team will review it and get back to you within 24 hours.
                       </p>
-                      <button onClick={() => { setIsSubmitted(false); setFormData({ firstName: "", lastName: "", email: "", subject: "", message: "" }); }}
+                      <button onClick={() => { setIsSubmitted(false); setFormData({ firstName: "", lastName: "", email: "", entityType: "", entityName: "", subject: "", message: "" }); }}
                         className="px-8 py-3 border border-black/10 text-[#1a1a2e]/50 font-bold text-xs uppercase tracking-widest rounded-xl hover:border-[#EE2C3C]/30 transition-all">
                         Send Another Message
                       </button>
