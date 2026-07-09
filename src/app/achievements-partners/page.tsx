@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -13,8 +13,31 @@ import { Navbar } from "@/components/demo-navbar";
 // CountUp Component for premium statistical animations
 const CountUp = ({ value, label, subtitle }: { value: number; label: string; subtitle: string }) => {
   const [count, setCount] = useState(0);
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
     let start = 0;
     const duration = 1.5; // seconds
     const end = value;
@@ -33,10 +56,10 @@ const CountUp = ({ value, label, subtitle }: { value: number; label: string; sub
     };
     
     requestAnimationFrame(run);
-  }, [value]);
+  }, [value, hasStarted]);
 
   return (
-    <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
+    <div ref={elementRef} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div>
         <div className="font-headline text-5xl md:text-6xl font-black text-[#1a1a2e] tracking-tighter mb-2 group-hover:text-primary transition-colors duration-300">
@@ -104,7 +127,7 @@ export default function AchievementsPartners() {
             <div className="absolute bottom-0 left-[-4px] w-2 h-2 bg-black/10 rounded-full" />
           </div>
 
-          <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">01 // Global Ecosystem</span>
+
           <h1 className="font-headline tracking-tighter leading-[0.9] uppercase text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-[#1a1a2e]">
             Building The <br />
             <span className="text-primary text-glow-red">Future</span> Through <br />
@@ -133,7 +156,7 @@ export default function AchievementsPartners() {
       {/* SECTION 3: TRUSTED BY INDUSTRY & ACADEMIA */}
       <section className="relative z-10 w-full max-w-[1440px] mx-auto py-24 space-y-16 overflow-hidden">
         <div className="text-center max-w-3xl mx-auto space-y-3 px-6 md:px-20">
-          <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">02 // Partner Network</span>
+
           <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
             Trusted By Industry & <span className="text-primary text-glow-red">Academia</span>
           </h2>
@@ -238,7 +261,7 @@ export default function AchievementsPartners() {
           <div className="absolute left-0 top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
             <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
           </div>
-          <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">03 // Core Affiliations</span>
+
           <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
             Strategic <span className="text-primary text-glow-red">Partnerships</span>
           </h2>
@@ -302,7 +325,7 @@ export default function AchievementsPartners() {
       <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">04 // Institutional Recognition</span>
+
             <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
               Recognition & <span className="text-primary text-glow-red">Collaborations</span>
             </h2>
@@ -365,7 +388,7 @@ export default function AchievementsPartners() {
           <div className="absolute left-0 top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
             <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
           </div>
-          <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">05 // Global Milestones</span>
+
           <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
             Ecosystem <span className="text-primary text-glow-red">Success Stories</span>
           </h2>
@@ -379,26 +402,30 @@ export default function AchievementsPartners() {
             {
               title: "Kaduna State University, Nigeria",
               desc: "Kaduna State University, Nigeria, collaborates with us to establish an innovation hub on campus, fostering creativity and technological advancement among students.",
-              img: "/cards/ng.png",
-              tag: "Nigeria"
+              img: "/extracted-images/kaduna_uni.png?v=1",
+              tag: "Nigeria",
+              objectPosition: "object-top"
             },
             {
               title: "Ministry Recognition (MoE, India)",
               desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
-              img: "/extracted-images/page_19_img_1_105.jpeg",
-              tag: "National Recognition"
+              img: "/extracted-images/moe_pradhan.png?v=4",
+              tag: "National Recognition",
+              objectPosition: "object-center"
             },
             {
               title: "IAIRESCO Global Community",
               desc: "IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.",
-              img: "/cards/media__1780295525047.png",
-              tag: "Global Partner"
+              img: "/extracted-images/iairesco_global.png?v=1",
+              tag: "Global Partner",
+              objectPosition: "object-top"
             },
             {
               title: "Western International School, Cambodia",
               desc: "Western International School in Cambodia partners with us to set up a state-of-the-art hi-tech lab and integrate Hexobrain products into classrooms, enriching students' learning experiences.",
-              img: "/cards/kh.png",
-              tag: "Cambodia"
+              img: "/extracted-images/cambodia_school.png?v=1",
+              tag: "Cambodia",
+              objectPosition: "object-top"
             }
           ].map((story, idx) => (
             <div key={idx} className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full">
@@ -407,7 +434,7 @@ export default function AchievementsPartners() {
                 <img 
                   src={story.img} 
                   alt={story.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                  className={`w-full h-full object-cover ${story.objectPosition || "object-center"} group-hover:scale-105 transition-transform duration-500`} 
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400";
                   }}
@@ -446,7 +473,7 @@ export default function AchievementsPartners() {
       <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
         <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">06 // Interactive Networks</span>
+
             <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
               Global Hubs & <span className="text-primary text-glow-red">Presence</span>
             </h2>
@@ -554,7 +581,7 @@ export default function AchievementsPartners() {
       {/* SECTION 8: WHY ORGANIZATIONS WORK WITH AIR G */}
       <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 space-y-16">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">08 // Value Propositions</span>
+
           <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
             Why Organizations <span className="text-primary text-glow-red">Work With Us</span>
           </h2>
@@ -615,7 +642,7 @@ export default function AchievementsPartners() {
         <div className="relative glass-premium rounded-[3.5rem] border border-black/5 overflow-hidden p-8 md:p-16 text-center space-y-8">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '20px 20px' }} />
           
-          <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">09 // Setup Node Connection</span>
+
           <h2 className="font-headline text-4xl md:text-6xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
             Let's Build The Future <br />
             <span className="text-primary text-glow-red">Together</span>

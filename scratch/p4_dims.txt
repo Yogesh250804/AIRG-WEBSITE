@@ -1,0 +1,7 @@
+page4_img_0.png: 811x161 (mode: RGB)
+page4_img_1.jpeg: 308x204 (mode: RGB)
+page4_img_2.jpeg: 807x605 (mode: RGB)
+page4_img_3.png: 1200x675 (mode: RGB)
+page4_img_4.jpeg: 308x410 (mode: RGB)
+page4_img_5.png: 580x291 (mode: RGB)
+page4_img_6.jpeg: 360x480 (mode: RGB)

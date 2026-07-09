@@ -1,0 +1,25 @@
+Page 1 has 4 images:
+  Img 0: xref=107, size=514x1112, ext=png
+  Img 1: xref=108, size=454x605, ext=jpeg
+  Img 2: xref=109, size=615x410, ext=png
+  Img 3: xref=110, size=240x320, ext=jpeg
+Page 2 has 3 images:
+  Img 0: xref=119, size=594x1056, ext=jpeg
+  Img 1: xref=120, size=605x807, ext=jpeg
+  Img 2: xref=121, size=605x807, ext=jpeg
+Page 3 has 1 images:
+  Img 0: xref=128, size=728x486, ext=jpeg
+Page 4 has 7 images:
+  Img 0: xref=134, size=811x161, ext=png
+  Img 1: xref=254, size=308x204, ext=jpeg
+  Img 2: xref=257, size=807x605, ext=jpeg
+  Img 3: xref=281, size=1200x675, ext=png
+  Img 4: xref=284, size=308x410, ext=jpeg
+  Img 5: xref=287, size=580x291, ext=png
+  Img 6: xref=310, size=360x480, ext=jpeg
+Page 5 has 2 images:
+  Img 0: xref=165, size=1229x922, ext=jpeg
+  Img 1: xref=320, size=820x615, ext=jpeg
+Page 6 has 2 images:
+  Img 0: xref=170, size=800x600, ext=jpeg
+  Img 1: xref=171, size=205x308, ext=png

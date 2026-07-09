@@ -1,7 +1,8 @@
-import Image from "next/image";
+import { Navbar } from "@/components/demo-navbar";
+import { workshopsData } from "@/data/workshops";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { workshopsData } from "@/data/workshops";
+import Image from "next/image";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,54 +25,10 @@ export default async function WorkshopDetailPage({ params }: PageProps) {
         <div className="absolute inset-0 bg-[radial-gradient(rgba(235,0,40,0.03)_1px,transparent_1px)] bg-[size:40px_40px] opacity-70" />
       </div>
 
-      {/* Futuristic Header */}
-      <header className="relative z-10 w-full glass-premium border-b border-black/5">
-        <nav className="flex justify-between items-center max-w-[1440px] mx-auto px-6 md:px-20 h-20">
-          <Link href="/#hero" className="flex items-center gap-4 group cursor-pointer">
-            <div className="flex flex-col items-center justify-center text-center group-hover:scale-105 transition-transform duration-300 py-1 select-none">
-              {/* Stylized Logo Typography */}
-              <div className="flex flex-col items-center leading-none select-none">
-                <div className="flex items-baseline justify-center gap-1.5 leading-none">
-                  <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">AIR</span>
-                  <span className="font-serif text-[17px] font-black text-[#EB0028] tracking-wide">GURUJI</span>
-                </div>
-                <span className="text-[6.5px] font-sans font-bold text-[#EB0028] tracking-[0.05em] mt-0.5 uppercase leading-none">
-                  AIR G INNOVATION
-                </span>
-                <span className="text-[8px] font-sans font-black text-[#1a1a2e] tracking-[0.38em] mt-0.5 uppercase leading-none">
-                  INTERNATIONAL
-                </span>
-              </div>
-            </div>
-          </Link>
-
-          {/* Navigation Links */}
-          <div className="hidden lg:flex gap-10 items-center">
-            {['hero', 'labs', 'centres', 'workshops', 'learning', 'store'].map((item) => (
-              <Link
-                key={item}
-                href={`/#${item}`}
-                className={`nav-link font-semibold transition-colors text-xs uppercase tracking-widest ${
-                  item === 'workshops' ? 'text-[#EB0028]' : 'text-[#1a1a2e]/40 hover:text-[#1a1a2e]'
-                }`}
-              >
-                {item === 'hero' ? 'Home' : item.replace('labs', 'Innovation Labs').replace('centres', 'Global Centres').replace('learning', 'Learning')}
-              </Link>
-            ))}
-          </div>
-
-          <Link
-            href="/#workshops"
-            className="px-5 py-2.5 rounded-xl border border-black/5 bg-white/40 backdrop-blur-md hover:border-primary/50 text-[#1a1a2e]/60 hover:text-[#1a1a2e] transition-all duration-300 flex items-center gap-2 text-xs font-bold uppercase tracking-widest font-mono shadow-sm"
-          >
-            <span className="material-symbols-outlined text-xs">arrow_back</span>
-            Back to Records
-          </Link>
-        </nav>
-      </header>
+      <Navbar />
 
       {/* Main Content Container */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 pt-12 pb-24">
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 pt-32 pb-24">
         {/* Breadcrumb & Navigation helper */}
         <div className="flex items-center gap-2 text-[10px] text-[#1a1a2e]/30 font-mono tracking-widest uppercase mb-8">
           <Link href="/" className="hover:text-primary transition-colors">OPERATIONS</Link>

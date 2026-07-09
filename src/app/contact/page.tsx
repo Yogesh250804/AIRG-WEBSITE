@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", subject: "", message: "" });
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", entityType: "School", entityName: "", subject: "", message: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ export default function ContactPage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -99,6 +99,22 @@ export default function ContactPage() {
                         <div className="space-y-1">
                           <label className="text-[9px] font-black text-[#1a1a2e]/40 uppercase tracking-widest">Last Name</label>
                           <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" required
+                            className="w-full h-12 bg-[#f8f8fa] rounded-xl px-4 text-sm border border-black/5 focus:outline-none focus:border-[#EE2C3C]/30" />
+                        </div>
+                      </div>
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-black text-[#1a1a2e]/40 uppercase tracking-widest">Entity Type</label>
+                          <select name="entityType" value={formData.entityType} onChange={handleChange} required
+                            className="w-full h-12 bg-[#f8f8fa] rounded-xl px-4 text-sm border border-black/5 focus:outline-none focus:border-[#EE2C3C]/30">
+                            <option value="School">School</option>
+                            <option value="Institute">Institute</option>
+                            <option value="Industry">Industry</option>
+                          </select>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[9px] font-black text-[#1a1a2e]/40 uppercase tracking-widest">Organization Name</label>
+                          <input name="entityName" value={formData.entityName} onChange={handleChange} placeholder="e.g. Greenwood High" required
                             className="w-full h-12 bg-[#f8f8fa] rounded-xl px-4 text-sm border border-black/5 focus:outline-none focus:border-[#EE2C3C]/30" />
                         </div>
                       </div>

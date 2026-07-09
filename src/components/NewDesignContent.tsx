@@ -15,8 +15,31 @@ import {
 // CountUp Component for premium statistical animations
 const CountUp = ({ value, label, subtitle }: { value: number; label: string; subtitle: string }) => {
   const [count, setCount] = useState(0);
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
     let start = 0;
     const duration = 1.5; // seconds
     const end = value;
@@ -35,10 +58,10 @@ const CountUp = ({ value, label, subtitle }: { value: number; label: string; sub
     };
     
     requestAnimationFrame(run);
-  }, [value]);
+  }, [value, hasStarted]);
 
   return (
-    <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden text-left">
+    <div ref={elementRef} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden text-left">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div>
         <div className="font-headline text-5xl md:text-6xl font-black text-[#1a1a2e] tracking-tighter mb-2 group-hover:text-primary transition-colors duration-300">
@@ -868,7 +891,7 @@ export default function NewDesignContent() {
                         onClick={() => navigateTo('learning')}
                         className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left"
                       >
-                        Overview
+                        School Labs
                       </button>
                       <Link
                         href="/learning/pdet-lab"
@@ -1017,7 +1040,7 @@ export default function NewDesignContent() {
                               setIsMobileMenuOpen(false);
                             }}
                           >
-                            Overview
+                            School Labs
                           </button>
                           <Link
                             href="/learning/pdet-lab"
@@ -1116,6 +1139,7 @@ export default function NewDesignContent() {
                 <div className="absolute top-[20%] left-[-15%] w-[700px] h-[700px] bg-[#FF5C6C]/6 rounded-full blur-[150px] opacity-75 animate-pulse" style={{ animationDuration: "12s" }} />
                 <div className="absolute top-[45%] right-[-20%] w-[800px] h-[800px] bg-primary/8 rounded-full blur-[180px] opacity-90 animate-pulse" style={{ animationDuration: "10s" }} />
                 <div className="absolute top-[70%] left-[-10%] w-[600px] h-[600px] bg-[#EE2C3C]/6 rounded-full blur-[140px]" />
+                <div className="absolute bottom-[5%] left-[-5%] w-[500px] h-[500px] bg-primary/8 rounded-full blur-[130px] animate-pulse" style={{ animationDuration: "9s" }} />
                 <div className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-primary/8 rounded-full blur-[130px] animate-pulse" style={{ animationDuration: "9s" }} />
               </div>
               <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 md:px-20 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center pt-4 pb-16">
@@ -1151,7 +1175,7 @@ export default function NewDesignContent() {
                   </h1>
                   
                   <p className="text-sm md:text-lg text-[#1a1a2e]/40 max-w-lg font-light leading-relaxed">
-                    Equipping students across India with hands-on robotics, AI, and deep-tech skills through our network of innovation labs and tactical training programs.
+                    Equipping students / professionals across India with hands-on robotics, AI, and deep-tech skills through our network of innovation labs and tactical training programs.
                   </p>
                   <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
                     <button 
@@ -1191,7 +1215,7 @@ export default function NewDesignContent() {
                   <div className="absolute top-8 left-8 font-mono text-[8px] text-[#1a1a2e]/40 pointer-events-none space-y-1 select-none">
                     <div>SYSTEM: AIG_GRID_V2.0</div>
                     <div>STATUS: <span className="text-primary font-black animate-pulse">ONLINE</span></div>
-                    <div>SECURE NODE: #04_SATARA</div>
+                    <div>SECURE NODE: INDIA</div>
                   </div>
                   
                   <div className="absolute top-8 right-8 font-mono text-[8px] text-[#1a1a2e]/40 pointer-events-none text-right select-none">
@@ -1317,7 +1341,7 @@ export default function NewDesignContent() {
 
                       {/* Tech Angle Text / Info overlays mock */}
                       <text x="260" y="75" fill="#EB0028" fontSize="7" fontFamily="monospace" fontWeight="bold" opacity="0.6">SYS_STATUS: ACTIVE</text>
-                      <text x="70" y="244" fill="#1a1a2e" fontSize="7" fontFamily="monospace" fontWeight="bold" opacity="0.4">NODE_04 // SATARA</text>
+                      <text x="70" y="244" fill="#1a1a2e" fontSize="7" fontFamily="monospace" fontWeight="bold" opacity="0.4">INDIA</text>
                       <text x="350" y="425" fill="#EB0028" fontSize="7" fontFamily="monospace" fontWeight="bold" opacity="0.6">R&amp;D_GRID: DEPLOYED</text>
                     </svg>
                   </div>
@@ -1358,10 +1382,15 @@ export default function NewDesignContent() {
                   </motion.div>
                 </div>
               </div>
+              {/* PREMIUM GRADIENT DIVIDER LINE */}
+              <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
+                <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+              </div>
+
               {/* SECTION 3: TRUSTED BY INDUSTRY & ACADEMIA — Right after hero */}
               <section className="w-full relative z-10 max-w-[1440px] mx-auto py-20 space-y-16 overflow-hidden bg-white">
                 <div className="text-center max-w-3xl mx-auto space-y-3 px-6 md:px-20">
-                  <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">02 // Partner Network</span>
+
                   <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                     Trusted By Industry & <span className="text-primary text-glow-red">Academia</span>
                   </h2>
@@ -1457,6 +1486,11 @@ export default function NewDesignContent() {
 
               {/* EXPLORE OUR IMPACT / ACHIEVEMENTS & PARTNERS CONTENT */}
               <div className="w-full pt-10 pb-8 relative z-10 bg-white overflow-hidden text-left">
+                {/* PREMIUM GRADIENT DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20 mb-10">
+                  <div className="w-full h-[1.5px] bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+                </div>
+
                 {/* SECTION 1: HERO */}
                 <section id="explore-impact" className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 pt-10 pb-20 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                   <div className="lg:col-span-6 space-y-8 relative pl-6 sm:pl-8">
@@ -1465,7 +1499,7 @@ export default function NewDesignContent() {
                       <div className="absolute bottom-0 left-[-4px] w-2 h-2 bg-black/10 rounded-full" />
                     </div>
 
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">01 // Global Ecosystem</span>
+
                     <h2 className="font-headline tracking-tighter leading-[0.9] uppercase text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-[#1a1a2e]">
                       Building The <br />
                       <span className="text-primary text-glow-red">Future</span> Through <br />
@@ -1480,10 +1514,15 @@ export default function NewDesignContent() {
                   <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <CountUp value={50000} label="Students+" subtitle="Empowered through global tech programs and interactive labs." />
                     <CountUp value={7} label="Countries+" subtitle="Active learning programs deployed across multiple continents." />
-                    <CountUp value={25} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
+                    <CountUp value={50} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
                     <CountUp value={50} label="Partners+" subtitle="Academic institutions, state incubation centers, & industry leaders." />
                   </div>
                 </section>
+
+                {/* PREMIUM GRADIENT DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
+                </div>
 
                 {/* SECTION 4: STRATEGIC PARTNERSHIPS */}
                 <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 space-y-16">
@@ -1491,7 +1530,7 @@ export default function NewDesignContent() {
                     <div className="absolute left-0 top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
                       <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                     </div>
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">03 // Core Affiliations</span>
+
                     <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                       Strategic <span className="text-primary text-glow-red">Partnerships</span>
                     </h2>
@@ -1555,7 +1594,7 @@ export default function NewDesignContent() {
                 <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
                   <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
                     <div className="text-center max-w-3xl mx-auto space-y-3">
-                      <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">04 // Institutional Recognition</span>
+
                       <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                         Recognition & <span className="text-primary text-glow-red">Collaborations</span>
                       </h2>
@@ -1618,7 +1657,7 @@ export default function NewDesignContent() {
                     <div className="absolute left-0 top-0 h-full w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
                       <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                     </div>
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">05 // Global Milestones</span>
+
                     <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                       Ecosystem <span className="text-primary text-glow-red">Success Stories</span>
                     </h2>
@@ -1632,44 +1671,43 @@ export default function NewDesignContent() {
                       {
                         title: "Kaduna State University, Nigeria",
                         desc: "Kaduna State University, Nigeria, collaborates with us to establish an innovation hub on campus, fostering creativity and technological advancement among students.",
-                        img: "/cards/kaduna-state-uni.jpg",
-                        tag: "Nigeria"
+                        img: "/extracted-images/kaduna_uni.png?v=1",
+                        tag: "Nigeria",
+                        objectPosition: "object-top"
                       },
                       {
                         title: "Ministry Recognition (MoE, India)",
                         desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
-                        img: "/extracted-images/page_19_img_1_105.jpeg",
-                        tag: "National Recognition"
+                        img: "/extracted-images/moe_pradhan.png?v=4",
+                        tag: "National Recognition",
+                        objectPosition: "object-center"
                       },
                       {
                         title: "IAIRESCO Global Community",
                         desc: "IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.",
-                        img: "/cards/symbiosis-tbi.png",
-                        tag: "Global Partner"
+                        img: "/extracted-images/iairesco_global.png?v=1",
+                        tag: "Global Partner",
+                        objectPosition: "object-top"
                       },
                       {
                         title: "Western International School, Cambodia",
                         desc: "Western International School in Cambodia partners with us to set up a state-of-the-art hi-tech lab and integrate Hexobrain products into classrooms, enriching students' learning experiences.",
-                        img: "/cards/western-cambodia.jpg",
-                        tag: "Cambodia"
+                        img: "/extracted-images/cambodia_school.png?v=1",
+                        tag: "Cambodia",
+                        objectPosition: "object-top"
                       }
                     ].map((story, idx) => (
-                      <div key={idx} className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full text-left">
-                         <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0">
+                      <div key={idx} className="group relative glass-premium rounded-[2.5rem] border-2 border-[#EE2C3C]/40 hover:border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full text-left">
+                         <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0 border-r-2 border-[#EE2C3C]/15">
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
                           <img 
                             src={story.img} 
                             alt={story.title} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                            className={`w-full h-full object-cover ${story.objectPosition || "object-center"} group-hover:scale-105 transition-transform duration-500`} 
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400";
                             }}
                           />
-                          <div className="absolute bottom-4 left-6 z-20">
-                            <span className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded text-[8px] font-mono text-white uppercase font-bold tracking-wider">
-                              {story.tag}
-                            </span>
-                          </div>
                         </div>
                         <div className="p-8 w-full md:w-1/2 flex flex-col justify-between space-y-6">
                           <div className="space-y-3">
@@ -1699,7 +1737,7 @@ export default function NewDesignContent() {
                 <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
                   <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
                     <div className="text-center max-w-3xl mx-auto space-y-3">
-                      <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">06 // Interactive Networks</span>
+
                       <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                         Global Hubs & <span className="text-primary text-glow-red">Presence</span>
                       </h2>
@@ -1882,9 +1920,9 @@ export default function NewDesignContent() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                       {[
-                        { name: "Mr. Haggai Mosses", role: "CEO", country: "Kenya", img: "/haggai-mosses.jpeg", bio: "Leading digital literacy and future-skills initiatives across Kenya's educational institutions." },
-                        { name: "Mr. Yassin Adam", role: "CEO", country: "Sudan", img: "/yassin-adam.jpeg", bio: "Driving technology education and AIR Lab deployments to empower Sudanese youth." },
-                        { name: "Mr. Murhib Alahmar", role: "CEO", country: "Yemen", img: "/murhib-alahmar.jpeg", bio: "Pioneering STEM infrastructure and innovation hubs for Yemeni students and educators." }
+                        { name: "Mr. Haggai Mosses", role: "Head", country: "Kenya", img: "/haggai-mosses.jpeg", bio: "Leading digital literacy and future-skills initiatives across Kenya's educational institutions." },
+                        { name: "Mr. Yassin Adam", role: "Head", country: "Sudan", img: "/yassin-adam.jpeg", bio: "Driving technology education and AIR Lab deployments to empower Sudanese youth." },
+                        { name: "Mr. Murhib Alahmar", role: "Head", country: "Yemen", img: "/murhib-alahmar.jpeg", bio: "Pioneering STEM infrastructure and innovation hubs for Yemeni students and educators." }
                       ].map((hub, i) => (
                         <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
                           {/* Animated Left Accent Bar */}
@@ -1979,7 +2017,7 @@ export default function NewDesignContent() {
                 {/* SECTION 8: WHY ORGANIZATIONS WORK WITH AIR G */}
                 <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 space-y-16">
                   <div className="text-center max-w-3xl mx-auto space-y-3">
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">08 // Value Propositions</span>
+
                     <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                       Why Organizations <span className="text-primary text-glow-red">Work With Us</span>
                     </h2>
@@ -2040,7 +2078,7 @@ export default function NewDesignContent() {
                   <div className="relative glass-premium rounded-[3.5rem] border border-black/5 overflow-hidden p-8 md:p-16 text-center space-y-8">
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '20px 20px' }} />
                     
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">09 // Setup Node Connection</span>
+
                     <h2 className="font-headline text-4xl md:text-6xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
                       Let's Build The Future <br />
                       <span className="text-primary text-glow-red">Together</span>
@@ -2073,7 +2111,7 @@ export default function NewDesignContent() {
                     <div className="absolute left-[-20px] top-0 h-12 w-[2.5px] bg-gradient-to-b from-[#EE2C3C] via-[#EE2C3C]/20 to-transparent">
                       <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
                     </div>
-                    <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">00 // Operational Frontiers</span>
+
                     <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
                       Field Record <span className="text-primary text-glow-red">Gallery</span>
                     </h2>
@@ -2101,13 +2139,13 @@ export default function NewDesignContent() {
                         <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
-                      <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">01 // Research Frontiers</span>
+
                       <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
                         Innovation <br />
                         <span className="text-primary text-glow-red">Labs</span>
                       </h2>
                       <p className="font-body text-sm md:text-base text-[#1a1a2e]/40 leading-relaxed font-light border-l-2 border-primary/20 pl-6">
-                        A distributed network of 15 deep-tech facilities operating at the edge of physical possibility. Integrating neural architectures, advanced robotics, precision agriculture, and aerospace systems.
+                        A distributed network of 50 deep-tech facilities operating at the edge of physical possibility. Integrating neural architectures, advanced robotics, precision agriculture, and aerospace systems.
                       </p>
                       
                       <div className="flex flex-wrap gap-2.5 pt-1">
@@ -2182,7 +2220,7 @@ export default function NewDesignContent() {
                         <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
-                      <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">02 // Physical Infrastructure</span>
+
                       <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
                         Offline <br />
                         <span className="text-primary text-glow-red">Centres</span>
@@ -2230,7 +2268,7 @@ export default function NewDesignContent() {
                         <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
-                      <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">03 // Operational Training</span>
+
                       <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
                         Workshops & <br />
                         <span className="text-primary text-glow-red">Briefings</span>
@@ -2323,7 +2361,7 @@ export default function NewDesignContent() {
                         <div className="absolute top-0 left-[-5px] w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_12px_#EE2C3C]" />
                       </div>
                       
-                      <span className="font-mono text-[10px] text-primary tracking-[0.4em] uppercase font-black block">04 // Logistics & Provisioning</span>
+
                       <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
                         Elite <br />
                         <span className="text-primary text-glow-red">Store</span>
@@ -2829,19 +2867,14 @@ export default function NewDesignContent() {
                   <h3 className="text-3xl font-headline text-[#1a1a2e] mb-4 uppercase tracking-tighter">Request a <span className="text-primary">Custom Showcase</span></h3>
                   <p className="text-[#1a1a2e]/40 text-sm font-light">Bring AIR G's tactical technology and innovation labs to your institution or corporate event.</p>
                 </div>
-                <button 
-                  onClick={() => {
-                    if (!user) {
-                      addNotification("Please login to inquire for collaboration.");
-                      setAuthModalOpen(true);
-                    } else {
-                      addNotification("Inquiry form will be sent to your email.");
-                    }
-                  }}
-                  className="bg-primary text-[#1a1a2e] px-12 py-6 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap hover:scale-105 transition-all"
+                <a 
+                  href="https://wa.me/919860779172?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20a%20custom%20showcase%20collaboration."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary text-[#1a1a2e] px-12 py-6 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap hover:scale-105 transition-all inline-block text-center"
                 >
                   Inquire for Collaboration
-                </button>
+                </a>
               </div>
             </div>
           </section>
@@ -2920,19 +2953,14 @@ export default function NewDesignContent() {
                   <h3 className="text-3xl font-headline text-[#1a1a2e] mb-4">Bulk Institutional Orders</h3>
                   <p className="text-[#1a1a2e]/40 text-sm">We provide specialized hardware kits and curricula for schools and colleges across Maharashtra. Connect with our procurement team for volume licensing.</p>
                 </div>
-                <button 
-                  onClick={() => {
-                    if (!user) {
-                      addNotification("Please login to contact sales.");
-                      setAuthModalOpen(true);
-                    } else {
-                      addNotification("Sales inquiry ticket created. We will email you shortly.");
-                    }
-                  }}
-                  className="bg-primary text-[#1a1a2e] px-10 py-5 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap"
+                <a 
+                  href="https://wa.me/919860779172?text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20bulk%20institutional%20orders."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary text-[#1a1a2e] px-10 py-5 rounded-2xl font-bold uppercase tracking-widest glow-red whitespace-nowrap inline-block text-center"
                 >
                   Contact Sales
-                </button>
+                </a>
               </div>
 
               <footer className="mt-40 pt-20 border-t border-black/5 grid grid-cols-1 md:grid-cols-5 gap-12 pb-10">
@@ -3253,12 +3281,7 @@ export default function NewDesignContent() {
                         <span className="text-[9px] font-mono text-[#1a1a2e]/30 uppercase tracking-wider">Self-Paced / Online</span>
                         <button 
                           onClick={() => {
-                            if (!user) {
-                              addNotification("Please login to enroll in this course.");
-                              setAuthModalOpen(true);
-                            } else {
-                              addNotification(`Starting course: ${course.title}`);
-                            }
+                            addNotification(`Starting course: ${course.title}`);
                           }}
                           className="text-[10px] font-bold text-primary flex items-center gap-1 hover:text-primary/80 transition-colors uppercase tracking-widest font-mono"
                         >
@@ -3268,6 +3291,65 @@ export default function NewDesignContent() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* Bharat AI Engine in Education - Why & How */}
+              <div className="glass-premium p-8 md:p-10 rounded-[2.5rem] border border-primary/20 bg-gradient-to-r from-primary/5 via-transparent to-transparent text-left mb-16 relative z-10">
+                <div className="grid lg:grid-cols-12 gap-10 items-center">
+                  {/* Why Needed */}
+                  <div className="lg:col-span-7 space-y-6">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest font-mono">
+                      // STEM SCHOOL LAB INFRASTRUCTURE
+                    </span>
+                    <h3 className="font-headline text-2xl md:text-3xl font-black text-[#1a1a2e] uppercase tracking-tight">
+                      Why School Labs Need the Bharat AI Engine
+                    </h3>
+                    <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-light font-body">
+                      Advanced STEM education requires computational power, but cloud subscriptions are expensive, require continuous high-speed internet, and risk exposing young students to unrestricted web platforms. The <strong>Bharat AI Engine</strong> is designed to run localized AI workloads directly inside the school computer lab safely and efficiently.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <div className="flex gap-3">
+                        <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">verified_user</span>
+                        <div>
+                          <h4 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wide">100% Sandbox Security</h4>
+                          <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed">Students interact with large language models (SIA), AI speech generators, and vision tools locally with zero external internet dependencies.</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <span className="material-symbols-outlined text-primary shrink-0 mt-0.5">rocket_launch</span>
+                        <div>
+                          <h4 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wide">Autonomous Control Simulation</h4>
+                          <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed">Provides hardware-linked libraries to program and run robotics sensors, drone flight paths, and machine parts directly on localized GPUs.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* How It Works */}
+                  <div className="lg:col-span-5 space-y-6 border-l border-black/5 pl-0 lg:pl-8">
+                    <h4 className="text-xs font-mono font-black text-primary uppercase tracking-[0.2em]">
+                      How Does It Work?
+                    </h4>
+                    <div className="space-y-6">
+                      {[
+                        { step: "01", title: "Local Server Setup", desc: "A central Bharat AI Engine edge server hardware unit is installed in the school's computer lab." },
+                        { step: "02", title: "MESH Node Network", desc: "Workstations connect to the host node over the school's local LAN/MESH network—no active internet needed." },
+                        { step: "03", title: "Run Practical Labs", desc: "Students build, test, and run coding, ROS2 robotics, and offline AI queries with immediate latency-free feedback." }
+                      ].map((item, idx) => (
+                        <div key={idx} className="flex gap-3.5 items-start">
+                          <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary font-mono font-bold text-xs shrink-0">
+                            {item.step}
+                          </div>
+                          <div>
+                            <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wide leading-none">{item.title}</h5>
+                            <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-1">{item.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -4563,13 +4645,10 @@ export default function NewDesignContent() {
               animation: bounce-subtle 4s ease-in-out infinite;
             }
           `}} />
-          <div 
-            onClick={() => {
-              if (!user) {
-                addNotification("Please login to access this option.");
-                setAuthModalOpen(true);
-              }
-            }}
+          <a 
+            href="https://wa.me/919860779172"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-white/95 backdrop-blur-md border border-[#EE2C3C]/30 rounded-full px-5 hidden sm:flex animate-border-glow select-none h-12 items-center justify-center w-[380px] min-w-[380px] text-[10px] font-black uppercase tracking-widest whitespace-nowrap gap-3 shadow-lg cursor-pointer"
           >
             <span className="text-[#1a1a2e] font-extrabold tracking-widest">Launch an AI Lab</span>
@@ -4577,18 +4656,11 @@ export default function NewDesignContent() {
             <span className="text-[#EE2C3C] flex items-center gap-1.5 animate-pulse font-extrabold">
               📞 Talk to an Expert Now
             </span>
-          </div>
+          </a>
           <a 
-            href={user ? "https://wa.me/919860779172" : undefined}
-            onClick={(e) => {
-              if (!user) {
-                e.preventDefault();
-                addNotification("Please login to access this option.");
-                setAuthModalOpen(true);
-              }
-            }}
-            target={user ? "_blank" : undefined}
-            rel={user ? "noopener noreferrer" : undefined}
+            href="https://wa.me/919860779172"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-14 h-14 bg-[#EE2C3C] text-white rounded-full flex items-center justify-center shadow-[0_0_25px_rgba(238,44,60,0.8)] hover:bg-[#d61e2e] hover:scale-110 active:scale-95 transition-all duration-300 relative group shrink-0 animate-phone-ring"
             aria-label="Contact Us on WhatsApp"
             id="floating-call-btn"

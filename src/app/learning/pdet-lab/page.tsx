@@ -768,7 +768,7 @@ export default function PDETLabPage() {
             <div style={{ fontSize: '10px', color: '#666' }}>Official Infrastructure Setup Quotation</div>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '16px', fontWeight: 700, color: '#333' }}>ESTIMATE / RECEIPT</div>
+            <div style={{ fontSize: '16px', fontWeight: 700, color: '#333' }}>ESTIMATE / QUOTATION</div>
             <div style={{ fontSize: '10px', color: '#666', marginTop: '4px' }}>Date: {new Date().toLocaleDateString("en-IN")}</div>
           </div>
         </div>

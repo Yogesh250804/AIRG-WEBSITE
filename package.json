@@ -10,7 +10,8 @@
     "extract": "node extract-satara.mjs",
     "copy-map": "node scratch/copy_map.js",
     "copy-images": "node scratch/copy_images.js",
-    "extract-ut": "node scratch/extract_uttarakhand.js"
+    "extract-ut": "node scratch/extract_uttarakhand.js",
+    "git-status": "node scratch/git_runner.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.3",

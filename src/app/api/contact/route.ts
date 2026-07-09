@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
-    const { firstName, lastName, email, subject, message } = await request.json();
+    const { firstName, lastName, email, entityType, entityName, subject, message } = await request.json();
 
     const smtpUser = process.env.SMTP_USER || "airgdatalab@gmail.com";
     const smtpPass = process.env.SMTP_PASS;
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       to: "airgdatalab@gmail.com",
       replyTo: email,
       subject: `Contact Form: ${subject}`,
-      text: `Name: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`,
+      text: `Name: ${firstName} ${lastName}\nEmail: ${email}\nEntity Type: ${entityType || "N/A"}\nEntity Name: ${entityName || "N/A"}\n\nMessage:\n${message}`,
     };
 
     if (smtpPass) {
