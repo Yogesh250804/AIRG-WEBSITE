@@ -9,6 +9,7 @@ export default function SchoolLabsPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedGrade, setSelectedGrade] = useState("1");
   const [galleryFilter, setGalleryFilter] = useState("all");
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   const gradesList = [
     { 
@@ -251,6 +252,49 @@ export default function SchoolLabsPage() {
     "Drone Flying & Assembly",
     "3D Designing & Printing"
   ];
+
+  const projectDetails: Record<string, { desc: string; components: string[]; difficulty: string }> = {
+    "AI Smart Dustbin": {
+      desc: "An automated waste management bin that detects approach using ultrasonic telemetry and automatically sorts dry/wet garbage using AI vision classification.",
+      components: ["Arduino Uno", "Servo Motors", "Ultrasonic Sensor", "Camera Module"],
+      difficulty: "Intermediate"
+    },
+    "Human Following Robot": {
+      desc: "An autonomous mobile rover that tracks and follows a specific human path using smart dual IR sensors and an ultrasonic collision avoidance module.",
+      components: ["Geared DC Motors", "IR Sensor Array", "Motor Driver", "Arduino UNO"],
+      difficulty: "Advanced"
+    },
+    "RFID Attendance System": {
+      desc: "A contact-free identity logging device that verifies student credentials via 13.56MHz RFID cards and writes logs to a local Google Sheets database.",
+      components: ["RC522 RFID Module", "ESP8266 Wi-Fi Chip", "OLED Display", "Buzzer"],
+      difficulty: "Beginner"
+    },
+    "Smart Irrigation System": {
+      desc: "A self-watering agriculture grid that measures soil hydration and triggers a mini submersible pump to water plants only when moisture falls below 40%.",
+      components: ["Soil Moisture Sensor", "5V Relay Module", "Water Pump", "ESP32 Controller"],
+      difficulty: "Intermediate"
+    },
+    "Automatic Street Lights": {
+      desc: "A smart grid simulator that automatically controls high-efficiency LED lights based on ambient illumination levels using LDR photo-resistors.",
+      components: ["LDR Phototransistor", "Transistors", "Power LEDs", "Breadboard Core"],
+      difficulty: "Beginner"
+    },
+    "AI Face Attendance": {
+      desc: "A high-precision face recognition scanner running local OpenCV models on a Raspberry Pi to authenticate and register student attendance.",
+      components: ["Raspberry Pi 4", "HQ Camera Module", "LCD Display Module", "Google Drive API"],
+      difficulty: "Advanced"
+    },
+    "Laser Security System": {
+      desc: "An intruder detection grid that triggers a high-decibel alarm and sends a push notification to mobile devices if a laser beam path is broken.",
+      components: ["Red Laser Diode", "Photo-resistor", "Active Buzzer", "Wi-Fi Telemetry Controller"],
+      difficulty: "Beginner"
+    },
+    "Voice Controlled Robot": {
+      desc: "A voice-activated robotic vehicle that processes natural speech commands over a Bluetooth interface to execute forward, reverse, and turn maneuvers.",
+      components: ["Chassis & DC Motors", "HC-05 Bluetooth Module", "Android Speech App", "Microcontroller"],
+      difficulty: "Intermediate"
+    }
+  };
 
   const sampleProjects = [
     "AI Smart Dustbin",
@@ -754,17 +798,90 @@ export default function SchoolLabsPage() {
                 
                 <div className="relative z-10">
                   <span className="text-primary text-xs font-bold uppercase tracking-widest block mb-4">[ Build 50+ Projects ]</span>
-                  <h3 className="text-3xl font-headline font-black uppercase tracking-tight mb-8">Real-World Student Inventions</h3>
+                  <h3 className="text-3xl font-headline font-black uppercase tracking-tight mb-6">Real-World Student Inventions</h3>
                   
+                  {/* Interactive Details Box */}
+                  <div className="mb-8 min-h-[140px] transition-all duration-300 relative">
+                    <AnimatePresence mode="wait">
+                      {hoveredProject ? (
+                        <motion.div
+                          key={hoveredProject}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          className="bg-white/[0.04] border border-white/10 rounded-2xl p-5 relative overflow-hidden backdrop-blur-md text-left"
+                        >
+                          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                            <span className="font-headline font-black text-sm uppercase tracking-wide text-primary">
+                              {hoveredProject}
+                            </span>
+                            {projectDetails[hoveredProject] && (
+                              <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider ${
+                                projectDetails[hoveredProject].difficulty === "Beginner" ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400" :
+                                projectDetails[hoveredProject].difficulty === "Intermediate" ? "bg-amber-500/10 border border-amber-500/30 text-amber-400" :
+                                "bg-rose-500/10 border border-rose-500/30 text-rose-400"
+                              }`}>
+                                {projectDetails[hoveredProject].difficulty}
+                              </span>
+                            )}
+                          </div>
+                          {projectDetails[hoveredProject] && (
+                            <>
+                              <p className="text-xs text-white/70 font-light leading-relaxed mb-4">
+                                {projectDetails[hoveredProject].desc}
+                              </p>
+                              <div className="flex flex-wrap gap-1.5 items-center">
+                                <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest mr-1.5">Hardware:</span>
+                                {projectDetails[hoveredProject].components.map((comp, cIdx) => (
+                                  <span key={cIdx} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[9px] text-white/60">
+                                    {comp}
+                                  </span>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="default-prompt"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="bg-white/[0.02] border border-dashed border-white/[0.06] rounded-2xl p-6 flex flex-col items-center justify-center text-center text-white/40 h-[140px]"
+                        >
+                          <span className="material-symbols-outlined text-white/20 text-3xl mb-2">touch_app</span>
+                          <p className="text-xs font-light">Hover over any student invention below to inspect its system architecture and components.</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {sampleProjects.map((project, idx) => (
-                      <div key={idx} className="flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] p-4 rounded-2xl hover:bg-white/[0.05] transition-all">
-                        <span className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary font-mono text-xs font-bold shrink-0">
-                          {idx + 1}
-                        </span>
-                        <span className="text-white/80 font-bold text-sm">{project}</span>
-                      </div>
-                    ))}
+                    {sampleProjects.map((project, idx) => {
+                      const isHovered = hoveredProject === project;
+                      return (
+                        <div 
+                          key={idx} 
+                          className={`flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] p-4 rounded-2xl transition-all cursor-pointer text-left ${
+                            isHovered 
+                              ? "bg-white/[0.08] border-primary/50 translate-x-1 shadow-lg" 
+                              : "hover:bg-white/[0.05]"
+                          }`}
+                          onMouseEnter={() => setHoveredProject(project)}
+                          onMouseLeave={() => setHoveredProject(null)}
+                        >
+                          <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-all ${
+                            isHovered ? "bg-primary text-white" : "bg-primary/20 text-primary"
+                          }`}>
+                            {idx + 1}
+                          </span>
+                          <span className={`font-bold text-sm transition-colors ${
+                            isHovered ? "text-white" : "text-white/80"
+                          }`}>{project}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
