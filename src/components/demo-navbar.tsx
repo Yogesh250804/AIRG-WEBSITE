@@ -24,14 +24,14 @@ export function Navbar() {
       name: "Learning", 
       href: "/#learning",
       dropdown: [
-        { name: "Overview", href: "/#learning" },
+        { name: "School Labs", href: "/learning/school-labs" },
         { name: "PDET Lab", href: "/learning/pdet-lab" },
-        { name: "AI Infrastructures", href: "/learning/ai-infrastructures" }
+        { name: "Workshops", href: "/#workshops" }
       ]
     },
     { name: "Store", href: "/#store" },
     { name: "Innovation Labs", href: "/#labs" },
-    { name: "Workshops", href: "/#workshops" },
+    { name: "AI Infra", href: "/learning/ai-infrastructures" },
     { name: "Global Centres", href: "/#centres" }
   ];
 

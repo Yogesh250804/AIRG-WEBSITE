@@ -119,8 +119,7 @@ const row1 = [
 const row2 = [
   { name: "DYP", logo: "/logos/dyp.png", scaleVal: 1.3 },
   { name: "Western University", logo: "/logos/western.png" },
-  { name: "Cummins", logo: "/logos/cummins.png", scaleVal: 1.6 },
-  { name: "Partner 7", logo: "/logos/left_7.jpg", scaleVal: 0.8 },
+  { name: "Institution's Innovation Council", logo: "/logos/left_7.png", scaleVal: 1.5 },
   { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.4 }
 ];
 
@@ -867,13 +866,13 @@ export default function NewDesignContent() {
             <Logo />
           </div>
           <div className="hidden lg:flex gap-6 xl:gap-8 items-center mr-auto">
-            {['hero', 'learning', 'store', 'labs', 'workshops', 'centres'].map((item) => {
+            {['hero', 'learning', 'store', 'labs', 'ai-infrastructures', 'centres'].map((item) => {
               const labels: Record<string, string> = {
                 hero: 'Home',
                 learning: 'Learning',
                 store: 'Store',
                 labs: 'Innovation Labs',
-                workshops: 'Workshops',
+                'ai-infrastructures': 'AI Infra',
                 centres: 'Global Centres'
               };
               
@@ -888,26 +887,40 @@ export default function NewDesignContent() {
                       <span className="material-symbols-outlined ml-1 text-[16px]">expand_more</span>
                     </button>
                     <div className="absolute left-0 top-full mt-0 hidden group-hover:flex flex-col bg-white/95 backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.1)] rounded-xl border border-black/5 overflow-hidden w-56 z-50 transition-all text-left">
-                      <button
-                        onClick={() => navigateTo('learning')}
-                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left"
+                      <Link
+                        href="/learning/school-labs"
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
                       >
                         School Labs
-                      </button>
+                      </Link>
                       <Link
                         href="/learning/pdet-lab"
                         className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
                       >
                         PDET Lab
                       </Link>
-                      <Link
-                        href="/learning/ai-infrastructures"
-                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
+                      <button
+                        onClick={() => {
+                          navigateTo('workshops');
+                        }}
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block w-full"
                       >
-                        AI Infrastructures
-                      </Link>
+                        Workshops
+                      </button>
                     </div>
                   </div>
+                );
+              }
+
+              if (item === 'ai-infrastructures') {
+                return (
+                  <Link
+                    key={item}
+                    href="/learning/ai-infrastructures"
+                    className={`nav-link font-semibold transition-colors text-xs uppercase tracking-widest ${activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/40 hover:text-[#1a1a2e]'}`}
+                  >
+                    {labels[item]}
+                  </Link>
                 );
               }
 
@@ -1010,13 +1023,13 @@ export default function NewDesignContent() {
               className="absolute inset-x-0 top-20 z-[99] lg:hidden bg-white/95 backdrop-blur-lg border-b border-black/5 shadow-lg p-6 flex flex-col gap-6"
             >
               <div className="flex flex-col gap-4">
-                {['hero', 'learning', 'store', 'labs', 'workshops', 'centres'].map((item) => {
+                {['hero', 'learning', 'store', 'labs', 'ai-infrastructures', 'centres'].map((item) => {
                   const labels: Record<string, string> = {
                     hero: 'Home',
                     learning: 'Learning',
                     store: 'Store',
                     labs: 'Innovation Labs',
-                    workshops: 'Workshops',
+                    'ai-infrastructures': 'AI Infra',
                     centres: 'Global Centres'
                   };
                   
@@ -1034,15 +1047,13 @@ export default function NewDesignContent() {
                           {labels[item]}
                         </button>
                         <div className="flex flex-col pl-4 pb-2 gap-2 border-l-2 border-primary/20 ml-2 mb-2">
-                          <button
+                          <Link
+                            href="/learning/school-labs"
                             className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
-                            onClick={() => {
-                              navigateTo('learning');
-                              setIsMobileMenuOpen(false);
-                            }}
+                            onClick={() => setIsMobileMenuOpen(false)}
                           >
                             School Labs
-                          </button>
+                          </Link>
                           <Link
                             href="/learning/pdet-lab"
                             className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
@@ -1050,15 +1061,32 @@ export default function NewDesignContent() {
                           >
                             PDET Lab
                           </Link>
-                          <Link
-                            href="/learning/ai-infrastructures"
-                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                          <button
+                            onClick={() => {
+                              navigateTo('workshops');
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e] w-full"
                           >
-                            AI Infrastructures
-                          </Link>
+                            Workshops
+                          </button>
                         </div>
                       </div>
+                    );
+                  }
+
+                  if (item === 'ai-infrastructures') {
+                    return (
+                      <Link
+                        key={item}
+                        href="/learning/ai-infrastructures"
+                        className={`text-left py-2 font-bold text-sm uppercase tracking-widest border-b border-black/5 transition-colors ${
+                          activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/60 hover:text-[#1a1a2e]'
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {labels[item]}
+                      </Link>
                     );
                   }
 

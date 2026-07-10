@@ -536,7 +536,7 @@ export default function PDETLabPage() {
                     <div className="px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white/[0.02]">
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center">
-                          <span className="material-symbols-outlined text-primary text-xl">receipt_long</span>
+                          <span className="material-symbols-outlined text-primary text-xl">description</span>
                         </div>
                         <div>
                           <span className="text-white/40 text-[10px] font-mono uppercase tracking-widest block">All Zones · Grand Total</span>
@@ -548,14 +548,14 @@ export default function PDETLabPage() {
                           // Only trigger receipt PDF download — no checkout modal
                           const hasItems = zones.some(z => z.items.some(item => item.qty > 0));
                           if (!hasItems) {
-                            alert("Please add at least one item before generating a receipt.");
+                            alert("Please add at least one item before generating a quotation.");
                             return;
                           }
                           window.print();
                         }}
                         className="w-full sm:w-auto px-10 py-4 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-primary/25 flex items-center justify-center gap-3 select-none hover:scale-[1.03] active:scale-95"
                       >
-                        <span>Download Receipt</span>
+                        <span>Download Quotation</span>
                         <span className="material-symbols-outlined text-sm">download</span>
                       </button>
                     </div>
