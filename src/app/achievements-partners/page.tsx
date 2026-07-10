@@ -78,6 +78,21 @@ const CountUp = ({ value, label, subtitle }: { value: number; label: string; sub
 
 export default function AchievementsPartners() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>("India");
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll active country inside list box
+  useEffect(() => {
+    if (!selectedCountry) return;
+    if (listRef.current) {
+      const activeEl = listRef.current.querySelector('[data-active="true"]');
+      if (activeEl) {
+        activeEl.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest"
+        });
+      }
+    }
+  }, [selectedCountry]);
 
   const row1 = [
     { name: "SYMBIOSIS", logo: "/logos/symbiosis.png" },
@@ -97,13 +112,13 @@ export default function AchievementsPartners() {
   ];
 
   const countries = [
-    { name: "India", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 25+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
-    { name: "Saudi Arabia", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
-    { name: "Ethiopia", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
-    { name: "Nigeria", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
-    { name: "Kenya", desc: "Establishing deep-tech robotics and AI training structures inside leading academic institutions.", reach: "High-tech school labs & certifications", details: "Spreading practical science.", coordinates: "Nairobi" },
-    { name: "Nepal", desc: "Integrating advanced STEM and robotics kits into school classrooms to prepare secondary students.", reach: "School integrations & kit support", details: "Practical tech education.", coordinates: "Kathmandu" },
-    { name: "Cambodia", desc: "Strategic implementation of Hexobrain programs and custom high-tech laboratory infrastructure.", reach: "Western International School Lab", details: "State-of-the-art classroom tech.", coordinates: "Phnom Penh" }
+    { name: "India", code: "in", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 25+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
+    { name: "Saudi Arabia", code: "sa", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
+    { name: "Ethiopia", code: "et", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
+    { name: "Nigeria", code: "ng", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
+    { name: "Kenya", code: "ke", desc: "Establishing deep-tech robotics and AI training structures inside leading academic institutions.", reach: "High-tech school labs & certifications", details: "Spreading practical science.", coordinates: "Nairobi" },
+    { name: "Nepal", code: "np", desc: "Integrating advanced STEM and robotics kits into school classrooms to prepare secondary students.", reach: "School integrations & kit support", details: "Practical tech education.", coordinates: "Kathmandu" },
+    { name: "Cambodia", code: "kh", desc: "Strategic implementation of Hexobrain programs and custom high-tech laboratory infrastructure.", reach: "Western International School Lab", details: "State-of-the-art classroom tech.", coordinates: "Phnom Penh" }
   ];
 
   return (
@@ -428,7 +443,7 @@ export default function AchievementsPartners() {
               objectPosition: "object-top"
             }
           ].map((story, idx) => (
-            <div key={idx} className="group relative glass-premium rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full">
+            <div key={idx} className="group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full">
               <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
                 <img 
@@ -483,30 +498,70 @@ export default function AchievementsPartners() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Countries List */}
-            <div className="lg:col-span-4 space-y-3 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-              {countries.map((country) => (
-                <button
-                  key={country.name}
-                  onClick={() => setSelectedCountry(country.name)}
-                  className={`w-full text-left p-6 rounded-2xl border transition-all duration-300 flex items-center justify-between ${
-                    selectedCountry === country.name
-                      ? "bg-[#1a1a2e] border-primary text-white-force shadow-lg"
-                      : "glass-premium border-black/5 text-[#1a1a2e] hover:border-black/20 bg-white"
-                  }`}
-                >
-                  <div>
-                    <h4 className={`font-headline font-black uppercase text-sm tracking-wide ${
-                      selectedCountry === country.name ? "text-white-force" : "text-[#1a1a2e]"
-                    }`}>{country.name}</h4>
-                    <span className={`text-[10px] font-mono tracking-wider uppercase ${selectedCountry === country.name ? "text-primary" : "text-[#1a1a2e]/40"}`}>
-                      {country.reach.split(", ")[0]}
-                    </span>
-                  </div>
-                  <ChevronRight size={16} className={selectedCountry === country.name ? "text-primary" : "text-[#1a1a2e]/40"} />
-                </button>
-              ))}
-            </div>
+             {/* Countries List inside a Cool Designed Box */}
+             <div 
+               className="lg:col-span-4 glass-premium rounded-[3rem] p-6 !border-2 !border-[#EE2C3C]/30 shadow-xl relative overflow-hidden bg-white/70 flex flex-col h-[520px]"
+             >
+               {/* Header Box */}
+               <div className="flex items-center justify-between mb-6 pb-4 border-b border-black/5 shrink-0">
+                 <div className="flex items-center gap-2">
+                   <span className="relative flex h-2.5 w-2.5">
+                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                   </span>
+                   <span className="font-headline font-black text-xs uppercase tracking-widest text-[#1a1a2e]/60">Select Hub</span>
+                 </div>
+                 <span className="font-mono text-[9px] text-primary font-black px-2 py-0.5 bg-primary/15 rounded-full border-2 border-primary/40">7 STATIONS</span>
+               </div>
+
+               {/* Scrolling Container */}
+               <div 
+                 ref={listRef} 
+                 className="flex-1 space-y-3 overflow-y-auto pr-1 custom-scrollbar scroll-smooth"
+               >
+                 {countries.map((country) => {
+                   const isActive = selectedCountry === country.name;
+                   return (
+                     <button
+                       key={country.name}
+                       data-active={isActive ? "true" : "false"}
+                       onClick={() => setSelectedCountry(country.name)}
+                       className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between group/btn relative overflow-hidden ${
+                         isActive
+                           ? "bg-[#1a1a2e] !border-primary text-white-force shadow-lg shadow-primary/10 translate-x-1"
+                           : "glass-premium border-black/5 text-[#1a1a2e] hover:border-primary/30 hover:bg-slate-50"
+                       }`}
+                     >
+                       {isActive && (
+                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary animate-pulse" />
+                       )}
+                       <div>
+                          <h4 className={`font-headline font-black uppercase text-sm tracking-wide flex items-center gap-2.5 ${
+                            isActive ? "text-white-force" : "text-[#1a1a2e]"
+                          }`}>
+                            <img 
+                              src={`https://flagcdn.com/w40/${country.code}.png`} 
+                              alt={country.name} 
+                              className="w-5.5 h-4 object-cover rounded-sm border border-white/10 shadow-sm shrink-0 select-none pointer-events-none"
+                            />
+                            <span>{country.name}</span>
+                          </h4>
+                         <span className={`text-[10px] font-mono tracking-wider uppercase block mt-0.5 ${isActive ? "text-primary" : "text-[#1a1a2e]/40"}`}>
+                           {country.reach.split(", ")[0]}
+                         </span>
+                       </div>
+                       <ChevronRight 
+                         size={16} 
+                         className={`transition-transform duration-300 ${
+                           isActive 
+                             ? "text-primary translate-x-0.5" 
+                             : "text-[#1a1a2e]/30 group-hover/btn:translate-x-0.5 group-hover/btn:text-primary/70"
+                         }`} 
+                       />
+                     </button>
+                   );
+                 })}
+               </div>
+             </div>
 
             {/* Interactive Details Card */}
             <div className="lg:col-span-8">
@@ -521,17 +576,24 @@ export default function AchievementsPartners() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -15 }}
                       transition={{ duration: 0.3 }}
-                      className="glass-premium p-10 rounded-[3rem] border border-black/5 shadow-xl space-y-8 min-h-[420px] flex flex-col justify-between bg-white"
+                      className="glass-premium p-10 rounded-[3rem] !border-2 !border-[#EE2C3C]/40 shadow-xl space-y-8 min-h-[420px] flex flex-col justify-between bg-white"
                     >
                       <div className="space-y-6">
                         <div className="flex items-center justify-between border-b border-black/5 pb-6">
                           <div className="flex items-center gap-3">
                             <MapPin className="text-primary w-6 h-6" />
-                            <h3 className="font-headline text-3xl font-black text-[#1a1a2e] uppercase tracking-tight">{current.name}</h3>
+                             <h3 className="font-headline text-3xl font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-3">
+                               <img 
+                                 src={`https://flagcdn.com/w80/${current.code}.png`} 
+                                 alt={current.name} 
+                                 className="w-9 h-6 object-cover rounded border border-black/10 shadow-sm shrink-0 select-none pointer-events-none"
+                               />
+                               <span>{current.name}</span>
+                             </h3>
                           </div>
-                          <span className="px-3 py-1 bg-primary/10 border border-primary/20 text-primary rounded-full text-xs font-mono font-bold tracking-wider uppercase">
-                            Active Region
-                          </span>
+                           <span className="px-3 py-1 bg-primary/15 border-2 border-primary/40 text-primary rounded-full text-xs font-mono font-black tracking-wider uppercase">
+                             Active Region
+                           </span>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-8 pt-2">
