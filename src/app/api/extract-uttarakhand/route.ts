@@ -23,14 +23,9 @@ export async function GET() {
   try {
     const url = "https://raw.githubusercontent.com/shuklaneerajdev/IndiaStateTopojsonFiles/master/Uttarakhand.geojson";
     const rawFile = await fetchUrl(url);
-    const jsonStart = rawFile.indexOf("{");
-    if (jsonStart === -1) {
-      return NextResponse.json({ error: "No JSON found" }, { status: 400 });
-    }
     const geojson = JSON.parse(rawFile);
 
-
-    // Calculate GPS bounding box
+    // Calculate GPS bounding box across all districts
     let gpsMinLon = Infinity;
     let gpsMaxLon = -Infinity;
     let gpsMinLat = Infinity;
@@ -52,57 +47,63 @@ export async function GET() {
       parseCoordsBBox(f.geometry.coordinates);
     });
 
-    // BBox limits for SVG mapping
-    const svgMinX = 40;
-    const svgMaxX = 560;
-    const svgMinY = 40;
-    const svgMaxY = 460;
+    // Target SVG viewport — matches how our India map renders state drilldown
+    // We use a standalone 600x500 viewport for the Uttarakhand drilldown view
+    const svgW = 580;
+    const svgH = 480;
+    const pad = 20;
 
     const projectX = (lon: number) => {
-      return svgMinX + ((lon - gpsMinLon) / (gpsMaxLon - gpsMinLon)) * (svgMaxX - svgMinX);
+      return pad + ((lon - gpsMinLon) / (gpsMaxLon - gpsMinLon)) * (svgW - pad * 2);
     };
-
     const projectY = (lat: number) => {
-      return svgMinY + ((gpsMaxLat - lat) / (gpsMaxLat - gpsMinLat)) * (svgMaxY - svgMinY);
+      // Invert Y: higher lat = higher on screen
+      return pad + ((gpsMaxLat - lat) / (gpsMaxLat - gpsMinLat)) * (svgH - pad * 2);
     };
-
-    const regionsList: any[] = [];
 
     const formatCoord = (c: number[]) => {
       return `${projectX(c[0]).toFixed(1)},${projectY(c[1]).toFixed(1)}`;
     };
 
+    const regionsList: any[] = [];
+
     geojson.features.forEach((f: any) => {
       const distName = f.properties.Dist_Name || "";
       const formattedName = distName.trim();
-      const id = `ut-${formattedName.toLowerCase().replace(/\s+/g, "-")}`;
-      
+      const id = `ut-${formattedName.toLowerCase().replace(/[\s]+/g, "-")}`;
+
       let pathString = "";
 
       if (f.geometry.type === "Polygon") {
         f.geometry.coordinates.forEach((ring: any[]) => {
-          pathString += (pathString ? " " : "") + "M " + ring.map(formatCoord).join(" L ") + " Z";
+          // Simplify: take every 3rd point to reduce path length but keep shape
+          const simplified = ring.filter((_: any, i: number) => i % 3 === 0);
+          if (simplified.length > 2) {
+            pathString += (pathString ? " " : "") + "M " + simplified.map(formatCoord).join(" L ") + " Z";
+          }
         });
       } else if (f.geometry.type === "MultiPolygon") {
         f.geometry.coordinates.forEach((polygon: any[]) => {
           polygon.forEach((ring: any[]) => {
-            pathString += (pathString ? " " : "") + "M " + ring.map(formatCoord).join(" L ") + " Z";
+            const simplified = ring.filter((_: any, i: number) => i % 3 === 0);
+            if (simplified.length > 2) {
+              pathString += (pathString ? " " : "") + "M " + simplified.map(formatCoord).join(" L ") + " Z";
+            }
           });
         });
       }
 
-      regionsList.push({
-        id,
-        name: formattedName,
-        path: pathString
-      });
+      if (pathString) {
+        regionsList.push({ id, name: formattedName, path: pathString });
+      }
     });
 
+    // Build the replacement ut entry
     const regionsStr = regionsList.map(r => {
       return `      { id: "${r.id}", name: "${r.name}", path: "${r.path}" }`;
     }).join(",\n");
 
-    const utEntry = `  ut: {
+    const newUtEntry = `  ut: {
     label: "Uttarakhand",
     viewBox: "0 0 600 500",
     regions: [
@@ -111,25 +112,28 @@ ${regionsStr}
     labs: []
   }`;
 
+    // Read the map file and replace the ut entry using a regex
     const mapFilePath = path.join(process.cwd(), "src/components/InteractiveIndiaMap.tsx");
-    const mapContent = fs.readFileSync(mapFilePath, "utf8");
+    let mapContent = fs.readFileSync(mapFilePath, "utf8");
 
-    const oldUtTarget = `  ut: {
-    label: "Uttarakhand",
-    viewBox: "0 0 600 500",
-    regions: [
-      { id: "ut-north", name: "Garhwal Highlands (Uttarkashi/Chamoli)", path: "M 100,50 L 400,50 L 450,220 L 200,220 Z" },
-      { id: "ut-west", name: "Garhwal Plains (Dehradun/Haridwar)", path: "M 50,220 L 200,220 L 250,350 L 50,350 Z" },
-      { id: "ut-east", name: "Kumaon Highlands (Pithoragarh/Almora)", path: "M 400,50 L 550,50 L 550,280 L 450,220 Z" },
-      { id: "ut-south", name: "Kumaon Plains (Nainital/US Nagar)", path: "M 200,220 L 450,220 L 550,280 L 500,450 L 200,450 L 250,350 Z" }
-    ],
-    labs: []
-  }`;
-
-    let newMapContent = mapContent.replace(oldUtTarget, utEntry);
-    fs.writeFileSync(mapFilePath, newMapContent, "utf8");
-
-    return NextResponse.json({ success: true, message: "Uttarakhand map successfully updated!", regionsCount: regionsList.length });
+    // Use regex to find and replace the entire ut: { ... } block
+    const utRegex = /  ut:\s*\{[\s\S]*?labs:\s*\[\]\s*\},?/;
+    if (utRegex.test(mapContent)) {
+      mapContent = mapContent.replace(utRegex, newUtEntry + ",");
+      fs.writeFileSync(mapFilePath, mapContent, "utf8");
+      return NextResponse.json({ 
+        success: true, 
+        message: `Uttarakhand map updated with ${regionsList.length} real districts!`,
+        districts: regionsList.map(r => r.name),
+        bounds: { gpsMinLon, gpsMaxLon, gpsMinLat, gpsMaxLat }
+      });
+    } else {
+      return NextResponse.json({ 
+        success: false, 
+        error: "Could not find ut: entry in map file. Pattern not matched.",
+        regionsGenerated: regionsList.length
+      });
+    }
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message, stack: err.stack });
   }

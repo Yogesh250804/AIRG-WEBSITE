@@ -40,20 +40,20 @@ export function Navbar() {
       {/* Import Material Symbols for icons matching home page */}
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
       
-      <header className="fixed top-0 w-full z-[100] bg-white/80 backdrop-blur-md border-b border-black/5">
+      <header className="fixed top-0 w-full z-[100] glass-premium border-b border-black/5">
         <nav className="flex justify-between items-center max-w-[1440px] mx-auto px-5 h-20 md:px-20">
-          <Link href="/" className="mr-8 xl:mr-16 shrink-0">
+          <Link href="/" className="mr-4 shrink-0">
             <div className="flex items-center gap-2 group cursor-pointer py-1 select-none">
               <img 
                 src="/aig-logo.png" 
                 alt="AIR GURUJI International Logo" 
-                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply" 
+                className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
               />
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex gap-6 xl:gap-8 items-center mr-auto">
+          <div className="hidden lg:flex flex-1 items-center justify-evenly px-6 xl:px-12">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group py-6">
                 <Link 
@@ -140,7 +140,7 @@ export function Navbar() {
             ) : (
               <button 
                 onClick={() => setAuthModalOpen(true)}
-                className="hidden md:block bg-primary text-[#1a1a2e] px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
+                className="hidden md:block bg-primary text-white px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest glow-red hover:scale-105 transition-all"
               >
                 Login
               </button>

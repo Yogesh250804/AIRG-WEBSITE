@@ -34,8 +34,28 @@ export default function SchoolLabsPage() {
       projects: ["Simple LED Flashlight", "Traffic Light Signal Controller", "IR Obstacle Detection Buggy"],
       hardware: ["Robotics Controller Board", "IR Obstacle Sensor", "Battery Pack & Jumper Cables"]
     },
-    { id: "3", label: "Grade 3", active: false, desc: "Curriculum expansion for advanced block coding and smart device inputs.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] },
-    { id: "4", label: "Grade 4", active: false, desc: "Curriculum expansion for algorithmic thinking and simple logic loop arrays.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] },
+    { 
+      id: "3", 
+      label: "Grade 3", 
+      file: "Grade 3 Book.pdf", 
+      active: true, 
+      desc: "Advanced block coding with Scratch, building light-sensing circuits, constructing simple mechanical arms, and understanding levers, pulleys, and wheel-axle systems in real devices.", 
+      kitName: "AIR Smart Builder Kit", 
+      previews: [], 
+      projects: ["Light-Sensing Night Lamp", "Mechanical Robotic Arm", "Scratch Animated Stories"], 
+      hardware: ["Light Dependent Resistors (LDR)", "AIR Arm Construction Frames", "LED Array & Resistor Pack"]
+    },
+    { 
+      id: "4", 
+      label: "Grade 4", 
+      file: "Grade 4 Book.pdf", 
+      active: true, 
+      desc: "Algorithmic thinking through programmable loops and conditionals, introduction to servo motors, building smart input-output systems, and hands-on electronics with basic circuit boards.", 
+      kitName: "AIR Logic & Servo Kit", 
+      previews: [], 
+      projects: ["Servo-Controlled Door Lock", "Button-Triggered Alarm System", "Multi-LED Pattern Display"], 
+      hardware: ["Servo Motor Modules", "Push-Button Input Arrays", "Breadboard & Jumper Wire Sets"]
+    },
     { 
       id: "5", 
       label: "Grade 5", 
@@ -47,10 +67,50 @@ export default function SchoolLabsPage() {
       projects: ["Automatic Hand Sanitizer Stand", "Smart Soil Moisture Monitor", "3D Custom Pen Cup Model"],
       hardware: ["Arduino Microcontroller Board", "Ultrasonic & Soil Sensors", "PLA 3D Printing Filament"]
     },
-    { id: "6", label: "Grade 6", active: false, desc: "Curriculum expansion for edge AI computation and smart cities prototypes.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] },
-    { id: "7", label: "Grade 7", active: false, desc: "Curriculum expansion for telemetry, agricultural drones, and smart automation.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] },
-    { id: "8", label: "Grade 8", active: false, desc: "Curriculum expansion for Python scripting, data structures, and vision AI nodes.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] },
-    { id: "9", label: "Grade 9", active: false, desc: "Curriculum expansion for mechanical design, flight mechanics, and advanced rovers.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] },
+    { 
+      id: "6", 
+      label: "Grade 6", 
+      file: "Grade 6 Book.pdf", 
+      active: true, 
+      desc: "Edge AI fundamentals using Raspberry Pi, smart city prototypes with IoT sensor networks, wireless communication modules, and introductory Python programming for hardware control.", 
+      kitName: "AIR Edge AI & IoT Kit", 
+      previews: [], 
+      projects: ["Smart Traffic Controller", "Air Quality Monitor Station", "Wireless Home Automation"], 
+      hardware: ["Raspberry Pi Zero W", "MQ Gas & Dust Sensors", "Wi-Fi & Bluetooth Modules"]
+    },
+    { 
+      id: "7", 
+      label: "Grade 7", 
+      file: "Grade 7 Book.pdf", 
+      active: true, 
+      desc: "Agricultural drone mechanics, telemetry and GPS tracking, autonomous navigation algorithms, remote sensing with camera modules, and field data collection systems.", 
+      kitName: "AIR Drone & Telemetry Kit", 
+      previews: [], 
+      projects: ["GPS-Tracked Mini Drone", "Crop Health Scanner", "Autonomous Line-Following Drone"], 
+      hardware: ["Quadcopter Frame & Motors", "GPS & Telemetry Modules", "FPV Camera & OSD Board"]
+    },
+    { 
+      id: "8", 
+      label: "Grade 8", 
+      file: "Grade 8 Book.pdf", 
+      active: true, 
+      desc: "Python scripting for data analysis, computer vision with OpenCV, training and deploying simple AI models on edge devices, and building intelligent vision-enabled robotic systems.", 
+      kitName: "AIR Python Vision AI Kit", 
+      previews: [], 
+      projects: ["Face Detection Security Camera", "Object Classifier with OpenCV", "Python Data Dashboard"], 
+      hardware: ["Raspberry Pi 4 (4GB)", "Pi Camera Module v3", "OpenCV Vision AI Software Pack"]
+    },
+    { 
+      id: "9", 
+      label: "Grade 9", 
+      file: "Grade 9 Book.pdf", 
+      active: true, 
+      desc: "Advanced mechanical design with CAD software, aerodynamics and flight mechanics, constructing and programming 4WD rovers, and applying physics principles to autonomous systems.", 
+      kitName: "AIR Rover & Flight Design Kit", 
+      previews: [], 
+      projects: ["CAD-Designed Rover Chassis", "Aerodynamic Glider Build", "Terrain-Mapping 4WD Robot"], 
+      hardware: ["4WD Robot Chassis Kit", "Fusion 360 CAD License", "IMU & Compass Navigation Sensors"]
+    },
     { id: "10", label: "Grade 10", active: false, desc: "Curriculum expansion for machine learning models and industrial IoT meshes.", kitName: "Coming Soon", previews: [], projects: [], hardware: [] }
   ];
 
@@ -816,8 +876,7 @@ export default function SchoolLabsPage() {
                                   </h4>
                                 </div>
 
-                                <div className="w-full border-t border-white/15 pt-4 flex justify-between items-center">
-                                  <span className="text-[8px] font-mono text-white/40 uppercase tracking-wider">NGO EDITION</span>
+                                <div className="w-full border-t border-white/15 pt-4 flex justify-end items-center">
                                   <span className="text-[8px] font-bold bg-primary/20 text-primary border border-primary/30 px-2.5 py-1 rounded-md uppercase tracking-widest">
                                     ACTIVE
                                   </span>

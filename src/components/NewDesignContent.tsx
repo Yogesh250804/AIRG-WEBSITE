@@ -170,7 +170,7 @@ const Logo = () => (
     <img 
       src="/aig-logo.png" 
       alt="AIR GURUJI International Logo" 
-      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply" 
+      className="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
     />
   </div>
 );
@@ -878,10 +878,10 @@ export default function NewDesignContent() {
       }} />
       <header className="fixed top-0 w-full z-[100] glass-premium border-b border-black/5">
         <nav className="flex justify-between items-center max-w-[1440px] mx-auto px-5 h-20 md:px-20">
-          <div onClick={() => navigateTo('hero')} className="mr-8 xl:mr-16 shrink-0">
+          <div onClick={() => navigateTo('hero')} className="mr-4 shrink-0">
             <Logo />
           </div>
-          <div className="hidden lg:flex gap-6 xl:gap-8 items-center mr-auto">
+          <div className="hidden lg:flex flex-1 items-center justify-evenly px-6 xl:px-12">
             {['hero', 'learning', 'store', 'labs', 'ai-infrastructures', 'centres'].map((item) => {
               const labels: Record<string, string> = {
                 hero: 'Home',
@@ -3020,13 +3020,13 @@ export default function NewDesignContent() {
                     </div>
 
                     {/* Info Column */}
-                    <div className="lg:col-span-3 space-y-4 pr-6">
+                    <div className="lg:col-span-3 space-y-3 pr-2">
                       <div className="flex items-center gap-3">
                         <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-[8px] font-black font-mono text-primary uppercase tracking-widest">{record.category}</span>
                         <span className="text-[10px] text-[#1a1a2e]/20 font-mono">/ MISSION DATA</span>
                       </div>
                       
-                      <h4 className="text-3xl md:text-4xl font-headline font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">{record.title}</h4>
+                      <h4 className="text-2xl md:text-3xl font-headline font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">{record.title}</h4>
                       
                       <p className="text-[#1a1a2e]/40 text-sm md:text-base font-light leading-relaxed max-w-xl">
                         {record.desc}
