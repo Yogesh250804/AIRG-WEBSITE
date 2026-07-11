@@ -108,23 +108,24 @@ const CountUpNumber = ({ value, suffix = "" }: { value: number; suffix?: string 
 };
 
 const row1 = [
-  { name: "SYMBIOSIS", logo: "/logos/symbiosis.png" },
+  { name: "Aditya Birla", logo: "/logos/extracted_p5_img2.png", scaleVal: 1.1 },
   { name: "Sharjah Research Park", logo: "/logos/sharjah.png" },
   { name: "UNESCO", logo: "/logos/unesco.png" },
   { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 1.3 },
-  { name: "Partner 5", logo: "/logos/left_5.jpg" },
-  { name: "Partner 6", logo: "/logos/left_6.jpg", scaleVal: 0.7 }
+  { name: "Cummins", logo: "/logos/left_5.jpg" },
+  { name: "MITCON", logo: "/logos/left_6.jpg", scaleVal: 0.85 }
 ];
 
 const row2 = [
   { name: "DYP", logo: "/logos/dyp.png", scaleVal: 1.3 },
   { name: "Western University", logo: "/logos/western.png" },
+  { name: "Maha60", logo: "/logos/maha60.png", scaleVal: 1.2 },
   { name: "Institution's Innovation Council", logo: "/logos/left_7.png", scaleVal: 1.5 },
   { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.4 }
 ];
 
 const countries = [
-  { name: "India", code: "in", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 25+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
+  { name: "India", code: "in", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 50+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
   { name: "Saudi Arabia", code: "sa", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
   { name: "Ethiopia", code: "et", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
   { name: "Nigeria", code: "ng", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
@@ -303,7 +304,7 @@ export default function NewDesignContent() {
 
   // Auto-scroll the active country into view inside the list box
   useEffect(() => {
-    if (!selectedCountry) return;
+    if (!selectedCountry || activeFace !== "centres") return;
     if (listRef.current) {
       const activeEl = listRef.current.querySelector('[data-active="true"]');
       if (activeEl) {
@@ -313,7 +314,7 @@ export default function NewDesignContent() {
         });
       }
     }
-  }, [selectedCountry]);
+  }, [selectedCountry, activeFace]);
 
   // Animated words in hero
   const [wordIndex, setWordIndex] = useState(0);
@@ -884,9 +885,9 @@ export default function NewDesignContent() {
             {['hero', 'learning', 'store', 'labs', 'ai-infrastructures', 'centres'].map((item) => {
               const labels: Record<string, string> = {
                 hero: 'Home',
-                learning: 'Learning',
+                learning: 'Labs',
                 store: 'Store',
-                labs: 'Innovation Labs',
+                labs: 'Airg Labs',
                 'ai-infrastructures': 'AI Infra',
                 centres: 'Global Centres'
               };
@@ -912,7 +913,7 @@ export default function NewDesignContent() {
                         href="/learning/pdet-lab"
                         className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
                       >
-                        PDET Lab
+                        College Labs
                       </Link>
                       <button
                         onClick={() => {
@@ -1041,9 +1042,9 @@ export default function NewDesignContent() {
                 {['hero', 'learning', 'store', 'labs', 'ai-infrastructures', 'centres'].map((item) => {
                   const labels: Record<string, string> = {
                     hero: 'Home',
-                    learning: 'Learning',
+                    learning: 'Labs',
                     store: 'Store',
-                    labs: 'Innovation Labs',
+                    labs: 'Airg Labs',
                     'ai-infrastructures': 'AI Infra',
                     centres: 'Global Centres'
                   };
@@ -1074,7 +1075,7 @@ export default function NewDesignContent() {
                             className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            PDET Lab
+                            College Labs
                           </Link>
                           <button
                             onClick={() => {
@@ -1586,16 +1587,16 @@ export default function NewDesignContent() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {[
                       {
-                        title: "Cloud Infrastructure Partner",
-                        name: "Microsoft Azure",
-                        desc: "Provides standard cloud technologies, cognitive service nodes, and AI ecosystem infrastructure for our curriculum deployment.",
-                        logo: "/logos/azure.jpeg"
+                        title: "CSR Funding Client",
+                        name: "Aditya Birla Group",
+                        desc: "Sponsors advanced AI and robotics school lab deployments, empowering underprivileged learners across regional nodes.",
+                        logo: "/logos/extracted_p5_img2.png"
                       },
                       {
-                        title: "Curriculum & Certification Partner",
-                        name: "MIT ADT University",
-                        desc: "Collaborates on deep-tech curriculum design, student credits alignment, and joint academic certifications.",
-                        logo: "/logos/mitadt.png"
+                        title: "Corporate Client",
+                        name: "Cummins",
+                        desc: "Sponsors specialized robotic hardware training, engineering bootcamps, and technical skill development workshops.",
+                        logo: "/logos/left_5.jpg"
                       },
                       {
                         title: "Innovation Partner",
@@ -2590,7 +2591,7 @@ export default function NewDesignContent() {
                 <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px] mb-4 block font-mono">Strategic Infrastructure</span>
                 <h2 className="font-headline tracking-tighter leading-[0.9]">
                   <span className="block text-4xl md:text-6xl font-black text-[#1a1a2e] uppercase">
-                    Innovation
+                    AIR G
                   </span>
                   <span className="block text-4xl md:text-6xl font-black bg-gradient-to-r from-[#EE2C3C] via-[#FF5C6C] to-[#BD1A29] bg-clip-text text-transparent uppercase drop-shadow-[0_2px_8px_rgba(238,44,60,0.15)]">
                     Labs
@@ -2844,6 +2845,140 @@ export default function NewDesignContent() {
                 </div>
 
               </div>
+
+              {/* Global Hubs & Presence section exact duplicate placed right under the map */}
+              <div className="mt-16 border-t border-black/5 pt-16 space-y-16">
+                <div className="text-center max-w-3xl mx-auto space-y-3">
+                  <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">
+                    Global Hubs &amp; <span className="text-primary text-glow-red">Presence</span>
+                  </h2>
+                  <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
+                    Click on any country node to inspect program reach, strategic leaders, and institutional partnerships.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  {/* Countries List */}
+                  <div className="lg:col-span-4 glass-premium rounded-[3rem] p-6 !border-2 !border-[#EE2C3C]/30 shadow-xl relative overflow-hidden bg-white/70 flex flex-col h-[520px]">
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-black/5 shrink-0">
+                      <div className="flex items-center gap-2">
+                        <span className="relative flex h-2.5 w-2.5">
+                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                        </span>
+                        <span className="font-headline font-black text-xs uppercase tracking-widest text-[#1a1a2e]/60">Select Hub</span>
+                      </div>
+                      <span className="font-mono text-[9px] text-primary font-black px-2 py-0.5 bg-primary/15 rounded-full border-2 border-primary/40">7 STATIONS</span>
+                    </div>
+
+                    <div className="flex-1 space-y-3 overflow-y-auto pr-1 custom-scrollbar scroll-smooth">
+                      {countries.map((country) => {
+                        const isActive = selectedCountry === country.name;
+                        return (
+                          <button
+                            key={country.name}
+                            data-active={isActive ? "true" : "false"}
+                            onClick={() => setSelectedCountry(country.name)}
+                            className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between group/btn relative overflow-hidden ${
+                              isActive
+                                ? "bg-[#1a1a2e] !border-primary text-white-force shadow-lg shadow-primary/10 translate-x-1"
+                                : "glass-premium border-black/5 text-[#1a1a2e] hover:border-primary/30 hover:bg-slate-50"
+                            }`}
+                          >
+                            {isActive && (
+                              <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary animate-pulse" />
+                            )}
+                            <div>
+                              <h4 className={`font-headline font-black uppercase text-sm tracking-wide flex items-center gap-2.5 ${
+                                isActive ? "text-white-force" : "text-[#1a1a2e]"
+                              }`}>
+                                <img 
+                                  src={`https://flagcdn.com/w40/${country.code}.png`} 
+                                  alt={country.name} 
+                                  className="w-5.5 h-4 object-cover rounded-sm border border-white/10 shadow-sm shrink-0 select-none pointer-events-none"
+                                />
+                                <span>{country.name}</span>
+                              </h4>
+                              <span className={`text-[10px] font-mono tracking-wider uppercase block mt-0.5 ${isActive ? "text-primary" : "text-[#1a1a2e]/40"}`}>
+                                {country.reach.split(", ")[0]}
+                              </span>
+                            </div>
+                            <span className="material-symbols-outlined text-sm text-[#1a1a2e]/30 group-hover/btn:text-primary transition-colors">chevron_right</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Details Card */}
+                  <div className="lg:col-span-8 glass-premium p-10 rounded-[3rem] !border-2 !border-[#EE2C3C]/40 shadow-xl min-h-[440px] flex flex-col justify-between bg-white text-left">
+                    <div className="flex-1">
+                      <AnimatePresence mode="wait">
+                        {selectedCountry && (() => {
+                          const current = countries.find(c => c.name === selectedCountry);
+                          if (!current) return null;
+                          return (
+                            <motion.div
+                              key={current.name}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.2 }}
+                              className="space-y-6"
+                            >
+                              <div className="flex items-center justify-between border-b border-black/5 pb-6">
+                                <div className="flex items-center gap-3">
+                                  <span className="material-symbols-outlined text-primary text-2xl">location_on</span>
+                                  <h3 className="font-headline text-3xl font-black text-[#1a1a2e] uppercase tracking-tight flex items-center gap-3">
+                                    <img 
+                                      src={`https://flagcdn.com/w80/${current.code}.png`} 
+                                      alt={current.name} 
+                                      className="w-9 h-6 object-cover rounded border border-black/10 shadow-sm shrink-0 select-none pointer-events-none"
+                                    />
+                                    <span>{current.name}</span>
+                                  </h3>
+                                </div>
+                                <span className="px-3 py-1 bg-primary/15 border-2 border-primary/40 text-primary rounded-full text-xs font-mono font-black tracking-wider uppercase">
+                                  Active Region
+                                </span>
+                              </div>
+
+                              <div className="grid md:grid-cols-2 gap-8 pt-2">
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-mono text-[#1a1a2e]/40 uppercase tracking-widest block font-bold">Initiatives Description:</span>
+                                  <p className="text-sm text-[#1a1a2e]/75 font-light leading-relaxed">{current.desc}</p>
+                                </div>
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-mono text-[#1a1a2e]/40 uppercase tracking-widest block font-bold">Scope &amp; Reach:</span>
+                                  <p className="text-sm text-primary font-bold">{current.reach}</p>
+                                </div>
+                              </div>
+
+                              <div className="grid md:grid-cols-2 gap-8 border-t border-black/5 pt-6">
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-mono text-[#1a1a2e]/40 uppercase tracking-widest block font-bold">Presence Coordinators:</span>
+                                  <p className="text-sm text-[#1a1a2e]/70 font-semibold">{current.details}</p>
+                                </div>
+                                <div className="space-y-1">
+                                  <span className="text-[10px] font-mono text-[#1a1a2e]/40 uppercase tracking-widest block font-bold">Active Cities / Nodes:</span>
+                                  <p className="text-sm text-[#1a1a2e]/70 font-semibold">{current.coordinates}</p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          );
+                        })()}
+                      </AnimatePresence>
+                    </div>
+                    
+                    <div className="flex justify-end gap-3 pt-8 border-t border-black/5 mt-6">
+                      <a href="https://wa.me/919860779172?text=Hello%2C%20I%20am%20interested%20in%20setting%20up%20an%20AIR%20G%20Hub.%20Please%20share%20more%20details." target="_blank" rel="noopener noreferrer" className="group px-6 py-3 bg-[#1a1a2e] hover:bg-primary !text-white font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 flex items-center gap-2">
+                        <span className="!text-white">Request Hub Setup</span>
+                        <span className="material-symbols-outlined text-sm !text-white group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </section>
 

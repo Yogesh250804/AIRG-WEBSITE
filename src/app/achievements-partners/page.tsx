@@ -95,24 +95,26 @@ export default function AchievementsPartners() {
   }, [selectedCountry]);
 
   const row1 = [
-    { name: "SYMBIOSIS", logo: "/logos/symbiosis.png" },
+    { name: "Aditya Birla", logo: "/logos/extracted_p5_img2.png", scaleVal: 1.1 },
+    { name: "Symbiosis SCEI", logo: "/logos/scei_clean.png", scaleVal: 1.2 },
+    { name: "Pratham", logo: "/logos/pratham_clean.png", scaleVal: 1.1 },
     { name: "Sharjah Research Park", logo: "/logos/sharjah.png" },
     { name: "UNESCO", logo: "/logos/unesco.png" },
-    { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 1.3 }
+    { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 1.3 },
+    { name: "Cummins", logo: "/logos/left_5.jpg" },
+    { name: "MITCON", logo: "/logos/left_6.jpg", scaleVal: 0.85 }
   ];
 
   const row2 = [
     { name: "DYP", logo: "/logos/dyp.png", scaleVal: 1.3 },
     { name: "Western University", logo: "/logos/western.png" },
-    { name: "Cummins", logo: "/logos/cummins.png", scaleVal: 1.6 },
-    { name: "Partner 5", logo: "/logos/left_5.jpg" },
-    { name: "Partner 6", logo: "/logos/left_6.jpg", scaleVal: 0.7 },
-    { name: "Partner 7", logo: "/logos/left_7.jpg", scaleVal: 0.8 },
+    { name: "Maha60", logo: "/logos/maha60.png", scaleVal: 1.2 },
+    { name: "Institution's Innovation Council", logo: "/logos/left_7.png", scaleVal: 1.5 },
     { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.4 }
   ];
 
   const countries = [
-    { name: "India", code: "in", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 25+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
+    { name: "India", code: "in", desc: "National tactical training programs, innovation labs setup, and strategic partnerships with state incubation centers.", reach: "50,000+ students, 50+ labs", details: "Core research and execution hub.", coordinates: "Satara, Pune, Mumbai, Delhi" },
     { name: "Saudi Arabia", code: "sa", desc: "Expanding innovation networks and tactical hubs under leadership nodes to build deep-tech skills.", reach: "Strategic hubs & leadership nodes", details: "Headed by MD Abdulrazaq Chubado.", coordinates: "Riyadh, Jeddah" },
     { name: "Ethiopia", code: "et", desc: "Developing future-ready academic training environments in collaboration with local ministries.", reach: "Academic collaborations & programs", details: "Headed by MD Yeabsira Mekshak.", coordinates: "Addis Ababa" },
     { name: "Nigeria", code: "ng", desc: "Strategic partnership with Kaduna State University to deploy a dedicated on-campus innovation hub.", reach: "Kaduna State University Campus Hub", details: "Empowering university students.", coordinates: "Kaduna" },
@@ -288,16 +290,16 @@ export default function AchievementsPartners() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
             {
-              title: "Cloud Infrastructure Partner",
-              name: "Microsoft Azure",
-              desc: "Provides standard cloud technologies, cognitive service nodes, and AI ecosystem infrastructure for our curriculum deployment.",
-              icon: Database
+              title: "CSR Funding Client",
+              name: "Aditya Birla Group",
+              desc: "Sponsors advanced AI and robotics school lab deployments, empowering underprivileged learners across regional nodes.",
+              icon: Award
             },
             {
-              title: "Curriculum & Certification Partner",
-              name: "MIT ADT University",
-              desc: "Collaborates on deep-tech curriculum design, student credits alignment, and joint academic certifications.",
-              icon: GraduationCap
+              title: "Corporate Client",
+              name: "Cummins",
+              desc: "Sponsors specialized robotic hardware training, engineering bootcamps, and technical skill development workshops.",
+              icon: Award
             },
             {
               title: "Innovation Partner",

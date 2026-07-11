@@ -21,16 +21,16 @@ export function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { 
-      name: "Learning", 
+      name: "Labs", 
       href: "/#learning",
       dropdown: [
         { name: "School Labs", href: "/learning/school-labs" },
-        { name: "PDET Lab", href: "/learning/pdet-lab" },
+        { name: "College Labs", href: "/learning/pdet-lab" },
         { name: "Workshops", href: "/#workshops" }
       ]
     },
     { name: "Store", href: "/#store" },
-    { name: "Innovation Labs", href: "/#labs" },
+    { name: "Airg Labs", href: "/#labs" },
     { name: "AI Infra", href: "/learning/ai-infrastructures" },
     { name: "Global Centres", href: "/#centres" }
   ];

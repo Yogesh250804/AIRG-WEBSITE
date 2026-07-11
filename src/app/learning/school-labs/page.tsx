@@ -253,46 +253,62 @@ export default function SchoolLabsPage() {
     "3D Designing & Printing"
   ];
 
-  const projectDetails: Record<string, { desc: string; components: string[]; difficulty: string }> = {
+  const projectDetails: Record<string, { desc: string; components: string[]; difficulty: string; learning: string; impact: string }> = {
     "AI Smart Dustbin": {
       desc: "An automated waste management bin that detects approach using ultrasonic telemetry and automatically sorts dry/wet garbage using AI vision classification.",
       components: ["Arduino Uno", "Servo Motors", "Ultrasonic Sensor", "Camera Module"],
-      difficulty: "Intermediate"
+      difficulty: "Intermediate",
+      learning: "Edge computing, Servo angle controls, Ultrasonic distance calculations.",
+      impact: "Reduces manual waste sorting by 80% using localized vision AI."
     },
     "Human Following Robot": {
       desc: "An autonomous mobile rover that tracks and follows a specific human path using smart dual IR sensors and an ultrasonic collision avoidance module.",
       components: ["Geared DC Motors", "IR Sensor Array", "Motor Driver", "Arduino UNO"],
-      difficulty: "Advanced"
+      difficulty: "Advanced",
+      learning: "Sensor calibration, feedback loop tuning, differential drive logic.",
+      impact: "Autonomous transport assistance in indoor workspaces."
     },
     "RFID Attendance System": {
       desc: "A contact-free identity logging device that verifies student credentials via 13.56MHz RFID cards and writes logs to a local Google Sheets database.",
       components: ["RC522 RFID Module", "ESP8266 Wi-Fi Chip", "OLED Display", "Buzzer"],
-      difficulty: "Beginner"
+      difficulty: "Beginner",
+      learning: "Serial communication, database logging, Wi-Fi networking.",
+      impact: "Eliminates paper registers and speeds up attendance entry by 90%."
     },
     "Smart Irrigation System": {
       desc: "A self-watering agriculture grid that measures soil hydration and triggers a mini submersible pump to water plants only when moisture falls below 40%.",
       components: ["Soil Moisture Sensor", "5V Relay Module", "Water Pump", "ESP32 Controller"],
-      difficulty: "Intermediate"
+      difficulty: "Intermediate",
+      learning: "Analog sensor reading, relay switching, micro-irrigation layout.",
+      impact: "Saves up to 60% water usage in smart greenhouse deployments."
     },
     "Automatic Street Lights": {
       desc: "A smart grid simulator that automatically controls high-efficiency LED lights based on ambient illumination levels using LDR photo-resistors.",
       components: ["LDR Phototransistor", "Transistors", "Power LEDs", "Breadboard Core"],
-      difficulty: "Beginner"
+      difficulty: "Beginner",
+      learning: "Voltage divider circuits, transistor switching, energy conservation.",
+      impact: "Minimizes civic electricity wastage by automating city lighting grids."
     },
     "AI Face Attendance": {
       desc: "A high-precision face recognition scanner running local OpenCV models on a Raspberry Pi to authenticate and register student attendance.",
       components: ["Raspberry Pi 4", "HQ Camera Module", "LCD Display Module", "Google Drive API"],
-      difficulty: "Advanced"
+      difficulty: "Advanced",
+      learning: "Computer vision, Python libraries (OpenCV), cloud API sync.",
+      impact: "Ensures secure, tamper-proof student entry logs with 99% accuracy."
     },
     "Laser Security System": {
       desc: "An intruder detection grid that triggers a high-decibel alarm and sends a push notification to mobile devices if a laser beam path is broken.",
       components: ["Red Laser Diode", "Photo-resistor", "Active Buzzer", "Wi-Fi Telemetry Controller"],
-      difficulty: "Beginner"
+      difficulty: "Beginner",
+      learning: "Laser path alignments, buzzer frequencies, push alert triggers.",
+      impact: "Affordable home/lab security grid with instant smart notification."
     },
     "Voice Controlled Robot": {
       desc: "A voice-activated robotic vehicle that processes natural speech commands over a Bluetooth interface to execute forward, reverse, and turn maneuvers.",
       components: ["Chassis & DC Motors", "HC-05 Bluetooth Module", "Android Speech App", "Microcontroller"],
-      difficulty: "Intermediate"
+      difficulty: "Intermediate",
+      learning: "Bluetooth communication protocols, string command processing, motor driver wiring.",
+      impact: "Hands-free mobility support and human-robot interface experience."
     }
   };
 
@@ -311,17 +327,91 @@ export default function SchoolLabsPage() {
     <main className="relative min-h-screen bg-white selection:bg-primary/20 selection:text-primary overflow-x-hidden text-[#111827]">
       <Navbar />
 
+      {/* Modern High-Tech CSS Animations */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes floatUp {
+          0% { transform: translateY(120px) rotate(0deg); opacity: 0; }
+          20% { opacity: 0.25; }
+          80% { opacity: 0.25; }
+          100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+        }
+        .animate-float-slow {
+          animation: floatUp 15s linear infinite;
+        }
+        .animate-float-medium {
+          animation: floatUp 10s linear infinite;
+        }
+        .animate-float-fast {
+          animation: floatUp 7s linear infinite;
+        }
+        @keyframes scanLine {
+          0% { top: -2%; }
+          50% { top: 102%; }
+          100% { top: -2%; }
+        }
+        .animate-scan {
+          animation: scanLine 6s ease-in-out infinite;
+        }
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .book-transform {
+          transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.6s ease;
+          transform-style: preserve-3d;
+        }
+        .group-hover-book:hover .book-transform {
+          transform: rotateY(-32deg) rotateX(8deg) translateZ(20px);
+          box-shadow: -20px 20px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(238, 44, 60, 0.2);
+        }
+      `}} />
+
       <div id="pdet-page-content-wrapper" className="print:hidden">
 
-        {/* Redesigned Premium Cyberpunk Hero Section */}
+        {/* Redesigned Premium Cyberpunk Hero Section with Indian Flag Theme */}
         <div 
           className="pt-40 pb-28 relative overflow-hidden border-b border-white/[0.04]"
           style={{
-            background: 'radial-gradient(circle at 80% 20%, rgba(238, 44, 60, 0.15), transparent 50%), radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.08), transparent 50%), #0B0F19'
+            background: 'radial-gradient(circle at 20% 20%, rgba(255, 103, 31, 0.35), transparent 60%), radial-gradient(circle at 80% 80%, rgba(19, 136, 8, 0.35), transparent 60%), radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15), transparent 45%), #0B0F19'
           }}
         >
           {/* Cyberpunk Grid Background Overlay */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+          {/* Floating High-Tech Particles */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+            <span className="absolute text-[8px] font-mono text-[#FF9933]/15 animate-float-slow left-[10%] top-[40%]">01</span>
+            <span className="absolute text-[9px] font-mono text-white/10 animate-float-medium left-[25%] top-[80%]">&lt;AI&gt;</span>
+            <span className="absolute text-[8px] font-mono text-[#138808]/20 animate-float-fast left-[80%] top-[30%]">+</span>
+            <span className="absolute text-[10px] font-mono text-white/10 animate-float-slow left-[70%] top-[70%]">10</span>
+            <span className="absolute text-[8px] font-mono text-[#FF9933]/20 animate-float-medium left-[85%] top-[60%]">[ROS2]</span>
+            <span className="absolute text-[9px] font-mono text-[#138808]/15 animate-float-fast left-[15%] top-[20%]">IOT</span>
+            <span className="absolute text-[8px] font-mono text-white/10 animate-float-slow left-[40%] top-[85%]">0</span>
+            <span className="absolute text-[10px] font-mono text-primary/10 animate-float-medium left-[90%] top-[10%]">1</span>
+          </div>
+
+          {/* Rotating Ashoka Chakra Watermark */}
+          <svg 
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] opacity-[0.18] text-[#0038A8] pointer-events-none animate-[spin_180s_linear_infinite]" 
+            viewBox="0 0 100 100"
+          >
+            <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="1.2" fill="none" />
+            <circle cx="50" cy="50" r="42" stroke="currentColor" strokeWidth="0.4" fill="none" />
+            <circle cx="50" cy="50" r="8" stroke="currentColor" strokeWidth="1.2" fill="none" />
+            {Array.from({ length: 24 }).map((_, i) => {
+              const angle = (i * 360) / 24;
+              return (
+                <line
+                  key={i}
+                  x1="50"
+                  y1="50"
+                  x2={50 + 42 * Math.cos((angle * Math.PI) / 180)}
+                  y2={50 + 42 * Math.sin((angle * Math.PI) / 180)}
+                  stroke="currentColor"
+                  strokeWidth="0.8"
+                />
+              );
+            })}
+          </svg>
 
           <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -335,17 +425,17 @@ export default function SchoolLabsPage() {
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.03] text-white/90 text-xs font-mono uppercase tracking-widest mb-8"
                   >
-                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-[#FF9933] animate-pulse" />
                     <span>FUTURE READY EDUCATION</span>
                   </motion.div>
                   
-                  <h1 className="font-headline text-5xl md:text-6xl lg:text-[76px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-white text-left">
+                  <h1 className="font-headline text-5xl md:text-6xl lg:text-[76px] font-black tracking-tighter leading-[0.95] mb-8 uppercase text-left">
                     <span className="block overflow-hidden py-1">
                       <motion.span 
                         initial={{ y: "100%", opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                        className="block"
+                        className="block bg-gradient-to-r from-[#FF9933] to-[#FF671F] text-transparent bg-clip-text"
                       >
                         AIR G
                       </motion.span>
@@ -355,7 +445,7 @@ export default function SchoolLabsPage() {
                         initial={{ y: "100%", opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                        className="block bg-gradient-to-r from-primary to-[#ff6b6b] text-transparent bg-clip-text text-glow-red"
+                        className="block bg-gradient-to-r from-white via-slate-100 to-[#138808] text-transparent bg-clip-text"
                       >
                         INNOVATION LAB
                       </motion.span>
@@ -372,74 +462,103 @@ export default function SchoolLabsPage() {
                       Complete AI, Robotics, IoT &amp; Emerging Technology Lab Proposal. Build your custom deployment quotation below.
                     </motion.p>
                   </div>
-                </div>
-              </div>
 
-              {/* Right Hero Cyberpunk Telemetry Image Card */}
-              <div className="flex-1 w-full relative">
-                <div className="absolute inset-0 bg-primary/10 rounded-[3rem] blur-2xl pointer-events-none" />
-                
-                <div className="aspect-[4/3] rounded-[3rem] bg-slate-950 border border-white/[0.08] shadow-2xl overflow-hidden relative group p-3">
-                  <div className="w-full h-full rounded-[2.3rem] overflow-hidden relative border border-white/[0.04]">
-                    <img 
-                      src={labImages[currentImageIndex]} 
-                      alt="AIR G Innovation Lab" 
-                      className="w-full h-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                    
-                    <div className="absolute bottom-8 left-8 right-8 text-left flex justify-between items-end">
-                      <div>
-                        <h3 className="font-headline text-2xl font-black text-white uppercase tracking-tight">Ecosystem Architecture</h3>
-                      </div>
-                      <span className="text-[10px] font-mono text-white/50 bg-slate-950/60 border border-white/10 px-3 py-1.5 rounded-xl backdrop-blur-md">
-                        PROPOSAL REV. 4
-                      </span>
+                  {/* Left Column Stats Cards */}
+                  <div className="grid grid-cols-3 gap-4 max-w-xl">
+                    <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 text-left backdrop-blur-md">
+                      <span className="text-[9px] text-[#FF9933] font-mono uppercase tracking-widest block mb-1">State Nodes</span>
+                      <span className="text-xl md:text-2xl font-black font-headline text-white">50+ Labs</span>
+                    </div>
+                    <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 text-left backdrop-blur-md">
+                      <span className="text-[9px] text-white/60 font-mono uppercase tracking-widest block mb-1">Empowered</span>
+                      <span className="text-xl md:text-2xl font-black font-headline text-white">50k+ Kids</span>
+                    </div>
+                    <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 text-left backdrop-blur-md">
+                      <span className="text-[9px] text-[#138808] font-mono uppercase tracking-widest block mb-1">Curriculums</span>
+                      <span className="text-xl md:text-2xl font-black font-headline text-white">Grades 1-10</span>
                     </div>
                   </div>
                 </div>
               </div>
 
+              {/* Right Hero Premium Image Card with 3D Tilt Hover Effect */}
+              <div className="flex-1 w-full relative">
+                {/* Backing Glows */}
+                <div className="absolute -inset-4 bg-gradient-to-tr from-[#138808]/20 via-[#0038A8]/10 to-[#FF9933]/25 rounded-[2.5rem] blur-2xl opacity-75 pointer-events-none" />
+                
+                {/* 3D tilt card */}
+                <motion.div 
+                  whileHover={{ rotateY: -6, rotateX: 6, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="relative p-[2px] rounded-[2.5rem] bg-gradient-to-tr from-[#138808]/40 via-white/10 to-[#FF9933]/50 shadow-2xl cursor-pointer"
+                  style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+                >
+                  <div className="aspect-[4/3] rounded-[2.4rem] bg-slate-950/90 overflow-hidden relative group">
+                    <img 
+                      src={labImages[currentImageIndex]} 
+                      alt="AIR G Innovation Lab" 
+                      className="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                    
+                    {/* Glowing scanning laser line */}
+                    <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF9933] to-transparent opacity-90 animate-scan pointer-events-none z-20" />
+                    {/* Matrix Scan lines overlay */}
+                    <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(rgba(18,185,129,0)_50%,rgba(18,185,129,0.25)_50%)] bg-[size:100%_4px] pointer-events-none" />
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Customization Workspace Section */}
-        <div className="py-24 bg-white border-b border-slate-100">
-          <div className="max-w-[1600px] mx-auto px-6 md:px-16">
+        <div className="py-24 relative overflow-hidden border-b border-slate-100 bg-[#FAFAFA]">
+          {/* Flag-inspired subtle glowing ambient blobs (soft light tints) */}
+          <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-[#FF9933]/4 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-[#138808]/4 rounded-full blur-[120px] pointer-events-none" />
+
+          <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-primary text-xs font-bold uppercase tracking-widest block mb-4">[ Live Calculator ]</span>
               <h2 className="text-4xl md:text-5xl font-headline font-black text-[#111827] uppercase tracking-tight">Configure Your School Lab</h2>
-              <p className="text-[#111827]/60 text-lg mt-4">Select items to dynamically estimate base costs, GST (18%), and compile a downloadable official quotation proposal.</p>
+              <p className="text-slate-500 text-lg mt-4">Select items to dynamically estimate base costs, GST (18%), and compile a downloadable official quotation proposal.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               {/* Left Column: Department List & Items Editor */}
               <div className="lg:col-span-7 space-y-6">
-                {/* Zone Select Tabs */}
-                <div className="flex flex-wrap gap-2.5 pb-5 border-b border-[#111827]/5">
-                  {zones.map((zone, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveZone(idx)}
-                      className={`px-5 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
-                        activeZone === idx 
-                          ? "bg-primary text-white shadow-lg shadow-primary/20" 
-                          : "bg-slate-150 text-slate-700 hover:bg-slate-200"
-                      }`}
-                      style={{ 
-                        backgroundColor: activeZone === idx ? '#EE2C3C' : '#f1f5f9',
-                        color: activeZone === idx ? '#ffffff' : '#334155' 
-                      }}
-                    >
-                      {zone.shortName}
-                    </button>
-                  ))}
+                {/* Zone Select Tabs Container */}
+                <div className="relative">
+                  {/* Fade overlays for scrolling indicator */}
+                  <div className="absolute right-0 top-0 bottom-5 w-12 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none z-10 block lg:hidden" />
+                  
+                  {/* Zone Select Tabs (Straight horizontal scroll with no wrapping) */}
+                  <div className="flex overflow-x-auto gap-2 pb-5 border-b border-slate-200/60 flex-nowrap scrollbar-thin pr-12 lg:pr-0">
+                    {zones.map((zone, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveZone(idx)}
+                        className={`px-3 py-2.5 md:px-5 md:py-3.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all duration-300 border shrink-0 ${
+                          activeZone === idx 
+                            ? "bg-primary text-white border-primary shadow-lg shadow-primary/20 scale-[1.02]" 
+                            : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-slate-900"
+                        }`}
+                        style={{ 
+                          backgroundColor: activeZone === idx ? '#EE2C3C' : '#ffffff',
+                          borderColor: activeZone === idx ? '#EE2C3C' : '#e2e8f0',
+                          color: activeZone === idx ? '#ffffff' : '#475569' 
+                        }}
+                      >
+                        {zone.shortName}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Active Department Panel */}
-                <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 text-left">
-                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#111827]/5">
+                <div className="bg-white border border-slate-200/80 rounded-3xl p-6 md:p-8 text-left shadow-sm">
+                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
                     <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
                       <span className="material-symbols-outlined">{zones[activeZone].icon}</span>
                     </div>
@@ -451,10 +570,10 @@ export default function SchoolLabsPage() {
 
                   <div className="space-y-4">
                     {zones[activeZone].items.map((item, idx) => (
-                      <div key={idx} className="bg-white border border-slate-200/60 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-sm transition-all">
+                      <div key={idx} className="bg-slate-50/50 border border-slate-200/60 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-white hover:shadow-md hover:border-[#FF9933]/30 transition-all">
                         <div className="flex-1">
                           <h4 className="font-bold text-[#111827] text-sm md:text-base leading-snug">{item.name}</h4>
-                          <span className="text-xs text-[#111827]/40 mt-1 block">Unit Price: ₹{formatCurrency(item.unitCost)}</span>
+                          <span className="text-xs text-slate-500 mt-1 block">Unit Price: ₹{formatCurrency(item.unitCost)}</span>
                         </div>
                         <div className="flex items-center gap-4 shrink-0 w-full md:w-auto justify-between md:justify-end">
                           <div className="flex items-center gap-2">
@@ -473,7 +592,7 @@ export default function SchoolLabsPage() {
                             </button>
                           </div>
                           <div className="text-right min-w-[90px]">
-                            <span className="text-xs text-[#111827]/40 block">Subtotal</span>
+                            <span className="text-xs text-slate-500 block">Subtotal</span>
                             <span className="font-extrabold text-slate-900 text-sm md:text-base tabular-nums">
                               ₹{formatCurrency(item.qty * item.unitCost)}
                             </span>
@@ -658,22 +777,27 @@ export default function SchoolLabsPage() {
                         <div className="flex justify-center items-center w-full py-8">
                           
                           {/* 3D-Like Enlarged CSS Book Cover Mockup */}
-                          <div className="relative group/book shrink-0">
+                          <div className="relative group/book shrink-0 group-hover-book perspective-1000">
                             {/* Book shadow glow */}
-                            <div className="absolute inset-0 bg-primary/20 rounded-r-[2.5rem] blur-3xl group-hover/book:scale-105 transition-transform duration-500" />
+                            <div className="absolute inset-0 bg-primary/20 rounded-r-[2.5rem] blur-3xl group-hover/book:scale-110 transition-transform duration-500" />
                             
                             {/* Realistic Book structure */}
                             <div 
-                              className="w-80 h-[26rem] rounded-r-[2.5rem] relative overflow-hidden flex flex-col justify-between p-8 border-l-[8px] border-primary shadow-2xl transition-all duration-500 group-hover/book:translate-x-2 group-hover/book:rotate-1 border border-white/[0.08]"
+                              className="w-80 h-[26rem] rounded-r-[2.5rem] relative overflow-hidden flex flex-col justify-between p-8 border-l-[8px] border-primary shadow-2xl book-transform border border-white/[0.08]"
                               style={{ 
-                                perspective: '1200px',
                                 backgroundImage: 'url(/book-cover-template.png)',
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center'
                               }}
                             >
-                              {/* Page edges mockup */}
-                              <div className="absolute right-0 top-0 bottom-0 w-[8px] bg-slate-100 rounded-r-xl shadow-inner" />
+                              {/* 3D Page edges stack simulation */}
+                              <div className="absolute right-0 top-[3px] bottom-[3px] w-[24px] bg-slate-100 shadow-inner origin-right transition-transform duration-500"
+                                   style={{ 
+                                     transform: 'rotateY(90deg) translateZ(12px)',
+                                     background: 'repeating-linear-gradient(to right, #eaeaea 0px, #eaeaea 2px, transparent 2px, transparent 4px)',
+                                     borderRadius: '0 4px 4px 0'
+                                   }} 
+                              />
                               
                               {/* Book Spine reflection */}
                               <div className="absolute left-0 top-0 bottom-0 w-[16px] bg-white/5" />
@@ -799,86 +923,76 @@ export default function SchoolLabsPage() {
                 <div className="relative z-10">
                   <span className="text-primary text-xs font-bold uppercase tracking-widest block mb-4">[ Build 50+ Projects ]</span>
                   <h3 className="text-3xl font-headline font-black uppercase tracking-tight mb-6">Real-World Student Inventions</h3>
-                  
-                  {/* Interactive Details Box */}
-                  <div className="mb-8 min-h-[140px] transition-all duration-300 relative">
-                    <AnimatePresence mode="wait">
-                      {hoveredProject ? (
-                        <motion.div
-                          key={hoveredProject}
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="bg-white/[0.04] border border-white/10 rounded-2xl p-5 relative overflow-hidden backdrop-blur-md text-left"
-                        >
-                          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-                            <span className="font-headline font-black text-sm uppercase tracking-wide text-primary">
-                              {hoveredProject}
-                            </span>
-                            {projectDetails[hoveredProject] && (
-                              <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider ${
-                                projectDetails[hoveredProject].difficulty === "Beginner" ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400" :
-                                projectDetails[hoveredProject].difficulty === "Intermediate" ? "bg-amber-500/10 border border-amber-500/30 text-amber-400" :
-                                "bg-rose-500/10 border border-rose-500/30 text-rose-400"
-                              }`}>
-                                {projectDetails[hoveredProject].difficulty}
-                              </span>
-                            )}
-                          </div>
-                          {projectDetails[hoveredProject] && (
-                            <>
-                              <p className="text-xs text-white/70 font-light leading-relaxed mb-4">
-                                {projectDetails[hoveredProject].desc}
-                              </p>
-                              <div className="flex flex-wrap gap-1.5 items-center">
-                                <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest mr-1.5">Hardware:</span>
-                                {projectDetails[hoveredProject].components.map((comp, cIdx) => (
-                                  <span key={cIdx} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[9px] text-white/60">
-                                    {comp}
-                                  </span>
-                                ))}
-                              </div>
-                            </>
-                          )}
-                        </motion.div>
-                      ) : (
-                        <motion.div
-                          key="default-prompt"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="bg-white/[0.02] border border-dashed border-white/[0.06] rounded-2xl p-6 flex flex-col items-center justify-center text-center text-white/40 h-[140px]"
-                        >
-                          <span className="material-symbols-outlined text-white/20 text-3xl mb-2">touch_app</span>
-                          <p className="text-xs font-light">Hover over any student invention below to inspect its system architecture and components.</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {sampleProjects.map((project, idx) => {
                       const isHovered = hoveredProject === project;
+                      const details = projectDetails[project];
                       return (
                         <div 
                           key={idx} 
-                          className={`flex items-center gap-4 bg-white/[0.03] border border-white/[0.06] p-4 rounded-2xl transition-all cursor-pointer text-left ${
+                          className={`flex flex-col bg-white/[0.03] border border-white/[0.06] p-5 rounded-2xl transition-all cursor-pointer text-left ${
                             isHovered 
-                              ? "bg-white/[0.08] border-primary/50 translate-x-1 shadow-lg" 
+                              ? "bg-white/[0.08] border-primary/50 shadow-lg" 
                               : "hover:bg-white/[0.05]"
                           }`}
                           onMouseEnter={() => setHoveredProject(project)}
                           onMouseLeave={() => setHoveredProject(null)}
+                          onClick={() => setHoveredProject(hoveredProject === project ? null : project)}
                         >
-                          <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-all ${
-                            isHovered ? "bg-primary text-white" : "bg-primary/20 text-primary"
-                          }`}>
-                            {idx + 1}
-                          </span>
-                          <span className={`font-bold text-sm transition-colors ${
-                            isHovered ? "text-white" : "text-white/80"
-                          }`}>{project}</span>
+                          <div className="flex items-center gap-4 w-full">
+                            <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-all ${
+                              isHovered ? "bg-primary text-white" : "bg-primary/20 text-primary"
+                            }`}>
+                              {idx + 1}
+                            </span>
+                            <span className={`font-bold text-sm transition-colors flex-1 ${
+                              isHovered ? "text-white" : "text-white/80"
+                            }`}>{project}</span>
+                            {details && (
+                              <span className={`px-2 py-0.5 rounded text-[8px] font-mono font-bold uppercase tracking-wider ${
+                                details.difficulty === "Beginner" ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400" :
+                                details.difficulty === "Intermediate" ? "bg-amber-500/10 border border-amber-500/30 text-amber-400" :
+                                "bg-rose-500/10 border border-rose-500/30 text-rose-400"
+                              }`}>
+                                {details.difficulty}
+                              </span>
+                            )}
+                          </div>
+
+                          <AnimatePresence>
+                            {isHovered && details && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                                animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                                exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                                transition={{ duration: 0.25, ease: "easeInOut" }}
+                                className="overflow-hidden border-t border-white/10 pt-4 space-y-3"
+                              >
+                                <p className="text-xs text-white/70 font-light leading-relaxed">
+                                  {details.desc}
+                                </p>
+                                
+                                <div className="space-y-2 text-[11px] text-white/60">
+                                  <div>
+                                    <span className="font-semibold text-[#FF9933]">Key Learning:</span> {details.learning}
+                                  </div>
+                                  <div>
+                                    <span className="font-semibold text-[#138808]">Real-World Impact:</span> {details.impact}
+                                  </div>
+                                </div>
+
+                                <div className="flex flex-wrap gap-1.5 items-center pt-2">
+                                  <span className="text-[9px] font-mono text-white/30 uppercase tracking-widest mr-1">Hardware:</span>
+                                  {details.components.map((comp, cIdx) => (
+                                    <span key={cIdx} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-[9px] text-white/60">
+                                      {comp}
+                                    </span>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                         </div>
                       );
                     })}
