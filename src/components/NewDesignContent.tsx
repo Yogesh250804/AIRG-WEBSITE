@@ -111,7 +111,7 @@ const row1 = [
   { name: "Aditya Birla", logo: "/logos/extracted_p5_img2.png", scaleVal: 1.1 },
   { name: "Sharjah Research Park", logo: "/logos/sharjah.png" },
   { name: "UNESCO", logo: "/logos/unesco.png" },
-  { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 0.85 },
+  { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 1.05 },
   { name: "Cummins", logo: "/logos/left_5.jpg" },
   { name: "MITCON", logo: "/logos/left_6.jpg", scaleVal: 1.3 }
 ];
@@ -121,7 +121,7 @@ const row2 = [
   { name: "Western University", logo: "/logos/western.png" },
   { name: "Maha60", logo: "/logos/maha60.png", scaleVal: 1.6 },
   { name: "Institution's Innovation Council", logo: "/logos/left_7.png", scaleVal: 1.5 },
-  { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 0.85 }
+  { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.05 }
 ];
 
 const countries = [
