@@ -102,7 +102,7 @@ export default function AchievementsPartners() {
     { name: "UNESCO", logo: "/logos/unesco.png" },
     { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 1.3 },
     { name: "Cummins", logo: "/logos/left_5.jpg" },
-    { name: "MITCON", logo: "/logos/left_6.jpg", scaleVal: 0.85 }
+    { name: "MITCON", logo: "/logos/left_6.jpg", scaleVal: 1.3 }
   ];
 
   const row2 = [
