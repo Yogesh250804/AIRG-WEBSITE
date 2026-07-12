@@ -1763,10 +1763,7 @@ export default function NewDesignContent() {
                               {story.desc}
                             </p>
                           </div>
-                          <Link href="/#contact" className="inline-flex items-center gap-1 text-xs font-bold text-[#1a1a2e]/80 hover:text-primary transition-colors group-hover:translate-x-1 duration-300">
-                            <span>Learn More</span>
-                            <ChevronRight size={14} className="mt-0.5" />
-                          </Link>
+
                         </div>
                       </div>
                     ))}

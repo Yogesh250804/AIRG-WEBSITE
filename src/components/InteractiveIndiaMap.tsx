@@ -917,7 +917,7 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
                 }
                 strokeWidth={isHovered ? "1.5" : hasDetailMap ? "1.2" : "0.5"}
                 style={{
-                  cursor: hasDetailMap ? "pointer" : "default",
+                  cursor: (!isPreview && hasDetailMap) ? "pointer" : "default",
                   transform: isHovered ? "scale(1.03)" : "scale(1)",
                   transformOrigin: "center",
                   transformBox: "fill-box",
@@ -932,7 +932,7 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
                   setHoveredState(null);
                   setHoveredStateName("");
                 }}
-                onClick={() => handleStateClick(location.id, location.name)}
+                onClick={() => !isPreview && handleStateClick(location.id, location.name)}
               />
             );
           })}
@@ -963,7 +963,7 @@ export default function InteractiveIndiaMap({ onStateSelect, isDark = false, isP
             }`}>
               {hoveredStateName}
             </h4>
-            {AVAILABLE_STATE_MAPS[hoveredState] && (
+            {!isPreview && AVAILABLE_STATE_MAPS[hoveredState] && (
               <div className="mt-2 pt-2 border-t border-primary/20">
                 <span className="text-[9px] font-mono text-primary/80 uppercase tracking-widest flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-[10px]">touch_app</span>
