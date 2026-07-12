@@ -50,3 +50,15 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# Large files / scratch
+class/
+*.pdf
+extract-*.js
+extract-*.mjs
+fix-*.js
+read-*.js
+parse-*.js
+inspect-*.js
+projected_*.txt
+scratch/
