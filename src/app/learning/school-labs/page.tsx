@@ -16,6 +16,7 @@ export default function SchoolLabsPage() {
       id: "1", 
       label: "Grade 1", 
       file: "Grade 1 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1uK3QDsEhlrG-mqZ_7L8k3MevThlW1AoT/view?usp=sharing",
       active: true, 
       desc: "Introduction to visual block coding (Scratch Jr), simple structural robotics assemblies, and understanding fundamental mechanical concepts like gears, axles, and levers.", 
       kitName: "AIR Junior Starter Kit", 
@@ -27,6 +28,7 @@ export default function SchoolLabsPage() {
       id: "2", 
       label: "Grade 2", 
       file: "Grade 2 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1t5UaCUuGiaGPsJFBvwXNRFoSFr0QbN4w/view?usp=sharing",
       active: true, 
       desc: "Exploring electrical circuits, basic sensor integrations (such as IR obstacle sensors), active block-programming, and building simple autonomous model systems.", 
       kitName: "AIR Robotics Explorer Kit", 
@@ -38,6 +40,7 @@ export default function SchoolLabsPage() {
       id: "3", 
       label: "Grade 3", 
       file: "Grade 3 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1IN_9uLnnEK02SaulG9mjUt17jiQ_rQx6/view?usp=sharing",
       active: true, 
       desc: "Advanced block coding with Scratch, building light-sensing circuits, constructing simple mechanical arms, and understanding levers, pulleys, and wheel-axle systems in real devices.", 
       kitName: "AIR Smart Builder Kit", 
@@ -49,6 +52,7 @@ export default function SchoolLabsPage() {
       id: "4", 
       label: "Grade 4", 
       file: "Grade 4 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1yB7mR_NEbCGyCgB5gGKQHU3oeyR5plNo/view?usp=sharing",
       active: true, 
       desc: "Algorithmic thinking through programmable loops and conditionals, introduction to servo motors, building smart input-output systems, and hands-on electronics with basic circuit boards.", 
       kitName: "AIR Logic & Servo Kit", 
@@ -60,6 +64,7 @@ export default function SchoolLabsPage() {
       id: "5", 
       label: "Grade 5", 
       file: "Grade 5 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1Ygv5nvNmjfaOxWOf8L3OHYHub8CqNyYa/view?usp=sharing",
       active: true, 
       desc: "Transition to physical computing with Arduino, interfacing multiple sensor matrices (ultrasonic, temperature), learning structural 3D design, and printing custom shapes.", 
       kitName: "AIR IoT & Creator 3D Kit", 
@@ -71,6 +76,7 @@ export default function SchoolLabsPage() {
       id: "6", 
       label: "Grade 6", 
       file: "Grade 6 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1e7NUPAeBUZJPex89gNJdqf88S9bgub43/view?usp=sharing",
       active: true, 
       desc: "Edge AI fundamentals using Raspberry Pi, smart city prototypes with IoT sensor networks, wireless communication modules, and introductory Python programming for hardware control.", 
       kitName: "AIR Edge AI & IoT Kit", 
@@ -82,6 +88,7 @@ export default function SchoolLabsPage() {
       id: "7", 
       label: "Grade 7", 
       file: "Grade 7 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1KblWtcx2rpBmoBUHsonreKXrQsIQGRxC/view?usp=sharing",
       active: true, 
       desc: "Agricultural drone mechanics, telemetry and GPS tracking, autonomous navigation algorithms, remote sensing with camera modules, and field data collection systems.", 
       kitName: "AIR Drone & Telemetry Kit", 
@@ -93,6 +100,7 @@ export default function SchoolLabsPage() {
       id: "8", 
       label: "Grade 8", 
       file: "Grade 8 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1xfF7vPk40GzbJBe2SN0DqZeUxO-EUYwP/view?usp=sharing",
       active: true, 
       desc: "Python scripting for data analysis, computer vision with OpenCV, training and deploying simple AI models on edge devices, and building intelligent vision-enabled robotic systems.", 
       kitName: "AIR Python Vision AI Kit", 
@@ -104,6 +112,7 @@ export default function SchoolLabsPage() {
       id: "9", 
       label: "Grade 9", 
       file: "Grade 9 Book.pdf", 
+      driveLink: "https://drive.google.com/file/d/1Ei4j_kiRWExVgr5C3x1mtixrwEhDMFOg/view?usp=sharing",
       active: true, 
       desc: "Advanced mechanical design with CAD software, aerodynamics and flight mechanics, constructing and programming 4WD rovers, and applying physics principles to autonomous systems.", 
       kitName: "AIR Rover & Flight Design Kit", 
@@ -891,12 +900,13 @@ export default function SchoolLabsPage() {
                       {/* Bottom Row: Download Button */}
                       <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row gap-4">
                         <a 
-                          href={`/class/${currentGrade.file}`} 
-                          download
+                          href={currentGrade.driveLink || `#`} 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="px-8 py-4 bg-primary text-white font-bold text-xs uppercase tracking-widest rounded-2xl hover:bg-primary/90 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg shadow-primary/25 select-none hover:scale-[1.02] active:scale-95 shrink-0"
                         >
                           <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
-                          <span>Download {currentGrade.label} Book (PDF)</span>
+                          <span>View {currentGrade.label} Book (PDF)</span>
                         </a>
                       </div>
 
