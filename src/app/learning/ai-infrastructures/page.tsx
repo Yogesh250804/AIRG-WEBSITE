@@ -102,10 +102,10 @@ export default function AIInfrastructuresB2BPage() {
     <main className="min-h-screen bg-white selection:bg-primary/20 selection:text-primary overflow-x-hidden text-[#1a1a2e] font-sans">
       <Navbar />
 
-      <div id="pdet-page-content-wrapper" className="print:hidden">
+      <div id="pdet-page-content-wrapper" className="print:hidden overflow-x-hidden relative">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(238,44,60,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(238,44,60,0.015)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
-      <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute top-[30%] right-[-10%] w-[600px] h-[600px] bg-primary/3 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-[10%] left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-[30%] right-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[180px] pointer-events-none" />
 
 
       {/* Hero Section */}
