@@ -2409,7 +2409,7 @@ export default function NewDesignContent() {
                             />
                           </div>
                           <div className="space-y-1.5 flex flex-col justify-end flex-grow pt-3.5">
-                            <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-[7px] font-mono text-primary uppercase font-bold tracking-wider self-start">
+                            <span className="px-2.5 py-0.5 bg-primary border border-primary/80 rounded text-[7px] font-mono text-white uppercase font-bold tracking-wider self-start shadow-sm">
                               {record.category}
                             </span>
                             <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight line-clamp-1 group-hover/item:text-primary transition-colors">
@@ -3019,7 +3019,7 @@ export default function NewDesignContent() {
                     {/* Info Column */}
                     <div className="lg:col-span-3 space-y-3 pr-2">
                       <div className="flex items-center gap-3">
-                        <span className="px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-[8px] font-black font-mono text-primary uppercase tracking-widest">{record.category}</span>
+                        <span className="px-3.5 py-1.5 bg-primary border border-primary/80 rounded-full text-[8px] font-black font-mono text-white uppercase tracking-widest shadow-sm">{record.category}</span>
                         <span className="text-[10px] text-[#1a1a2e]/20 font-mono">/ MISSION DATA</span>
                       </div>
                       
@@ -3703,7 +3703,7 @@ export default function NewDesignContent() {
                     
                     <div className="space-y-5">
                       <div className="flex justify-between items-start">
-                        <span className="px-2.5 py-1 bg-primary/10 border border-primary/20 rounded-lg text-[9px] font-mono text-primary uppercase font-bold tracking-wider inline-block">
+                        <span className="px-3 py-1 bg-primary border border-primary/80 rounded-lg text-[9px] font-mono text-white uppercase font-bold tracking-wider inline-block shadow-sm">
                           Official Curriculum
                         </span>
                         <span className="material-symbols-outlined text-primary text-xl">menu_book</span>
