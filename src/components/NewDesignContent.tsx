@@ -2054,7 +2054,7 @@ export default function NewDesignContent() {
                         <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
                       {[
                         { name: "Mr. Saptparishi Ghosh", role: "CEO, Symbiosis TBI", img: "/extracted-members/page_11_img_4_700.png", bio: "Incubation and startup ecosystem expert leading Symbiosis Technology Business Incubator." },
                         { name: "Mr. Aashish Banka", role: "CEO, Goosebumps.biz", img: "/extracted-members/page_11_img_5_703.png", bio: "Digital transformation leader driving experiential marketing and technology solutions." },
@@ -2063,15 +2063,15 @@ export default function NewDesignContent() {
                         { name: "Mr. Vijay Trimbake", role: "CFO, AIR G International", img: "/extracted-members/page_11_img_8_715.png", bio: "Overseeing financial strategy, budgeting, and fiscal operations across all AIR G global hubs.", objectPosition: "center 12%" },
                         { name: "Mr. Chakravarti Gupta", role: "Chief Technology Advisor", img: "/extracted-members/page_11_img_9_731.png", bio: "Senior technology strategist advising on AI infrastructure architecture and enterprise systems." }
                       ].map((member, i) => (
-                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
+                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-4 sm:p-6 flex flex-col sm:flex-row items-center sm:items-center gap-3 sm:gap-6 text-center sm:text-left relative overflow-hidden">
                           {/* Animated Left Accent Bar */}
                           <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
                           {/* Dotted red texture background inside card */}
                           <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(235, 0, 40, 0.03) 1.2px, transparent 1px)', backgroundSize: '16px 16px' }} />
 
-                          {/* Left: Clean Framed Portrait */}
-                          <div className="w-28 h-28 rounded-2xl overflow-hidden bg-white border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
+                          {/* Portrait — smaller on mobile, larger on sm+ */}
+                          <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-white border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
                             <img 
                               src={member.img} 
                               alt={member.name} 
@@ -2086,11 +2086,11 @@ export default function NewDesignContent() {
                             />
                           </div>
 
-                          {/* Right: Info */}
-                          <div className="space-y-1.5 flex-1 relative z-10">
-                            <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{member.name}</h4>
-                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{member.role}</p>
-                            <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{member.bio}</p>
+                          {/* Info — always visible */}
+                          <div className="space-y-1 sm:space-y-1.5 flex-1 relative z-10 min-w-0">
+                            <h4 className="font-headline text-[10px] sm:text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{member.name}</h4>
+                            <p className="text-[9px] sm:text-[10px] text-primary font-bold uppercase tracking-wider">{member.role}</p>
+                            <p className="hidden sm:block text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{member.bio}</p>
                           </div>
                         </div>
                       ))}
