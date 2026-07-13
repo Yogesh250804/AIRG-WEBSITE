@@ -41,7 +41,7 @@ export default async function LabDetailPage({ params }: PageProps) {
         {/* Hero Section - Title block & Stats on the right to fill empty space */}
         <div className="grid lg:grid-cols-5 gap-16 items-start mb-16">
           <div className="lg:col-span-3 space-y-6">
-            <span className="px-3.5 py-1 bg-[#EE2C3C] rounded-full text-[9px] font-extrabold text-white uppercase tracking-widest inline-flex items-center gap-1.5 font-sans shadow-sm">
+            <span className="px-3.5 py-1 bg-[#EE2C3C]/15 border-2 border-[#EE2C3C]/40 rounded-full text-[9px] font-extrabold text-[#EE2C3C] uppercase tracking-widest inline-flex items-center gap-1.5 font-sans">
               <span className="material-symbols-outlined text-[12px]">{lab.icon}</span>
               {lab.status}
             </span>
