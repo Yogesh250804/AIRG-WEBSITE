@@ -62,10 +62,10 @@ const CountUp = ({ value, label, subtitle }: { value: number; label: string; sub
   }, [value, hasStarted]);
 
   return (
-    <div ref={elementRef} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden text-left">
+    <div ref={elementRef} className="group relative glass-premium p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden text-left">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div>
-        <div className="font-headline text-5xl md:text-6xl font-black text-[#1a1a2e] tracking-tighter mb-2 group-hover:text-primary transition-colors duration-300">
+        <div className="font-headline text-4xl sm:text-5xl md:text-6xl font-black text-[#1a1a2e] tracking-tighter mb-2 group-hover:text-primary transition-colors duration-300">
           {count}{label.includes("+") ? "+" : ""}
         </div>
         <div className="text-xs font-mono uppercase tracking-[0.2em] text-primary font-black mb-1">
@@ -1611,7 +1611,7 @@ export default function NewDesignContent() {
                         logo: "/logos/western.png"
                       }
                     ].map((item, i) => (
-                      <div key={i} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
+                      <div key={i} className="group relative glass-premium p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                         <div className="space-y-6 text-left">
                           <div className="w-16 h-16 rounded-2xl bg-white border border-black/5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(238,44,60,0.1)] transition-all duration-300 p-2">
@@ -1675,7 +1675,7 @@ export default function NewDesignContent() {
                           desc: "Collaboration to deploy state-of-the-art tech labs and hands-on robotics workshops as part of corporate community empowerment programs."
                         }
                       ].map((item, i) => (
-                        <div key={i} className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden bg-white text-left">
+                        <div key={i} className="group relative glass-premium p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden bg-white text-left">
                           <div className="space-y-4">
                             <div className="flex items-center gap-2">
                               <Award className="w-5 h-5 text-primary" />
@@ -1791,7 +1791,7 @@ export default function NewDesignContent() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                       {/* Countries List inside a Cool Designed Box */}
                       <div 
-                        className="lg:col-span-4 glass-premium rounded-[3rem] p-6 !border-2 !border-[#EE2C3C]/30 shadow-xl relative overflow-hidden bg-white/70 flex flex-col h-[520px]"
+                        className="lg:col-span-4 glass-premium rounded-[2rem] lg:rounded-[3rem] p-5 sm:p-6 !border-2 !border-[#EE2C3C]/30 shadow-xl relative overflow-hidden bg-white/70 flex flex-col h-[420px] lg:h-[520px]"
                       >
                         {/* Header Box */}
                         <div className="flex items-center justify-between mb-6 pb-4 border-b border-black/5 shrink-0">
@@ -1855,7 +1855,7 @@ export default function NewDesignContent() {
                       </div>
 
                       {/* Interactive Details Card */}
-                      <div className="lg:col-span-8 glass-premium p-10 rounded-[3rem] !border-2 !border-[#EE2C3C]/40 shadow-xl min-h-[440px] flex flex-col justify-between bg-white text-left">
+                      <div className="lg:col-span-8 glass-premium p-5 sm:p-8 lg:p-10 rounded-[2rem] lg:rounded-[3rem] !border-2 !border-[#EE2C3C]/40 shadow-xl min-h-[300px] lg:min-h-[440px] flex flex-col justify-between bg-white text-left">
                         <div className="flex-1">
                           <AnimatePresence mode="wait">
                             {selectedCountry && (() => {
@@ -1960,21 +1960,21 @@ export default function NewDesignContent() {
                         <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
                       {[
                         { name: "Mr. Pratap Pawar", role: "CEO — India", img: "/extracted-members/page_11_img_2_694.png", bio: "Visionary leader driving AIR G International's pan-India operations, academic partnerships, and strategic growth across emerging markets." },
                         { name: "Mr. Abdulrazaq Chubado", role: "Managing Director — Saudi Arabia", img: "/extracted-members/page_11_img_1_691.png", bio: "Spearheading AIR G's Middle East expansion, forging key government and institutional partnerships across the Gulf region." },
                         { name: "Mr. Yeabsira Mekshak", role: "Managing Director — Ethiopia", img: "/extracted-members/yeabsira-mekasha.png", bio: "Leading AIR G's African growth strategy, building technology education infrastructure and partnerships across East Africa." }
                       ].map((leader, i) => (
-                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
+                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-4 sm:p-6 flex flex-row items-center gap-4 sm:gap-6 text-left relative overflow-hidden">
                           {/* Animated Left Accent Bar */}
                           <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
                           
                           {/* Dotted texture background inside card */}
                           <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(235, 0, 40, 0.03) 1.2px, transparent 1px)', backgroundSize: '16px 16px' }} />
 
-                          {/* Left: Clean Framed Portrait */}
-                          <div className="w-28 h-28 rounded-2xl overflow-hidden bg-slate-50 border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
+                          {/* Portrait */}
+                          <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-slate-50 border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
                             <img 
                               src={leader.img} 
                               alt={leader.name} 
@@ -1985,10 +1985,10 @@ export default function NewDesignContent() {
                             />
                           </div>
 
-                          {/* Right: Info */}
-                          <div className="space-y-1.5 flex-1 relative z-10">
-                            <h4 className="font-headline text-base font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{leader.name}</h4>
-                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{leader.role}</p>
+                          {/* Info */}
+                          <div className="space-y-1 sm:space-y-1.5 flex-1 relative z-10 min-w-0">
+                            <h4 className="font-headline text-sm sm:text-base font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{leader.name}</h4>
+                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider leading-tight">{leader.role}</p>
                             <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{leader.bio}</p>
                           </div>
                         </div>
@@ -2007,21 +2007,21 @@ export default function NewDesignContent() {
                         <div className="w-full h-[1px] bg-gradient-to-r from-primary/20 to-transparent mt-2" />
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-8">
                       {[
                         { name: "Mr. Haggai Mosses", role: "Head", country: "Kenya", img: "/haggai-mosses.jpeg", bio: "Leading digital literacy and future-skills initiatives across Kenya's educational institutions." },
                         { name: "Mr. Yassin Adam", role: "Head", country: "Sudan", img: "/yassin-adam.jpeg", bio: "Driving technology education and AIR Lab deployments to empower Sudanese youth." },
                         { name: "Mr. Murhib Alahmar", role: "Head", country: "Yemen", img: "/murhib-alahmar.jpeg", bio: "Pioneering STEM infrastructure and innovation hubs for Yemeni students and educators." }
                       ].map((hub, i) => (
-                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-6 flex flex-row items-center gap-6 text-left relative overflow-hidden">
+                        <div key={i} className="group rounded-[2rem] bg-white border border-black/[0.04] hover:border-primary/20 hover:shadow-xl hover:shadow-primary/[0.05] transition-all duration-400 hover:-translate-y-1 p-4 sm:p-6 flex flex-row items-center gap-4 sm:gap-6 text-left relative overflow-hidden">
                           {/* Animated Left Accent Bar */}
                           <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
                           {/* Dotted red texture background inside card */}
                           <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(235, 0, 40, 0.03) 1.2px, transparent 1px)', backgroundSize: '16px 16px' }} />
 
-                          {/* Left: Clean Framed Portrait */}
-                          <div className="w-28 h-28 rounded-2xl overflow-hidden bg-slate-50 border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
+                          {/* Portrait */}
+                          <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-slate-50 border border-black/5 shadow-sm shrink-0 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 relative z-10">
                             <img 
                               src={hub.img} 
                               alt={hub.name} 
@@ -2032,10 +2032,10 @@ export default function NewDesignContent() {
                             />
                           </div>
 
-                          {/* Right: Info */}
-                          <div className="space-y-1.5 flex-1 relative z-10">
+                          {/* Info */}
+                          <div className="space-y-1 sm:space-y-1.5 flex-1 relative z-10 min-w-0">
                             <h4 className="font-headline text-sm font-extrabold text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors leading-tight">{hub.name}</h4>
-                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider">{hub.role} — {hub.country} Hub</p>
+                            <p className="text-[10px] text-primary font-bold uppercase tracking-wider leading-tight">{hub.role} — {hub.country} Hub</p>
                             <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed pt-0.5">{hub.bio}</p>
                           </div>
                         </div>
@@ -2164,7 +2164,7 @@ export default function NewDesignContent() {
 
                 {/* SECTION 9: BECOME A PARTNER */}
                 <section id="become-partner" className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24">
-                  <div className="relative glass-premium rounded-[3.5rem] border border-black/5 overflow-hidden p-8 md:p-16 text-center space-y-8">
+                  <div className="relative glass-premium rounded-[2rem] sm:rounded-[3rem] md:rounded-[3.5rem] border border-black/5 overflow-hidden p-6 sm:p-10 md:p-16 text-center space-y-6 sm:space-y-8">
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #EE2C3C 1px, transparent 0)', backgroundSize: '20px 20px' }} />
                     
 
@@ -2219,7 +2219,7 @@ export default function NewDesignContent() {
 
               {/* REST OF SECTIONS IN PADDED CONTAINER */}
               <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20 py-4 space-y-4 relative z-10">
-                <div className="glass-premium p-8 md:p-12 rounded-[3rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
+                <div className="glass-premium p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] border border-black/5 hover:border-primary/20 transition-all duration-500 shadow-3xl relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                     <div className="lg:col-span-7 space-y-6 relative">
