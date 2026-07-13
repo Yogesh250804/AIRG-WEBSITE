@@ -993,7 +993,7 @@ const calculateGrandTotal = () => {
                   <span className="text-primary text-xs font-bold uppercase tracking-widest block mb-4">[ Build 50+ Projects ]</span>
                   <h3 className="text-3xl font-headline font-black uppercase tracking-tight mb-6">Real-World Student Inventions</h3>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                     {sampleProjects.map((project, idx) => {
                       const isHovered = hoveredProject === project;
                       const details = projectDetails[project];
