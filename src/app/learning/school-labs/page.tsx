@@ -153,7 +153,7 @@ export default function SchoolLabsPage() {
       image: "/lab-ai.png",
       photos: ["/attachments/PHOTO-2026-07-10-14-56-31_2.jpg", "/attachments/PHOTO-2026-07-10-14-56-31.jpg"],
       items: [
-        { name: "Bharat AI Engine (Education Edition) AI Platform with models, Local Server, LMS, Coding, Vision AI (10 System Software)", qty: 0, unitCost: 236000, isLot: false },
+        { name: "Bharat AI Engine (Education Edition) AI Platform with models, Local Server, LMS, Coding, Vision AI (10 System Software)", qty: 0, unitCost: 400000, isLot: false },
         { name: "Computer Systems (Intel Core i7, 8GB RAM, 512GB SSD, 22\" LED, Keyboard & Mouse)", qty: 0, unitCost: 30000, isLot: false },
         { name: "Smart TV (55\" 4K Samsung Vision AI)", qty: 0, unitCost: 55000, isLot: false },
         { name: "HD Webcam (Full HD)", qty: 0, unitCost: 2500, isLot: false },
@@ -268,17 +268,17 @@ export default function SchoolLabsPage() {
     return zones[zoneIdx].items.reduce((sum, item) => sum + (item.qty * item.unitCost), 0);
   };
 
-  const calculateGrandTotal = () => {
-    return zones.reduce((sum, _, zoneIdx) => sum + calculateZoneTotal(zoneIdx), 0);
-  };
-
   const calculateBaseCost = () => {
-    return Math.round(calculateGrandTotal() / 1.18);
-  };
+  return zones.reduce((sum, _, zoneIdx) => sum + calculateZoneTotal(zoneIdx), 0);
+};
 
-  const calculateGST = () => {
-    return calculateGrandTotal() - calculateBaseCost();
-  };
+const calculateGST = () => {
+  return Math.round(calculateBaseCost() * 0.18);
+};
+
+const calculateGrandTotal = () => {
+  return calculateBaseCost() + calculateGST();
+};
 
   const formatCurrency = (amount: number) => {
     return amount.toLocaleString("en-IN");
