@@ -2273,7 +2273,7 @@ export default function NewDesignContent() {
                             />
                           </div>
                           <div className="space-y-1.5 flex flex-col justify-end flex-grow pt-3.5">
-                            <span className="px-2 py-0.5 bg-primary/10 border border-primary/20 rounded text-[7px] font-mono text-primary uppercase font-bold tracking-wider self-start">
+                            <span className="px-2.5 py-0.5 bg-primary border border-primary/80 rounded text-[7px] font-mono text-white uppercase font-bold tracking-wider self-start shadow-sm">
                               {lab.status}
                             </span>
                             <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight line-clamp-1 group-hover/item:text-primary transition-colors">
