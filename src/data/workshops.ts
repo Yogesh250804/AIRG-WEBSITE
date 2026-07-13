@@ -58,7 +58,7 @@ export const workshopsData: Workshop[] = [
   {
     slug: "rajendra-khandala-flight-lab",
     title: "Rajendra Khandala Flight Science Lab",
-    category: "Aeronautics & Physics",
+    category: "Aerodynamics & Physics",
     desc: "Students at Rajendra School, Khandala assembled gliders and explored aerodynamics — discovering flight physics through real hands-on experiments.",
     url: "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
     detailedDesc: "The AIR G Flight Science Lab at Rajendra School in Khandala introduced students to fundamental aerodynamics through the construction and testing of model gliders. Students studied wing geometry, lift-to-drag ratios, and trajectory physics in a guided outdoor session. Using aero simulation software alongside physical models, students gained an intuitive understanding of aviation mechanics — a critical foundation for future engineering careers.",
