@@ -279,6 +279,18 @@ export default function NewDesignContent() {
   const { isAuthModalOpen, setAuthModalOpen, addNotification } = useAppContext();
   const { user, logout, loading } = useAuth();
   const router = useRouter();
+  
+  const getLabUrl = (slug: string) => {
+    if (slug === "rajendra-khandala-lab") return "/labs/rajendra-khandala";
+    if (slug === "venurai-chavan-lab") return "/labs/venurai-chavan";
+    if (slug === "mudhoji-lab-showcase") return "/labs/mudhoji-lab";
+    if (slug === "sakharwadi-lab-showcase") return "/labs/sakharwadi-lab";
+    if (slug === "sant-tukaram-lab-showcase") return "/labs/sant-tukaram";
+    if (slug === "koteshwar-vidyaly-lab-showcase") return "/labs/koteshwar-vidyaly";
+    if (slug === "ss-nikam-lab-showcase") return "/labs/ss-nikam";
+    return `/labs/${slug}`;
+  };
+
   const [activeFace, setActiveFace] = useState("hero");
   const [previousFace, setPreviousFace] = useState("");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -3149,7 +3161,7 @@ export default function NewDesignContent() {
               {/* Portfolio Showcase Gallery - Horizontal Layout */}
               <div className="space-y-10 mb-32">
                 {fieldRecords.map((record, i) => (
-                  <Link href={`/workshops/${record.slug}`} key={i} className="group grid lg:grid-cols-5 gap-10 items-center glass-premium p-6 rounded-[2.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 overflow-hidden relative cursor-pointer w-full">
+                  <Link href={getLabUrl(record.slug)} key={i} className="group grid lg:grid-cols-5 gap-10 items-center glass-premium p-6 rounded-[2.5rem] border border-black/5 hover:border-primary/20 transition-all duration-500 overflow-hidden relative cursor-pointer w-full">
                     {/* Image Column */}
                     <div className="lg:col-span-2 relative aspect-[16/10] rounded-[1.5rem] overflow-hidden border border-black/5">
                       <Image 
