@@ -3171,9 +3171,7 @@ export default function NewDesignContent() {
                       
                       <h4 className="text-2xl md:text-3xl font-headline font-black text-[#1a1a2e] uppercase tracking-tighter leading-none">{record.title}</h4>
                       
-                      <p className="text-[#1a1a2e]/40 text-sm md:text-base font-light leading-relaxed max-w-xl">
-                        {record.desc}
-                      </p>
+                      {/* Description removed */}
 
                       <div className="pt-4 flex items-center gap-6">
                         <div className="flex items-center gap-2 text-[#1a1a2e]/60">

@@ -142,12 +142,7 @@ export default function AppleCarousel() {
                   >
                     {activeWorkshop.title}
                   </h3>
-                  <p 
-                    className="text-xs sm:text-sm font-medium leading-relaxed line-clamp-2 sm:line-clamp-3"
-                    style={{ color: "rgba(255, 255, 255, 0.95)", textShadow: "0 2.5px 10px rgba(0, 0, 0, 0.9)" }}
-                  >
-                    {activeWorkshop.desc}
-                  </p>
+                  {/* Description removed */}
                   <div className="flex items-center gap-3 pt-2">
                     <button className="px-6 py-2.5 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-lg hover:scale-105 active:scale-95 transition-transform duration-200">
                       Explore Details
