@@ -62,5 +62,6 @@ parse-*.js
 inspect-*.js
 projected_*.txt
 scratch/
-/video/
-/public/video/
+
+/public/video/airg_labs_overview.mp4
+video/

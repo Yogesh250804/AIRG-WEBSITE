@@ -2623,15 +2623,14 @@ export default function NewDesignContent() {
           <div className="lg:col-span-7 relative z-10">
             <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-[#ffffff]/10 to-[#FF9933]/40 shadow-2xl">
               <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative z-10 group">
-                <iframe
-  src="https://drive.google.com/file/d/15NIYdCIpzQhn2g7s4cwgLmioSVkloMk_/preview"
-  className="absolute left-0 w-full border-0"
-  style={{
-    top: '-50px',
-    height: 'calc(100% + 100px)'
-  }}
-  allow="autoplay; fullscreen"
-  allowFullScreen
+                <video
+  src="/video/airg_labs_overview_compressed.mp4"
+  autoPlay
+  loop
+  muted
+  playsInline
+  preload="metadata"
+  className="w-full h-full object-cover"
 />
               </div>
             </div>
