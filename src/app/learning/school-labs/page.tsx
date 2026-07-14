@@ -591,6 +591,7 @@ const calculateGrandTotal = () => {
                   <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative z-10 group">
                     <video
   src="/video/airg_labs_overview_compressed.mp4"
+  controls
   autoPlay
   loop
   muted
