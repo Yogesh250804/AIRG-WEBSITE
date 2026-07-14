@@ -2601,10 +2601,10 @@ export default function NewDesignContent() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
                 {[
-                  { label: "Verified Hubs", val: `${labs.length} Active Labs`, icon: "domain", pulse: true },
-                  { label: "Coverage Area", val: "3 Active States", icon: "map" },
-                  { label: "Focus Domains", val: "Deep Tech & AI", icon: "precision_manufacturing" },
-                  { label: "Mission Scale", val: "State-Wide Impact", icon: "hub" }
+                  { label: "Verified Hubs", val: "50+ Labs", icon: "domain", pulse: true },
+                  { label: "Coverage Area", val: "7+ Countries", icon: "public" },
+                  { label: "Strategic Partners", val: "50+ Partners", icon: "handshake" },
+                  { label: "Students Empowered", val: "50000+ Students", icon: "school" }
                 ].map((item) => (
                   <div key={item.label} className="p-6 glass-premium rounded-2xl border border-black/5 border-t-2 border-t-primary flex flex-col gap-2 group hover:border-primary/50 transition-all shadow-sm">
                     <div className="flex items-center gap-2">
