@@ -20,7 +20,7 @@ export default function AIInfrastructuresB2BPage() {
     {
       name: "Bharat AI Engine",
       icon: "dns",
-      image: "/extracted-images/bharat_ai_engine_cropped.png",
+      image: "/extracted-images/bharat_ai_engine_v2.png",
       description: "BHARAT AI ENGINE™ is a device-grade Edge AI infrastructure system designed to convert existing computers into a full-fledged AI Ecosystem — without replacing computers, without cloud dependency, and without complex installations. It operates as a central AI engine that delivers real-time artificial intelligence capabilities to multiple computers simultaneously over a local network.",
       stats: { type: "Edge AI", network: "Local MESH", setup: "Zero Cloud" },
       items: [
@@ -197,12 +197,12 @@ export default function AIInfrastructuresB2BPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 w-full relative max-w-xl lg:max-w-none"
             >
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative bg-[#f5f5f8] border border-black/5">
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-overlay z-10 pointer-events-none" />
+              <div className="aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl relative bg-white border border-black/5">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent mix-blend-overlay z-10 pointer-events-none" />
                 <img
-                  src="/extracted-images/bharat_ai_engine_cropped.png"
+                  src="/extracted-images/bharat_ai_engine_v2.png"
                   alt="Bharat AI Engine"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-contain p-4 bg-white"
                 />
               </div>
             </motion.div>
