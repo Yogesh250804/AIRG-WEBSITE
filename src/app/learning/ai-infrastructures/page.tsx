@@ -200,7 +200,7 @@ export default function AIInfrastructuresB2BPage() {
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative bg-[#f5f5f8] border border-black/5">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent mix-blend-overlay z-10 pointer-events-none" />
                 <img
-                  src="/extracted-images/page_1_img_1_39.png"
+                  src="/extracted-images/bharat_ai_engine_cropped.png"
                   alt="Bharat AI Engine"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
