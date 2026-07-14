@@ -20,26 +20,36 @@ export default async function LabDetailPage({ params }: PageProps) {
   return (
     <main className="w-full h-screen overflow-y-auto custom-scrollbar bg-[#fcfcfc] text-[#1a1a2e] relative selection:bg-primary/30 selection:text-[#1a1a2e]">
       {/* Background Decorative Accents */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[5%] right-[5%] w-[45%] h-[45%] bg-[#EE2C3C]/5 rounded-full blur-[140px]" />
-        <div className="absolute bottom-[5%] left-[5%] w-[45%] h-[45%] bg-blue-500/5 rounded-full blur-[140px]" />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(238,44,60,0.015) 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
+        <div className="absolute top-[2%] right-[-10%] w-[600px] h-[600px] bg-[#EE2C3C]/5 rounded-full blur-[120px] opacity-70" />
+        <div className="absolute top-[30%] left-[-10%] w-[500px] h-[500px] bg-blue-500/3 rounded-full blur-[100px] opacity-50" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-[#EE2C3C]/3 rounded-full blur-[130px] opacity-60" />
       </div>
 
       <Navbar />
 
       {/* Main Content Container */}
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-20 pt-32 pb-24">
-        {/* Navigation Breadcrumb */}
-        <div className="flex items-center gap-2 text-[10px] text-[#1a1a2e]/40 uppercase tracking-widest font-mono mb-12">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <span>/</span>
-          <Link href="/#labs" className="hover:text-primary transition-colors">Innovation Labs</Link>
-          <span>/</span>
-          <span className="text-[#EE2C3C] font-bold">{lab.name}</span>
+        {/* Navigation Breadcrumb & Back Button */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-black/5 pb-4">
+          <div className="flex items-center gap-2 text-[10px] text-[#1a1a2e]/40 uppercase tracking-widest font-mono">
+            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/#labs" className="hover:text-primary transition-colors">Innovation Labs</Link>
+            <span>/</span>
+            <span className="text-[#EE2C3C] font-bold">{lab.name}</span>
+          </div>
+          <Link 
+            href="/#labs" 
+            className="inline-flex items-center gap-2 px-4 py-2 border border-black/10 text-[#1a1a2e]/60 hover:text-red-600 hover:border-red-200 hover:bg-red-50/30 font-mono text-[9px] font-black uppercase tracking-wider rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-sm bg-white"
+          >
+            <span className="material-symbols-outlined text-[12px]">arrow_back</span>
+            Back to AIR G Labs
+          </Link>
         </div>
 
         {/* Hero Section - Title block & Stats on the right to fill empty space */}
-        <div className="grid lg:grid-cols-5 gap-16 items-start mb-16">
+        <div className="grid lg:grid-cols-5 gap-16 items-start mb-16 border-t-2 border-[#EE2C3C] pt-10">
           <div className="lg:col-span-3 space-y-6">
             <span className="px-3.5 py-1 bg-[#EE2C3C]/15 border-2 border-[#EE2C3C]/40 rounded-full text-[9px] font-extrabold text-[#EE2C3C] uppercase tracking-widest inline-flex items-center gap-1.5 font-sans">
               <span className="material-symbols-outlined text-[12px]">{lab.icon}</span>
@@ -54,17 +64,24 @@ export default async function LabDetailPage({ params }: PageProps) {
           </div>
 
           {/* Quick Metrics on the right side of the Title block */}
-          <div className="lg:col-span-2 space-y-6 border-l-2 border-[#EE2C3C]/20 pl-8 pt-2">
-            <div className="text-[10px] font-black text-[#EE2C3C] tracking-widest uppercase mb-4">
-              Lab Performance & Scope
+          <div className="lg:col-span-2 space-y-4">
+            <div className="text-[10px] font-black text-[#EE2C3C] tracking-widest uppercase mb-2 pl-2">
+              // Lab Performance & Scope
             </div>
-            <div className="space-y-6">
-              {lab.stats.map((stat, i) => (
-                <div key={i} className="space-y-1">
-                  <div className="text-[9px] text-[#1a1a2e]/40 uppercase tracking-wider font-mono">{stat.label}</div>
-                  <div className="text-2xl font-black text-[#1a1a2e] tracking-tight font-sans">{stat.value}</div>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 gap-4">
+              {lab.stats.map((stat, i) => {
+                const theme = { 
+                  bg: 'bg-gradient-to-br from-red-50/60 via-white to-red-50/10 border-red-100 hover:border-red-400/40', 
+                  text: 'text-red-600', 
+                  label: 'text-red-500/80' 
+                };
+                return (
+                  <div key={i} className={`p-5 rounded-2xl border hover:scale-[1.02] hover:shadow-lg transition-all duration-300 flex flex-col gap-1 shadow-sm ${theme.bg}`}>
+                    <div className={`text-[9px] uppercase tracking-widest font-mono font-black ${theme.label}`}>{stat.label}</div>
+                    <div className={`text-2xl font-black tracking-tight font-sans ${theme.text}`}>{stat.value}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -78,54 +95,90 @@ export default async function LabDetailPage({ params }: PageProps) {
         </div>
 
         {/* Detailed Information & Technical Specs */}
-        <div className="grid lg:grid-cols-12 gap-16 items-start border-t border-black/5 pt-16">
+        <div className="grid lg:grid-cols-12 gap-12 items-start border-t border-black/5 pt-16">
           {/* Left Column: Description & Directives */}
-          <div className="lg:col-span-7 space-y-12">
+          <div className="lg:col-span-7 space-y-8">
             {/* Mission Dossier */}
-            <div className="space-y-4">
-              <h2 className="text-lg font-bold uppercase tracking-widest text-[#1a1a2e] flex items-center gap-2.5 font-sans">
-                <span className="w-1 h-5 bg-[#EE2C3C] rounded-full" />
+            <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-4 hover:shadow-md hover:scale-[1.005] hover:border-red-400/30 transition-all duration-300 relative overflow-hidden">
+              <div className="absolute right-6 top-6 text-red-500/5 font-serif text-8xl font-black select-none pointer-events-none">“</div>
+              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-red-600 flex items-center gap-2.5 font-mono relative z-10">
+                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
                 Mission Overview
               </h2>
-              <p className="text-base text-[#1a1a2e]/65 leading-relaxed font-sans text-justify">
+              <p className="text-base text-[#1a1a2e]/70 leading-relaxed font-sans text-justify font-light relative z-10">
                 {lab.detailedDesc}
               </p>
             </div>
 
             {/* Core Research Directives */}
-            <div className="space-y-4">
-              <h2 className="text-lg font-bold uppercase tracking-widest text-[#1a1a2e] flex items-center gap-2.5 font-sans">
-                <span className="w-1 h-5 bg-[#EE2C3C] rounded-full" />
+            <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-6 hover:shadow-md hover:scale-[1.005] hover:border-red-400/30 transition-all duration-300">
+              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-red-600 flex items-center gap-2.5 font-mono">
+                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
                 Key Focus & Projects
               </h2>
-              <ul className="space-y-4 font-sans">
-                {lab.highlights.map((highlight, i) => (
-                  <li key={i} className="flex gap-4 items-start">
-                    <span className="w-6 h-6 rounded-full bg-[#EE2C3C]/10 flex items-center justify-center text-[10px] font-bold text-[#EE2C3C] shrink-0 mt-0.5">
-                      {i + 1}
-                    </span>
-                    <p className="text-sm text-[#1a1a2e]/65 leading-relaxed">
-                      {highlight}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              <div className="space-y-4">
+                {lab.highlights.map((highlight, i) => {
+                  const projectTitle = `Featured Project ${String(i + 1).padStart(2, '0')}`;
+                  return (
+                    <div key={i} className="p-6 rounded-2xl border border-red-100/50 bg-white hover:border-red-400/40 hover:shadow-md hover:scale-[1.01] transition-all duration-300 flex gap-4 items-start group">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-red-500 text-white font-mono font-black flex items-center justify-center shadow-md shadow-red-500/20 shrink-0">
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <div className="space-y-1">
+                        <h4 className="text-sm font-black uppercase tracking-wide text-red-700/80 group-hover:text-red-600 transition-colors">{projectTitle}</h4>
+                        <p className="text-xs text-[#1a1a2e]/60 leading-relaxed font-light">{highlight}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
           {/* Right Column: Equipment & Action */}
-          <div className="lg:col-span-5 space-y-12">
+          <div className="lg:col-span-5 space-y-8">
+            {/* Lab Hardware Specifications Widget */}
+            <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-5 hover:shadow-md hover:border-red-400/30 transition-all duration-300">
+              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-600 font-mono border-b border-red-100 pb-3">
+                // Hardware & Network Configuration
+              </div>
+              <div className="space-y-3.5 text-xs">
+                {[
+                  { name: "AI Server Cluster", value: "Bharat AI Engine Local Host", icon: "dns" },
+                  { name: "Connectivity Hub", value: "Offline MESH Connection", icon: "wifi" },
+                  { name: "FDP Training", value: "Certified Teacher Training Provided", icon: "group" },
+                  { name: "Curriculum Kits", value: "Grade-specific Assembly Kits", icon: "menu_book" }
+                ].map((spec, idx) => (
+                  <div key={idx} className="flex items-center justify-between py-2 border-b border-black/5">
+                    <div className="flex items-center gap-2.5 text-[#1a1a2e]/70 font-bold">
+                      <span className="material-symbols-outlined text-base text-red-500">{spec.icon}</span>
+                      {spec.name}
+                    </div>
+                    <div className="text-right text-[#1a1a2e]/50 font-mono text-[10px]">{spec.value}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Technology Stack Panel */}
-            <div className="space-y-4">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#1a1a2e]/80 font-mono">
-                Equipment & Tools Configured
+            <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-5 hover:shadow-md hover:border-red-400/30 transition-all duration-300">
+              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-600 font-mono">
+                // Equipment & Tools Configured
               </div>
               <div className="flex flex-wrap gap-2">
-                {lab.techStack.map((tech) => (
+                {[
+                  "AI & Computing Servers",
+                  "Robotics Assembly Kits",
+                  "Smart Sensors (IoT)",
+                  "Drone & VR Systems",
+                  "3D Printers",
+                  "Branding Displays"
+                ].map((tech) => (
                   <span
                     key={tech}
-                    className="px-3.5 py-1.5 rounded-xl border border-black/5 bg-slate-100/50 font-mono text-[9px] font-bold text-[#1a1a2e]/60 uppercase tracking-wider"
+                    className="px-3.5 py-2 rounded-xl border border-red-100 bg-white hover:bg-red-50/40 text-[10px] font-bold text-red-700/80 uppercase tracking-wider flex items-center gap-2 hover:scale-[1.03] transition-all duration-300 shadow-sm hover:border-red-300 cursor-default"
                   >
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
                     {tech}
                   </span>
                 ))}
@@ -133,23 +186,30 @@ export default async function LabDetailPage({ params }: PageProps) {
             </div>
 
             {/* Collaboration Action Panel */}
-            <div className="space-y-6 pt-6 border-t border-black/5">
-              <div className="space-y-2">
-                <h3 className="font-sans text-lg font-black text-[#1a1a2e] uppercase tracking-tight">Academic Collaboration</h3>
-                <p className="text-[#1a1a2e]/50 text-xs font-sans leading-relaxed">
+            <div className="p-8 rounded-[2rem] bg-gradient-to-tr from-[#1a1a2e] to-[#252542] text-white shadow-xl relative overflow-hidden group hover:shadow-2xl hover:scale-[1.01] transition-all duration-500">
+              <div className="absolute -right-10 -bottom-10 w-44 h-44 bg-primary/25 rounded-full blur-[70px] pointer-events-none group-hover:scale-125 transition-transform duration-700" />
+              <div className="space-y-4 relative z-10">
+                <h3 className="font-sans text-lg font-black text-white uppercase tracking-tight">Academic Collaboration</h3>
+                <p className="text-white/60 text-xs font-sans leading-relaxed font-light">
                   Connect with this school's lab center to request student project portfolios, schedule visits, or coordinate STEM showcases.
                 </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <button className="w-full px-6 py-3.5 bg-[#EE2C3C] text-white font-extrabold text-[10px] uppercase tracking-widest rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] glow-red font-sans text-center">
-                  Contact Lab Center
-                </button>
-                <Link 
-                  href="/#labs" 
-                  className="w-full px-6 py-3.5 border border-black/10 text-[#1a1a2e]/60 hover:text-[#1a1a2e] font-extrabold text-[10px] uppercase tracking-widest rounded-xl hover:border-black/30 transition-all duration-300 flex items-center justify-center gap-2 font-sans text-center"
-                >
-                  Return to Hub
-                </Link>
+                <div className="flex flex-col gap-3 pt-2">
+                  <a 
+                    href={`https://wa.me/919860779172?text=Hello%2C%20I%20am%20interested%20in%20collaborating%20with%20the%20${encodeURIComponent(lab.name)}.%20Please%20share%20more%20details.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-6 py-4 bg-primary text-white font-extrabold text-[10px] uppercase tracking-widest rounded-xl hover:bg-[#d42535] transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-primary/25 font-sans text-center block"
+                  >
+                    Contact Lab Center
+                  </a>
+                  <Link 
+                    href="/#labs" 
+                    className="w-full px-6 py-4 border border-white/10 hover:border-white/30 text-white/70 hover:text-white font-extrabold text-[10px] uppercase tracking-widest rounded-xl transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 font-sans text-center"
+                  >
+                    <span className="material-symbols-outlined text-xs">arrow_back</span>
+                    Return to Hub
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
