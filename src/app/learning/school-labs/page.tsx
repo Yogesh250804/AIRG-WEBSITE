@@ -580,7 +580,6 @@ const calculateGrandTotal = () => {
             </div>
           </div>
         </div>
-
         {/* NEW SECTION: Video Tour */}
         <div className="py-16 bg-[#0B0F19] relative overflow-hidden text-left border-b border-white/[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
@@ -590,11 +589,11 @@ const calculateGrandTotal = () => {
               <div className="lg:col-span-7 order-2 lg:order-1">
                 <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-white/10 to-[#FF9933]/40 shadow-2xl">
                   <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative group">
-                    <video
-                      src="/video/airg_labs_overview.mp4"
-                      controls
-                      poster="/attachments/PHOTO-2026-07-10-14-56-30.jpg"
-                      className="w-full h-full object-cover"
+                    <iframe
+                      src="https://drive.google.com/file/d/15NIYdCIpzQhn2g7s4cwgLmioSVkloMk_/preview"
+                      className="w-full h-full border-0"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
                     />
                   </div>
                 </div>
@@ -626,7 +625,6 @@ const calculateGrandTotal = () => {
             </div>
           </div>
         </div>
-
         {/* Customization Workspace Section */}
         <div className="py-24 relative overflow-hidden border-b border-slate-100 bg-[#FAFAFA]">
           {/* Flag-inspired subtle glowing ambient blobs (soft light tints) */}

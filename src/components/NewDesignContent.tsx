@@ -2615,54 +2615,53 @@ export default function NewDesignContent() {
                   </div>
                 ))}
               </div>
-
-              {/* Premium Video Tour Block */}
-              <div className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-[#0B0F19] p-6 md:p-10 rounded-[2.5rem] border border-white/[0.04] relative overflow-hidden shadow-2xl text-left">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
-                
-                {/* Video on the Left */}
-                <div className="lg:col-span-7 order-2 lg:order-1 relative z-10">
-                  <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-[#ffffff]/10 to-[#FF9933]/40 shadow-2xl">
-                    <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative group">
-                      <video
-                        src="/video/airg_labs_overview.mp4"
-                        controls
-                        poster="/attachments/PHOTO-2026-07-10-14-56-30.jpg"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Text on the Right */}
-                <div className="lg:col-span-5 space-y-6 order-1 lg:order-2 lg:pl-8 relative z-10">
-                  <span className="text-primary text-xs font-bold uppercase tracking-widest block font-mono">// EXPERIENCE AIR G LABS</span>
-                  <h2 className="text-4xl md:text-5xl font-headline font-black text-[#ffffff] uppercase tracking-tight leading-none">
-                    Inside the <span className="bg-clip-text bg-gradient-to-r from-[#FF9933] via-[#ffffff] to-[#138808]" style={{ color: 'transparent', WebkitTextFillColor: 'transparent' }}>AIR G International</span> Labs
-                  </h2>
-                  <p className="text-[#ffffff]/60 text-lg font-light leading-relaxed">
-                    Take a visual tour inside our state-of-the-art facilities. See where students build next-generation robotics, code custom AI models, print 3D prototypes, and master drone telemetry.
-                  </p>
-                  
-                  {/* Action Badges */}
-                  <div className="flex flex-wrap gap-4 pt-2">
-                    <div className="flex items-center gap-2 text-xs text-[#ffffff]/70 bg-[#ffffff]/[0.03] border border-[#ffffff]/[0.08] px-4 py-2.5 rounded-full">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF9933] animate-pulse" />
-                      <span>Real-World Projects</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-[#ffffff]/70 bg-[#ffffff]/[0.03] border border-[#ffffff]/[0.08] px-4 py-2.5 rounded-full">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#ffffff] animate-pulse" />
-                      <span>Edge AI Platform</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-[#ffffff]/70 bg-[#ffffff]/[0.03] border border-[#ffffff]/[0.08] px-4 py-2.5 rounded-full">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#138808] animate-pulse" />
-                      <span>Hands-On Kits</span>
-                    </div>
-                  </div>
-                </div>
+        {/* NEW SECTION: Video Tour */}
+        <div className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-[#0B0F19] p-6 md:p-10 rounded-[2.5rem] border border-white/[0.04] relative overflow-hidden shadow-2xl text-left">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
+          
+          {/* Video on the Left */}
+          <div className="lg:col-span-7 order-2 lg:order-1 relative z-10">
+            <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-[#ffffff]/10 to-[#FF9933]/40 shadow-2xl">
+              <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative group">
+                <iframe
+                  src="https://drive.google.com/file/d/15NIYdCIpzQhn2g7s4cwgLmioSVkloMk_/preview"
+                  className="w-full h-full border-0"
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                />
               </div>
+            </div>
+          </div>
+          
+          {/* Text on the Right */}
+          <div className="lg:col-span-5 space-y-6 order-1 lg:order-2 lg:pl-8 relative z-10">
+            <span className="text-primary text-xs font-bold uppercase tracking-widest block font-mono">// EXPERIENCE AIR G LABS</span>
+            <h2 className="text-4xl md:text-5xl font-headline font-black text-[#ffffff] uppercase tracking-tight leading-none">
+              Inside the <span className="bg-clip-text bg-gradient-to-r from-[#FF9933] via-[#ffffff] to-[#138808]" style={{ color: 'transparent', WebkitTextFillColor: 'transparent' }}>AIR G International</span> Labs
+            </h2>
+            <p className="text-[#ffffff]/60 text-lg font-light leading-relaxed">
+              Take a visual tour inside our state-of-the-art facilities. See where students build next-generation robotics, code custom AI models, print 3D prototypes, and master drone telemetry.
+            </p>
+            
+            {/* Action Badges */}
+            <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex items-center gap-2 text-xs text-[#ffffff]/70 bg-[#ffffff]/[0.03] border border-[#ffffff]/[0.08] px-4 py-2.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF9933] animate-pulse" />
+                <span>Real-World Projects</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#ffffff]/70 bg-[#ffffff]/[0.03] border border-[#ffffff]/[0.08] px-4 py-2.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ffffff] animate-pulse" />
+                <span>Edge AI Platform</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#ffffff]/70 bg-[#ffffff]/[0.03] border border-[#ffffff]/[0.08] px-4 py-2.5 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#138808] animate-pulse" />
+                <span>Hands-On Kits</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {labs.map((lab, i) => (
                   <div key={i} className="glass-premium p-5 rounded-3xl border border-black/5 border-t-4 border-t-primary group hover:border-primary/50 transition-all duration-500 relative overflow-hidden shadow-sm flex flex-col justify-between h-full">
                     <div className="scanning-line group-hover:translate-y-[380px] transition-transform duration-[3000ms] ease-linear"></div>
