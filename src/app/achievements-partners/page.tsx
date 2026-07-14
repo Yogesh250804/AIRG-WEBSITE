@@ -159,7 +159,7 @@ export default function AchievementsPartners() {
         <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <CountUp value={50000} label="Students+" subtitle="Empowered through global tech programs and interactive labs." />
           <CountUp value={7} label="Countries+" subtitle="Active learning programs deployed across multiple continents." />
-          <CountUp value={25} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
+          <CountUp value={50} label="Labs+" subtitle="State-of-the-art innovation and robotics setups implemented." />
           <CountUp value={50} label="Partners+" subtitle="Academic institutions, state incubation centers, & industry leaders." />
         </div>
       </section>
