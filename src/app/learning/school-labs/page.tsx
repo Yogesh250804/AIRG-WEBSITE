@@ -124,7 +124,7 @@ export default function SchoolLabsPage() {
   ];
 
   const labImages = [
-    "/attachments/thumbnail.png",
+    "/attachments/PHOTO-2026-07-10-14-56-30.jpg",
     "/attachments/PHOTO-2026-07-10-14-56-30_1.jpg",
     "/attachments/PHOTO-2026-07-10-14-56-30_2.jpg",
     "/attachments/PHOTO-2026-07-10-14-56-31.jpg",
@@ -227,7 +227,7 @@ export default function SchoolLabsPage() {
       shortName: "Branding",
       icon: "stars",
       image: "/lab-smartlearning.png",
-      photos: ["/attachments/thumbnail.png", "/attachments/PHOTO-2026-07-10-14-56-31_1.jpg"],
+      photos: ["/attachments/PHOTO-2026-07-10-14-56-30.jpg", "/attachments/PHOTO-2026-07-10-14-56-31_1.jpg"],
       items: [
         { name: "Acrylic Lab Name (Entry)", qty: 0, unitCost: 6000, isLot: false },
         { name: "Acrylic Names, Stickers for Dept.", qty: 0, unitCost: 1200, isLot: false },
