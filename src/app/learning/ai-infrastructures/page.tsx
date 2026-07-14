@@ -197,12 +197,12 @@ export default function AIInfrastructuresB2BPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="flex-1 w-full relative max-w-xl lg:max-w-none"
             >
-              <div className="aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden shadow-2xl relative bg-white border border-black/5">
+              <div className="aspect-[1536/871] rounded-3xl overflow-hidden shadow-2xl relative bg-white border border-black/5">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent mix-blend-overlay z-10 pointer-events-none" />
                 <img
                   src="/extracted-images/bharat_ai_engine_v4.png"
                   alt="Bharat AI Engine"
-                  className="absolute inset-0 w-full h-full object-contain p-4 bg-white"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
             </motion.div>
