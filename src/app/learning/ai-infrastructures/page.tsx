@@ -183,7 +183,7 @@ export default function AIInfrastructuresB2BPage() {
                 </button>
                 <button
                   onClick={() => document.getElementById("facility-showcase")?.scrollIntoView({ behavior: "smooth" })}
-                  className="px-10 py-4 bg-[#1a1a2e]/5 border border-[#1a1a2e]/10 text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#1a1a2e]/10 transition-all duration-300 hover:scale-[1.03] active:scale-95"
+                  className="px-10 py-4 bg-[#1a1a2e] text-white font-extrabold text-xs uppercase tracking-widest rounded-xl hover:bg-[#252542] transition-all duration-300 shadow-lg shadow-black/10 hover:scale-[1.03] active:scale-95"
                 >
                   Setup Configurator
                 </button>
