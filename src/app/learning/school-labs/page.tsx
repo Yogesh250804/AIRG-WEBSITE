@@ -586,7 +586,7 @@ const calculateGrandTotal = () => {
           <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Video on the Left */}
-              <div className="lg:col-span-7 order-2 lg:order-1">
+              <div className="lg:col-span-7">
                 <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-white/10 to-[#FF9933]/40 shadow-2xl">
                   <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative group">
                     <iframe
@@ -599,7 +599,7 @@ const calculateGrandTotal = () => {
                 </div>
               </div>
               {/* Text on the Right */}
-              <div className="lg:col-span-5 space-y-6 order-1 lg:order-2 lg:pl-8">
+              <div className="lg:col-span-5 space-y-6 lg:pl-8">
                 <span className="text-primary text-xs font-bold uppercase tracking-widest block font-mono">// EXPERIENCE AIR G LABS</span>
                 <h2 className="text-4xl md:text-5xl font-headline font-black text-white uppercase tracking-tight leading-none">
                   Inside the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF9933] via-white to-[#138808]">AIR G International</span> Labs
@@ -624,8 +624,7 @@ const calculateGrandTotal = () => {
               </div>
             </div>
           </div>
-        </div>
-        {/* Customization Workspace Section */}
+        </div>        {/* Customization Workspace Section */}
         <div className="py-24 relative overflow-hidden border-b border-slate-100 bg-[#FAFAFA]">
           {/* Flag-inspired subtle glowing ambient blobs (soft light tints) */}
           <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-[#FF9933]/4 rounded-full blur-[120px] pointer-events-none" />

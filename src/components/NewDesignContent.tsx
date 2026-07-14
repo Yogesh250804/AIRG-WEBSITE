@@ -2620,7 +2620,7 @@ export default function NewDesignContent() {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />
           
           {/* Video on the Left */}
-          <div className="lg:col-span-7 order-2 lg:order-1 relative z-10">
+          <div className="lg:col-span-7 relative z-10">
             <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-[#ffffff]/10 to-[#FF9933]/40 shadow-2xl">
               <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative group">
                 <iframe
@@ -2634,7 +2634,7 @@ export default function NewDesignContent() {
           </div>
           
           {/* Text on the Right */}
-          <div className="lg:col-span-5 space-y-6 order-1 lg:order-2 lg:pl-8 relative z-10">
+          <div className="lg:col-span-5 space-y-6 lg:pl-8 relative z-10">
             <span className="text-primary text-xs font-bold uppercase tracking-widest block font-mono">// EXPERIENCE AIR G LABS</span>
             <h2 className="text-4xl md:text-5xl font-headline font-black text-[#ffffff] uppercase tracking-tight leading-none">
               Inside the <span className="bg-clip-text bg-gradient-to-r from-[#FF9933] via-[#ffffff] to-[#138808]" style={{ color: 'transparent', WebkitTextFillColor: 'transparent' }}>AIR G International</span> Labs
