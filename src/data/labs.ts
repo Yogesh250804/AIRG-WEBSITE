@@ -37,7 +37,7 @@ export const labsData: Lab[] = [
     "stats": [
       {
         "label": "Students Trained",
-        "value": "240+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Robotics Kits",
@@ -76,7 +76,7 @@ export const labsData: Lab[] = [
     "stats": [
       {
         "label": "Active Learners",
-        "value": "180+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Soil Telemetry Kits",
@@ -119,7 +119,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Students Enrolled",
-        "value": "150+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Physics Experiments",
@@ -155,7 +155,7 @@ export const labsData: Lab[] = [
     "stats": [
       {
         "label": "Students Guided",
-        "value": "190+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Electronic Benches",
@@ -198,7 +198,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Active Classrooms",
-        "value": "140+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Anatomy Projects",
@@ -241,7 +241,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Students Engaged",
-        "value": "210+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Game Code Programs",
@@ -280,7 +280,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Students Certified",
-        "value": "160+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Safety Seminars",
@@ -358,7 +358,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Classroom Enrollees",
-        "value": "170+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Maze Runs Logged",
@@ -397,7 +397,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Student Designers",
-        "value": "120+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "CAD Designs Saved",
@@ -475,7 +475,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Middle Schoolers",
-        "value": "160+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Language Modules",
@@ -514,7 +514,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Active Classes",
-        "value": "110+ Students"
+        "value": "300+ Students"
       },
       {
         "label": "Gallons Conserved",
@@ -535,19 +535,21 @@ export const labsData: Lab[] = [
     "desc": "Immersive VR Education. Navigating solar systems and organic cells in virtual headsets.",
     "detailedDesc": "Located at Holy Convent in Karad, this lab utilizes VR to teach complex sciences. Students take virtual field trips to space, examine microscopic cells, and manipulate virtual organs to bring textbooks to life.",
     "status": "Active Lab Center",
-    "img": "/extracted-images/holy_convent/holy_convent_0.jpeg",
+    "img": "/extracted-images/holy_convent/holy_convent_1.jpeg",
     "images": [
-      "/extracted-images/holy_convent/holy_convent_0.jpeg",
       "/extracted-images/holy_convent/holy_convent_1.jpeg",
       "/extracted-images/holy_convent/holy_convent_2.jpeg",
       "/extracted-images/holy_convent/holy_convent_3.jpeg",
       "/extracted-images/holy_convent/holy_convent_4.jpeg"
     ],
     "techStack": [
-      "VR Educational Suites",
-      "Spatial WebXR",
-      "3D Solar Maps",
-      "Human Anatomy VR"
+      "Meta Quest VR Headsets",
+      "Spatial WebXR Software",
+      "3D Solar System Map VR",
+      "Human Anatomy VR Suite",
+      "VR Controller Charging Docks",
+      "Sanitized Headset Covers",
+      "Interactive Classroom Display"
     ],
     "stats": [
       {
@@ -560,7 +562,7 @@ export const labsData: Lab[] = [
       },
       {
         "label": "Engaged Learners",
-        "value": "260+ Students"
+        "value": "300+ Students"
       }
     ],
     "highlights": [
