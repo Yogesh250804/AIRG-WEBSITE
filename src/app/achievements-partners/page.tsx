@@ -333,6 +333,7 @@ export default function AchievementsPartners() {
         </div>
       </section>
 
+
       {/* PREMIUM GRADIENT DIVIDER LINE */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
@@ -425,7 +426,7 @@ export default function AchievementsPartners() {
             },
             {
               title: "Ministry Recognition (MoE, India)",
-              desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
+              desc: "Awarded by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
               img: "/extracted-images/moe_pradhan.png?v=4",
               tag: "National Recognition",
               objectPosition: "object-center"
@@ -628,6 +629,146 @@ export default function AchievementsPartners() {
                   );
                 })()}
               </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PREMIUM GRADIENT DIVIDER LINE */}
+      <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
+      </div>
+
+      {/* SECTION: OUR NGO PARTNERS */}
+      <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Grassroots Collaborations</span>
+            <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+              OUR NGO <span className="text-primary text-glow-red">PARTNERS</span>
+            </h2>
+            <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
+              Partnering with leading organizations to deliver digital literacy, AI labs, and STEM education to rural communities.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center gap-12 max-w-6xl mx-auto">
+            {/* Row 1: Pratham (Most Value) */}
+            <div className="w-full max-w-5xl flex justify-center">
+              <div className="relative bg-gradient-to-br from-slate-50 to-white p-8 md:p-12 rounded-[2.5rem] border border-black/5 shadow-xl w-full overflow-hidden text-left">
+                
+                {/* Top Tagline */}
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-black/5">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+                    <span className="text-xs font-mono font-black text-[#1a1a2e] uppercase tracking-widest">Featured Strategic Partnership</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+                  
+                  {/* Left Column: Logo & Stats */}
+                  <div className="lg:col-span-4 flex flex-col items-center lg:items-start gap-3 w-full">
+                    <span className="text-[11px] font-mono font-extrabold text-primary uppercase tracking-[0.15em] text-center max-w-[280px] block w-full">
+                      STEAM & TECHNOLOGY PARTNER
+                    </span>
+                    <div className="w-full aspect-square max-w-[280px] flex items-center justify-center p-6 bg-white rounded-3xl border-2 border-primary shadow-md hover:shadow-lg transition-all duration-300">
+                      <img 
+                        src="/logos/prratham_logo_original.webp" 
+                        alt="Pratham Logo" 
+                        className="max-w-full max-h-full object-contain scale-105"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Right Column: Detailed Info */}
+                  <div className="lg:col-span-8 space-y-6">
+                    <div className="space-y-4 text-[#1a1a2e]/75 font-body text-sm leading-relaxed">
+                      <p>
+                        <strong>AIR G International</strong> is proud to partner with <strong>Pratham</strong> as its AI, STEAM, Robotics, and Emerging Technology Partner. This collaboration brings together Pratham&apos;s extensive educational reach and commitment to improving learning outcomes with AIR G International&apos;s expertise in future-ready technologies.
+                      </p>
+                      <p>
+                        Together, we are empowering the next generation through hands-on, project-based learning in Artificial Intelligence (AI), Robotics, Coding, Internet of Things (IoT), Drone Technology, 3D Printing, Virtual Reality (VR), Electronics, and Design Thinking. Through this partnership, more than 10,000 students across India have already been introduced to emerging technologies, fostering innovation, critical thinking, creativity, and problem-solving skills that prepare them for the future workforce.
+                      </p>
+                      <p className="text-xs text-[#1a1a2e]/70 leading-relaxed border-l-2 border-primary/20 pl-4">
+                        Pratham is one of the largest and most successful non-governmental organizations (NGOs) in India, specifically focusing on education. Operating across more than 25 states and union territories, it reaches and supports millions of children and youth annually through literacy, elementary education, and skill-building.
+                      </p>
+                    </div>
+
+                    {/* Key Highlights Grid */}
+                    <div className="pt-6 border-t border-black/5">
+                      <h4 className="text-xs font-mono font-black text-[#1a1a2e] uppercase tracking-widest mb-4">Key Highlights</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                          <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">Reach</span>
+                          <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Impacts over 6-7 million children and young adults every year.</p>
+                        </div>
+                        <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                          <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">History</span>
+                          <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Established in 1995 in Mumbai to provide pre-school education in slums.</p>
+                        </div>
+                        <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                          <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">Programs</span>
+                          <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Known for remedial learning (Read India) and the ASER report.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            {/* Row 2: Remaining 4 Partners */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
+              {[
+                { 
+                  name: "Pravich Welfare Foundation", 
+                  logo: "/logos/pravich_logo.png",
+                  desc: "Focuses on rural digital literacy, youth skill development, and community welfare initiatives."
+                },
+                { 
+                  name: "Sanjyot Bahuuddeshiya Sanstha", 
+                  logo: "/logos/sanjyot_logo.png",
+                  desc: "Supports elementary education assistance, social support programs, and rural vocational training." 
+                },
+                { 
+                  name: "Suprabhat Mahila Mandal", 
+                  logo: "/logos/suprabhat_logo.png",
+                  desc: "Dedicated to empowering women, child welfare projects, and conducting rural health awareness camps."
+                },
+                { 
+                  name: "Yashwant Bahuuddeshiya Samajik Sanstha", 
+                  logo: "/logos/yashwant_logo.png",
+                  desc: "Promotes rural development, environmental preservation campaigns, and youth guidance seminars."
+                }
+              ].map((ngo, idx) => (
+                <div key={idx} className="group relative bg-white p-6 rounded-[2rem] border border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-500 flex flex-col items-center text-center">
+                  <div className="w-32 h-32 flex items-center justify-center p-2 bg-slate-50 rounded-2xl border border-black/5 mb-4 group-hover:scale-105 transition-transform duration-300 shrink-0 shadow-sm">
+                    <img 
+                      src={ngo.logo} 
+                      alt={ngo.name} 
+                      className="max-w-[90%] max-h-[90%] object-contain"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src.includes(".jpg")) {
+                          target.src = target.src.replace(".jpg", ".png");
+                        } else if (target.src.includes(".png")) {
+                          target.src = target.src.replace(".png", ".jpg");
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">{ngo.name}</h4>
+                    <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed">
+                      {ngo.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

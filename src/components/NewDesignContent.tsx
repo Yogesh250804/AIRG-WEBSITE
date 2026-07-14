@@ -812,7 +812,7 @@ export default function NewDesignContent() {
     
     const handleHashChange = () => {
       const hash = window.location.hash.replace("#", "");
-      if (hash && ["hero", "labs", "centres", "workshops", "learning", "store"].includes(hash)) {
+      if (hash && ["hero", "labs", "centres", "workshops", "learning", "store", "ai-infrastructures"].includes(hash)) {
         setActiveFace(hash);
         if (hash === "centres") {
           setActiveNetwork("india");
@@ -916,6 +916,20 @@ export default function NewDesignContent() {
                       >
                         College Labs
                       </Link>
+                      <Link
+                        href="/learning/grampanchayat-ai-lab"
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
+                      >
+                        Grampanchayat AI Lab
+                      </Link>
+                      <button
+                        onClick={() => {
+                          navigateTo('ai-infrastructures');
+                        }}
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block w-full"
+                      >
+                        AI Infrastructure
+                      </button>
                       <button
                         onClick={() => {
                           navigateTo('workshops');
@@ -1078,6 +1092,22 @@ export default function NewDesignContent() {
                           >
                             College Labs
                           </Link>
+                          <Link
+                            href="/learning/grampanchayat-ai-lab"
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            Grampanchayat AI Lab
+                          </Link>
+                          <button
+                            onClick={() => {
+                              navigateTo('ai-infrastructures');
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e] w-full"
+                          >
+                            AI Infrastructure
+                          </button>
                           <button
                             onClick={() => {
                               navigateTo('workshops');
@@ -1631,71 +1661,7 @@ export default function NewDesignContent() {
                   </div>
                 </section>
 
-                {/* PREMIUM GRADIENT DIVIDER LINE */}
-                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
-                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
-                </div>
 
-                {/* SECTION 5: RECOGNITION & COLLABORATIONS */}
-                <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
-                  <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
-                    <div className="text-center max-w-3xl mx-auto space-y-3">
-
-                      <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
-                        Recognition & <span className="text-primary text-glow-red">Collaborations</span>
-                      </h2>
-                      <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
-                        Honored and recognized by government departments and international networks for democratizing advanced technical education.
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {[
-                        {
-                          title: "Ministry of Education Recognition",
-                          desc: "Appreciated by educational leadership and Hon. Dharmendra Pradhan Ji (Education Minister, India) for scaling technology labs access to tier 2 and tier 3 cities."
-                        },
-                        {
-                          title: "Global Education Collaborations",
-                          desc: "Cross-border partnerships to introduce standard robotics, drone programming, and IoT kits inside school curricula internationally."
-                        },
-                        {
-                          title: "Innovation Ecosystem Partnerships",
-                          desc: "Affiliation with state and university incubation centers to deploy prototype building kits, research infrastructure, and certification modules."
-                        },
-                        {
-                          title: "International University Partnerships",
-                          desc: "Bridging the gap between school innovators and global universities to enable student project evaluations and international mentorship."
-                        },
-                        {
-                          title: "Government Engagements",
-                          desc: "Working with municipal corporations, schools councils, and central departments to build sustainable future skills laboratories."
-                        },
-                        {
-                          title: "Corporate CSR Partnerships (Aditya Birla Carbon)",
-                          desc: "Collaboration to deploy state-of-the-art tech labs and hands-on robotics workshops as part of corporate community empowerment programs."
-                        }
-                      ].map((item, i) => (
-                        <div key={i} className="group relative glass-premium p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-black/5 hover:border-primary/20 hover:shadow-[0_20px_50px_rgba(238,44,60,0.06)] transition-all duration-500 flex flex-col justify-between overflow-hidden bg-white text-left">
-                          <div className="space-y-4">
-                            <div className="flex items-center gap-2">
-                              <Award className="w-5 h-5 text-primary" />
-                              <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">{item.title}</h3>
-                            </div>
-                            <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </section>
-
-                {/* PREMIUM GRADIENT DIVIDER LINE */}
-                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
-                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
-                </div>
 
                 {/* SECTION 6: SUCCESS STORIES */}
                 <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 space-y-16">
@@ -1723,7 +1689,7 @@ export default function NewDesignContent() {
                       },
                       {
                         title: "Ministry Recognition (MoE, India)",
-                        desc: "Appreciated by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
+                        desc: "Awarded by the Ministry of Education, India, and Hon. Dharmendra Pradhan Ji (Education Minister, India) for outstanding contribution to technical education.",
                         img: "/extracted-images/moe_pradhan.png?v=4",
                         tag: "National Recognition",
                         objectPosition: "object-center"
@@ -1928,6 +1894,146 @@ export default function NewDesignContent() {
                         </div>
                       </div>
 
+                    </div>
+                  </div>
+                </section>
+
+                {/* PREMIUM GRADIENT DIVIDER LINE */}
+                <div className="w-full max-w-[1440px] mx-auto px-6 md:px-20">
+                  <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#EE2C3C]/20 to-transparent" />
+                </div>
+
+                {/* SECTION: OUR NGO PARTNERS */}
+                <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24">
+                  <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
+                    <div className="text-center max-w-3xl mx-auto space-y-3">
+                      <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Grassroots Collaborations</span>
+                      <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+                        OUR NGO <span className="text-primary text-glow-red">PARTNERS</span>
+                      </h2>
+                      <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
+                        Partnering with leading organizations to deliver digital literacy, AI labs, and STEM education to rural communities.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col items-center gap-12 max-w-6xl mx-auto">
+                      {/* Row 1: Pratham (Most Value) */}
+                      <div className="w-full max-w-5xl flex justify-center">
+                        <div className="relative bg-gradient-to-br from-slate-50 to-white p-8 md:p-12 rounded-[2.5rem] border border-black/5 shadow-xl w-full overflow-hidden text-left">
+                          
+                          {/* Top Tagline */}
+                          <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-black/5">
+                            <div className="flex items-center gap-3">
+                              <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+                              <span className="text-xs font-mono font-black text-[#1a1a2e] uppercase tracking-widest">Featured Strategic Partnership</span>
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+                            
+                            {/* Left Column: Logo & Stats */}
+                            <div className="lg:col-span-4 flex flex-col items-center lg:items-start gap-3 w-full">
+                              <span className="text-[11px] font-mono font-extrabold text-primary uppercase tracking-[0.15em] text-center max-w-[280px] block w-full">
+                                STEAM & TECHNOLOGY PARTNER
+                              </span>
+                              <div className="w-full aspect-square max-w-[280px] flex items-center justify-center p-6 bg-white rounded-3xl border-2 border-primary shadow-md hover:shadow-lg transition-all duration-300">
+                                <img 
+                                  src="/logos/prratham_logo_original.webp" 
+                                  alt="Pratham Logo" 
+                                  className="max-w-full max-h-full object-contain scale-105"
+                                />
+                              </div>
+                            </div>
+
+                            {/* Right Column: Detailed Info */}
+                            <div className="lg:col-span-8 space-y-6">
+                              <div className="space-y-4 text-[#1a1a2e]/75 font-body text-sm leading-relaxed">
+                                <p>
+                                  <strong>AIR G International</strong> is proud to partner with <strong>Pratham</strong> as its AI, STEAM, Robotics, and Emerging Technology Partner. This collaboration brings together Pratham&apos;s extensive educational reach and commitment to improving learning outcomes with AIR G International&apos;s expertise in future-ready technologies.
+                                </p>
+                                <p>
+                                  Together, we are empowering the next generation through hands-on, project-based learning in Artificial Intelligence (AI), Robotics, Coding, Internet of Things (IoT), Drone Technology, 3D Printing, Virtual Reality (VR), Electronics, and Design Thinking. Through this partnership, more than 10,000 students across India have already been introduced to emerging technologies, fostering innovation, critical thinking, creativity, and problem-solving skills that prepare them for the future workforce.
+                                </p>
+                                <p className="text-xs text-[#1a1a2e]/70 leading-relaxed border-l-2 border-primary/20 pl-4">
+                                  Pratham is one of the largest and most successful non-governmental organizations (NGOs) in India, specifically focusing on education. Operating across more than 25 states and union territories, it reaches and supports millions of children and youth annually through literacy, elementary education, and skill-building.
+                                </p>
+                              </div>
+
+                              {/* Key Highlights Grid */}
+                              <div className="pt-6 border-t border-black/5">
+                                <h4 className="text-xs font-mono font-black text-[#1a1a2e] uppercase tracking-widest mb-4">Key Highlights</h4>
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                  <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                                    <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">Reach</span>
+                                    <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Impacts over 6-7 million children and young adults every year.</p>
+                                  </div>
+                                  <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                                    <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">History</span>
+                                    <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Established in 1995 in Mumbai to provide pre-school education in slums.</p>
+                                  </div>
+                                  <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                                    <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">Programs</span>
+                                    <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Known for remedial learning (Read India) and the ASER report.</p>
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+
+                      {/* Row 2: Remaining 4 Partners */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
+                        {[
+                          { 
+                            name: "Pravich Welfare Foundation", 
+                            logo: "/logos/pravich_logo.png",
+                            desc: "Focuses on rural digital literacy, youth skill development, and community welfare initiatives."
+                          },
+                          { 
+                            name: "Sanjyot Bahuuddeshiya Sanstha", 
+                            logo: "/logos/sanjyot_logo.png",
+                            desc: "Supports elementary education assistance, social support programs, and rural vocational training." 
+                          },
+                          { 
+                            name: "Suprabhat Mahila Mandal", 
+                            logo: "/logos/suprabhat_logo.png",
+                            desc: "Dedicated to empowering women, child welfare projects, and conducting rural health awareness camps."
+                          },
+                          { 
+                            name: "Yashwant Bahuuddeshiya Samajik Sanstha", 
+                            logo: "/logos/yashwant_logo.png",
+                            desc: "Promotes rural development, environmental preservation campaigns, and youth guidance seminars."
+                          }
+                        ].map((ngo, idx) => (
+                          <div key={idx} className="group relative bg-white p-6 rounded-[2rem] border border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-500 flex flex-col items-center text-center">
+                            <div className="w-32 h-32 flex items-center justify-center p-2 bg-slate-50 rounded-2xl border border-black/5 mb-4 group-hover:scale-105 transition-transform duration-300 shrink-0 shadow-sm">
+                              <img 
+                                src={ngo.logo} 
+                                alt={ngo.name} 
+                                className="max-w-[90%] max-h-[90%] object-contain"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  if (target.src.includes(".jpg")) {
+                                    target.src = target.src.replace(".jpg", ".png");
+                                  } else if (target.src.includes(".png")) {
+                                    target.src = target.src.replace(".png", ".jpg");
+                                  }
+                                }}
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <h4 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">{ngo.name}</h4>
+                              <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed">
+                                {ngo.desc}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -2398,24 +2504,16 @@ export default function NewDesignContent() {
                         <div 
                           key={i}
                           onClick={() => navigateTo('workshops')}
-                          className="glass-premium p-3.5 rounded-[2rem] border border-black/5 hover:border-primary/25 hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between group/item h-auto relative overflow-hidden"
+                          className="glass-premium p-3.5 rounded-[2rem] border border-black/5 hover:border-primary/25 hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-center group/item h-auto relative overflow-hidden"
                         >
                           <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-black/5 bg-slate-100 shrink-0">
                             <Image 
                               src={record.url} 
-                              alt={record.title} 
+                              alt="" 
                               fill 
                               className="object-cover group-hover/item:scale-105 transition-transform duration-500" 
                               sizes="(max-width: 768px) 100vw, 200px" 
                             />
-                          </div>
-                          <div className="space-y-1.5 flex flex-col justify-end flex-grow pt-3.5">
-                            <span className="px-2.5 py-0.5 bg-primary/15 border-2 border-primary/40 rounded text-[7px] font-mono text-primary uppercase font-bold tracking-wider self-start">
-                              {record.category}
-                            </span>
-                            <div className="text-[#1a1a2e] font-headline font-black text-xs uppercase tracking-tight line-clamp-1 group-hover/item:text-primary transition-colors">
-                              {record.title}
-                            </div>
                           </div>
                         </div>
                       ))}

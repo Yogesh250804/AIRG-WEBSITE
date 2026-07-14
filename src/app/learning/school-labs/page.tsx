@@ -154,7 +154,7 @@ export default function SchoolLabsPage() {
       photos: ["/attachments/PHOTO-2026-07-10-14-56-31_2.jpg", "/attachments/PHOTO-2026-07-10-14-56-31.jpg"],
       items: [
         { name: "Bharat AI Engine (Education Edition) AI Platform with models, Local Server, LMS, Coding, Vision AI (10 System Software)", qty: 0, unitCost: 400000, isLot: false },
-        { name: "Computer Systems (Intel Core i7, 8GB RAM, 512GB SSD, 22\" LED, Keyboard & Mouse)", qty: 0, unitCost: 30000, isLot: false },
+        { name: "Computer Systems (Intel Core i7, 8GB RAM, 512GB SSD, 22\" LED, Keyboard & Mouse)", qty: 0, unitCost: 50000, isLot: false },
         { name: "Smart TV (55\" 4K Samsung Vision AI)", qty: 0, unitCost: 55000, isLot: false },
         { name: "HD Webcam (Full HD)", qty: 0, unitCost: 2500, isLot: false },
         { name: "Pendrive (64GB)", qty: 0, unitCost: 800, isLot: false }
@@ -217,14 +217,15 @@ export default function SchoolLabsPage() {
       image: "/lab-3dprinting.png",
       photos: ["/attachments/PHOTO-2026-07-10-14-56-32.jpg", "/attachments/PHOTO-2026-07-10-14-56-32_1.jpg", "/attachments/PHOTO-2026-07-10-14-56-30_1.jpg"],
       items: [
+        { name: "Bamboo Labs A1 multicolor Printer", qty: 0, unitCost: 60000, isLot: false },
         { name: "Bambu Lab A1 Printer with Assembly", qty: 0, unitCost: 35000, isLot: false },
         { name: "Anycubic Printer with Assembly", qty: 0, unitCost: 25000, isLot: false },
         { name: "Filament PLA Pro+", qty: 0, unitCost: 1000, isLot: false }
       ]
     },
     {
-      name: "Branding & Display Department",
-      shortName: "Branding",
+      name: "Setup & Display Department",
+      shortName: "Setup",
       icon: "stars",
       image: "/lab-smartlearning.png",
       photos: ["/attachments/PHOTO-2026-07-10-14-56-30.jpg", "/attachments/PHOTO-2026-07-10-14-56-31_1.jpg"],
@@ -233,7 +234,9 @@ export default function SchoolLabsPage() {
         { name: "Acrylic Names, Stickers for Dept.", qty: 0, unitCost: 1200, isLot: false },
         { name: "Technology Acrylic Posters", qty: 0, unitCost: 2000, isLot: false },
         { name: "Information Boards PVC Foam", qty: 0, unitCost: 2000, isLot: false },
-        { name: "Information Books Set", qty: 0, unitCost: 200, isLot: false }
+        { name: "Information Books Set", qty: 0, unitCost: 200, isLot: false },
+        { name: "Electrician Work", qty: 0, unitCost: 60000, isLot: true },
+        { name: "Lab Setup/Installation", qty: 0, unitCost: 70000, isLot: true }
       ]
     },
     {
@@ -251,6 +254,18 @@ export default function SchoolLabsPage() {
         { name: "Line Following Robot", qty: 0, unitCost: 6000, isLot: false },
         { name: "WiFi Controlled Robot", qty: 0, unitCost: 6000, isLot: false },
         { name: "Robotics ARM", qty: 0, unitCost: 6000, isLot: false }
+      ]
+    },
+    {
+      name: "Furniture Department",
+      shortName: "Furniture",
+      icon: "table_restaurant",
+      image: "/lab-smartlearning.png",
+      photos: ["/attachments/PHOTO-2026-07-10-14-56-31.jpg"],
+      items: [
+        { name: "Octagon Table", qty: 0, unitCost: 10000, isLot: false },
+        { name: "Site Table", qty: 0, unitCost: 6000, isLot: false },
+        { name: "Chair", qty: 0, unitCost: 2000, isLot: false }
       ]
     }
   ]);
@@ -647,8 +662,8 @@ const calculateGrandTotal = () => {
                   {/* Fade overlays for scrolling indicator */}
                   <div className="absolute right-0 top-0 bottom-5 w-12 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none z-10 block lg:hidden" />
                   
-                  {/* Zone Select Tabs (Straight horizontal scroll with no wrapping) */}
-                  <div className="flex overflow-x-auto gap-2 pb-5 border-b border-slate-200/60 flex-nowrap scrollbar-thin pr-12 lg:pr-0">
+                  {/* Zone Select Tabs (Wrapped with no horizontal scroll) */}
+                  <div className="flex flex-wrap gap-2 pb-5 border-b border-slate-200/60 pr-12 lg:pr-0">
                     {zones.map((zone, idx) => (
                       <button
                         key={idx}
@@ -759,7 +774,6 @@ const calculateGrandTotal = () => {
                       <div className="flex justify-between items-center border-t border-white/[0.08] pt-4">
                         <div>
                           <span className="text-white/40 text-[10px] font-mono uppercase tracking-widest block">Grand Total Cost</span>
-                          <span className="text-[9px] text-primary block mt-0.5">// Setup &amp; Installation Exempted</span>
                         </div>
                         <span className="text-2xl font-extrabold font-headline tracking-tighter text-primary tabular-nums">
                           ₹{formatCurrency(calculateGrandTotal())}
@@ -1302,7 +1316,7 @@ const calculateGrandTotal = () => {
               </tr>
               <tr>
                 <td style={{ color: '#888', fontSize: '10px' }}>All configured department(s) included</td>
-                <td style={{ textAlign: 'right', color: '#888', fontSize: '10px' }}>Setup &amp; Installation: Exempted</td>
+                <td style={{ textAlign: 'right', color: '#888', fontSize: '10px' }}></td>
               </tr>
             </tbody>
           </table>
@@ -1313,8 +1327,7 @@ const calculateGrandTotal = () => {
           <div style={{ fontWeight: 700, color: '#555', marginBottom: '4px' }}>Terms & Conditions:</div>
           <div>1. This PDF quotation is generated based on selected lab customizations.</div>
           <div>2. Pricing includes 18% GST as per statutory guidelines for NGO/educational projects.</div>
-          <div>3. Standard installation, setup, and commissioning of the lab are fully exempted from additional costs.</div>
-          <div>4. Valid for 30 days from generation date.</div>
+          <div>3. Valid for 30 days from generation date.</div>
         </div>
 
         <div style={{ marginTop: '20px', paddingTop: '12px', borderTop: '1px solid #eee', textAlign: 'center', fontSize: '9px', color: '#aaa' }}>
