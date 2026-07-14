@@ -88,7 +88,11 @@ export default async function LabDetailPage({ params }: PageProps) {
 
         {/* CLASSROOM GALLERY SWIPER COMES FIRST (Large & Centered directly under the title area) */}
         <div className="w-full mb-16">
-          <ImageSlider images={lab.images} name={lab.name} />
+          <ImageSlider 
+            images={lab.images} 
+            name={lab.name} 
+            className="relative w-full aspect-[16/9] max-h-[620px] rounded-3xl overflow-hidden shadow-md border border-black/5 bg-black group select-none"
+          />
           <div className="text-[9px] text-[#1a1a2e]/40 uppercase tracking-widest font-mono text-right mt-2 mr-2">
             Interactive Classroom View Gallery // Swipe or Click Arrows to Navigate
           </div>

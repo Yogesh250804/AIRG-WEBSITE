@@ -22,10 +22,15 @@ export const labsData: Lab[] = [
     "desc": "The AIR G Innovation Lab at our school is a future-ready learning space where students explore Artificial Intelligence, Robotics, IoT, Drone Technology, 3D Printing, Virtual Reality, Coding, and Electronics through hands-on innovation and project-based learning.",
     "detailedDesc": "Situated at Rajendra School in Khandala, this lab introduces students to aviation science. Through constructing model gliders, studying wind resistance, and mapping flight paths, physics concepts are made active and engaging.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
+    "img": "/centres/rajendra/PHOTO-2026-07-14-21-26-46.jpg",
     "images": [
-      "/extracted-hi/12ed4d69-0743-419b-bc95-454d67ff7d5f.jpeg",
-      "/extracted-hi/acdaffd4-7572-43c2-8b34-2a0df298aca1.jpeg"
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-46.jpg",
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-46(1).jpg",
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-46(2).jpg",
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-47.jpg",
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-47(1).jpg",
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-47(2).jpg",
+      "/centres/rajendra/PHOTO-2026-07-14-21-26-47(3).jpg"
     ],
     "techStack": [
       "Model Glider Kits",
@@ -61,10 +66,27 @@ export const labsData: Lab[] = [
     "desc": "Our AIR G Innovation Lab inspires students to become creative thinkers, problem solvers, and future innovators by integrating emerging technologies with experiential learning.",
     "detailedDesc": "The Venurai Chavan Lab introduces water conservation tech. Students program ultrasonic depth sensors to read school water levels, building automatic pump cutoff switches to prevent overflow.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg",
+    "img": "/centres/yashwantrao/PHOTO-2026-07-14-21-45-32.jpg",
     "images": [
-      "/extracted-hi/661d0e1c-45e0-4a30-9c15-96bff2e87b21.jpeg",
-      "/extracted-hi/8de7aef7-e23f-4fcb-af05-fba1a8be7031.jpeg"
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-45-32.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-45-33.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-32.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-32(1).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-33.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-33(1).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-33(2).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-33(3).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-34.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-34(1).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-34(2).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-34(3).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-35.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-35(1).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-35(2).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-36.jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-36(1).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-36(2).jpg",
+      "/centres/yashwantrao/PHOTO-2026-07-14-21-41-36(3).jpg"
     ],
     "techStack": [
       "Ultrasonic Depth Sensors",
@@ -264,10 +286,11 @@ export const labsData: Lab[] = [
     "desc": "Built on the principles of experiential learning, the AIR G Innovation Lab encourages students to explore, invent, and solve real-world challenges using AI, Robotics, IoT, and emerging technologies.",
     "detailedDesc": "Mudhoji Lab, located at Mudhoji High School in Phaltan, is a dedicated space for hands-on learning. Students learn to program Arduino boards, build block-based and C++ robotics models, and design parts using 3D printers, fostering early interest in engineering and computer science.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/09462899-fd09-4dd9-9f48-a2ef7174280e.jpeg",
+    "img": "/centres/mudhoji/PHOTO-2026-07-14-21-09-31.jpg",
     "images": [
-      "/extracted-hi/09462899-fd09-4dd9-9f48-a2ef7174280e.jpeg",
-      "/extracted-hi/8de7aef7-e23f-4fcb-af05-fba1a8be7031.jpeg"
+      "/centres/mudhoji/PHOTO-2026-07-14-21-09-31.jpg",
+      "/centres/mudhoji/PHOTO-2026-07-14-21-09-32.jpg",
+      "/centres/mudhoji/PHOTO-2026-07-14-21-45-33.jpg"
     ],
     "techStack": [
       "Arduino UNO",
@@ -304,10 +327,16 @@ export const labsData: Lab[] = [
     "desc": "The AIR G Innovation Lab nurtures curiosity and innovation by combining technology, creativity, and practical learning to prepare students for Industry 4.0 and beyond.",
     "detailedDesc": "Located at Sakharwadi High School, this lab leverages technology to understand local agriculture. Students write code to interface soil sensors with automated water pumps, building practical smart-watering systems and weather monitoring stations.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
+    "img": "/centres/sakharwadi/PHOTO-2026-07-14-21-14-30.jpg",
     "images": [
-      "/extracted-hi/0d0a47da-fa16-46de-a21d-0535b434d063.jpeg",
-      "/extracted-hi/a3a18266-7e2d-4337-bf74-c1182831f994.jpeg"
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-14-30.jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-14-30(1).jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-14-31.jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-14-48.jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-16-55.jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-16-55(1).jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-16-56.jpg",
+      "/centres/sakharwadi/PHOTO-2026-07-14-21-16-56(1).jpg"
     ],
     "techStack": [
       "Soil Moisture Sensors",
@@ -343,10 +372,14 @@ export const labsData: Lab[] = [
     "desc": "Our AIR G Innovation Lab enables students to transform ideas into impactful projects through Artificial Intelligence, Robotics, Drone Technology, IoT, Electronics, and Digital Fabrication.",
     "detailedDesc": "The Sant Tukaram Lab provides a solid foundation in electronics. Students learn to assemble fundamental logic gates on breadboards, utilize resistors, transistors, and LEDs, and understand the core hardware components that make up modern computers.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/13b605b2-a681-45de-911d-b3724780786c.jpeg",
+    "img": "/centres/sant-tukaram/PHOTO-2026-07-14-21-37-23(2).jpg",
     "images": [
-      "/extracted-hi/13b605b2-a681-45de-911d-b3724780786c.jpeg",
-      "/extracted-hi/b6994ed0-bfb9-46cd-984b-5924a8bcd659.jpeg"
+      "/centres/sant-tukaram/PHOTO-2026-07-14-21-28-28.jpg",
+      "/centres/sant-tukaram/PHOTO-2026-07-14-21-28-28(1).jpg",
+      "/centres/sant-tukaram/PHOTO-2026-07-14-21-37-23.jpg",
+      "/centres/sant-tukaram/PHOTO-2026-07-14-21-37-23(1).jpg",
+      "/centres/sant-tukaram/PHOTO-2026-07-14-21-37-23(2).jpg",
+      "/centres/sant-tukaram/PHOTO-2026-07-14-21-37-24.jpg"
     ],
     "techStack": [
       "Breadboards",
@@ -422,13 +455,18 @@ export const labsData: Lab[] = [
     "desc": "The AIR G Innovation Lab bridges academic knowledge with practical application, helping students develop confidence, critical thinking, and innovation through advanced technologies.",
     "detailedDesc": "Koteshwar Vidyaly Lab in Wai focuses on embedded software. Students connect microchips with LED matrices, programming basic snake games, countdown timers, and scrolling message displays.",
     "status": "Active Lab Center",
-    "img": "/extracted-images/koteshwar/koteshwar_0.jpeg",
+    "img": "/centres/koteshwar/PHOTO-2026-07-14-21-46-58.jpg",
     "images": [
-      "/extracted-images/koteshwar/koteshwar_0.jpeg",
-      "/extracted-images/koteshwar/koteshwar_1.jpeg",
-      "/extracted-images/koteshwar/koteshwar_2.jpeg",
-      "/extracted-images/koteshwar/koteshwar_3.jpeg",
-      "/extracted-images/koteshwar/koteshwar_4.jpeg"
+      "/centres/koteshwar/PHOTO-2026-07-14-21-46-58.jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-46-59.jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-46-59(1).jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-00.jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-00(1).jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-00(2).jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-00(3).jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-01.jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-01(1).jpg",
+      "/centres/koteshwar/PHOTO-2026-07-14-21-47-01(2).jpg"
     ],
     "techStack": [
       "Arduino Nano",
@@ -543,10 +581,12 @@ export const labsData: Lab[] = [
     "desc": "The AIR G Innovation Lab prepares students for future careers by integrating modern technologies with design thinking, problem-solving, teamwork, and experiential education.",
     "detailedDesc": "S.S. Nikam Lab introduces internet-connected devices. Middle schoolers configure temperature, humidity, and barometric sensors, uploading live local weather charts to a shared campus web page.",
     "status": "Active Lab Center",
-    "img": "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg",
+    "img": "/centres/ss-nikam/PHOTO-2026-07-14-21-47-36.jpg",
     "images": [
-      "/extracted-hi/4c81cd5d-92a8-4d86-8c9b-2b68dac490e7.jpeg",
-      "/extracted-hi/fa1640fb-1fb4-499e-a1f4-52861ca1beca.jpeg"
+      "/centres/ss-nikam/PHOTO-2026-07-14-21-47-36.jpg",
+      "/centres/ss-nikam/PHOTO-2026-07-14-21-47-37.jpg",
+      "/centres/ss-nikam/PHOTO-2026-07-14-21-47-37(1).jpg",
+      "/centres/ss-nikam/PHOTO-2026-07-14-21-47-38.jpg"
     ],
     "techStack": [
       "DHT11 Temperature Sensor",

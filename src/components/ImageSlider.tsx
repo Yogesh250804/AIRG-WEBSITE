@@ -13,7 +13,7 @@ interface ImageSliderProps {
 export default function ImageSlider({ 
   images, 
   name, 
-  className = "relative w-full aspect-[16/9] rounded-3xl overflow-hidden shadow-sm border border-black/5 bg-slate-100 group select-none" 
+  className = "relative w-full aspect-[16/9] rounded-3xl overflow-hidden shadow-sm border border-black/5 bg-black group select-none" 
 }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
@@ -72,12 +72,16 @@ export default function ImageSlider({
               src={images[currentIndex]}
               alt={`${name} classroom view ${currentIndex + 1}`}
               fill
-              className="object-contain bg-[#1a1a2e]"
+              className="object-contain bg-black"
               sizes="100vw"
               priority
             />
           </motion.div>
         </AnimatePresence>
+        
+        {/* Left/Right Dark Gradient Overlays */}
+        <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-black/60 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-black/60 to-transparent pointer-events-none z-10" />
       </div>
 
       {/* Navigation Arrows */}
