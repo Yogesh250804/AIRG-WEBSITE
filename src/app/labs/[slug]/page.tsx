@@ -101,10 +101,9 @@ export default async function LabDetailPage({ params }: PageProps) {
             {/* Mission Dossier */}
             <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-4 hover:shadow-md hover:scale-[1.005] hover:border-red-400/30 transition-all duration-300 relative overflow-hidden">
               <div className="absolute right-6 top-6 text-red-500/5 font-serif text-8xl font-black select-none pointer-events-none">“</div>
-              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-red-600 flex items-center gap-2.5 font-mono relative z-10">
-                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+              <div className="inline-flex items-center px-4 py-1.5 bg-red-600/10 border-2 border-red-600/30 rounded-full text-[10px] font-black text-red-600 uppercase tracking-widest font-mono relative z-10 mb-2">
                 Mission Overview
-              </h2>
+              </div>
               <p className="text-base text-[#1a1a2e]/70 leading-relaxed font-sans text-justify font-light relative z-10">
                 {lab.detailedDesc}
               </p>
@@ -112,10 +111,9 @@ export default async function LabDetailPage({ params }: PageProps) {
 
             {/* Core Research Directives */}
             <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-6 hover:shadow-md hover:scale-[1.005] hover:border-red-400/30 transition-all duration-300">
-              <h2 className="text-xs font-black uppercase tracking-[0.2em] text-red-600 flex items-center gap-2.5 font-mono">
-                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+              <div className="inline-flex items-center px-4 py-1.5 bg-red-600/10 border-2 border-red-600/30 rounded-full text-[10px] font-black text-red-600 uppercase tracking-widest font-mono mb-2">
                 Key Focus & Projects
-              </h2>
+              </div>
               <div className="space-y-4">
                 {lab.highlights.map((highlight, i) => {
                   const projectTitle = `Featured Project ${String(i + 1).padStart(2, '0')}`;
@@ -139,8 +137,8 @@ export default async function LabDetailPage({ params }: PageProps) {
           <div className="lg:col-span-5 space-y-8">
             {/* Lab Hardware Specifications Widget */}
             <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-5 hover:shadow-md hover:border-red-400/30 transition-all duration-300">
-              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-600 font-mono border-b border-red-100 pb-3">
-                // Hardware & Network Configuration
+              <div className="inline-flex items-center px-4 py-1.5 bg-red-600/10 border-2 border-red-600/30 rounded-full text-[10px] font-black text-red-600 uppercase tracking-widest font-mono mb-2">
+                Hardware & Network Configuration
               </div>
               <div className="space-y-3.5 text-xs">
                 {[
@@ -162,8 +160,8 @@ export default async function LabDetailPage({ params }: PageProps) {
 
             {/* Technology Stack Panel */}
             <div className="p-8 rounded-[2rem] border border-red-100 bg-gradient-to-br from-white/95 to-red-50/30 shadow-sm space-y-5 hover:shadow-md hover:border-red-400/30 transition-all duration-300">
-              <div className="text-[10px] font-black uppercase tracking-[0.25em] text-red-600 font-mono">
-                // Equipment & Tools Configured
+              <div className="inline-flex items-center px-4 py-1.5 bg-red-600/10 border-2 border-red-600/30 rounded-full text-[10px] font-black text-red-600 uppercase tracking-widest font-mono mb-2">
+                Equipment & Tools Configured
               </div>
               <div className="flex flex-wrap gap-2">
                 {[
