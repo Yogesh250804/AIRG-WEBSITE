@@ -2805,6 +2805,18 @@ export default function NewDesignContent() {
                     </div>
                   </div>
                 ))}
+                
+                {/* Coming Soon Card */}
+                <div className="glass-premium p-5 rounded-3xl border border-dashed border-primary/40 bg-primary/5 group transition-all duration-500 relative overflow-hidden shadow-sm flex flex-col justify-center items-center text-center h-full min-h-[320px]">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-4">
+                    <span className="material-symbols-outlined text-primary text-3xl animate-pulse">rocket_launch</span>
+                  </div>
+                  <h4 className="text-xl font-headline font-black text-[#1a1a2e] uppercase tracking-tight mb-2">100+ Labs</h4>
+                  <p className="text-[#EE2C3C] text-xs font-bold uppercase tracking-widest font-mono mb-4">Coming Soon</p>
+                  <p className="text-xs text-[#1a1a2e]/40 leading-relaxed font-body max-w-[200px]">
+                    Expanding our deep-tech footprint to prepare more students for the digital future.
+                  </p>
+                </div>
               </div>
             </div>
           </section>

@@ -14,150 +14,87 @@ export interface Workshop {
 
 export const workshopsData: Workshop[] = [
   {
-    slug: "rajendra-khandala-lab",
-    title: "AIRG Rajendra Khandala Lab",
-    category: "Innovation Lab",
-    desc: "The AIR G Innovation Lab at our school is a future-ready learning space where students explore Artificial Intelligence, Robotics, IoT, Drone Technology, 3D Printing, Virtual Reality, Coding, and Electronics through hands-on innovation.",
-    url: "/centres/rajendra/PHOTO-2026-07-14-21-26-46.jpg",
-    detailedDesc: "Situated at Rajendra School in Khandala, this lab introduces students to aviation science. Through constructing model gliders, studying wind resistance, and mapping flight paths, physics concepts are made active and engaging.",
-    location: "Khandala, Satara",
-    date: "Active Center",
-    techStack: ["Model Glider Kits", "Aero Simulation Software", "Electronic Sensors", "Physics Measurement Tools"],
+    slug: "school-level-robotics",
+    title: "AIRG Junior Robotics & Circuit Designing",
+    category: "School Level",
+    desc: "Introducing fundamental electronics, logic gates, and breadboard circuitry to school students through interactive hands-on builds.",
+    url: "/centres/workshops/PHOTO-2026-07-14-21-51-43.jpg",
+    detailedDesc: "Our school-level workshops establish foundational skills in hardware and software design. Working directly with breadboards, logic gate ICs, resistors, and solar-power components, young learners understand how physical inputs control digital systems. These sessions empower students to design autonomous line-following cars and smart LDR lighting prototypes, making science education practical and engaging.",
+    location: "Satara & Pune District Schools",
+    date: "Ongoing Program",
+    techStack: ["Breadboards", "Logic Gate ICs", "LEDs", "LDR Sensors", "Solar Panels"],
     stats: [
-      { label: "Gliders Assembled", value: "50+ Models" },
-      { label: "Students Enrolled", value: "300+ Students" },
-      { label: "Physics Experiments", value: "30+ Logged" }
+      { label: "Schools Covered", value: "15+ Schools" },
+      { label: "Students Trained", value: "3,000+ Students" },
+      { label: "Projects Completed", value: "500+ Builds" }
     ],
     highlights: [
-      "Designed and launched micro-gliders with optimal wing ratios",
-      "Used software to simulate airflow over wings and understand lift",
-      "Conducted outdoor flight competitions testing range and stability"
+      "Students build and present fully functional solar-powered smart light setups",
+      "Hands-on breadboard assembly workshops teaching discrete AND/OR/NOT logic gates",
+      "Weekly block-coding and robotics sessions integrated directly into school hours"
     ]
   },
   {
-    slug: "venurai-chavan-lab",
-    title: "AIRG Yashwantrao & Sou Venutai Chavan Lab",
-    category: "Innovation Lab",
-    desc: "Our AIR G Innovation Lab inspires students to become creative thinkers, problem solvers, and future innovators by integrating emerging technologies with experiential learning.",
-    url: "/centres/yashwantrao/PHOTO-2026-07-14-21-45-32.jpg",
-    detailedDesc: "The Venurai Chavan Lab introduces water conservation tech. Students program ultrasonic depth sensors to read school water levels, building automatic pump cutoff switches to prevent overflow.",
-    location: "Karad, Satara",
-    date: "Active Center",
-    techStack: ["Ultrasonic Depth Sensors", "Relay Cutoffs", "Arduino boards", "Water Flowmeters"],
+    slug: "institute-level-iot",
+    title: "Advanced Embedded Systems & IoT Engineering",
+    category: "Institute Level",
+    desc: "Equipping college and technical institute students with industry-standard microcontroller programming, cloud telemetry, and IoT network design skills.",
+    url: "/centres/workshops/PHOTO-2026-07-14-21-54-36.jpg",
+    detailedDesc: "Designed for engineering institutes and degree colleges, this advanced training module covers the design and deployment of real-world internet-connected systems. Students interface microcontrollers like ESP32 with multi-sensor arrays, code real-time data streaming engines, and connect physical hardware nodes to cloud-based IoT dashboards for monitoring local weather, soil quality, or smart campus grids.",
+    location: "Technical Institutes & Engineering Colleges",
+    date: "Active Program",
+    techStack: ["ESP32 Microchips", "IoT Protocols (MQTT/HTTP)", "Real-time Telemetry", "Cloud Dashboards"],
     stats: [
-      { label: "Systems Installed", value: "2 Campus Setups" },
-      { label: "Active Classes", value: "300+ Students" },
-      { label: "Gallons Conserved", value: "Estimated 1000+ Gal" }
+      { label: "Institutes Partnered", value: "10+ Colleges" },
+      { label: "Graduates Certified", value: "1,200+ Engineers" },
+      { label: "Research Projects", value: "85+ Prototypes" }
     ],
     highlights: [
-      "Programmed ultrasonic tank alarms warning of school tank overflows",
-      "Constructed flowmeter sensors showing real-time water usage speeds",
-      "Created classroom models explaining how residential pipes manage water flow"
+      "Rigorous coursework in embedded firmware development using C++ and RTOS",
+      "Students deploy fully functional smart weather station networks across campus grounds",
+      "Comprehensive certification aligned with Industry 4.0 professional requirements"
     ]
   },
   {
-    slug: "mudhoji-lab-showcase",
-    title: "AIRG Mudhoji Lab",
-    category: "Innovation Lab",
-    desc: "Built on the principles of experiential learning, the AIR G Innovation Lab encourages students to explore, invent, and solve real-world challenges using AI, Robotics, IoT, and emerging technologies.",
-    url: "/centres/mudhoji/PHOTO-2026-07-14-21-09-31.jpg",
-    detailedDesc: "Mudhoji Lab, located at Mudhoji High School in Phaltan, is a dedicated space for hands-on learning. Students learn to program Arduino boards, build block-based and C++ robotics models, and design parts using 3D printers, fostering early interest in engineering.",
-    location: "Phaltan, Satara",
-    date: "Active Center",
-    techStack: ["Arduino UNO", "Scratch Programming", "3D Printing", "STEM Robotics Kits", "Tinkercad"],
+    slug: "industry-level-automation",
+    title: "Industrial Automation & Applied AI Bootcamps",
+    category: "Industry Level",
+    desc: "Practical training bootcamps for industry professionals focusing on autonomous systems, manufacturing automation, and custom robotic solutions.",
+    url: "/centres/workshops/PHOTO-2026-07-14-21-51-45.jpg",
+    detailedDesc: "Our professional bootcamps bridge the gap between academic theory and active industrial deployment. Working with high-grade robotic actuators, vision sensors, programmable logic controllers (PLCs), and deep-learning models, participants build solutions for smart manufacturing, quality-control automation, and autonomous navigation — equipping them to lead innovation in production environments.",
+    location: "AIRG Corporate Training Centers",
+    date: "Active Program",
+    techStack: ["Applied AI Engines", "Robot Operating System (ROS)", "PLC Systems", "Computer Vision"],
     stats: [
-      { label: "Students Trained", value: "300+ Students" },
-      { label: "Robotics Kits", value: "25+ Active Kits" },
-      { label: "Completed Projects", value: "65+ Projects" }
+      { label: "Professionals Trained", value: "500+ Candidates" },
+      { label: "Corporate Partners", value: "12+ Companies" },
+      { label: "Placement Success", value: "92% Placed" }
     ],
     highlights: [
-      "Built autonomous line-following robot models for regional exhibitions",
-      "Designed and 3D-printed custom mechanical gears in class",
-      "Hosted weekly block-coding bootcamps for middle school grades"
+      "Intensive 6-week bootcamps focusing on machine vision algorithms for manufacturing lines",
+      "Direct integration trials with autonomous navigation and obstacle-avoidance robots",
+      "Hands-on work building custom industrial sensor nodes for production-level diagnostics"
     ]
   },
   {
-    slug: "sakharwadi-lab-showcase",
-    title: "AIRG Sakharwadi Lab",
-    category: "Innovation Lab",
-    desc: "The AIR G Innovation Lab nurtures curiosity and innovation by combining technology, creativity, and practical learning to prepare students for Industry 4.0 and beyond.",
-    url: "/centres/sakharwadi/PHOTO-2026-07-14-21-14-30.jpg",
-    detailedDesc: "Located at Sakharwadi High School, this lab leverages technology to understand local agriculture. Students write code to interface soil sensors with automated water pumps, building practical smart-watering systems and weather monitoring stations.",
-    location: "Sakharwadi, Satara",
-    date: "Active Center",
-    techStack: ["Soil Moisture Sensors", "Arduino ESP32", "Micro-Pump Actuators", "LED Displays"],
+    slug: "international-stem-outreach",
+    title: "AIRG International STEM & Robotics Outreach",
+    category: "Institute Level",
+    desc: "Bringing world-class STEM education, low-cost robotics kits, and digital literacy tools to international students across global communities.",
+    url: "/centres/workshops/PHOTO-2026-07-14-21-52-22.jpg",
+    detailedDesc: "The AIRG International Outreach program extends modern tech education to global schools and partner centers. By designing modular, cost-efficient robotics kits and local-language digital curriculums, we enable children in developing communities to build autonomous car models, configure smart sensors, and write block-based scripts — sparking creative thinking and equipping them for a digital future.",
+    location: "Global Schools & Partner Centers",
+    date: "Active Outreach",
+    techStack: ["Robotic Car Kits", "Visual Block Coding", "STEM Pedagogy", "Offline Learning Kits"],
     stats: [
-      { label: "Active Learners", value: "300+ Students" },
-      { label: "Soil Telemetry Kits", value: "15+ Workstations" },
-      { label: "School Greenhouses", value: "2 Monitored Zones" }
+      { label: "Countries Covered", value: "3+ Global Regions" },
+      { label: "Outreach Centers", value: "15+ Centers" },
+      { label: "Students Engaged", value: "2,500+ Worldwide" }
     ],
     highlights: [
-      "Programmed soil sensor kits to automatically water school plants",
-      "Created digital temperature alarms for classroom weather monitoring",
-      "Conducted agricultural science workshops using real-time data kits"
-    ]
-  },
-  {
-    slug: "sant-tukaram-lab-showcase",
-    title: "AIRG Sant Tukaram Lab",
-    category: "Innovation Lab",
-    desc: "Our AIR G Innovation Lab enables students to transform ideas into impactful projects through Artificial Intelligence, Robotics, Drone Technology, IoT, Electronics, and Digital Fabrication.",
-    url: "/centres/sant-tukaram/PHOTO-2026-07-14-21-37-23(2).jpg",
-    detailedDesc: "The Sant Tukaram Lab provides a solid foundation in electronics. Students learn to assemble fundamental logic gates on breadboards, utilize resistors, transistors, and LEDs, and understand the core hardware components that make up modern computers.",
-    location: "Satara District",
-    date: "Active Center",
-    techStack: ["Breadboards", "Logic Gate ICs (AND/OR/NOT)", "Multimeters", "LED Arrays", "Resistors & Capacitors"],
-    stats: [
-      { label: "Students Guided", value: "300+ Students" },
-      { label: "Electronic Benches", value: "12 Stations" },
-      { label: "Logic Circuits Built", value: "80+ Designs" }
-    ],
-    highlights: [
-      "Built full adder circuits on breadboards using discrete ICs",
-      "Designed light-sensing night lights using photoresistors",
-      "Programmed simple blinking pattern matrices using 555 timers"
-    ]
-  },
-  {
-    slug: "koteshwar-vidyaly-lab-showcase",
-    title: "AIRG Koteshwar Vidyaly Lab",
-    category: "Innovation Lab",
-    desc: "The AIR G Innovation Lab bridges academic knowledge with practical application, helping students develop confidence, critical thinking, and innovation through advanced technologies.",
-    url: "/centres/koteshwar/PHOTO-2026-07-14-21-46-58.jpg",
-    detailedDesc: "Koteshwar Vidyaly Lab in Wai focuses on embedded software. Students connect microchips with LED matrices, programming basic snake games, countdown timers, and scrolling message displays.",
-    location: "Wai, Satara",
-    date: "Active Center",
-    techStack: ["Arduino Nano", "8x8 LED Matrices", "LCD Character Screens", "C++ Coding", "Buzzer Sounds"],
-    stats: [
-      { label: "Microchip Kits", value: "20+ Boards" },
-      { label: "Students Engaged", value: "300+ Students" },
-      { label: "Game Code Programs", value: "45+ Uploaded" }
-    ],
-    highlights: [
-      "Programmed a school bell countdown timer displayed on LCD screens",
-      "Designed and coded retro 2D games using tactile buttons and LED grids",
-      "Conducted inter-school programming competitions on Arduino IDE"
-    ]
-  },
-  {
-    slug: "ss-nikam-lab-showcase",
-    title: "AIRG S.S. Nikam Lab",
-    category: "Innovation Lab",
-    desc: "The AIR G Innovation Lab prepares students for future careers by integrating modern technologies with design thinking, problem-solving, teamwork, and experiential education.",
-    url: "/centres/ss-nikam/PHOTO-2026-07-14-21-47-36.jpg",
-    detailedDesc: "S.S. Nikam Lab introduces internet-connected devices. Middle schoolers configure temperature, humidity, and barometric sensors, uploading live local weather charts to a shared campus web page.",
-    location: "Satara District",
-    date: "Active Center",
-    techStack: ["DHT11 Temperature Sensor", "Wi-Fi ESP8266 Microchips", "IoT dashboards", "Weather APIs"],
-    stats: [
-      { label: "Weather Nodes", value: "8 Connected Stations" },
-      { label: "Logs Streamed", value: "5000+ Records" },
-      { label: "Enrolled Students", value: "140+ Learners" }
-    ],
-    highlights: [
-      "Connected school weather arrays to broadcast local heat indexes",
-      "Programmed Wi-Fi chips to email daily classroom humidity summaries",
-      "Coded web-dashboards that show daily climate patterns to all teachers"
+      "Deployment of custom offline-capable learning kits to support regions with low connectivity",
+      "Interactive coding and robotics workshops for young learners utilizing physical cars",
+      "Special training programs conducted for local educators to sustain STEM education long-term"
     ]
   }
 ];
