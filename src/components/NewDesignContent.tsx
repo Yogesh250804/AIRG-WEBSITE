@@ -109,6 +109,7 @@ const CountUpNumber = ({ value, suffix = "" }: { value: number; suffix?: string 
 
 const row1 = [
   { name: "Aditya Birla", logo: "/logos/extracted_p5_img2.png", scaleVal: 1.1 },
+  { name: "Symbiosis", logo: "/logos/symbiosis.png", scaleVal: 1.2 },
   { name: "Sharjah Research Park", logo: "/logos/sharjah.png" },
   { name: "UNESCO", logo: "/logos/unesco.png" },
   { name: "MIT-ADT", logo: "/logos/mitadt.png", scaleVal: 1.05 },

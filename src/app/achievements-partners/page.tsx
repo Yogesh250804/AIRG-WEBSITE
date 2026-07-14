@@ -96,7 +96,7 @@ export default function AchievementsPartners() {
 
   const row1 = [
     { name: "Aditya Birla", logo: "/logos/extracted_p5_img2.png", scaleVal: 1.1 },
-    { name: "Symbiosis SCEI", logo: "/logos/scei_clean.png", scaleVal: 1.2 },
+    { name: "Symbiosis", logo: "/logos/symbiosis.png", scaleVal: 1.2 },
     { name: "Pratham", logo: "/logos/pratham_clean.png", scaleVal: 1.1 },
     { name: "Sharjah Research Park", logo: "/logos/sharjah.png" },
     { name: "UNESCO", logo: "/logos/unesco.png" },
