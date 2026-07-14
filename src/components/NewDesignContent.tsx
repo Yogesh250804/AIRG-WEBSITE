@@ -2626,9 +2626,7 @@ export default function NewDesignContent() {
                 <video
   src="/video/airg_labs_overview_compressed.mp4"
   controls
-  autoPlay
-  loop
-  muted
+  poster="/attachments/PHOTO-2026-07-10-14-56-30.jpg"
   playsInline
   preload="metadata"
   className="w-full h-full object-cover"
