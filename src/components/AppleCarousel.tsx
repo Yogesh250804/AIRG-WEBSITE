@@ -8,7 +8,7 @@ import { workshopsData, Workshop } from "@/data/workshops";
 export default function AppleCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const activeWorkshop = workshopsData[activeIndex];
+  const activeWorkshop = workshopsData[activeIndex] || workshopsData[0];
   const [isHovered, setIsHovered] = useState(false);
   const [isPortrait, setIsPortrait] = useState(false);
 
