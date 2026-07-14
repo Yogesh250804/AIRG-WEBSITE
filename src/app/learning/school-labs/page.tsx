@@ -594,8 +594,6 @@ const calculateGrandTotal = () => {
   className="w-full h-full border-0"
   allow="autoplay; fullscreen; picture-in-picture"
   allowFullScreen
-  webkitallowfullscreen="true"
-  mozallowfullscreen="true"
 />
                   </div>
                 </div>
