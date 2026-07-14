@@ -20,7 +20,7 @@ export default function AIInfrastructuresB2BPage() {
     {
       name: "Bharat AI Engine",
       icon: "dns",
-      image: "/extracted-images/page_1_img_1_39.png",
+      image: "/extracted-images/bharat_ai_engine_cropped.jpg",
       description: "BHARAT AI ENGINE™ is a device-grade Edge AI infrastructure system designed to convert existing computers into a full-fledged AI Ecosystem — without replacing computers, without cloud dependency, and without complex installations. It operates as a central AI engine that delivers real-time artificial intelligence capabilities to multiple computers simultaneously over a local network.",
       stats: { type: "Edge AI", network: "Local MESH", setup: "Zero Cloud" },
       items: [
