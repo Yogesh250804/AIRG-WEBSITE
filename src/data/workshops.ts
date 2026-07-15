@@ -35,27 +35,6 @@ export const workshopsData: Workshop[] = [
     ]
   },
   {
-    slug: "institute-level-iot",
-    title: "Advanced Embedded Systems & IoT Engineering",
-    category: "Institute Level",
-    desc: "Equipping college and technical institute students with industry-standard microcontroller programming, cloud telemetry, and IoT network design skills.",
-    url: "/centres/workshops/PHOTO-2026-07-14-21-54-36.jpg",
-    detailedDesc: "Designed for engineering institutes and degree colleges, this advanced training module covers the design and deployment of real-world internet-connected systems. Students interface microcontrollers like ESP32 with multi-sensor arrays, code real-time data streaming engines, and connect physical hardware nodes to cloud-based IoT dashboards for monitoring local weather, soil quality, or smart campus grids.",
-    location: "Technical Institutes & Engineering Colleges",
-    date: "Active Program",
-    techStack: ["ESP32 Microchips", "IoT Protocols (MQTT/HTTP)", "Real-time Telemetry", "Cloud Dashboards"],
-    stats: [
-      { label: "Institutes Partnered", value: "10+ Colleges" },
-      { label: "Graduates Certified", value: "1,200+ Engineers" },
-      { label: "Research Projects", value: "85+ Prototypes" }
-    ],
-    highlights: [
-      "Rigorous coursework in embedded firmware development using C++ and RTOS",
-      "Students deploy fully functional smart weather station networks across campus grounds",
-      "Comprehensive certification aligned with Industry 4.0 professional requirements"
-    ]
-  },
-  {
     slug: "industry-level-automation",
     title: "Industrial Automation & Applied AI Bootcamps",
     category: "Industry Level",
