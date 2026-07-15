@@ -446,6 +446,13 @@ export default function NewDesignContent() {
   const [currentEmblemLetter, setCurrentEmblemLetter] = useState("A");
   const [isEmblemMirrored, setIsEmblemMirrored] = useState(false);
   const [videoLang, setVideoLang] = useState<'en' | 'mr'>('en');
+  const tourVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (tourVideoRef.current) {
+      tourVideoRef.current.load();
+    }
+  }, [videoLang]);
 
    // Cart state
   const [cart, setCart] = useState<{ name: string; price: string; img: string; tag: string; quantity: number }[]>([]);
@@ -2900,6 +2907,7 @@ export default function NewDesignContent() {
                   </button>
                 </div>
                 <video
+                  ref={tourVideoRef}
                   src={videoLang === 'en' ? "/video/airg_labs_overview_compressed.mp4" : "/video/airg_labs_overview_marathi.mp4"}
                   controls
                   poster="/attachments/thumbnail.png"

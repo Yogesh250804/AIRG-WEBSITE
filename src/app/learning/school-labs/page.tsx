@@ -2,7 +2,7 @@
 
 import { Navbar } from "@/components/demo-navbar";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function SchoolLabsPage() {
   const [activeZone, setActiveZone] = useState(0);
@@ -11,6 +11,13 @@ export default function SchoolLabsPage() {
   const [galleryFilter, setGalleryFilter] = useState("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [videoLang, setVideoLang] = useState<'en' | 'mr'>('en');
+  const schoolVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (schoolVideoRef.current) {
+      schoolVideoRef.current.load();
+    }
+  }, [videoLang]);
 
   const gradesList = [
     { 
@@ -629,6 +636,7 @@ const calculateGrandTotal = () => {
                       </button>
                     </div>
                     <video
+                      ref={schoolVideoRef}
                       src={videoLang === 'en' ? "/video/airg_labs_overview_compressed.mp4" : "/video/airg_labs_overview_marathi.mp4"}
                       controls
                       poster="/attachments/thumbnail.png"
