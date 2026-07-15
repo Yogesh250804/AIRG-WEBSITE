@@ -483,12 +483,12 @@ export default function AIInfrastructuresB2BPage() {
                 
                 {/* HUD Overlay details */}
                 <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
-                  DGP & CM OSD
+                  DGP Maharashtra
                 </div>
                 
                 <div className="absolute bottom-6 left-6 right-6 z-20">
                   <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// STATE SECURE CAPABILITIES</div>
-                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date & CM OSD C. Vaze</h4>
+                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date, DGP Maharashtra</h4>
                   <p className="text-[10px] text-slate-400 font-medium mt-1">In discussion on state police & cyber-security infrastructure integrations.</p>
                 </div>
               </div>
@@ -510,7 +510,7 @@ export default function AIInfrastructuresB2BPage() {
                 <div className="absolute bottom-6 left-6 right-6 z-20">
                   <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// EXECUTIVE SECRETARIAT</div>
                   <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Devendra Fadnavis</h4>
-                  <p className="text-[10px] text-slate-400 font-medium mt-1">Reviewing the blueprint of Bharat AI Engine implementation for regional schools.</p>
+                  <p className="text-[10px] text-slate-400 font-medium mt-1">Reviewing the blueprint of Bharat AI Engine implementation for schools, institutes, and industries.</p>
                 </div>
               </div>
 
