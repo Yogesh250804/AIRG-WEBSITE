@@ -431,7 +431,7 @@ export default function AIInfrastructuresB2BPage() {
             {/* Left side text and awards */}
             <div className="lg:col-span-5 space-y-8">
               <div className="space-y-3">
-                <span className="text-sm font-bold font-mono text-primary tracking-wider uppercase block">IMPACT STATISTICS</span>
+                <span className="text-sm font-bold font-mono text-primary tracking-wider uppercase block">NATIONWIDE IMPACT</span>
                 <h3 className="text-3xl md:text-4.5xl font-black text-white uppercase font-headline leading-none">
                   50,000+ <br />
                   <span className="text-slate-400">Students Impacted</span>
@@ -487,7 +487,7 @@ export default function AIInfrastructuresB2BPage() {
                 </div>
                 
                 <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">STATE SECURE CAPABILITIES</div>
+                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">SECURITY COLLABORATION</div>
                   <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date, DGP Maharashtra</h4>
                   <p className="text-[10px] text-slate-400 font-medium mt-1">In discussion on state police & cyber-security infrastructure integrations.</p>
                 </div>
@@ -508,7 +508,7 @@ export default function AIInfrastructuresB2BPage() {
                 </div>
 
                 <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">EXECUTIVE SECRETARIAT</div>
+                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">GOVERNMENT BRIEFING</div>
                   <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Devendra Fadnavis</h4>
                   <p className="text-[10px] text-slate-400 font-medium mt-1">Reviewing the blueprint of Bharat AI Engine implementation for schools, institutes, and industries.</p>
                 </div>
