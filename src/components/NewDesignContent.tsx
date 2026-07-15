@@ -1880,7 +1880,7 @@ export default function NewDesignContent() {
                             <div className="hidden md:flex flex-1 items-center gap-4 ml-8">
                               <div className="glass-premium rounded-2xl p-4 border border-[#EE2C3C]/20 shadow-lg text-center shrink-0 w-36 flex flex-col items-center justify-center gap-1 group/stat hover:border-[#EE2C3C]/50 transition-all duration-300">
                                 <span className="material-symbols-outlined text-xs text-primary">handshake</span>
-                                <div className="text-lg font-black text-[#1a1a2e] font-headline">100+</div>
+                                <div className="text-lg font-black text-[#1a1a2e] font-headline">50+</div>
                                 <div className="text-[9px] font-bold text-[#1a1a2e]/50 uppercase tracking-wider font-mono">Global Partners</div>
                               </div>
                               <div className="flex-1 h-[1.5px] bg-gradient-to-l from-transparent to-[#EE2C3C]/35" />
