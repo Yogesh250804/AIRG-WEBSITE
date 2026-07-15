@@ -256,7 +256,7 @@ export default function AIInfrastructuresB2BPage() {
                 </h4>
                 
                 <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Engineered specifically for <strong className="font-bold text-[#1a1a2e]">schools and institutes</strong>. Transform classrooms into advanced technical learning spaces to introduce AI, robotics, and coding to students in a safe, offline sandbox environment.
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">schools and institutes</strong>. Transform classrooms into advanced technical learning spaces to introduce AI, robotics, and coding to students in a safe, offline sandbox environment.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -304,7 +304,7 @@ export default function AIInfrastructuresB2BPage() {
                 </h4>
                 
                 <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Engineered specifically for <strong className="font-bold text-[#1a1a2e]">lawyers and CAs</strong>. Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">lawyers and CAs</strong>. Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -352,7 +352,7 @@ export default function AIInfrastructuresB2BPage() {
                 </h4>
                 
                 <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Engineered specifically for <strong className="font-bold text-[#1a1a2e]">MNCs and industries</strong>. A high-capacity cluster engineered for complete data sovereignty. Designed for large corporations, government departments, and R&D facilities.
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">MNCs and industries</strong>. A high-capacity cluster engineered for complete data sovereignty. Designed for large corporations, government departments, and R&D facilities.
                 </p>
 
                 <div className="space-y-4 mb-8">
