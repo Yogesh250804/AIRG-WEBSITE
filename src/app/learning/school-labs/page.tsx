@@ -124,16 +124,15 @@ export default function SchoolLabsPage() {
   ];
 
   const labImages = [
-    "/attachments/PHOTO-2026-07-10-14-56-30.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-30_1.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-30_2.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-31.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-31_1.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-31_2.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-32.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-32_1.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-32_2.jpg",
-    "/attachments/PHOTO-2026-07-10-14-56-32_3.jpg"
+    "/pratham/PHOTO-2026-07-14-20-49-29.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-29 (1).jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30 (1).jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30 (2).jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-31.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-32.jpg",
+    "/pratham/PHOTO-2026-07-14-20-50-11.jpg",
+    "/pratham/PHOTO-2026-07-14-20-50-11 (1).jpg"
   ];
 
   useEffect(() => {
@@ -236,7 +235,8 @@ export default function SchoolLabsPage() {
         { name: "Information Boards PVC Foam", qty: 0, unitCost: 2000, isLot: false },
         { name: "Information Books Set", qty: 0, unitCost: 200, isLot: false },
         { name: "Electrician Work", qty: 0, unitCost: 60000, isLot: true },
-        { name: "Lab Setup/Installation", qty: 0, unitCost: 70000, isLot: true }
+        { name: "Lab Setup/Installation", qty: 0, unitCost: 70000, isLot: true },
+        { name: "Light Bundle", qty: 0, unitCost: 10000, isLot: true }
       ]
     },
     {

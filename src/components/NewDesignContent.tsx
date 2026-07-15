@@ -275,6 +275,109 @@ const ButterySmoothA = ({
   );
 };
 
+const prathamMedia = [
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-29.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-29 (1).jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-30.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-30 (1).jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-30 (2).jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-31.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-32.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-50-11.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-50-11 (1).jpg" },
+  { type: "video", url: "/pratham/VIDEO-2026-07-14-20-47-54.mp4" },
+  { type: "video", url: "/pratham/VIDEO-2026-07-14-20-47-55.mp4" },
+  { type: "video", url: "/pratham/VIDEO-2026-07-14-20-47-56.mp4" },
+];
+
+const PrathamMediaCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % prathamMedia.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + prathamMedia.length) % prathamMedia.length);
+  };
+
+  const currentItem = prathamMedia[currentIndex];
+
+  return (
+    <div className="w-full max-w-[280px] mt-4 flex flex-col items-center">
+      <span className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.15em] mb-2 block w-full text-center">
+        ACTIVITY PHOTOS & VIDEOS
+      </span>
+      <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-black/10 bg-black/5 shadow-md group">
+        <AnimatePresence mode="wait">
+          {currentItem.type === "image" ? (
+            <motion.img
+              key={currentItem.url}
+              src={currentItem.url}
+              alt={`Pratham Activities ${currentIndex + 1}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full object-cover select-none"
+            />
+          ) : (
+            <motion.div
+              key={currentItem.url}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full h-full"
+            >
+              <video
+                src={currentItem.url}
+                controls
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={handlePrev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#1a1a2e] flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 hover:scale-105"
+          aria-label="Previous Media"
+        >
+          <ChevronRight className="w-4 h-4 rotate-180" />
+        </button>
+        <button
+          onClick={handleNext}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#1a1a2e] flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 hover:scale-105"
+          aria-label="Next Media"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+
+        {/* Counter Badge */}
+        <span className="absolute top-2 right-2 px-2 py-0.5 text-[10px] font-mono font-bold bg-[#1a1a2e]/70 text-white rounded-full backdrop-blur-sm">
+          {currentIndex + 1}/{prathamMedia.length}
+        </span>
+      </div>
+      
+      {/* Scroll indicator dots */}
+      <div className="flex gap-1.5 mt-2.5 max-w-full overflow-x-auto py-1 px-2 no-scrollbar justify-center">
+        {prathamMedia.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+              index === currentIndex ? "bg-primary w-3" : "bg-black/20 hover:bg-black/40"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function NewDesignContent() {
   const { isAuthModalOpen, setAuthModalOpen, addNotification } = useAppContext();
   const { user, logout, loading } = useAuth();
@@ -1955,6 +2058,7 @@ export default function NewDesignContent() {
                                   className="max-w-full max-h-full object-contain scale-105"
                                 />
                               </div>
+                              <PrathamMediaCarousel />
                             </div>
 
                             {/* Right Column: Detailed Info */}
