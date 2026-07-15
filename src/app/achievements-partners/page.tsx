@@ -556,7 +556,7 @@ export default function AchievementsPartners() {
               objectPosition: "object-center"
             }
           ].map((story, idx) => (
-            <div key={idx} className="group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full">
+            <div key={idx} className={`group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full ${idx === 2 ? "md:col-span-2 md:max-w-[calc(50%-16px)] md:mx-auto w-full" : ""}`}>
               <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
                 <img 
