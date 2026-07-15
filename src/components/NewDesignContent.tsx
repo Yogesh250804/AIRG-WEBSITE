@@ -1038,14 +1038,12 @@ export default function NewDesignContent() {
                       >
                         Grampanchayat AI Lab
                       </Link>
-                      <button
-                        onClick={() => {
-                          navigateTo('ai-infrastructures');
-                        }}
+                      <Link
+                        href="/learning/ai-infrastructures"
                         className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block w-full"
                       >
                         AI Infrastructure
-                      </button>
+                      </Link>
                       <button
                         onClick={() => {
                           navigateTo('workshops');
@@ -1215,15 +1213,13 @@ export default function NewDesignContent() {
                           >
                             Grampanchayat AI Lab
                           </Link>
-                          <button
-                            onClick={() => {
-                              navigateTo('ai-infrastructures');
-                              setIsMobileMenuOpen(false);
-                            }}
-                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e] w-full"
+                          <Link
+                            href="/learning/ai-infrastructures"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e] block w-full"
                           >
                             AI Infrastructure
-                          </button>
+                          </Link>
                           <button
                             onClick={() => {
                               navigateTo('workshops');
