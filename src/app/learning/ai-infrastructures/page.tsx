@@ -217,11 +217,6 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
-      {/* Visual Section Divider */}
-      <div className="w-full relative z-20 my-6">
-        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
-      </div>
-
       {/* ========== SECTION: THREE POWERFUL EDITIONS (Slide 5) ========== */}
       <div className="pt-20 pb-24 bg-white relative overflow-hidden">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
@@ -386,11 +381,6 @@ export default function AIInfrastructuresB2BPage() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Visual Section Divider */}
-      <div className="w-full relative z-20 my-6">
-        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
       {/* Visual Section Divider */}
