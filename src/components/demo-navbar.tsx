@@ -25,7 +25,7 @@ export function Navbar() {
       href: "/#learning",
       dropdown: [
         { name: "School Labs", href: "/learning/school-labs" },
-        { name: "College Labs", href: "/learning/pdet-lab" },
+        { name: "Institute Labs", href: "/learning/pdet-lab" },
         { name: "Grampanchayat AI Lab", href: "/learning/grampanchayat-ai-lab" },
         { name: "AI Infrastructure", href: "/#ai-infrastructures" },
         { name: "Workshops", href: "/#workshops" }

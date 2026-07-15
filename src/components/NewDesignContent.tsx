@@ -1029,7 +1029,7 @@ export default function NewDesignContent() {
                         href="/learning/pdet-lab"
                         className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block"
                       >
-                        College Labs
+                        Institute Labs
                       </Link>
                       <Link
                         href="/learning/grampanchayat-ai-lab"
@@ -1205,7 +1205,7 @@ export default function NewDesignContent() {
                             className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e]"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            College Labs
+                            Institute Labs
                           </Link>
                           <Link
                             href="/learning/grampanchayat-ai-lab"
