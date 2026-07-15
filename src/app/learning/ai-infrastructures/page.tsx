@@ -217,6 +217,11 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
+      </div>
+
       {/* ========== SECTION: THREE POWERFUL EDITIONS (Slide 5) ========== */}
       <div className="pt-20 pb-24 bg-white relative overflow-hidden">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
@@ -379,6 +384,138 @@ export default function AIInfrastructuresB2BPage() {
                 <span>STATUS: READY</span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
+      </div>
+
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
+      </div>
+
+      {/* ========== SECTION: GOVERNMENT ENDORSEMENT & VISION (Slide 19) ========== */}
+      <div className="pt-24 pb-28 bg-[#090a10] text-white relative overflow-hidden">
+        {/* Soft patriotic ambient backdrops */}
+        <div className="absolute top-1/4 left-[-10%] w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[160px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[160px] pointer-events-none" />
+        
+        {/* Fine grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+        />
+
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
+          
+          {/* Header */}
+          <div className="text-center mb-20 space-y-4">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/5 text-amber-400 text-xs font-bold uppercase tracking-[0.2em] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
+              National Pride & Collaborations
+            </span>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight uppercase font-headline">
+              Government Partnerships & <span className="text-primary text-glow-red">Vision</span>
+            </h2>
+            <div className="w-36 h-[3px] bg-gradient-to-r from-orange-500 via-white to-emerald-500 mx-auto rounded-full mt-4" />
+            <p className="text-slate-400 text-lg font-light max-w-3xl mx-auto pt-2">
+              Privileged to collaborate with senior governance nodes and education leaders to scale advanced technical learning facilities nationally.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-16 items-center text-left">
+            
+            {/* Left side text and awards */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="space-y-3">
+                <span className="text-sm font-bold font-mono text-primary tracking-wider uppercase block">// IMPACT STATISTICS</span>
+                <h3 className="text-3xl md:text-4.5xl font-black text-white uppercase font-headline leading-none">
+                  50,000+ <br />
+                  <span className="text-slate-400">Students Impacted</span>
+                </h3>
+                <p className="text-slate-400 text-base leading-relaxed font-light pt-2">
+                  AIR G International is in active discussions and operational deployments with state government departments, police forces, and CM secretariats to scale offline AI and electronics education frameworks.
+                </p>
+              </div>
+              
+              {/* Premium Gold Border Recognition Box */}
+              <div className="relative rounded-[2rem] border border-amber-500/20 bg-amber-500/[0.02] p-8 space-y-4 overflow-hidden shadow-[inset_0_0_30px_rgba(245,158,11,0.02)]">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-amber-400 text-2xl">workspace_premium</span>
+                  <span className="text-xs font-mono text-amber-400 uppercase font-black tracking-widest block">Institutional Recognition</span>
+                </div>
+                <div className="space-y-3 border-l-2 border-amber-500/20 pl-4">
+                  <div>
+                    <h4 className="text-sm font-bold text-white leading-tight">Ministry of Education</h4>
+                    <p className="text-[10px] text-slate-400 font-medium">Government of India</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white leading-tight">Hon. Education Minister of India</h4>
+                    <p className="text-[10px] text-slate-400 font-medium">Official Acknowledgment & Scaling Support</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2.5">
+                {["Best AI Education Innovation", "EdTech Excellence", "National Innovation Award"].map((tag, idx) => (
+                  <span key={idx} className="px-3.5 py-1.5 bg-[#1e293b] border border-slate-700 text-slate-300 text-[10px] font-mono uppercase font-bold rounded-lg hover:border-primary/40 transition-colors duration-300">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Right side government photos - Structured like a prestigious gallery */}
+            <div className="lg:col-span-7 grid grid-cols-2 gap-6 md:gap-8">
+              
+              {/* Photo 1: DGP Discussion */}
+              <div className="group relative rounded-[2.5rem] overflow-hidden border border-slate-800 hover:border-amber-500/30 shadow-2xl transition-all duration-500 bg-slate-900 aspect-[3/4]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent z-10 pointer-events-none" />
+                <img 
+                  src="/extracted-images/page_19_img_1_105.jpeg" 
+                  alt="Government discussion with DGP Sadanand Date and Chief Minister OSD Chandrashekhar Vaze" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                
+                {/* HUD Overlay details */}
+                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
+                  DGP & CM OSD
+                </div>
+                
+                <div className="absolute bottom-6 left-6 right-6 z-20">
+                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// STATE SECURE CAPABILITIES</div>
+                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date & CM OSD C. Vaze</h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-1">In discussion on state police & cyber-security infrastructure integrations.</p>
+                </div>
+              </div>
+
+              {/* Photo 2: CM Devendra Fadnavis */}
+              <div className="group relative rounded-[2.5rem] overflow-hidden border border-slate-800 hover:border-amber-500/30 shadow-2xl transition-all duration-500 bg-slate-900 aspect-[3/4]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent z-10 pointer-events-none" />
+                <img 
+                  src="/extracted-images/page_19_img_2_106.png" 
+                  alt="Government consultation with Chief Minister Devendra Fadnavis" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                
+                {/* HUD Overlay details */}
+                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
+                  CM MEETING
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6 z-20">
+                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// EXECUTIVE SECRETARIAT</div>
+                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Devendra Fadnavis</h4>
+                  <p className="text-[10px] text-slate-400 font-medium mt-1">Reviewing the blueprint of Bharat AI Engine implementation for regional schools.</p>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>
@@ -636,138 +773,6 @@ export default function AIInfrastructuresB2BPage() {
             
           </div>
         </div>
-      </div>
-
-      {/* Visual Section Divider */}
-      <div className="w-full relative z-20 my-6">
-        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
-      </div>
-
-      {/* ========== SECTION: GOVERNMENT ENDORSEMENT & VISION (Slide 19) ========== */}
-      <div className="pt-24 pb-28 bg-[#090a10] text-white relative overflow-hidden">
-        {/* Soft patriotic ambient backdrops */}
-        <div className="absolute top-1/4 left-[-10%] w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[160px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-[-10%] w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[160px] pointer-events-none" />
-        
-        {/* Fine grid pattern */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }}
-        />
-
-        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
-          
-          {/* Header */}
-          <div className="text-center mb-20 space-y-4">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/5 text-amber-400 text-xs font-bold uppercase tracking-[0.2em] font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
-              National Pride & Collaborations
-            </span>
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight uppercase font-headline">
-              Government Partnerships & <span className="text-primary text-glow-red">Vision</span>
-            </h2>
-            <div className="w-36 h-[3px] bg-gradient-to-r from-orange-500 via-white to-emerald-500 mx-auto rounded-full mt-4" />
-            <p className="text-slate-400 text-lg font-light max-w-3xl mx-auto pt-2">
-              Privileged to collaborate with senior governance nodes and education leaders to scale advanced technical learning facilities nationally.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-12 gap-16 items-center text-left">
-            
-            {/* Left side text and awards */}
-            <div className="lg:col-span-5 space-y-8">
-              <div className="space-y-3">
-                <span className="text-sm font-bold font-mono text-primary tracking-wider uppercase block">// IMPACT STATISTICS</span>
-                <h3 className="text-3xl md:text-4.5xl font-black text-white uppercase font-headline leading-none">
-                  50,000+ <br />
-                  <span className="text-slate-400">Students Impacted</span>
-                </h3>
-                <p className="text-slate-400 text-base leading-relaxed font-light pt-2">
-                  AIR G International is in active discussions and operational deployments with state government departments, police forces, and CM secretariats to scale offline AI and electronics education frameworks.
-                </p>
-              </div>
-              
-              {/* Premium Gold Border Recognition Box */}
-              <div className="relative rounded-[2rem] border border-amber-500/20 bg-amber-500/[0.02] p-8 space-y-4 overflow-hidden shadow-[inset_0_0_30px_rgba(245,158,11,0.02)]">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-amber-400 text-2xl">workspace_premium</span>
-                  <span className="text-xs font-mono text-amber-400 uppercase font-black tracking-widest block">Institutional Recognition</span>
-                </div>
-                <div className="space-y-3 border-l-2 border-amber-500/20 pl-4">
-                  <div>
-                    <h4 className="text-sm font-bold text-white leading-tight">Ministry of Education</h4>
-                    <p className="text-[10px] text-slate-400 font-medium">Government of India</p>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white leading-tight">Hon. Education Minister of India</h4>
-                    <p className="text-[10px] text-slate-400 font-medium">Official Acknowledgment & Scaling Support</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2.5">
-                {["Best AI Education Innovation", "EdTech Excellence", "National Innovation Award"].map((tag, idx) => (
-                  <span key={idx} className="px-3.5 py-1.5 bg-[#1e293b] border border-slate-700 text-slate-300 text-[10px] font-mono uppercase font-bold rounded-lg hover:border-primary/40 transition-colors duration-300">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Right side government photos - Structured like a prestigious gallery */}
-            <div className="lg:col-span-7 grid grid-cols-2 gap-6 md:gap-8">
-              
-              {/* Photo 1: DGP Discussion */}
-              <div className="group relative rounded-[2.5rem] overflow-hidden border border-slate-800 hover:border-amber-500/30 shadow-2xl transition-all duration-500 bg-slate-900 aspect-[3/4]">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent z-10 pointer-events-none" />
-                <img 
-                  src="/extracted-images/page_19_img_1_105.jpeg" 
-                  alt="Government discussion with DGP Sadanand Date and Chief Minister OSD Chandrashekhar Vaze" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                
-                {/* HUD Overlay details */}
-                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
-                  DGP & CM OSD
-                </div>
-                
-                <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// STATE SECURE CAPABILITIES</div>
-                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date & CM OSD C. Vaze</h4>
-                  <p className="text-[10px] text-slate-400 font-medium mt-1">In discussion on state police & cyber-security infrastructure integrations.</p>
-                </div>
-              </div>
-
-              {/* Photo 2: CM Devendra Fadnavis */}
-              <div className="group relative rounded-[2.5rem] overflow-hidden border border-slate-800 hover:border-amber-500/30 shadow-2xl transition-all duration-500 bg-slate-900 aspect-[3/4]">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090a10] via-transparent to-transparent z-10 pointer-events-none" />
-                <img 
-                  src="/extracted-images/page_19_img_2_106.png" 
-                  alt="Government consultation with Chief Minister Devendra Fadnavis" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                
-                {/* HUD Overlay details */}
-                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
-                  CM MEETING
-                </div>
-
-                <div className="absolute bottom-6 left-6 right-6 z-20">
-                  <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">// EXECUTIVE SECRETARIAT</div>
-                  <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Devendra Fadnavis</h4>
-                  <p className="text-[10px] text-slate-400 font-medium mt-1">Reviewing the blueprint of Bharat AI Engine implementation for regional schools.</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      {/* Visual Section Divider */}
-      <div className="w-full relative z-20 my-6">
-        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
       {/* B2B Partnership proposal form */}
