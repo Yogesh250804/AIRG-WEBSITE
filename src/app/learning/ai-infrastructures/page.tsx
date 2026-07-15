@@ -4,6 +4,7 @@ import { Navbar } from "@/components/demo-navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CheckoutModal } from "@/components/store/CheckoutModal";
+import Link from "next/link";
 
 export default function AIInfrastructuresB2BPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -378,6 +379,22 @@ export default function AIInfrastructuresB2BPage() {
                 <span>DEPLOYMENT: GPU CLUSTER</span>
                 <span>STATUS: READY</span>
               </div>
+            </div>
+          </div>
+
+          {/* Sleek CTA block below grid */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 p-6 sm:p-8 rounded-[2rem] border border-black/5 bg-white/40 backdrop-blur-md max-w-4xl mx-auto shadow-sm">
+              <div className="text-left space-y-1">
+                <h4 className="text-lg font-black text-[#1a1a2e] uppercase font-headline">Want to build custom AI infrastructure?</h4>
+                <p className="text-sm text-[#1a1a2e]/60 font-medium">Partner with us to deploy the Bharat AI Engine at your institution or enterprise.</p>
+              </div>
+              <Link
+                href="/contact"
+                className="bg-primary hover:bg-[#d42535] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary/20 shrink-0"
+              >
+                Join Us Today
+              </Link>
             </div>
           </div>
         </div>
