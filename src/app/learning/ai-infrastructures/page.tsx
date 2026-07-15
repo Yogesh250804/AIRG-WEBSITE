@@ -234,8 +234,8 @@ export default function AIInfrastructuresB2BPage() {
             <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] tracking-tight uppercase font-headline">
               Three Powerful Editions. <span className="text-primary">One Secure Ecosystem.</span>
             </h2>
-            <p className="text-[#1a1a2e]/55 text-lg font-medium max-w-2xl mx-auto">
-              Custom-built setups optimized for schools, professional firms, and enterprise deployment.
+            <p className="text-[#1a1a2e]/55 text-lg font-medium max-w-3xl mx-auto">
+              Custom-built setups optimized for education, institutes, and industry deployment.
             </p>
           </div>
 
