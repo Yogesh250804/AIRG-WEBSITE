@@ -1862,7 +1862,13 @@ export default function NewDesignContent() {
                         return (
                           <div key={idx} className="md:col-span-2 flex items-center justify-center w-full relative">
                             {/* Left Connector Line */}
-                            <div className="hidden md:block flex-1 h-[1.5px] bg-gradient-to-r from-transparent via-[#EE2C3C]/15 to-[#EE2C3C]/35 mr-8" />
+                            <div className="hidden md:flex flex-1 items-center gap-4 mr-8">
+                              <div className="flex-1 h-[1.5px] bg-gradient-to-r from-transparent to-[#EE2C3C]/35" />
+                              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 rounded-full border border-black/5 shadow-sm">
+                                <span className="text-[9px] font-black tracking-widest text-[#1a1a2e]/40 uppercase font-mono">AIRG</span>
+                                <span className="text-xs">🇮🇳</span>
+                              </div>
+                            </div>
                             
                             {/* The Card */}
                             <div className="w-full md:max-w-[calc(50%-16px)] shrink-0">
@@ -1870,7 +1876,13 @@ export default function NewDesignContent() {
                             </div>
                             
                             {/* Right Connector Line */}
-                            <div className="hidden md:block flex-1 h-[1.5px] bg-gradient-to-l from-transparent via-[#EE2C3C]/15 to-[#EE2C3C]/35 ml-8" />
+                            <div className="hidden md:flex flex-1 items-center gap-4 ml-8">
+                              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 rounded-full border border-black/5 shadow-sm">
+                                <span className="text-[9px] font-black tracking-widest text-[#1a1a2e]/40 uppercase font-mono">AIRG</span>
+                                <span className="text-xs">🇮🇳</span>
+                              </div>
+                              <div className="flex-1 h-[1.5px] bg-gradient-to-l from-transparent to-[#EE2C3C]/35" />
+                            </div>
                           </div>
                         );
                       }
