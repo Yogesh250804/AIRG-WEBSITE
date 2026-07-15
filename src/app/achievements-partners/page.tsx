@@ -535,11 +535,11 @@ export default function AchievementsPartners() {
               objectPosition: "object-center"
             },
             {
-              title: "IAIRESCO Global Community",
-              desc: "IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.",
-              img: "/extracted-images/iairesco_global.png?v=1",
-              tag: "Global Partner",
-              objectPosition: "object-top"
+              title: "Trusted by Ministry of Education, Ethiopia",
+              desc: "The Ministry of Education, Ethiopia endorses AIR GURUJI International's educational initiative, encouraging schools, colleges, and institutes nationwide to collaborate on STEM/STEAM learning and advanced technology integrations.",
+              img: "/extracted-images/PHOTO-2026-07-14-21-04-37.jpg",
+              tag: "National Endorsement",
+              objectPosition: "object-center"
             },
             {
               title: "Western International School, Cambodia",
@@ -549,11 +549,11 @@ export default function AchievementsPartners() {
               objectPosition: "object-top"
             },
             {
-              title: "Trusted by Ministry of Education, Ethiopia",
-              desc: "The Ministry of Education, Ethiopia endorses AIR GURUJI International's educational initiative, encouraging schools, colleges, and institutes nationwide to collaborate on STEM/STEAM learning and advanced technology integrations.",
-              img: "/extracted-images/PHOTO-2026-07-14-21-04-37.jpg",
-              tag: "National Endorsement",
-              objectPosition: "object-center"
+              title: "IAIRESCO Global Community",
+              desc: "IAIRESCO, a global community, partners with Guruji AIR to spread technology education across the globe, empowering learners worldwide.",
+              img: "/extracted-images/iairesco_global.png?v=1",
+              tag: "Global Partner",
+              objectPosition: "object-top"
             }
           ].map((story, idx) => {
             const cardElement = (
@@ -587,7 +587,7 @@ export default function AchievementsPartners() {
               </div>
             );
 
-            if (idx === 4) {
+            if (idx === 2) {
               return (
                 <div key={idx} className="md:col-span-2 flex items-center justify-center w-full relative">
                   {/* Left Connector Line */}
