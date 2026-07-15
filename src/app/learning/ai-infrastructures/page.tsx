@@ -247,7 +247,7 @@ export default function AIInfrastructuresB2BPage() {
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="px-3.5 py-1 bg-primary/10 border border-primary/20 rounded-full text-[9px] font-black font-mono text-primary uppercase tracking-widest">
-                    School Edition
+                    Education Edition
                   </span>
                   <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V1.0</span>
                 </div>
@@ -295,7 +295,7 @@ export default function AIInfrastructuresB2BPage() {
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="px-3.5 py-1 bg-[#1e293b]/10 border border-[#1e293b]/20 rounded-full text-[9px] font-black font-mono text-[#1e293b] uppercase tracking-widest">
-                    Professional Edition
+                    Institute Edition
                   </span>
                   <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V2.0</span>
                 </div>
@@ -343,7 +343,7 @@ export default function AIInfrastructuresB2BPage() {
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] font-black font-mono text-emerald-600 uppercase tracking-widest">
-                    Enterprise Edition
+                    Industry Edition
                   </span>
                   <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V3.0</span>
                 </div>
