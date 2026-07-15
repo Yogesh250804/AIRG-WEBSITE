@@ -593,9 +593,10 @@ export default function AchievementsPartners() {
                   {/* Left Connector Line */}
                   <div className="hidden md:flex flex-1 items-center gap-4 mr-8">
                     <div className="flex-1 h-[1.5px] bg-gradient-to-r from-transparent to-[#EE2C3C]/35" />
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 rounded-full border border-black/5 shadow-sm">
-                      <span className="text-[9px] font-black tracking-widest text-[#1a1a2e]/40 uppercase font-mono">AIRG</span>
-                      <span className="text-xs">🇮🇳</span>
+                    <div className="glass-premium rounded-2xl p-4 border border-[#EE2C3C]/20 shadow-lg text-center shrink-0 w-36 flex flex-col items-center justify-center gap-1 group/stat hover:border-[#EE2C3C]/50 transition-all duration-300">
+                      <span className="material-symbols-outlined text-xs text-primary">public</span>
+                      <div className="text-lg font-black text-[#1a1a2e] font-headline">7+</div>
+                      <div className="text-[9px] font-bold text-[#1a1a2e]/50 uppercase tracking-wider font-mono">Global Reach</div>
                     </div>
                   </div>
                   
@@ -606,9 +607,10 @@ export default function AchievementsPartners() {
                   
                   {/* Right Connector Line */}
                   <div className="hidden md:flex flex-1 items-center gap-4 ml-8">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-50 rounded-full border border-black/5 shadow-sm">
-                      <span className="text-[9px] font-black tracking-widest text-[#1a1a2e]/40 uppercase font-mono">AIRG</span>
-                      <span className="text-xs">🇮🇳</span>
+                    <div className="glass-premium rounded-2xl p-4 border border-[#EE2C3C]/20 shadow-lg text-center shrink-0 w-36 flex flex-col items-center justify-center gap-1 group/stat hover:border-[#EE2C3C]/50 transition-all duration-300">
+                      <span className="material-symbols-outlined text-xs text-primary">handshake</span>
+                      <div className="text-lg font-black text-[#1a1a2e] font-headline">100+</div>
+                      <div className="text-[9px] font-bold text-[#1a1a2e]/50 uppercase tracking-wider font-mono">Global Partners</div>
                     </div>
                     <div className="flex-1 h-[1.5px] bg-gradient-to-l from-transparent to-[#EE2C3C]/35" />
                   </div>
