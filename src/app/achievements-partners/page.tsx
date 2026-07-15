@@ -587,7 +587,7 @@ export default function AchievementsPartners() {
               </div>
             );
 
-            if (idx === 2) {
+            if (idx === 4) {
               return (
                 <div key={idx} className="md:col-span-2 flex items-center justify-center w-full relative">
                   {/* Left Connector Line */}
