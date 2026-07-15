@@ -547,6 +547,13 @@ export default function AchievementsPartners() {
               img: "/extracted-images/cambodia_school.png?v=1",
               tag: "Cambodia",
               objectPosition: "object-top"
+            },
+            {
+              title: "Trusted by Ministry of Education, Ethiopia",
+              desc: "The Ministry of Education, Ethiopia endorses AIR GURUJI International's educational initiative, encouraging schools, colleges, and institutes nationwide to collaborate on STEM/STEAM learning and advanced technology integrations.",
+              img: "/extracted-images/PHOTO-2026-07-14-21-04-37.jpg",
+              tag: "National Endorsement",
+              objectPosition: "object-center"
             }
           ].map((story, idx) => (
             <div key={idx} className="group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full">

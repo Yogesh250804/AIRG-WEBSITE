@@ -10,6 +10,7 @@ export default function SchoolLabsPage() {
   const [selectedGrade, setSelectedGrade] = useState("1");
   const [galleryFilter, setGalleryFilter] = useState("all");
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [videoLang, setVideoLang] = useState<'en' | 'mr'>('en');
 
   const gradesList = [
     { 
@@ -603,15 +604,38 @@ const calculateGrandTotal = () => {
               {/* Video on the Left */}
               <div className="lg:col-span-7">
                 <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-white/10 to-[#FF9933]/40 shadow-2xl">
-                  <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative z-10 group">
+                  <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative z-10 group pointer-events-auto">
+                    {/* Floating Language Selector */}
+                    <div className="absolute top-4 right-4 z-30 flex items-center gap-1 bg-black/60 backdrop-blur-md p-1 rounded-full border border-white/10 select-none">
+                      <button
+                        onClick={() => setVideoLang('en')}
+                        className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${
+                          videoLang === 'en'
+                            ? 'bg-[#EE2C3C] text-white shadow-lg'
+                            : 'text-white/60 hover:text-white hover:bg-white/5'
+                        }`}
+                      >
+                        English
+                      </button>
+                      <button
+                        onClick={() => setVideoLang('mr')}
+                        className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${
+                          videoLang === 'mr'
+                            ? 'bg-[#EE2C3C] text-white shadow-lg'
+                            : 'text-white/60 hover:text-white hover:bg-white/5'
+                        }`}
+                      >
+                        मराठी
+                      </button>
+                    </div>
                     <video
-  src="/video/airg_labs_overview_compressed.mp4"
-  controls
-  poster="/attachments/thumbnail.png"
-  playsInline
-  preload="metadata"
-  className="w-full h-full object-cover"
-/>
+                      src={videoLang === 'en' ? "/video/airg_labs_overview_compressed.mp4" : "/video/airg_labs_overview_marathi.mp4"}
+                      controls
+                      poster="/attachments/thumbnail.png"
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover pointer-events-auto cursor-pointer"
+                    />
                   </div>
                 </div>
               </div>

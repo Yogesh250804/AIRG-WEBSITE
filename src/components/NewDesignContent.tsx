@@ -445,6 +445,7 @@ export default function NewDesignContent() {
 
   const [currentEmblemLetter, setCurrentEmblemLetter] = useState("A");
   const [isEmblemMirrored, setIsEmblemMirrored] = useState(false);
+  const [videoLang, setVideoLang] = useState<'en' | 'mr'>('en');
 
    // Cart state
   const [cart, setCart] = useState<{ name: string; price: string; img: string; tag: string; quantity: number }[]>([]);
@@ -1822,6 +1823,13 @@ export default function NewDesignContent() {
                         img: "/extracted-images/cambodia_school.png?v=1",
                         tag: "Cambodia",
                         objectPosition: "object-top"
+                      },
+                      {
+                        title: "Trusted by Ministry of Education, Ethiopia",
+                        desc: "The Ministry of Education, Ethiopia endorses AIR GURUJI International's educational initiative, encouraging schools, colleges, and institutes nationwide to collaborate on STEM/STEAM learning and advanced technology integrations.",
+                        img: "/extracted-images/PHOTO-2026-07-14-21-04-37.jpg",
+                        tag: "National Endorsement",
+                        objectPosition: "object-center"
                       }
                     ].map((story, idx) => (
                       <div key={idx} className="group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full text-left">
@@ -2837,15 +2845,38 @@ export default function NewDesignContent() {
           {/* Video on the Left */}
           <div className="lg:col-span-7 relative z-10">
             <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-[#138808]/30 via-[#ffffff]/10 to-[#FF9933]/40 shadow-2xl">
-              <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative z-10 group">
+              <div className="aspect-video rounded-[1.9rem] bg-slate-950 overflow-hidden relative z-10 group pointer-events-auto">
+                {/* Floating Language Selector */}
+                <div className="absolute top-4 right-4 z-30 flex items-center gap-1 bg-black/60 backdrop-blur-md p-1 rounded-full border border-white/10 select-none">
+                  <button
+                    onClick={() => setVideoLang('en')}
+                    className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${
+                      videoLang === 'en'
+                        ? 'bg-[#EE2C3C] text-white shadow-lg'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => setVideoLang('mr')}
+                    className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-300 ${
+                      videoLang === 'mr'
+                        ? 'bg-[#EE2C3C] text-white shadow-lg'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    मराठी
+                  </button>
+                </div>
                 <video
-  src="/video/airg_labs_overview_compressed.mp4"
-  controls
-  poster="/attachments/thumbnail.png"
-  playsInline
-  preload="metadata"
-  className="w-full h-full object-cover"
-/>
+                  src={videoLang === 'en' ? "/video/airg_labs_overview_compressed.mp4" : "/video/airg_labs_overview_marathi.mp4"}
+                  controls
+                  poster="/attachments/thumbnail.png"
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover pointer-events-auto cursor-pointer"
+                />
               </div>
             </div>
           </div>
