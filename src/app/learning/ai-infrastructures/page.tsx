@@ -663,6 +663,11 @@ export default function AIInfrastructuresB2BPage() {
         </div>
       </div>
 
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
+      </div>
+
       {/* ========== SECTION: BHARAT AI SPECIFICATIONS (Slide 17) ========== */}
       <div className="pt-20 pb-24 bg-[#f8f8fb] relative">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16 z-10 relative">
@@ -712,6 +717,11 @@ export default function AIInfrastructuresB2BPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
       {/* ========== SECTION: SIA INTERFACE SHOWCASE (Slides 15 & 16) ========== */}
