@@ -14,234 +14,234 @@ export interface Workshop {
 
 export const workshopsData: Workshop[] = [
   {
-    slug: "school-level-robotics-1",
-    title: "AIRG Junior Robotics & Circuit Designing",
-    category: "School Level",
-    desc: "Introducing fundamental electronics, logic gates, and breadboard circuitry to school students through interactive hands-on builds.",
+    slug: "rajendra-khandala",
+    title: "AIRG Rajendra Khandala Lab",
+    category: "School Lab",
+    desc: "A future-ready learning space for Artificial Intelligence, Robotics, 3D printing, and Drone Technology.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00.jpg",
-    detailedDesc: "Our school-level workshops establish foundational skills in hardware and software design. Working directly with breadboards, logic gate ICs, resistors, and solar-power components, young learners understand how physical inputs control digital systems. These sessions empower students to design autonomous line-following cars and smart LDR lighting prototypes, making science education practical and engaging.",
-    location: "Satara & Pune District Schools",
-    date: "Ongoing Program",
-    techStack: ["Breadboards", "Logic Gate ICs", "LEDs", "LDR Sensors", "Solar Panels"],
+    detailedDesc: "Situated at Rajendra School in Khandala, this lab introduces students to aviation science. Through constructing model gliders, studying wind resistance, and mapping flight paths, physics concepts are made active and engaging.",
+    location: "Khandala, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Model Glider Kits", "Aero Simulation Software", "Electronic Sensors", "Physics Measurement Tools"],
     stats: [
-      { label: "Schools Covered", value: "15+ Schools" },
-      { label: "Students Trained", value: "3,000+ Students" },
-      { label: "Projects Completed", value: "500+ Builds" }
+      { label: "Gliders Assembled", value: "50+ Models" },
+      { label: "Students Enrolled", value: "300+ Students" },
+      { label: "Physics Experiments", value: "30+ Logged" }
     ],
     highlights: [
-      "Students build and present fully functional solar-powered smart light setups",
-      "Hands-on breadboard assembly workshops teaching discrete AND/OR/NOT logic gates",
-      "Weekly block-coding and robotics sessions integrated directly into school hours"
+      "Designed and launched micro-gliders with optimal wing ratios",
+      "Used software to simulate airflow over wings and understand lift",
+      "Conducted outdoor flight competitions testing range and stability"
     ]
   },
   {
-    slug: "industry-level-automation-2",
-    title: "Industrial Automation & Applied AI Bootcamps",
-    category: "Industry Level",
-    desc: "Practical training bootcamps for industry professionals focusing on autonomous systems, manufacturing automation, and custom robotic solutions.",
+    slug: "venurai-chavan",
+    title: "AIRG Yashwantrao & Sou Venutai Chavan Lab",
+    category: "School Lab",
+    desc: "Experiential learning hub combining emerging technologies to inspire creative thinking and problem-solving.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(1).jpg",
-    detailedDesc: "Our professional bootcamps bridge the gap between academic theory and active industrial deployment. Working with high-grade robotic actuators, vision sensors, programmable logic controllers (PLCs), and deep-learning models, participants build solutions for smart manufacturing, quality-control automation, and autonomous navigation — equipping them to lead innovation in production environments.",
-    location: "AIRG Corporate Training Centers",
-    date: "Active Program",
-    techStack: ["Applied AI Engines", "Robot Operating System (ROS)", "PLC Systems", "Computer Vision"],
+    detailedDesc: "The Venurai Chavan Lab introduces water conservation tech. Students program ultrasonic depth sensors to read school water levels, building automatic pump cutoff switches to prevent overflow.",
+    location: "Karad, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Ultrasonic Depth Sensors", "Relay Cutoffs", "Arduino boards", "Water Flowmeters"],
     stats: [
-      { label: "Professionals Trained", value: "500+ Candidates" },
-      { label: "Corporate Partners", value: "12+ Companies" },
-      { label: "Placement Success", value: "92% Placed" }
+      { label: "Systems Installed", value: "2 Campus Setups" },
+      { label: "Active Classes", value: "300+ Students" },
+      { label: "Gallons Conserved", value: "Estimated 1000+ Gal" }
     ],
     highlights: [
-      "Intensive 6-week bootcamps focusing on machine vision algorithms for manufacturing lines",
-      "Direct integration trials with autonomous navigation and obstacle-avoidance robots",
-      "Hands-on work building custom industrial sensor nodes for production-level diagnostics"
+      "Programmed ultrasonic tank alarms warning of school tank overflows",
+      "Constructed flowmeter sensors showing real-time water usage speeds",
+      "Created classroom models explaining how residential pipes manage water flow"
     ]
   },
   {
-    slug: "international-stem-outreach-3",
-    title: "AIRG International STEM & Robotics Outreach",
-    category: "Institute Level",
-    desc: "Bringing world-class STEM education, low-cost robotics kits, and digital literacy tools to international students across global communities.",
+    slug: "birla-innovation",
+    title: "AIRG Birla Innovation Lab",
+    category: "School Lab",
+    desc: "Engaging learning environment offering hands-on training in IoT, Drones, VR, and 3D printing.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(2).jpg",
-    detailedDesc: "The AIRG International Outreach program extends modern tech education to global schools and partner centers. By designing modular, cost-efficient robotics kits and local-language digital curriculums, we enable children in developing communities to build autonomous car models, configure smart sensors, and write block-based scripts — sparking creative thinking and equipping them for a digital future.",
-    location: "Global Schools & Partner Centers",
-    date: "Active Outreach",
-    techStack: ["Robotic Car Kits", "Visual Block Coding", "STEM Pedagogy", "Offline Learning Kits"],
+    detailedDesc: "Birla Innovation Lab combines structural arts with physics. Students create bridge and dome models using 3D CAD design tools, testing their strength under weights to study compression, tension, and load limits.",
+    location: "Pune, Maharashtra",
+    date: "Active Lab",
+    techStack: ["3D CAD Design", "3D Printing Filament", "Bridge Model Testers", "Structural Blueprints"],
     stats: [
-      { label: "Countries Covered", value: "3+ Global Regions" },
-      { label: "Outreach Centers", value: "15+ Centers" },
-      { label: "Students Engaged", value: "2,500+ Worldwide" }
+      { label: "Bridges Tested", value: "30+ Models" },
+      { label: "Student Designers", value: "300+ Students" },
+      { label: "CAD Designs Saved", value: "85+ Models" }
     ],
     highlights: [
-      "Deployment of custom offline-capable learning kits to support regions with low connectivity",
-      "Interactive coding and robotics workshops for young learners utilizing physical cars",
-      "Special training programs conducted for local educators to sustain STEM education long-term"
+      "Built truss bridge structures that carried 5x their own weight",
+      "Created customized 3D models of historical monuments in CAD classes",
+      "Analyzed structural support failures using weight testing frames"
     ]
   },
   {
-    slug: "ai-ml-innovation-setup-4",
-    title: "AI & Machine Learning Innovation Setup",
-    category: "Academic Level",
-    desc: "Deploying high-performance compute resources, vision models, and custom educational frameworks in higher academic systems.",
+    slug: "eon-hub",
+    title: "AIRG Eon Lab",
+    category: "School Lab",
+    desc: "Immersive workspace for building, experimenting, and innovating with advanced digital technologies.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(3).jpg",
-    detailedDesc: "Our academic setup programs enable universities and engineering colleges to host advanced artificial intelligence laboratories. Deploying local GPU resources, edge nodes, and visual classification systems, we empower students to train, test, and package machine learning solutions directly within campus borders.",
-    location: "National Partner Institutes",
-    date: "Active Program",
-    techStack: ["GPU Clusters", "Visual Models", "Local Server Edge Nodes", "Python SDKs"],
+    detailedDesc: "EON Hub focuses on computer programming fundamentals. Through solving logic puzzles, writing basic Python algorithms, and sorting lists, students develop strong computational thinking skills.",
+    location: "Pune, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Python 3", "Visual Logic Puzzles", "Algorithms Training", "Jupyter Notebooks"],
     stats: [
-      { label: "Centers Implemented", value: "8+ Innovation Labs" },
-      { label: "Active Researchers", value: "450+ Engineers" },
-      { label: "Models Deployed", value: "120+ AI Models" }
+      { label: "Python Projects", value: "90+ Scripts" },
+      { label: "Students Certified", value: "180+ Learners" },
+      { label: "Code Competitions", value: "6 Hosted" }
     ],
     highlights: [
-      "Integration of real-time computer vision classifiers inside standard class formats",
-      "Hands-on server management training focusing on edge AI models and private networks",
-      "Dedicated access to custom Python development SDKs for hardware integrations"
+      "Helped every student code a basic command-line word puzzle game in Python",
+      "Programmed sorting algorithms showing visual arrays rearrange themselves",
+      "Conducted logic code battles that teach clean and efficient syntax"
     ]
   },
   {
-    slug: "robotics-integration-logic-5",
-    title: "Robotics Integration & Logic Design",
-    category: "School Level",
-    desc: "Interactive workshops teaching logic gate combinations, sensor interfaces, and robotic control flow design to secondary schools.",
+    slug: "holy-convent",
+    title: "AIRG Holy Convent Lab",
+    category: "School Lab",
+    desc: "Empowering young minds with robotics assemblies, automation, coding, and engineering design foundations.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(4).jpg",
-    detailedDesc: "We provide comprehensive equipment, kits, and training for students to master logical control boards, actuators, and signal interfaces. These hands-on labs teach the foundations of modern robotics, preparing students for advanced electronics fields.",
-    location: "Partner High Schools",
-    date: "Active Program",
-    techStack: ["Robotics Boards", "Actuators", "Logic Design", "Sensor Matrices"],
+    detailedDesc: "Located at Holy Convent in Karad, this lab utilizes VR to teach complex sciences. Students take virtual field trips to space, examine microscopic cells, and manipulate virtual organs to bring textbooks to life.",
+    location: "Karad, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Meta Quest VR Headsets", "Spatial WebXR Software", "3D Solar System Map VR", "Human Anatomy VR Suite"],
     stats: [
-      { label: "Participating Schools", value: "20+ Schools" },
-      { label: "Kits Distributed", value: "800+ Kits" },
-      { label: "Workshops Hosted", value: "40+ Events" }
+      { label: "VR Headsets", value: "8 Setups" },
+      { label: "Interactive Trips", value: "12 Modules" },
+      { label: "Engaged Learners", value: "300+ Students" }
     ],
     highlights: [
-      "Building multi-sensor collision prevention systems with visual feedback",
-      "Analyzing signal logic diagrams and tracing circuit connections interactively",
-      "Creating custom automated behaviors based on physical environment triggers"
+      "Guided students through a shared virtual tour inside a human blood vessel",
+      "Configured web-based astronomy maps so students could select stars",
+      "Conducted class-wide science lessons using immersive VR anatomy models"
     ]
   },
   {
-    slug: "edge-computing-iot-6",
-    title: "Edge Computing & IoT Lab Deployment",
-    category: "Institute Level",
-    desc: "Advanced networking and processing configurations at the edge of active IoT infrastructures.",
+    slug: "shauryasaihiki",
+    title: "AIRG Shaurya Sainiki Lab",
+    category: "School Lab",
+    desc: "Ecosystem of innovation fostering tech leadership, collaboration, and creative logic development.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(5).jpg",
-    detailedDesc: "Our IoT lab systems enable student developers to deploy microchip networks running telemetry, MQTT servers, and database bridges locally. These setups prepare engineering candidates for modern distributed system architectures.",
-    location: "State Incubation Centers",
-    date: "Active Program",
-    techStack: ["Edge Nodes", "MQTT Servers", "IoT Network Bridges", "Telemetry"],
+    detailedDesc: "Shauryasaihiki Lab teaches students HTML/CSS essentials and basic internet hygiene. Topics include strong password creation, identifying phishing emails, and building personal static website portfolios.",
+    location: "Satara, Maharashtra",
+    date: "Active Lab",
+    techStack: ["HTML5", "CSS3 Layouts", "Local Web Servers", "Browser Security Tools"],
     stats: [
-      { label: "Incubators Equipped", value: "6+ Centers" },
-      { label: "Nodes Active", value: "150+ Nodes" },
-      { label: "Certified Candidates", value: "300+ Engineers" }
+      { label: "Websites Deployed", value: "80+ Portfolios" },
+      { label: "Students Certified", value: "300+ Students" },
+      { label: "Safety Seminars", value: "12 Conducted" }
     ],
     highlights: [
-      "Deploying local broker grids and testing transmission speed of telemetry packets",
-      "Securing device communication lines via local credential verification standards",
-      "Familiarizing students with cloud synchronization protocols and data backup structures"
+      "Helped every student build and run their own local HTML biography page",
+      "Conducted school-wide training on password management and safety",
+      "Trained student ambassadors on checking website SSL certificates"
     ]
   },
   {
-    slug: "applied-ai-center-7",
-    title: "Applied Artificial Intelligence Center",
-    category: "Industry Level",
-    desc: "Professional AI infrastructure and computer vision packages built for deployment in commercial environments.",
+    slug: "mudhoji-lab",
+    title: "AIRG Mudhoji Lab",
+    category: "School Lab",
+    desc: "Practical workspace for C++ coding, robotics kits programming, and active engineering basics.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(6).jpg",
-    detailedDesc: "Providing edge computing solutions, smart camera grids, and visual diagnostic tools for commercial operations and industrial manufacturing pipelines, ensuring high efficiency and precision.",
-    location: "Corporate Innovation Centers",
-    date: "Ongoing Program",
-    techStack: ["Edge Compute Units", "Smart Cameras", "Visual Diagnostics", "Predictive ML"],
+    detailedDesc: "Mudhoji Lab, located at Mudhoji High School in Phaltan, is a dedicated space for hands-on learning. Students learn to program Arduino boards, build block-based and C++ robotics models, and design parts using 3D printers, fostering early interest in engineering and computer science.",
+    location: "Phaltan, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Arduino UNO", "Scratch Programming", "3D Printing", "STEM Robotics Kits", "Tinkercad"],
     stats: [
-      { label: "Deployment Settings", value: "15+ Sites" },
-      { label: "Sensors Managed", value: "500+ Active Units" },
-      { label: "Precision Rate", value: "99.2% Accuracy" }
+      { label: "Students Trained", value: "300+ Students" },
+      { label: "Robotics Kits", value: "25+ Active Kits" },
+      { label: "Completed Projects", value: "65+ Projects" }
     ],
     highlights: [
-      "Configuring smart visual sorting scripts for production line objects",
-      "Implementing low-latency data streams to local monitoring consoles",
-      "Optimizing deep neural networks to run efficiently on low-power hardware"
+      "Built autonomous line-following robot models for regional exhibitions",
+      "Designed and 3D-printed custom mechanical gears in class",
+      "Hosted weekly block-coding bootcamps for middle school grades"
     ]
   },
   {
-    slug: "autonomous-systems-drone-8",
-    title: "Autonomous Systems & Drone Telemetry",
-    category: "Institute Level",
-    desc: "Configuring flight controllers, navigation sensors, and real-time telemetry systems for autonomous robotics.",
+    slug: "sakharwadi-lab",
+    title: "AIRG Sakharwadi Lab",
+    category: "School Lab",
+    desc: "Agricultural science lab focusing on soil moisture sensors, weather telemetry, and Industry 4.0.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(7).jpg",
-    detailedDesc: "Empowering university candidates with technical flight controller configurations, GPS positioning systems, and sensor integrations to construct and pilot fully autonomous rovers and drones.",
-    location: "Global Outreach Centers",
-    date: "Active Program",
-    techStack: ["Flight Controllers", "GPS Modules", "Real-Time Telemetry", "Autonomous Rover Build"],
+    detailedDesc: "Located at Sakharwadi High School, this lab leverages technology to understand local agriculture. Students write code to interface soil sensors with automated water pumps, building practical smart-watering systems and weather monitoring stations.",
+    location: "Sakharwadi, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Soil Moisture Sensors", "Arduino ESP32", "Micro-Pump Actuators", "LED Displays"],
     stats: [
-      { label: "Outreach Facilities", value: "12+ Hubs" },
-      { label: "Systems Deployed", value: "200+ Rover Units" },
-      { label: "Students Engaged", value: "1,500+ Worldwide" }
+      { label: "Active Learners", value: "300+ Students" },
+      { label: "Soil Telemetry Kits", value: "15+ Workstations" },
+      { label: "School Greenhouses", value: "2 Monitored Zones" }
     ],
     highlights: [
-      "Building quadcopter telemetry networks and monitoring real-time flight patterns",
-      "Setting up GPS path navigation coordinates for off-road rover platforms",
-      "Applying sensor fusion algorithms to combine gyro, compass, and laser measurements"
+      "Programmed soil sensor kits to automatically water school plants",
+      "Created digital temperature alarms for classroom weather monitoring",
+      "Conducted agricultural science workshops using real-time data kits"
     ]
   },
   {
-    slug: "digital-literacy-hardware-9",
-    title: "Digital Literacy & Hardware Foundations",
-    category: "School Level",
-    desc: "Hands-on basic hardware assemblies, component sorting, and electronic circuit logic training.",
+    slug: "sant-tukaram",
+    title: "AIRG Sant Tukaram Lab",
+    category: "School Lab",
+    desc: "Electronics and digital fabrication lab teaching logic gates assembly and circuit logic.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(8).jpg",
-    detailedDesc: "We provide early education modules helping school students build fundamental understandings of wires, batteries, switches, resistors, and basic logic gates via color-coded visual blocks.",
-    location: "Rural Development Schools",
-    date: "Ongoing Program",
-    techStack: ["Basic Circuits", "Component Sorting", "Electronic Blocks", "Visual Logic"],
+    detailedDesc: "The Sant Tukaram Lab provides a solid foundation in electronics. Students learn to assemble fundamental logic gates on breadboards, utilize resistors, transistors, and LEDs, and understand the core hardware components that make up modern computers.",
+    location: "Pune, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Breadboards", "Logic Gate ICs (AND/OR/NOT)", "Multimeters", "LED Arrays", "Resistors & Capacitors"],
     stats: [
-      { label: "Rural Schools", value: "35+ Schools" },
-      { label: "Students Reached", value: "8,000+ Students" },
-      { label: "Blocks Distributed", value: "1,200+ Packs" }
+      { label: "Students Guided", value: "300+ Students" },
+      { label: "Electronic Benches", value: "12 Stations" },
+      { label: "Logic Circuits Built", value: "80+ Designs" }
     ],
     highlights: [
-      "Assembling battery-powered motor assemblies with physical switches",
-      "Learning component sorting based on resistance and function markings",
-      "Writing logic flow diagrams on paper and testing them with physical logic blocks"
+      "Built full adder circuits on breadboards using discrete ICs",
+      "Designed light-sensing night lights using photoresistors",
+      "Programmed simple blinking pattern matrices using 555 timers"
     ]
   },
   {
-    slug: "embedded-systems-microcontroller-10",
-    title: "Embedded Systems & Microcontroller Lab",
-    category: "Institute Level",
-    desc: "Practical coding and wiring sessions on development boards (ESP32 / Arduino UNO) for university students.",
+    slug: "swami-ramanand",
+    title: "AIRG Swami Ramanand Lab",
+    category: "School Lab",
+    desc: "Biology-tech sensor laboratory monitoring heart-rate logs, temperature telemetry, and exercise data.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(9).jpg",
-    detailedDesc: "Designed to provide mechanical, electrical, and computer engineering students with hands-on practice in writing low-level firmware, managing interrupts, and configuring GPIO interfaces.",
-    location: "Engineering Partner Colleges",
-    date: "Active Program",
-    techStack: ["ESP32", "Arduino IDE", "Interrupt Management", "GPIO Wiring"],
+    detailedDesc: "At Swami Ramanand Lab, biology meets technology. Students use heart-rate monitors, temperature probes, and respiratory telemetry kits to map physical responses during exercise, learning biological systems through interactive sensor data.",
+    location: "Satara, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Heart Rate Monitors", "Temperature Probes", "Python Data Science", "Scratch UI Builder"],
     stats: [
-      { label: "Engineering Labs", value: "14+ Centers" },
-      { label: "Active Student Boards", value: "600+ Units" },
-      { label: "Research Projects", value: "90+ Submissions" }
+      { label: "Sensor Workstations", value: "10 Active Setups" },
+      { label: "Active Classrooms", value: "300+ Students" },
+      { label: "Anatomy Projects", value: "25+ Completed" }
     ],
     highlights: [
-      "Programming dual-core ESP32 microcontrollers to handle concurrent sensor tasks",
-      "Interfacing LCD panels and physical keypad arrays for user inputs",
-      "Testing serial communication protocols like SPI and I2C on breadboards"
+      "Mapped classmates' heart recovery times using digital sensor graphs",
+      "Programmed interactive scratch animations responsive to temperature sensors",
+      "Conducted educational biology workshops during science fair week"
     ]
   },
   {
-    slug: "smart-manufacturing-robotics-11",
-    title: "Smart Manufacturing & Robotics Training",
-    category: "Industry Level",
-    desc: "High-grade industrial arm training, custom sorting robots, and automated production system simulators.",
+    slug: "koteshwar-vidyaly",
+    title: "AIRG Koteshwar Vidyaly Lab",
+    category: "School Lab",
+    desc: "Embedded software lab specializing in Arduino programming, LED matrices, and game programming.",
     url: "/centres/gallery/PHOTO-2026-07-14-21-54-00(10).jpg",
-    detailedDesc: "Training courses for senior students and professionals to operate, program, and maintain multi-axis robotic arms, pneumatic sorting grids, and manufacturing line simulators.",
-    location: "AIRG Technical Hubs",
-    date: "Active Program",
-    techStack: ["Multi-Axis Robotic Arms", "Pneumatics", "Manufacturing Simulators", "Robot Safety Protocols"],
+    detailedDesc: "Koteshwar Vidyaly Lab in Wai focuses on embedded software. Students connect microchips with LED matrices, programming basic snake games, countdown timers, and scrolling message displays.",
+    location: "Wai, Maharashtra",
+    date: "Active Lab",
+    techStack: ["Arduino Nano", "8x8 LED Matrices", "LCD Character Screens", "C++ Coding", "Buzzer Sounds"],
     stats: [
-      { label: "Technical Hubs", value: "4+ Main Hubs" },
-      { label: "Industrial Robots", value: "24+ Units" },
-      { label: "Certified Operators", value: "180+ Candidates" }
+      { label: "Microchip Kits", value: "20+ Boards" },
+      { label: "Students Engaged", value: "300+ Students" },
+      { label: "Game Code Programs", value: "45+ Uploaded" }
     ],
     highlights: [
-      "Writing path execution programs for 6-axis robotic arms",
-      "Integrating pneumatic grippers and suction cups into automated pipelines",
-      "Implementing safe emergency-stop loops and checking proximity sensor boundaries"
+      "Programmed a school bell countdown timer displayed on LCD screens",
+      "Designed and coded retro 2D games using tactile buttons and LED grids",
+      "Conducted inter-school programming competitions on Arduino IDE"
     ]
   }
 ];
