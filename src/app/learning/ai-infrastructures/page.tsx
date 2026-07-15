@@ -217,6 +217,177 @@ export default function AIInfrastructuresB2BPage() {
         <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
+      {/* ========== SECTION: THREE POWERFUL EDITIONS (Slide 5) ========== */}
+      <div className="pt-20 pb-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
+
+
+          <div className="text-center mb-16 space-y-4">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]">
+              OUR SOLUTIONS
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] tracking-tight uppercase font-headline">
+              Three Powerful Editions. <span className="text-primary">One Secure Ecosystem.</span>
+            </h2>
+            <p className="text-[#1a1a2e]/55 text-lg font-medium max-w-2xl mx-auto">
+              Custom-built setups optimized for schools, professional firms, and enterprise deployment.
+            </p>
+          </div>
+
+          {/* 3-Column Detailed Editions Grid (Bharat AI 1.0, 2.0, 3.0) */}
+          <div className="grid lg:grid-cols-3 gap-8 max-w-[1500px] mx-auto text-left mt-8">
+            {/* Bharat AI 1.0 - School Edition */}
+            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/40 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <span className="px-3.5 py-1 bg-primary/10 border border-primary/20 rounded-full text-[9px] font-black font-mono text-primary uppercase tracking-widest">
+                    School Edition
+                  </span>
+                  <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V1.0</span>
+                </div>
+                
+                <h3 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight mb-2 group-hover:text-primary transition-colors duration-300">
+                  Bharat AI 1.0
+                </h3>
+                <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-[#1a1a2e]/50 mb-6 font-bold">
+                  AI Innovation Lab Engine
+                </h4>
+                
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                  Transform classrooms into advanced technical learning spaces. Engineered to introduce AI, robotics, and coding to students in a safe, offline sandbox environment.
+                </p>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    { label: "AI Learning", desc: "Interactive playground with preloaded models to understand machine learning basics.", icon: "school" },
+                    { label: "Robotics Sandbox", desc: "Offline workspace to write controls and automate physical robot hardware kits.", icon: "precision_manufacturing" },
+                    { label: "Drone Simulation", desc: "Run virtual flight dynamics and autonomous pathway scripts safely.", icon: "flight_takeoff" },
+                    { label: "VR / AR Hub", desc: "Immersive 3D curriculum environments for deep spatial learning.", icon: "vrpano" },
+                    { label: "3D Printing Hub", desc: "Design, slice, and send CAD prototypes to offline manufacturing units.", icon: "view_in_ar" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
+                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
+                <span>DEPLOYMENT: LOCAL MESH</span>
+                <span>STATUS: READY</span>
+              </div>
+            </div>
+
+            {/* Bharat AI 2.0 - Professional Edition */}
+            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-[#1e293b]/40 hover:shadow-[0_20px_50px_rgba(30,41,59,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1e293b]/5 rounded-full blur-2xl pointer-events-none" />
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <span className="px-3.5 py-1 bg-[#1e293b]/10 border border-[#1e293b]/20 rounded-full text-[9px] font-black font-mono text-[#1e293b] uppercase tracking-widest">
+                    Professional Edition
+                  </span>
+                  <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V2.0</span>
+                </div>
+                
+                <h3 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight mb-2 group-hover:text-[#1e293b] transition-colors duration-300">
+                  Bharat AI 2.0
+                </h3>
+                <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-[#1a1a2e]/50 mb-6 font-bold">
+                  SIA Workspace System
+                </h4>
+                
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                  Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
+                </p>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    { label: "Private AI (Local GPT)", desc: "Interact with private AI models locally without subscription fees or data leaks.", icon: "chat" },
+                    { label: "Secure Document AI", desc: "Index and extract key details from internal PDF, Excel, and doc repositories.", icon: "description" },
+                    { label: "Smart Q&A Node", desc: "Instant contextual answers backed strictly by local corporate documents.", icon: "quiz" },
+                    { label: "Knowledge Retrieval", desc: "High-speed semantic search indexing for large institutional archives.", icon: "database" },
+                    { label: "AI-Powered Drafting", desc: "Secure assistant to compose letters, reports, and code blocks in privacy.", icon: "edit_document" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#1e293b]/5 border border-[#1e293b]/10 flex items-center justify-center text-[#1e293b] shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
+                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
+                <span>DEPLOYMENT: LOCAL SERVER</span>
+                <span>STATUS: READY</span>
+              </div>
+            </div>
+
+            {/* Bharat AI 3.0 - Enterprise Edition */}
+            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-emerald-500/40 hover:shadow-[0_20px_50px_rgba(16,185,129,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <span className="px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] font-black font-mono text-emerald-600 uppercase tracking-widest">
+                    Enterprise Edition
+                  </span>
+                  <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V3.0</span>
+                </div>
+                
+                <h3 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight mb-2 group-hover:text-emerald-600 transition-colors duration-300">
+                  Bharat AI 3.0
+                </h3>
+                <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-[#1a1a2e]/50 mb-6 font-bold">
+                  Private AI Infrastructure Platform
+                </h4>
+                
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                  A high-capacity cluster engineered for complete data sovereignty. Designed for large corporations, government departments, and R&D facilities.
+                </p>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    { label: "AI Automation Node", desc: "Automate complex enterprise pipelines offline using custom local triggers.", icon: "bolt" },
+                    { label: "High-Speed AI Workflows", desc: "Multi-agent systems executing high-throughput queries concurrently.", icon: "insights" },
+                    { label: "Custom Model Training", desc: "Securely fine-tune large models on local specialized server hardware nodes.", icon: "terminal" },
+                    { label: "Private Analytics", desc: "Run intelligence synthesis over internal datasets with zero external sync.", icon: "assessment" },
+                    { label: "Air-Gapped Security", desc: "Absolute privacy shielding for sensitive state or proprietary IP archives.", icon: "gpp_good" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/5 border border-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
+                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
+                <span>DEPLOYMENT: GPU CLUSTER</span>
+                <span>STATUS: READY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Visual Section Divider */}
+      <div className="w-full relative z-20 my-6">
+        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
+      </div>
+
       {/* Why Build an AIR Lab */}
       <div className="pt-20 pb-24 bg-[#090a12] text-white relative overflow-hidden">
         {/* Subtle grid pattern overlay */}
@@ -414,182 +585,6 @@ export default function AIInfrastructuresB2BPage() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Visual Section Divider */}
-      <div className="w-full relative z-20 my-6">
-        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
-      </div>
-
-      {/* ========== SECTION: THREE POWERFUL EDITIONS (Slide 5) ========== */}
-      <div className="pt-20 pb-24 bg-white relative overflow-hidden">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
-
-
-          <div className="text-center mb-16 space-y-4">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]">
-              OUR SOLUTIONS
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-[#1a1a2e] tracking-tight uppercase font-headline">
-              Three Powerful Editions. <span className="text-primary">One Secure Ecosystem.</span>
-            </h2>
-            <p className="text-[#1a1a2e]/55 text-lg font-medium max-w-2xl mx-auto">
-              Custom-built setups optimized for schools, professional firms, and enterprise deployment.
-            </p>
-          </div>
-
-          {/* 3-Column Detailed Editions Grid (Bharat AI 1.0, 2.0, 3.0) */}
-          <div className="grid lg:grid-cols-3 gap-8 max-w-[1500px] mx-auto text-left mt-8">
-            {/* Bharat AI 1.0 - School Edition */}
-            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-primary/40 hover:shadow-[0_20px_50px_rgba(238,44,60,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="px-3.5 py-1 bg-primary/10 border border-primary/20 rounded-full text-[9px] font-black font-mono text-primary uppercase tracking-widest">
-                    School Edition
-                  </span>
-                  <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V1.0</span>
-                </div>
-                
-                <h3 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight mb-2 group-hover:text-primary transition-colors duration-300">
-                  Bharat AI 1.0
-                </h3>
-                <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-[#1a1a2e]/50 mb-6 font-bold">
-                  AI Innovation Lab Engine
-                </h4>
-                
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Transform classrooms into advanced technical learning spaces. Engineered to introduce AI, robotics, and coding to students in a safe, offline sandbox environment.
-                </p>
-
-                <div className="space-y-4 mb-8">
-                  {[
-                    { label: "AI Learning", desc: "Interactive playground with preloaded models to understand machine learning basics.", icon: "school" },
-                    { label: "Robotics Sandbox", desc: "Offline workspace to write controls and automate physical robot hardware kits.", icon: "precision_manufacturing" },
-                    { label: "Drone Simulation", desc: "Run virtual flight dynamics and autonomous pathway scripts safely.", icon: "flight_takeoff" },
-                    { label: "VR / AR Hub", desc: "Immersive 3D curriculum environments for deep spatial learning.", icon: "vrpano" },
-                    { label: "3D Printing Hub", desc: "Design, slice, and send CAD prototypes to offline manufacturing units.", icon: "view_in_ar" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <span className="material-symbols-outlined text-base">{item.icon}</span>
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
-                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
-                <span>DEPLOYMENT: LOCAL MESH</span>
-                <span>STATUS: READY</span>
-              </div>
-            </div>
-
-            {/* Bharat AI 2.0 - Professional Edition */}
-            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-[#1e293b]/40 hover:shadow-[0_20px_50px_rgba(30,41,59,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1e293b]/5 rounded-full blur-2xl pointer-events-none" />
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="px-3.5 py-1 bg-[#1e293b]/10 border border-[#1e293b]/20 rounded-full text-[9px] font-black font-mono text-[#1e293b] uppercase tracking-widest">
-                    Professional Edition
-                  </span>
-                  <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V2.0</span>
-                </div>
-                
-                <h3 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight mb-2 group-hover:text-[#1e293b] transition-colors duration-300">
-                  Bharat AI 2.0
-                </h3>
-                <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-[#1a1a2e]/50 mb-6 font-bold">
-                  SIA Workspace System
-                </h4>
-                
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
-                </p>
-
-                <div className="space-y-4 mb-8">
-                  {[
-                    { label: "Private AI (Local GPT)", desc: "Interact with private AI models locally without subscription fees or data leaks.", icon: "chat" },
-                    { label: "Secure Document AI", desc: "Index and extract key details from internal PDF, Excel, and doc repositories.", icon: "description" },
-                    { label: "Smart Q&A Node", desc: "Instant contextual answers backed strictly by local corporate documents.", icon: "quiz" },
-                    { label: "Knowledge Retrieval", desc: "High-speed semantic search indexing for large institutional archives.", icon: "database" },
-                    { label: "AI-Powered Drafting", desc: "Secure assistant to compose letters, reports, and code blocks in privacy.", icon: "edit_document" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#1e293b]/5 border border-[#1e293b]/10 flex items-center justify-center text-[#1e293b] shrink-0">
-                        <span className="material-symbols-outlined text-base">{item.icon}</span>
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
-                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
-                <span>DEPLOYMENT: LOCAL SERVER</span>
-                <span>STATUS: READY</span>
-              </div>
-            </div>
-
-            {/* Bharat AI 3.0 - Enterprise Edition */}
-            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-emerald-500/40 hover:shadow-[0_20px_50px_rgba(16,185,129,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="px-3.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[9px] font-black font-mono text-emerald-600 uppercase tracking-widest">
-                    Enterprise Edition
-                  </span>
-                  <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V3.0</span>
-                </div>
-                
-                <h3 className="font-headline text-2xl font-black text-[#1a1a2e] uppercase tracking-tight mb-2 group-hover:text-emerald-600 transition-colors duration-300">
-                  Bharat AI 3.0
-                </h3>
-                <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-[#1a1a2e]/50 mb-6 font-bold">
-                  Private AI Infrastructure Platform
-                </h4>
-                
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  A high-capacity cluster engineered for complete data sovereignty. Designed for large corporations, government departments, and R&D facilities.
-                </p>
-
-                <div className="space-y-4 mb-8">
-                  {[
-                    { label: "AI Automation Node", desc: "Automate complex enterprise pipelines offline using custom local triggers.", icon: "bolt" },
-                    { label: "High-Speed AI Workflows", desc: "Multi-agent systems executing high-throughput queries concurrently.", icon: "insights" },
-                    { label: "Custom Model Training", desc: "Securely fine-tune large models on local specialized server hardware nodes.", icon: "terminal" },
-                    { label: "Private Analytics", desc: "Run intelligence synthesis over internal datasets with zero external sync.", icon: "assessment" },
-                    { label: "Air-Gapped Security", desc: "Absolute privacy shielding for sensitive state or proprietary IP archives.", icon: "gpp_good" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/5 border border-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
-                        <span className="material-symbols-outlined text-base">{item.icon}</span>
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
-                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
-                <span>DEPLOYMENT: GPU CLUSTER</span>
-                <span>STATUS: READY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Visual Section Divider */}
-      <div className="w-full relative z-20 my-6">
-        <div className="w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent h-[2px]"></div>
       </div>
 
       {/* ========== SECTION: SIA INTERFACE SHOWCASE (Slides 15 & 16) ========== */}
