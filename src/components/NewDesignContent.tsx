@@ -1831,32 +1831,52 @@ export default function NewDesignContent() {
                         tag: "National Endorsement",
                         objectPosition: "object-center"
                       }
-                    ].map((story, idx) => (
-                      <div key={idx} className={`group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full text-left ${idx === 2 ? "md:col-span-2 md:max-w-[calc(50%-16px)] md:mx-auto w-full" : ""}`}>
-                         <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0 border-r-2 border-[#EE2C3C]/15">
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
-                          <img 
-                            src={story.img} 
-                            alt={story.title} 
-                            className={`w-full h-full object-cover ${story.objectPosition || "object-center"} group-hover:scale-105 transition-transform duration-500`} 
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400";
-                            }}
-                          />
-                        </div>
-                        <div className="p-8 w-full md:w-1/2 flex flex-col justify-between space-y-6">
-                          <div className="space-y-3">
-                            <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight leading-tight">
-                              {story.title}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                              {story.desc}
-                            </p>
+                    ].map((story, idx) => {
+                      const cardElement = (
+                        <div className="group relative glass-premium rounded-[2.5rem] !border-2 !border-[#EE2C3C]/40 hover:!border-[#EE2C3C]/70 hover:shadow-[0_20px_50px_rgba(238,44,60,0.15)] transition-all duration-500 overflow-hidden flex flex-col md:flex-row h-full text-left w-full">
+                          <div className="relative w-full md:w-1/2 aspect-[16/10] overflow-hidden bg-slate-900 shrink-0 border-r-2 border-[#EE2C3C]/15">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10" />
+                            <img 
+                              src={story.img} 
+                              alt={story.title} 
+                              className={`w-full h-full object-cover ${story.objectPosition || "object-center"} group-hover:scale-105 transition-transform duration-500`} 
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400";
+                              }}
+                            />
                           </div>
-
+                          <div className="p-8 w-full md:w-1/2 flex flex-col justify-between space-y-6">
+                            <div className="space-y-3">
+                              <h3 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight leading-tight">
+                                {story.title}
+                              </h3>
+                              <p className="text-xs sm:text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+                                {story.desc}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+
+                      if (idx === 2) {
+                        return (
+                          <div key={idx} className="md:col-span-2 flex items-center justify-center w-full relative">
+                            {/* Left Connector Line */}
+                            <div className="hidden md:block flex-1 h-[1.5px] bg-gradient-to-r from-transparent via-[#EE2C3C]/15 to-[#EE2C3C]/35 mr-8" />
+                            
+                            {/* The Card */}
+                            <div className="w-full md:max-w-[calc(50%-16px)] shrink-0">
+                              {cardElement}
+                            </div>
+                            
+                            {/* Right Connector Line */}
+                            <div className="hidden md:block flex-1 h-[1.5px] bg-gradient-to-l from-transparent via-[#EE2C3C]/15 to-[#EE2C3C]/35 ml-8" />
+                          </div>
+                        );
+                      }
+
+                      return <div key={idx} className="w-full">{cardElement}</div>;
+                    })}
                   </div>
                 </section>
 
