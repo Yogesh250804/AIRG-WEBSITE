@@ -291,7 +291,7 @@ export default function AIInfrastructuresB2BPage() {
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="px-3.5 py-1 bg-[#1e293b]/10 border border-[#1e293b]/20 rounded-full text-[9px] font-black font-mono text-[#1e293b] uppercase tracking-widest">
-                    Institute Edition
+                    Professional Edition
                   </span>
                   <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V2.0</span>
                 </div>
@@ -304,7 +304,7 @@ export default function AIInfrastructuresB2BPage() {
                 </h4>
                 
                 <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Most suitable for <strong className="font-bold text-[#1a1a2e]">lawyers and CAs</strong>. Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">Professionals, Management Heads, Small teams, Medium teams with lawyers and CAs</strong>. Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
                 </p>
 
                 <div className="space-y-4 mb-8">
