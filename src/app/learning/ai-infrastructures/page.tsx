@@ -313,8 +313,8 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   </div>
                   {/* Top-Left Bharat AI branding */}
-                  <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-20">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white font-mono">BHARAT AI 1.0</span>
+                  <div className="absolute top-3 left-3 z-20 select-none">
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-mono">BHARAT AI 1.0</span>
                   </div>
                   {/* Bottom-Left Watch badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
@@ -389,8 +389,8 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   </div>
                   {/* Top-Left Bharat AI branding */}
-                  <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-20">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white font-mono">BHARAT AI 2.0</span>
+                  <div className="absolute top-3 left-3 z-20 select-none">
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-mono">BHARAT AI 2.0</span>
                   </div>
                   {/* Bottom-Left Download badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
@@ -466,8 +466,8 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   </div>
                   {/* Top-Left Bharat AI branding */}
-                  <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-20">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white font-mono">BHARAT AI 3.0</span>
+                  <div className="absolute top-3 left-3 z-20 select-none">
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-mono">BHARAT AI 3.0</span>
                   </div>
                   {/* Bottom-Left Watch badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
