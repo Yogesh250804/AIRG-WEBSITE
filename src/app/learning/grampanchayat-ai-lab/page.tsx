@@ -99,7 +99,7 @@ export default function GrampanchayatAILabPage() {
       step: "02",
       title: "Infrastructure Installation",
       desc: "Our engineers install smart panels, computing terminals, agricultural IoT kits, and local language AI assets.",
-      image: "/hardware-procurement.png"
+      image: "/hardware_procurement_new.png"
     },
     {
       step: "03",

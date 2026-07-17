@@ -139,7 +139,7 @@ export default function PDETLabPage() {
       step: "02",
       title: "Hardware Procurement",
       desc: "Our team sources and delivers premium, industry-standard equipment directly to your campus.",
-      image: "/hardware-procurement.png"
+      image: "/hardware_procurement_new.png"
     },
     {
       step: "03",
