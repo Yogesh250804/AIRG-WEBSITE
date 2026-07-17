@@ -36,6 +36,22 @@ export default function AIInfrastructuresB2BPage() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutItem, setCheckoutItem] = useState<{ name: string; price: number; image?: string; category?: string } | null>(null);
 
+  // Lightbox and Media States
+  const [activeVideoUrl, setActiveVideoUrl] = useState<string | null>(null);
+  const [activeVideoTitle, setActiveVideoTitle] = useState<string>("");
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [activePhotoIdx, setActivePhotoIdx] = useState(0);
+
+  const BHARAT_AI_3_PHOTOS = [
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-22-57.jpg",
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-30-26.jpg",
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-31-39.jpg",
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-31-39(1).jpg",
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-35-37.jpg",
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-35-37(1).jpg",
+    "/images/bharat-ai-3/PHOTO-2026-07-15-11-35-37(2).jpg"
+  ];
+
   const updateQuantity = (zoneIdx: number, itemIdx: number, delta: number) => {
     setZones(prevZones => {
       const newZones = JSON.parse(JSON.stringify(prevZones));
@@ -278,6 +294,18 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   ))}
                 </div>
+                
+                {/* Watch Demo Video */}
+                <button 
+                  onClick={() => {
+                    setActiveVideoUrl("/video/bharat_ai_1.mp4");
+                    setActiveVideoTitle("Bharat AI 1.0 Demo");
+                  }}
+                  className="mb-8 w-full py-3.5 px-4 rounded-xl border border-primary/20 hover:border-primary/50 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-sm">play_circle</span>
+                  Watch Demo Video
+                </button>
               </div>
               <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
                 <span>DEPLOYMENT: LOCAL MESH</span>
@@ -326,6 +354,17 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   ))}
                 </div>
+                
+                {/* Download Booklet */}
+                <a 
+                  href="/booklet_bharat_ai_2.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mb-8 w-full py-3.5 px-4 rounded-xl border border-[#1e293b]/20 hover:border-[#1e293b]/50 text-[#1e293b] hover:bg-[#1e293b]/5 font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer text-center"
+                >
+                  <span className="material-symbols-outlined text-sm">description</span>
+                  Download Booklet
+                </a>
               </div>
               <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
                 <span>DEPLOYMENT: LOCAL SERVER</span>
@@ -373,6 +412,30 @@ export default function AIInfrastructuresB2BPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Video & Photos Actions */}
+                <div className="grid grid-cols-2 gap-3 mb-8">
+                  <button 
+                    onClick={() => {
+                      setActiveVideoUrl("/video/bharat_ai_3.mp4");
+                      setActiveVideoTitle("Bharat AI 3.0 Demo");
+                    }}
+                    className="py-3.5 px-3 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/5 font-bold text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-xs">play_circle</span>
+                    Demo Video
+                  </button>
+                  <button 
+                    onClick={() => {
+                      setIsGalleryOpen(true);
+                      setActivePhotoIdx(0);
+                    }}
+                    className="py-3.5 px-3 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/5 font-bold text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-xs">photo_library</span>
+                    View Photos
+                  </button>
                 </div>
               </div>
               <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
@@ -1014,6 +1077,102 @@ export default function AIInfrastructuresB2BPage() {
           <div style={{ marginTop: '2px' }}>For support or proposal requests, contact: support@airg.international</div>
         </div>
       </div>
+
+      {/* Video Lightbox Modal */}
+      <AnimatePresence>
+        {activeVideoUrl && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+          >
+            <div className="relative w-full max-w-4xl bg-[#0b0f19] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <div className="p-4 border-b border-white/5 flex items-center justify-between">
+                <span className="text-sm font-bold uppercase tracking-wider text-white">{activeVideoTitle}</span>
+                <button 
+                  onClick={() => setActiveVideoUrl(null)}
+                  className="text-white/60 hover:text-white transition-colors cursor-pointer w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined text-sm">close</span>
+                </button>
+              </div>
+              <div className="aspect-video w-full">
+                <video 
+                  src={activeVideoUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Gallery Modal */}
+      <AnimatePresence>
+        {isGalleryOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 select-none"
+          >
+            <div className="relative w-full max-w-5xl bg-[#0b0f19] rounded-2xl overflow-hidden border border-white/10 shadow-2xl flex flex-col h-[85vh]">
+              <div className="p-4 border-b border-white/5 flex items-center justify-between shrink-0">
+                <span className="text-sm font-bold uppercase tracking-wider text-white">
+                  Bharat AI 3.0 Photo Gallery ({activePhotoIdx + 1} of {BHARAT_AI_3_PHOTOS.length})
+                </span>
+                <button 
+                  onClick={() => setIsGalleryOpen(false)}
+                  className="text-white/60 hover:text-white transition-colors cursor-pointer w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined text-sm">close</span>
+                </button>
+              </div>
+              
+              <div className="flex-1 relative flex items-center justify-center bg-black overflow-hidden p-6">
+                {/* Main Image */}
+                <img 
+                  src={BHARAT_AI_3_PHOTOS[activePhotoIdx]} 
+                  alt={`Bharat AI 3.0 Photo ${activePhotoIdx + 1}`}
+                  className="max-w-full max-h-full object-contain rounded-lg transition-transform duration-300"
+                />
+
+                {/* Navigation Arrows */}
+                <button 
+                  onClick={() => setActivePhotoIdx(prev => (prev === 0 ? BHARAT_AI_3_PHOTOS.length - 1 : prev - 1))}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all border border-white/5"
+                >
+                  <span className="material-symbols-outlined text-sm">chevron_left</span>
+                </button>
+                <button 
+                  onClick={() => setActivePhotoIdx(prev => (prev === BHARAT_AI_3_PHOTOS.length - 1 ? 0 : prev + 1))}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all border border-white/5"
+                >
+                  <span className="material-symbols-outlined text-sm">chevron_right</span>
+                </button>
+              </div>
+
+              {/* Thumbnails list at the bottom */}
+              <div className="p-4 bg-[#070a10] border-t border-white/5 overflow-x-auto flex gap-3 justify-center shrink-0">
+                {BHARAT_AI_3_PHOTOS.map((photo, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => setActivePhotoIdx(idx)}
+                    className={`relative w-20 aspect-video rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                      idx === activePhotoIdx ? "border-emerald-500 scale-105" : "border-transparent opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={photo} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
