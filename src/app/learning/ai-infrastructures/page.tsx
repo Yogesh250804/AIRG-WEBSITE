@@ -295,17 +295,29 @@ export default function AIInfrastructuresB2BPage() {
                   ))}
                 </div>
                 
-                {/* Watch Demo Video */}
-                <button 
+                {/* Video Preview Thumbnail */}
+                <div 
                   onClick={() => {
                     setActiveVideoUrl("/video/bharat_ai_1.mp4");
                     setActiveVideoTitle("Bharat AI 1.0 Demo");
                   }}
-                  className="mb-8 w-full py-3.5 px-4 rounded-xl border border-primary/20 hover:border-primary/50 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                  className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-primary/30 shadow-sm cursor-pointer group/video z-10"
                 >
-                  <span className="material-symbols-outlined text-sm">play_circle</span>
-                  Watch Demo Video
-                </button>
+                  <img 
+                    src="/bharat_ai_1_thumb.png" 
+                    alt="Bharat AI 1.0 Video Preview" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover/video:bg-black/40 transition-colors flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-primary text-[#1a1a2e] flex items-center justify-center shadow-lg group-hover/video:scale-110 transition-transform duration-300">
+                      <span className="material-symbols-outlined text-2xl font-bold">play_arrow</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Demo Video</span>
+                  </div>
+                </div>
               </div>
               <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
                 <span>DEPLOYMENT: LOCAL MESH</span>
@@ -414,29 +426,41 @@ export default function AIInfrastructuresB2BPage() {
                   ))}
                 </div>
 
-                {/* Video & Photos Actions */}
-                <div className="grid grid-cols-2 gap-3 mb-8">
-                  <button 
-                    onClick={() => {
-                      setActiveVideoUrl("/video/bharat_ai_3.mp4");
-                      setActiveVideoTitle("Bharat AI 3.0 Demo");
-                    }}
-                    className="py-3.5 px-3 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/5 font-bold text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
-                  >
-                    <span className="material-symbols-outlined text-xs">play_circle</span>
-                    Demo Video
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setIsGalleryOpen(true);
-                      setActivePhotoIdx(0);
-                    }}
-                    className="py-3.5 px-3 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/5 font-bold text-[10px] uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
-                  >
-                    <span className="material-symbols-outlined text-xs">photo_library</span>
-                    View Photos
-                  </button>
+                {/* Video Preview Thumbnail */}
+                <div 
+                  onClick={() => {
+                    setActiveVideoUrl("/video/bharat_ai_3.mp4");
+                    setActiveVideoTitle("Bharat AI 3.0 Demo");
+                  }}
+                  className="mb-4 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-emerald-500/30 shadow-sm cursor-pointer group/video z-10"
+                >
+                  <img 
+                    src="/bharat_ai_3_thumb.png" 
+                    alt="Bharat AI 3.0 Video Preview" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover/video:bg-black/40 transition-colors flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg group-hover/video:scale-110 transition-transform duration-300">
+                      <span className="material-symbols-outlined text-2xl font-bold">play_arrow</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Demo Video</span>
+                  </div>
                 </div>
+
+                {/* View Photos Button */}
+                <button 
+                  onClick={() => {
+                    setIsGalleryOpen(true);
+                    setActivePhotoIdx(0);
+                  }}
+                  className="mb-8 w-full py-3.5 px-4 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/5 font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-sm">photo_library</span>
+                  View Photos & Gallery
+                </button>
               </div>
               <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
                 <span>DEPLOYMENT: GPU CLUSTER</span>
