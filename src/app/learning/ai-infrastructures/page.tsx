@@ -242,7 +242,7 @@ export default function AIInfrastructuresB2BPage() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
               <div>
                 <div className="flex justify-between items-start mb-6">
-                  <span className="px-3.5 py-1 bg-primary/10 border border-primary/20 rounded-full text-[9px] font-black font-mono text-primary uppercase tracking-widest">
+                  <span className="px-3.5 py-1 bg-red-50 border border-red-200 rounded-full text-[9px] font-black font-mono text-red-700 uppercase tracking-widest">
                     Education Edition
                   </span>
                   <span className="text-sm font-black font-mono text-[#1a1a2e]/30">V1.0</span>
