@@ -1374,15 +1374,10 @@ export default function NewDesignContent() {
                   </p>
                   <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
                     <button 
-                      onClick={() => {
-                        const el = document.getElementById("explore-impact");
-                        if (el) {
-                          el.scrollIntoView({ behavior: "smooth" });
-                        }
-                      }}
+                      onClick={() => navigateTo('labs')}
                       className="group relative px-6 py-4 sm:px-10 sm:py-5 bg-primary text-[#1a1a2e] font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] glow-red inline-flex items-center"
                     >
-                      <span className="relative z-10 flex items-center gap-3">Explore Our Impact <span className="material-symbols-outlined text-sm">bolt</span></span>
+                      <span className="relative z-10 flex items-center gap-3">Visit Airg Labs <span className="material-symbols-outlined text-sm">arrow_forward</span></span>
                     </button>
                     <button className="group px-6 py-4 sm:px-10 sm:py-5 glass-premium text-[#1a1a2e]/60 font-bold text-xs uppercase tracking-widest rounded-lg border border-black/5 hover:border-black/20 transition-all duration-300 flex items-center gap-2" onClick={() => navigateTo('workshops')}>
                       <span>View Workshops</span>
