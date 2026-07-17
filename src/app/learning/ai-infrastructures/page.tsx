@@ -272,16 +272,15 @@ export default function AIInfrastructuresB2BPage() {
                 </h4>
                 
                 <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Most suitable for <strong className="font-bold text-[#1a1a2e]">schools and institutes</strong>. Transform classrooms into advanced technical learning spaces to introduce AI, robotics, and coding to students in a safe, offline sandbox environment.
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">schools and institutes</strong>. An offline-first local system enabling students to access interactive AI chatbots, programming labs, and computer vision models completely without internet.
                 </p>
-
                 <div className="space-y-4 mb-8">
                   {[
-                    { label: "AI Learning", desc: "Interactive playground with preloaded models to understand machine learning basics.", icon: "school" },
-                    { label: "Robotics Sandbox", desc: "Offline workspace to write controls and automate physical robot hardware kits.", icon: "precision_manufacturing" },
-                    { label: "Drone Simulation", desc: "Run virtual flight dynamics and autonomous pathway scripts safely.", icon: "flight_takeoff" },
-                    { label: "VR / AR Hub", desc: "Immersive 3D curriculum environments for deep spatial learning.", icon: "vrpano" },
-                    { label: "3D Printing Hub", desc: "Design, slice, and send CAD prototypes to offline manufacturing units.", icon: "view_in_ar" }
+                    { label: "Aira Teacher (AI Chatbot)", desc: "Offline conversational AI assistant that talks, listens, and teaches coding/AI in 20+ languages.", icon: "chat" },
+                    { label: "AI Research Lab", desc: "Ready-to-run local AI modules like Face Detection, Object Detection, and Handwriting AI.", icon: "visibility" },
+                    { label: "Developer Studio", desc: "Local Python Sandbox, Jupyter Lab Studio, and Scratch block coding for hands-on programming.", icon: "code" },
+                    { label: "AI Training Lab", desc: "A visual local pipeline for students to collect custom data, train ML models, and evaluate offline.", icon: "model_training" },
+                    { label: "Interactive Graphs", desc: "Learn data science by editing Python visualization scripts and rendering real-time charts.", icon: "bar_chart" }
                   ].map((item, idx) => (
                     <div key={idx} className="flex gap-3">
                       <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
