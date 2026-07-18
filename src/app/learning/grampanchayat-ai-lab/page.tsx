@@ -425,25 +425,25 @@ export default function GrampanchayatAILabPage() {
 
             {/* Object 4 */}
             <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col sm:flex-row gap-6 items-start">
-              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-slate-900 relative">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-slate-950 relative">
                 <img
-                  src="/lab-electronics.png"
-                  alt="NPK Telemetry Soil Probe"
+                  src="/iot-kit.png"
+                  alt="Smart Electronics & IoT Kit"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="space-y-3 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10">Agri-IoT Module</span>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10">Smart IoT Module</span>
                 </div>
-                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-emerald-500 transition-colors">NPK Telemetry Probes</h3>
+                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-emerald-500 transition-colors">Smart Electronics & IoT</h3>
                 <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
-                  Field-ready soil chemistry sensors, humidity/temperature probes, and long-range solar transmitters built to teach kids environmental data logging.
+                  Introducing kids to basic microelectronics, circuit prototyping, and programming wireless telemetry sensors to monitor and automate real-world environments.
                 </p>
                 <ul className="text-[11px] text-[#1a1a2e]/70 space-y-1 font-mono">
-                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Capacitive NPK Level Analysis Sensors</li>
-                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Long-Range LoRa Telemetry Transmitter</li>
-                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Weather-Resistant Battery Case Module</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Basic Circuit & Microelectronics Design</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Wireless Telemetry (Wi-Fi/Bluetooth Modules)</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Smart Automation & Environment Monitoring</li>
                 </ul>
               </div>
             </div>
@@ -508,9 +508,6 @@ export default function GrampanchayatAILabPage() {
                     alt={`Rural Lab Activity ${idx + 1}`}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-white text-3xl bg-primary/80 p-4 rounded-full scale-75 group-hover:scale-100 transition-all duration-300">visibility</span>
-                  </div>
                 </div>
               </div>
             ))}
