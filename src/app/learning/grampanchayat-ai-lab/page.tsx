@@ -4,6 +4,11 @@ import { Navbar } from "@/components/demo-navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CheckoutModal } from "@/components/store/CheckoutModal";
+import { 
+  Cpu, Sprout, Milestone, GraduationCap, Users, ShieldCheck, 
+  ArrowRight, Lightbulb, MapPin, Award, CheckCircle2, ChevronRight,
+  TrendingUp, Globe, FileText, Settings
+} from "lucide-react";
 
 export default function GrampanchayatAILabPage() {
   const [activeZone, setActiveZone] = useState(0);
@@ -12,6 +17,11 @@ export default function GrampanchayatAILabPage() {
   const [checkoutItem, setCheckoutItem] = useState<{ name: string; price: number; image?: string; category?: string } | null>(null);
 
   const labImages = [
+    "/pratham/PHOTO-2026-07-14-20-49-29.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-31.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-32.jpg",
+    "/pratham/PHOTO-2026-07-14-20-50-11.jpg",
     "/indian_pdet_lab.png"
   ];
 
@@ -120,180 +130,205 @@ export default function GrampanchayatAILabPage() {
       <Navbar />
 
       {/* Hero section */}
-      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 pt-16 pb-24">
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 pt-16 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6 text-left">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono font-bold uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              Grassroots Innovation
+              Grassroots Tech Revolution
             </span>
-            <h1 className="font-headline text-4xl sm:text-6xl font-black uppercase tracking-tight leading-[0.9] text-[#1a1a2e]">
+            <h1 className="font-headline text-5xl sm:text-7xl font-black uppercase tracking-tight leading-[0.9] text-[#1a1a2e]">
               Grampanchayat <br />
-              <span className="text-primary text-glow-red">AI Lab</span>
+              <span className="text-primary text-glow-red">AI Labs</span>
             </h1>
-            <p className="text-base sm:text-lg text-[#1a1a2e]/65 font-light leading-relaxed max-w-xl">
-              Bringing advanced technologies to rural communities. The Grampanchayat AI Lab bridges the digital divide, introducing artificial intelligence, coding, and agricultural IoT systems at the local village council level.
+            <p className="text-base sm:text-xl text-[#1a1a2e]/70 font-light leading-relaxed max-w-2xl">
+              Pioneering the democratization of high-compute artificial intelligence, coding, precision IoT, and modern tech skills at the very foundation of local self-governance.
             </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-primary bg-primary/5 px-3 py-1.5 rounded-lg border border-primary/10">
+                <Award className="w-4 h-4" />
+                <span>India's 1st Grassroots AI Initiative</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1a1a2e]/60 bg-black/5 px-3 py-1.5 rounded-lg border border-black/5">
+                <MapPin className="w-4 h-4" />
+                <span>Empowering Rural Communities</span>
+              </div>
+            </div>
           </div>
           <div className="lg:col-span-5 relative">
-            <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10" />
+            <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10 animate-pulse" />
             <div className="glass-premium rounded-[3rem] border border-black/5 overflow-hidden p-3 shadow-2xl bg-white/70">
-              <div className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-slate-900">
+              <div className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-slate-900 group">
                 <img
                   src={labImages[currentImageIndex]}
                   alt="Grampanchayat AI Lab Setup"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                  <div>
+                    <span className="text-[10px] font-mono text-white/70 uppercase tracking-widest">Active Site Showcase</span>
+                    <p className="text-sm font-bold text-white font-headline uppercase mt-0.5">Grassroots Innovation Hub</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Lab Customization Zones */}
-      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 border-t border-black/5">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-5 space-y-8 text-left sticky top-28">
-            <div className="space-y-3">
-              <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Interactive Estimator</span>
-              <h2 className="font-headline text-3xl sm:text-4xl font-black uppercase tracking-tight leading-none text-[#1a1a2e]">
-                Configure the <br />
-                <span className="text-primary">Grampanchayat Lab</span>
+      {/* Milestone Spotlight: First AI Lab in Grampanchayat */}
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-20 border-t border-black/5">
+        <div className="bg-gradient-to-br from-[#1a1a2e] to-[#252542] rounded-[3.5rem] text-white overflow-hidden shadow-2xl relative">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(238,44,60,0.15),transparent_45%)]" />
+          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-8 sm:p-12 md:p-16 items-center relative z-10">
+            <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono font-bold uppercase tracking-wider">
+                <Milestone className="w-3.5 h-3.5" />
+                Historic Milestone
+              </div>
+              <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none">
+                India's First AI Lab <br />
+                <span className="text-primary text-glow-red">In A Grampanchayat</span>
               </h2>
-              <p className="text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
-                Add equipment quantities to calculate a live setup budget estimate for your local Grampanchayat.
+              <p className="text-sm sm:text-base text-white/70 font-light leading-relaxed max-w-xl">
+                Breaking technology barriers where they matter most. We established the country's first-ever Grampanchayat AI Lab, demonstrating that state-of-the-art technologies like local generative AI models, edge compute nodes, and IoT-driven farming systems aren't just for tech hubs—they belong in our villages.
+              </p>
+              
+              {/* Highlight list */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 p-1 rounded-lg bg-primary/20 text-primary">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold font-mono tracking-wider uppercase text-white">Local Language Access</h4>
+                    <p className="text-[11px] text-white/50 font-light mt-0.5">Generative AI training in regional languages for accessibility.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 p-1 rounded-lg bg-primary/20 text-primary">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold font-mono tracking-wider uppercase text-white">Smart Farming Integration</h4>
+                    <p className="text-[11px] text-white/50 font-light mt-0.5">Real IoT sensors predicting soil and moisture health locally.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 p-1 rounded-lg bg-primary/20 text-primary">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold font-mono tracking-wider uppercase text-white">Self-Sustaining Model</h4>
+                    <p className="text-[11px] text-white/50 font-light mt-0.5">Managed by local youth operators trained in advanced modules.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="mt-1 p-1 rounded-lg bg-primary/20 text-primary">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold font-mono tracking-wider uppercase text-white">Coding & Drones corner</h4>
+                    <p className="text-[11px] text-white/50 font-light mt-0.5">Exposing rural school students to physical automation early.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Impact Metric Cards */}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+              <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
+                <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Global Reach</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">50,000+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Students Empowered</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Across global schools and advanced training networks.</p>
+              </div>
+              
+              <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
+                <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Local Village</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-primary mt-2">1,500+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Villagers Connected</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Trained on local language AI assistants and digital tools.</p>
+              </div>
+              
+              <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
+                <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Global Reach</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">50+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Labs Established</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Innovation and deep tech lab centers built globally.</p>
+              </div>
+              
+              <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
+                <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Local Village</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">5+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Active IoT Nodes</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Soil and crop telemetry nodes deployed in the area.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Four Pillars of Grampanchayat AI Labs */}
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-16 text-left">
+        <div className="space-y-12">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Empowering Rural Minds</span>
+            <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none text-[#1a1a2e]">
+              How AIRG Teaches Children & Opens AI Labs in Villages
+            </h2>
+            <p className="text-sm sm:text-base text-[#1a1a2e]/60 font-light leading-relaxed max-w-3xl">
+              By setting up physical AI and Robotics Labs inside Gram Panchayats, AIRG is bringing cutting-edge technology directly to rural schools. We empower local students with practical coding, hardware engineering, and automation skills to solve regional challenges.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white border border-black/5 hover:border-primary/20 p-6 rounded-3xl transition-all duration-300 shadow-sm hover:shadow-md relative overflow-hidden group">
+              <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-5 group-hover:scale-110 transition-transform">
+                <Cpu className="w-6 h-6" />
+              </div>
+              <h3 className="font-headline text-lg font-black uppercase tracking-tight text-[#1a1a2e] mb-2">Bharat AI Engine</h3>
+              <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                Rural kids interact with the Bharat AI Engine, learning generative AI concepts, coding logic, and regional language translation offline without requiring high-speed internet.
               </p>
             </div>
 
-            {/* Live Estimator Total Box */}
-            <div className="glass-premium rounded-[2.5rem] border-2 border-primary/20 p-8 shadow-xl bg-white space-y-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
-              <div>
-                <span className="text-xs font-mono font-bold tracking-widest text-[#1a1a2e]/45 uppercase">Estimated Setup Budget</span>
-                <div className="text-4xl sm:text-5xl font-black text-primary tracking-tight mt-1">
-                  ₹{formatCurrency(calculateGrandTotal())}
-                </div>
-                <p className="text-[10px] text-[#1a1a2e]/40 mt-1">Excludes local logistics, custom shipping, and site development taxes.</p>
+            <div className="bg-white border border-black/5 hover:border-primary/20 p-6 rounded-3xl transition-all duration-300 shadow-sm hover:shadow-md relative overflow-hidden group">
+              <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-5 group-hover:scale-110 transition-transform">
+                <Settings className="w-6 h-6" />
               </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => {
-                    const total = calculateGrandTotal();
-                    if (total === 0) return;
-                    setCheckoutItem({
-                      name: "Custom Grampanchayat AI Lab Setup",
-                      price: total,
-                      category: "Lab Infrastructure"
-                    });
-                    setIsCheckoutOpen(true);
-                  }}
-                  disabled={calculateGrandTotal() === 0}
-                  className={`flex-1 py-4 px-6 rounded-2xl font-bold text-xs uppercase tracking-widest transition-all text-center ${
-                    calculateGrandTotal() > 0
-                      ? "bg-primary text-white hover:scale-[1.02] shadow-lg shadow-primary/20 cursor-pointer"
-                      : "bg-[#1a1a2e]/10 text-[#1a1a2e]/30 cursor-not-allowed"
-                  }`}
-                  style={{ color: calculateGrandTotal() > 0 ? '#ffffff' : '' }}
-                >
-                  Request Proposal
-                </button>
-                <button
-                  onClick={() => {
-                    window.print();
-                  }}
-                  disabled={calculateGrandTotal() === 0}
-                  className={`py-4 px-6 rounded-2xl border transition-all ${
-                    calculateGrandTotal() > 0
-                      ? "border-black/10 hover:border-black/25 text-[#1a1a2e] hover:bg-slate-50 cursor-pointer"
-                      : "border-black/5 text-[#1a1a2e]/20 cursor-not-allowed"
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-base">print</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-8">
-            <div className="flex flex-wrap gap-2 pb-2 border-b border-black/5">
-              {zones.map((zone, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveZone(idx)}
-                  className={`px-5 py-3 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-2 border ${
-                    activeZone === idx
-                      ? "bg-[#1a1a2e] border-primary text-white hover:bg-[#1a1a2e]/95"
-                      : "bg-white border-black/5 text-[#1a1a2e]/60 hover:bg-slate-50 hover:border-black/10"
-                  }`}
-                  style={{ color: activeZone === idx ? '#ffffff' : '' }}
-                >
-                  <span className="material-symbols-outlined text-base">{zone.icon}</span>
-                  <span>Zone {String(idx + 1).padStart(2, "0")}</span>
-                </button>
-              ))}
+              <h3 className="font-headline text-lg font-black uppercase tracking-tight text-[#1a1a2e] mb-2">Robotics & Robots</h3>
+              <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                Students construct physical robots, wire microcontrollers like Arduino, and program smart motors to build automation models like automatic streetlights.
+              </p>
             </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeZone}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-6 text-left"
-              >
-                <div className="glass-premium rounded-[2.5rem] border border-black/5 p-6 sm:p-8 bg-white shadow-lg space-y-6">
-                  <div>
-                    <span className="text-[10px] font-mono font-bold tracking-widest text-[#1a1a2e]/40 uppercase block mb-1">Active custom Zone</span>
-                    <h3 className="font-headline text-xl sm:text-2xl font-black uppercase text-[#1a1a2e]">{zones[activeZone].name}</h3>
-                  </div>
+            <div className="bg-white border border-black/5 hover:border-primary/20 p-6 rounded-3xl transition-all duration-300 shadow-sm hover:shadow-md relative overflow-hidden group">
+              <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-5 group-hover:scale-110 transition-transform">
+                <Globe className="w-6 h-6" />
+              </div>
+              <h3 className="font-headline text-lg font-black uppercase tracking-tight text-[#1a1a2e] mb-2">Drones & Aviation</h3>
+              <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                Introducing kids to aerodynamics, model glider assembly, and smart flight controllers. Students simulate drone mapping and crop survey runs.
+              </p>
+            </div>
 
-                  <div className="space-y-4">
-                    {zones[activeZone].items.map((item, itemIdx) => (
-                      <div
-                        key={itemIdx}
-                        className="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-2xl border border-black/5 hover:border-black/10 transition-colors bg-white/50 gap-4"
-                      >
-                        <div className="space-y-1">
-                          <h4 className="text-sm font-semibold text-[#1a1a2e]">{item.name}</h4>
-                          <span className="text-[10px] font-mono text-primary font-bold">
-                            ₹{formatCurrency(item.unitCost)} {item.isLot ? "/ Lot" : "/ Unit"}
-                          </span>
-                        </div>
-
-                        {/* Quantity controls */}
-                        <div className="flex items-center gap-3 self-end sm:self-auto">
-                          <button
-                            onClick={() => updateQuantity(activeZone, itemIdx, -1)}
-                            className="w-9 h-9 rounded-xl border border-black/10 hover:border-black/25 flex items-center justify-center text-sm font-bold text-[#1a1a2e]/60 hover:text-[#1a1a2e] hover:bg-slate-50 transition-all select-none active:scale-95"
-                          >
-                            -
-                          </button>
-                          <span className="w-10 text-center font-mono text-sm font-bold text-[#1a1a2e]">
-                            {item.qty}
-                          </span>
-                          <button
-                            onClick={() => updateQuantity(activeZone, itemIdx, 1)}
-                            className="w-9 h-9 rounded-xl border border-black/10 hover:border-black/25 flex items-center justify-center text-sm font-bold text-[#1a1a2e]/60 hover:text-[#1a1a2e] hover:bg-slate-50 transition-all select-none active:scale-95"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-4 border-t border-black/5 flex justify-between items-center">
-                    <span className="text-xs font-mono font-bold text-[#1a1a2e]/45 uppercase">Zone Subtotal</span>
-                    <span className="text-lg font-bold text-primary">₹{formatCurrency(calculateZoneTotal(activeZone))}</span>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+            <div className="bg-white border border-black/5 hover:border-primary/20 p-6 rounded-3xl transition-all duration-300 shadow-sm hover:shadow-md relative overflow-hidden group">
+              <div className="w-12 h-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-5 group-hover:scale-110 transition-transform">
+                <Sprout className="w-6 h-6" />
+              </div>
+              <h3 className="font-headline text-lg font-black uppercase tracking-tight text-[#1a1a2e] mb-2">Hands-on IoT</h3>
+              <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                Teaching kids how to interface soil moisture, weather sensors, and solar telemetry kits to build real precision farming aids for their own family fields.
+              </p>
+            </div>
           </div>
         </div>
       </section>
+
+
 
       {/* Steps Section */}
       <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 border-t border-black/5 text-left">
@@ -315,6 +350,48 @@ export default function GrampanchayatAILabPage() {
                 <span className="text-4xl font-mono font-black text-primary/25 group-hover:text-primary/45 transition-colors mb-4">{step.step}</span>
                 <h3 className="font-headline text-lg font-black uppercase tracking-tight text-[#1a1a2e] mb-2">{step.title}</h3>
                 <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Grassroots Activity Gallery Section */}
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 border-t border-black/5 text-left bg-gradient-to-b from-transparent to-slate-50/50">
+        <div className="space-y-16">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Grassroots Showcase</span>
+            <h2 className="font-headline text-3xl sm:text-4xl font-black uppercase tracking-tight leading-none text-[#1a1a2e]">
+              Rural Lab Activity Gallery
+            </h2>
+            <p className="text-sm text-[#1a1a2e]/55 font-light leading-relaxed">
+              Real-world documentation of children, mentors, and local leaders collaborating, creating, and learning in our Grampanchayat AI Labs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[
+              "/pratham/PHOTO-2026-07-14-20-49-29.jpg",
+              "/pratham/PHOTO-2026-07-14-20-49-29 (1).jpg",
+              "/pratham/PHOTO-2026-07-14-20-49-30.jpg",
+              "/pratham/PHOTO-2026-07-14-20-49-30 (1).jpg",
+              "/pratham/PHOTO-2026-07-14-20-49-30 (2).jpg",
+              "/pratham/PHOTO-2026-07-14-20-49-31.jpg",
+              "/pratham/PHOTO-2026-07-14-20-49-32.jpg",
+              "/pratham/PHOTO-2026-07-14-20-50-11.jpg",
+              "/pratham/PHOTO-2026-07-14-20-50-11 (1).jpg"
+            ].map((img, idx) => (
+              <div key={idx} className="group relative overflow-hidden rounded-[2.5rem] border border-black/5 bg-white p-2.5 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-slate-900">
+                  <img
+                    src={img}
+                    alt={`Rural Lab Activity ${idx + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="material-symbols-outlined text-white text-3xl bg-primary/80 p-4 rounded-full scale-75 group-hover:scale-100 transition-all duration-300">visibility</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
