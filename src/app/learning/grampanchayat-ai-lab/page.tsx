@@ -16,6 +16,52 @@ export default function GrampanchayatAILabPage() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutItem, setCheckoutItem] = useState<{ name: string; price: number; image?: string; category?: string } | null>(null);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    panchayat: "",
+    state: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const names = formData.name.trim().split(" ");
+      const firstName = names[0] || "Grampanchayat";
+      const lastName = names.slice(1).join(" ") || "Inquirer";
+
+      const payload = {
+        firstName,
+        lastName,
+        email: formData.email,
+        subject: `Gram Panchayat Lab Setup Proposal Request`,
+        message: `Name: ${formData.name}\nPhone: ${formData.phone}\nGram Panchayat: ${formData.panchayat}\nState: ${formData.state}\n\nMessage/Requirements:\n${formData.message || "Interested in establishing an AI Lab in our Gram Panchayat."}`
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", phone: "", email: "", panchayat: "", state: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (err) {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const labImages = [
     "/pratham/PHOTO-2026-07-14-20-49-29.jpg",
     "/pratham/PHOTO-2026-07-14-20-49-30.jpg",
@@ -511,6 +557,126 @@ export default function GrampanchayatAILabPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* Establish Lab Contact CTA Section */}
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 border-t border-black/5 text-left bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 space-y-6">
+            <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Bring AI to Your Village</span>
+            <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none text-[#1a1a2e]">
+              Start an AI Lab in Your Gram Panchayat
+            </h2>
+            <p className="text-sm text-[#1a1a2e]/60 font-light leading-relaxed">
+              Are you an administrator, panchayat member, or community leader looking to establish a state-of-the-art AI & Robotics Lab? 
+            </p>
+            <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed">
+              Submit your request, and our development team will prepare a customized setup proposal, feasibility report, and implementation schedule for your local administration.
+            </p>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="glass-premium rounded-[3rem] border border-black/5 p-8 sm:p-10 bg-slate-50/50 shadow-xl relative">
+              {submitStatus === "success" ? (
+                <div className="text-center py-12 space-y-4">
+                  <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                    <span className="material-symbols-outlined text-3xl">check_circle</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#1a1a2e]">Request Received!</h3>
+                  <p className="text-sm text-[#1a1a2e]/60 max-w-md mx-auto">
+                    Thank you! Our community development specialists will review your panchayat proposal and contact you via email or phone shortly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1a2e]/60">Full Name</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-black/5 bg-white text-sm focus:outline-none focus:border-primary/45 transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1a2e]/60">Phone Number</label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="+91 98765 43210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-black/5 bg-white text-sm focus:outline-none focus:border-primary/45 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1a2e]/60">Gram Panchayat Name</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Shirwal Panchayat"
+                        value={formData.panchayat}
+                        onChange={(e) => setFormData({ ...formData, panchayat: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-black/5 bg-white text-sm focus:outline-none focus:border-primary/45 transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1a2e]/60">State / Region</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Maharashtra"
+                        value={formData.state}
+                        onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                        className="w-full px-4 py-3.5 rounded-xl border border-black/5 bg-white text-sm focus:outline-none focus:border-primary/45 transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1a2e]/60">Email Address</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="admin@panchayat.gov.in"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/5 bg-white text-sm focus:outline-none focus:border-primary/45 transition-colors"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1a1a2e]/60">Requirements / Message (Optional)</label>
+                    <textarea
+                      rows={3}
+                      placeholder="Any specific school names, student counts, or special requests..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/5 bg-white text-sm focus:outline-none focus:border-primary/45 transition-colors resize-none"
+                    />
+                  </div>
+
+                  {submitStatus === "error" && (
+                    <p className="text-xs font-mono text-red-500">Something went wrong. Please try again or email us directly.</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 px-6 rounded-2xl bg-[#1a1a2e] text-white hover:bg-[#1a1a2e]/90 font-bold text-xs uppercase tracking-widest transition-all duration-300 disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit Proposal Request"}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>
