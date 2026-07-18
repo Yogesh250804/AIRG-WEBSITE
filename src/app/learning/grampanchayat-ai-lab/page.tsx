@@ -349,66 +349,102 @@ export default function GrampanchayatAILabPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Object 1 */}
-            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-primary to-[#ff8f97] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-primary/10">
-                <Cpu className="w-10 h-10 sm:w-12 sm:h-12" />
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col sm:flex-row gap-6 items-start">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-white relative p-2 flex items-center justify-center">
+                <img
+                  src="/extracted-images/bharat_ai_engine_v4.png"
+                  alt="Bharat AI Engine Hardware"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="space-y-3 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/5 px-2 py-0.5 rounded">Offline Server Node</span>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/10">Offline Server Node</span>
                 </div>
-                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-primary transition-colors">Bharat AI Engine</h3>
+                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-primary transition-colors">Bharat AI Engine™</h3>
                 <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
                   A high-durability local edge host serving interactive LMS, generative AI chat, and regional language models without requiring active internet connectivity.
                 </p>
+                <ul className="text-[11px] text-[#1a1a2e]/70 space-y-1 font-mono">
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Offline LLM Pipeline (Llama/Gemma)</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> MESH Network (Up to 20 client nodes)</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Voice-Activated Regional Translation</li>
+                </ul>
               </div>
             </div>
 
             {/* Object 2 */}
-            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-blue-500 to-[#92c5ff] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-blue-500/10">
-                <Settings className="w-10 h-10 sm:w-12 sm:h-12" />
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col sm:flex-row gap-6 items-start">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-slate-900 relative">
+                <img
+                  src="/lab-robotics.png"
+                  alt="AIR Robotics Base Board"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="space-y-3 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-500 bg-blue-500/5 px-2 py-0.5 rounded">Tactile Assembly</span>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-blue-500 bg-blue-500/5 px-2 py-0.5 rounded border border-blue-500/10">Tactile Assembly</span>
                 </div>
                 <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-blue-500 transition-colors">AIR Robotics Base Boards</h3>
                 <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
                   Tactile block connectors, microcontrollers (Arduino/Raspberry Pi compatible), smart stepper motor modules, and sensors for building autonomous robots.
                 </p>
+                <ul className="text-[11px] text-[#1a1a2e]/70 space-y-1 font-mono">
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Solderless Kids-Safe Connections</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Dual Arduino & Raspberry Pi Support</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Multi-Servo & Active Sensor Ports</li>
+                </ul>
               </div>
             </div>
 
             {/* Object 3 */}
-            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-purple-500 to-[#dca9ff] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-purple-500/10">
-                <Globe className="w-10 h-10 sm:w-12 sm:h-12" />
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col sm:flex-row gap-6 items-start">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-slate-900 relative">
+                <img
+                  src="/lab-drone.png"
+                  alt="Aviation Drone Kit"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="space-y-3 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-500 bg-purple-500/5 px-2 py-0.5 rounded">Aero Simulator</span>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-purple-500 bg-purple-500/5 px-2 py-0.5 rounded border border-purple-500/10">Aero Simulator</span>
                 </div>
                 <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-purple-500 transition-colors">Aviation & Flight Kits</h3>
                 <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
                   Aerodynamic wing configurations, high-density foam model gliders, and smart miniature flight controller boards to teach kids structural design and survey math.
                 </p>
+                <ul className="text-[11px] text-[#1a1a2e]/70 space-y-1 font-mono">
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> Lightweight Aerodynamic Foam Gliders</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> Wireless Flight Telemetry Tracking</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-purple-500" /> Rudder & Surface Servo Configurations</li>
+                </ul>
               </div>
             </div>
 
             {/* Object 4 */}
-            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
-              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-emerald-500 to-[#92ffd3] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-emerald-500/10">
-                <Sprout className="w-10 h-10 sm:w-12 sm:h-12" />
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col sm:flex-row gap-6 items-start">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-slate-900 relative">
+                <img
+                  src="/lab-electronics.png"
+                  alt="NPK Telemetry Soil Probe"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="space-y-3 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/5 px-2 py-0.5 rounded">Agri-IoT Module</span>
+                  <span className="text-[9px] font-mono font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/5 px-2 py-0.5 rounded border border-emerald-500/10">Agri-IoT Module</span>
                 </div>
                 <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-emerald-500 transition-colors">NPK Telemetry Probes</h3>
                 <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
                   Field-ready soil chemistry sensors, humidity/temperature probes, and long-range solar transmitters built to teach kids environmental data logging.
                 </p>
+                <ul className="text-[11px] text-[#1a1a2e]/70 space-y-1 font-mono">
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Capacitive NPK Level Analysis Sensors</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Long-Range LoRa Telemetry Transmitter</li>
+                  <li className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Weather-Resistant Battery Case Module</li>
+                </ul>
               </div>
             </div>
           </div>
