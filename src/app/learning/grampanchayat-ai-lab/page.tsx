@@ -129,10 +129,18 @@ export default function GrampanchayatAILabPage() {
     <main className="bg-[#FAFBFD] min-h-screen text-[#1a1a2e] relative overflow-x-hidden font-sans pt-20">
       <Navbar />
 
+      {/* Decorative Grid and Ambient Glow Objects */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-10" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse" />
+      <div className="absolute top-96 right-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse" />
+
       {/* Hero section */}
       <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 pt-16 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-6 text-left relative">
+            {/* Design Element: Accent Line */}
+            <div className="absolute -left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block rounded-full" />
+            
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono font-bold uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               Grassroots Tech Revolution
@@ -145,19 +153,19 @@ export default function GrampanchayatAILabPage() {
               Pioneering the democratization of high-compute artificial intelligence, coding, precision IoT, and modern tech skills at the very foundation of local self-governance.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-primary bg-primary/5 px-3 py-1.5 rounded-lg border border-primary/10">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-primary bg-primary/5 px-3 py-1.5 rounded-lg border border-primary/10 hover:border-primary/30 transition-colors">
                 <Award className="w-4 h-4" />
                 <span>India's 1st Grassroots AI Initiative</span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1a1a2e]/60 bg-black/5 px-3 py-1.5 rounded-lg border border-black/5">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1a1a2e]/60 bg-black/5 px-3 py-1.5 rounded-lg border border-black/5 hover:border-black/10 transition-colors">
                 <MapPin className="w-4 h-4" />
                 <span>Empowering Rural Communities</span>
               </div>
             </div>
           </div>
           <div className="lg:col-span-5 relative">
-            <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10 animate-pulse" />
-            <div className="glass-premium rounded-[3rem] border border-black/5 overflow-hidden p-3 shadow-2xl bg-white/70">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-[3.1rem] blur opacity-15" />
+            <div className="glass-premium rounded-[3rem] border border-black/5 overflow-hidden p-3 shadow-2xl bg-white/70 relative">
               <div className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-slate-900 group">
                 <img
                   src={labImages[currentImageIndex]}
@@ -326,10 +334,86 @@ export default function GrampanchayatAILabPage() {
             </div>
           </div>
         </div>
+      </section>      {/* Rural AI Infrastructure Kit Showcase */}
+      <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-20 border-t border-black/5 text-left bg-gradient-to-b from-transparent to-[#FAFBFD]">
+        <div className="space-y-12">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Physical Objects & Hardware</span>
+            <h2 className="font-headline text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none text-[#1a1a2e]">
+              Rural AI Infrastructure Kit
+            </h2>
+            <p className="text-sm sm:text-base text-[#1a1a2e]/60 font-light leading-relaxed max-w-3xl">
+              Inside every Grampanchayat AI Lab, kids get hands-on access to custom hardware built specifically for offline, durable educational use.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Object 1 */}
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-primary to-[#ff8f97] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-primary/10">
+                <Cpu className="w-10 h-10 sm:w-12 sm:h-12" />
+              </div>
+              <div className="space-y-3 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary bg-primary/5 px-2 py-0.5 rounded">Offline Server Node</span>
+                </div>
+                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-primary transition-colors">Bharat AI Engine</h3>
+                <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                  A high-durability local edge host serving interactive LMS, generative AI chat, and regional language models without requiring active internet connectivity.
+                </p>
+              </div>
+            </div>
+
+            {/* Object 2 */}
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-blue-500 to-[#92c5ff] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-blue-500/10">
+                <Settings className="w-10 h-10 sm:w-12 sm:h-12" />
+              </div>
+              <div className="space-y-3 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-blue-500 bg-blue-500/5 px-2 py-0.5 rounded">Tactile Assembly</span>
+                </div>
+                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-blue-500 transition-colors">AIR Robotics Base Boards</h3>
+                <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                  Tactile block connectors, microcontrollers (Arduino/Raspberry Pi compatible), smart stepper motor modules, and sensors for building autonomous robots.
+                </p>
+              </div>
+            </div>
+
+            {/* Object 3 */}
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-purple-500 to-[#dca9ff] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-purple-500/10">
+                <Globe className="w-10 h-10 sm:w-12 sm:h-12" />
+              </div>
+              <div className="space-y-3 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-500 bg-purple-500/5 px-2 py-0.5 rounded">Aero Simulator</span>
+                </div>
+                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-purple-500 transition-colors">Aviation & Flight Kits</h3>
+                <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                  Aerodynamic wing configurations, high-density foam model gliders, and smart miniature flight controller boards to teach kids structural design and survey math.
+                </p>
+              </div>
+            </div>
+
+            {/* Object 4 */}
+            <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-emerald-500 to-[#92ffd3] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-lg shadow-emerald-500/10">
+                <Sprout className="w-10 h-10 sm:w-12 sm:h-12" />
+              </div>
+              <div className="space-y-3 text-left">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/5 px-2 py-0.5 rounded">Agri-IoT Module</span>
+                </div>
+                <h3 className="font-headline text-xl font-black uppercase text-[#1a1a2e] group-hover:text-emerald-500 transition-colors">NPK Telemetry Probes</h3>
+                <p className="text-xs text-[#1a1a2e]/60 font-light leading-relaxed">
+                  Field-ready soil chemistry sensors, humidity/temperature probes, and long-range solar transmitters built to teach kids environmental data logging.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
-
-
-
       {/* Steps Section */}
       <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 border-t border-black/5 text-left">
         <div className="space-y-16">
