@@ -4,8 +4,8 @@ import { Navbar } from "@/components/demo-navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { CheckoutModal } from "@/components/store/CheckoutModal";
-import { 
-  Cpu, Sprout, Milestone, GraduationCap, Users, ShieldCheck, 
+import {
+  Cpu, Sprout, Milestone, GraduationCap, Users, ShieldCheck,
   ArrowRight, Lightbulb, MapPin, Award, CheckCircle2, ChevronRight,
   TrendingUp, Globe, FileText, Settings
 } from "lucide-react";
@@ -140,7 +140,7 @@ export default function GrampanchayatAILabPage() {
           <div className="lg:col-span-7 space-y-6 text-left relative">
             {/* Design Element: Accent Line */}
             <div className="absolute -left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-transparent hidden md:block rounded-full" />
-            
+
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono font-bold uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               Grassroots Tech Revolution
@@ -189,7 +189,7 @@ export default function GrampanchayatAILabPage() {
         <div className="bg-gradient-to-br from-[#1a1a2e] to-[#252542] rounded-[3.5rem] text-white overflow-hidden shadow-2xl relative">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(238,44,60,0.15),transparent_45%)]" />
           <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-8 sm:p-12 md:p-16 items-center relative z-10">
             <div className="lg:col-span-7 space-y-6 text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono font-bold uppercase tracking-wider">
@@ -203,7 +203,7 @@ export default function GrampanchayatAILabPage() {
               <p className="text-sm sm:text-base text-white/70 font-light leading-relaxed max-w-xl">
                 Breaking technology barriers where they matter most. We established the country's first-ever Grampanchayat AI Lab, demonstrating that state-of-the-art technologies like local generative AI models, edge compute nodes, and IoT-driven farming systems aren't just for tech hubs—they belong in our villages.
               </p>
-              
+
               {/* Highlight list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <div className="flex items-start gap-3">
@@ -253,21 +253,21 @@ export default function GrampanchayatAILabPage() {
                 <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Students Empowered</div>
                 <p className="text-[10px] text-white/40 font-light mt-2">Across global schools and advanced training networks.</p>
               </div>
-              
+
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
                 <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Local Village</span>
                 <div className="text-3xl sm:text-4xl font-black font-headline text-primary mt-2">1,500+</div>
                 <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Villagers Connected</div>
                 <p className="text-[10px] text-white/40 font-light mt-2">Trained on local language AI assistants and digital tools.</p>
               </div>
-              
+
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
                 <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Global Reach</span>
                 <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">50+</div>
                 <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Labs Established</div>
                 <p className="text-[10px] text-white/40 font-light mt-2">Innovation and deep tech lab centers built globally.</p>
               </div>
-              
+
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
                 <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Local Village</span>
                 <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">5+</div>
@@ -350,11 +350,11 @@ export default function GrampanchayatAILabPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Object 1 */}
             <div className="group relative overflow-hidden rounded-[3rem] border border-black/5 bg-white p-8 transition-all duration-300 hover:shadow-xl hover:border-primary/20 flex flex-col sm:flex-row gap-6 items-start">
-              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-white relative p-2 flex items-center justify-center">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-[2rem] overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-md border border-black/5 bg-slate-950 relative">
                 <img
-                  src="/extracted-images/bharat_ai_engine_v4.png"
+                  src="/extracted-images/bharat_ai_server.png"
                   alt="Bharat AI Engine Hardware"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="space-y-3 text-left">
@@ -520,7 +520,8 @@ export default function GrampanchayatAILabPage() {
 
       {/* Print receipt template (hidden on screen) */}
       <div id="pdet-receipt-print-root" className="hidden print:block p-8 bg-white max-w-[800px] mx-auto">
-        <style dangerouslySetInnerHTML={{__html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           @media print {
             body {
               background: white !important;
@@ -540,7 +541,7 @@ export default function GrampanchayatAILabPage() {
             }
           }
         `}} />
-        
+
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '3px solid #EE2C3C', paddingBottom: '16px', marginBottom: '20px' }}>
           <div>
