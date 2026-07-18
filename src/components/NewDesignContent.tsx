@@ -123,6 +123,7 @@ const row2 = [
   { name: "Maha60", logo: "/logos/maha60.png", scaleVal: 1.6 },
   { name: "Institution's Innovation Council", logo: "/logos/left_7.png", scaleVal: 1.5 },
   { name: "Varhad Group", logo: "/logos/varhad.jpeg", scaleVal: 1.05 },
+  { name: "IAIRESCO", logo: "/logos/iairesco.jpg", scaleVal: 1.0 },
 ];
 
 const countries = [
