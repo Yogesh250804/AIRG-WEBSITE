@@ -106,11 +106,11 @@ export async function GET() {
     const { execSync } = require("child_process");
     let gitOutput = "";
     try {
-      gitOutput += execSync("git add .", { cwd: process.cwd() }).toString();
-      gitOutput += execSync('git commit -m "Update site UI, GST, WhatsApp links, and gallery assets"', { cwd: process.cwd() }).toString();
-      gitOutput += execSync("git push", { cwd: process.cwd() }).toString();
+      gitOutput += "ADD: " + execSync("git add -A", { cwd: process.cwd() }).toString() + "\n";
+      gitOutput += "COMMIT: " + execSync('git commit -m "Deploy latest local UI updates and assets"', { cwd: process.cwd() }).toString() + "\n";
+      gitOutput += "PUSH: " + execSync("git push origin main", { cwd: process.cwd() }).toString() + "\n";
     } catch (gErr: any) {
-      gitOutput += `\nGit info: ${gErr.stdout ? gErr.stdout.toString() : ''} ${gErr.stderr ? gErr.stderr.toString() : gErr.message}`;
+      gitOutput += `\nGit error/info: ${gErr.stdout ? gErr.stdout.toString() : ''} ${gErr.stderr ? gErr.stderr.toString() : gErr.message}`;
     }
 
     return NextResponse.json({
