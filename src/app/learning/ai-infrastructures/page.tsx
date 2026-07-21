@@ -273,36 +273,17 @@ export default function AIInfrastructuresB2BPage() {
                   AI Innovation Lab Engine
                 </h4>
                 
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-6 font-light">
                   Most suitable for <strong className="font-bold text-[#1a1a2e]">schools and institutes</strong>. An offline-first local system enabling students to access interactive AI chatbots, programming labs, and computer vision models completely without internet.
                 </p>
-                <div className="space-y-4 mb-8">
-                  {[
-                    { label: "Aira Teacher (AI Chatbot)", desc: "Offline conversational AI assistant that talks, listens, and teaches coding/AI in 20+ languages.", icon: "chat" },
-                    { label: "AI Research Lab", desc: "Ready-to-run local AI modules like Face Detection, Object Detection, and Handwriting AI.", icon: "visibility" },
-                    { label: "Developer Studio", desc: "Local Python Sandbox, Jupyter Lab Studio, and Scratch block coding for hands-on programming.", icon: "code" },
-                    { label: "AI Training Lab", desc: "A visual local pipeline for students to collect custom data, train ML models, and evaluate offline.", icon: "model_training" },
-                    { label: "Interactive Graphs", desc: "Learn data science by editing Python visualization scripts and rendering real-time charts.", icon: "bar_chart" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <span className="material-symbols-outlined text-base">{item.icon}</span>
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
-                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
+
                 {/* Video Preview Thumbnail */}
                 <div 
                   onClick={() => {
                     setActiveVideoUrl("/video/bharat_ai_1.mp4");
                     setActiveVideoTitle("Bharat AI 1.0 Version Overview");
                   }}
-                  className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-primary/30 shadow-sm cursor-pointer group/video z-10"
+                  className="mb-6 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-primary/30 shadow-sm cursor-pointer group/video z-10"
                 >
                   <img 
                     src="/bharat_ai_1_thumb.png" 
@@ -325,21 +306,41 @@ export default function AIInfrastructuresB2BPage() {
                   </div>
                 </div>
 
-                {/* Professional Consultation Button */}
-                <a 
-                  href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%201.0%20(Education%20Edition)"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
-                >
-                  <span className="material-symbols-outlined text-base">forum</span>
-                  Request Official Consultation
-                </a>
+                <div className="space-y-4 mb-8">
+                  {[
+                    { label: "Aira Teacher (AI Chatbot)", desc: "Offline conversational AI assistant that talks, listens, and teaches coding/AI in 20+ languages.", icon: "chat" },
+                    { label: "AI Research Lab", desc: "Ready-to-run local AI modules like Face Detection, Object Detection, and Handwriting AI.", icon: "visibility" },
+                    { label: "Developer Studio", desc: "Local Python Sandbox, Jupyter Lab Studio, and Scratch block coding for hands-on programming.", icon: "code" },
+                    { label: "AI Training Lab", desc: "A visual local pipeline for students to collect custom data, train ML models, and evaluate offline.", icon: "model_training" },
+                    { label: "Interactive Graphs", desc: "Learn data science by editing Python visualization scripts and rendering real-time charts.", icon: "bar_chart" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
+                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+
+              {/* Professional Consultation Button */}
+              <a 
+                href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%201.0%20(Education%20Edition)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg mt-auto"
+              >
+                <span className="material-symbols-outlined text-base">forum</span>
+                Request Official Consultation
+              </a>
             </div>
 
             {/* Bharat AI 2.0 - Professional Edition */}
-            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-[#1e293b]/40 hover:shadow-[0_20px_50px_rgba(30,41,59,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden lg:translate-y-8">
+            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-[#1e293b]/40 hover:shadow-[0_20px_50px_rgba(30,41,59,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#1e293b]/5 rounded-full blur-2xl pointer-events-none" />
               <div>
                 <div className="flex justify-between items-start mb-6">
@@ -356,36 +357,16 @@ export default function AIInfrastructuresB2BPage() {
                   SIA Workspace System
                 </h4>
                 
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-6 font-light">
                   Most suitable for <strong className="font-bold text-[#1a1a2e]">Professionals, Management Heads, Small teams, Medium teams with lawyers and CAs</strong>. Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
                 </p>
 
-                <div className="space-y-4 mb-8">
-                  {[
-                    { label: "Private AI (Local GPT)", desc: "Interact with private AI models locally without subscription fees or data leaks.", icon: "chat" },
-                    { label: "Secure Document AI", desc: "Index and extract key details from internal PDF, Excel, and doc repositories.", icon: "description" },
-                    { label: "Smart Q&A Node", desc: "Instant contextual answers backed strictly by local corporate documents.", icon: "quiz" },
-                    { label: "Knowledge Retrieval", desc: "High-speed semantic search indexing for large institutional archives.", icon: "database" },
-                    { label: "AI-Powered Drafting", desc: "Secure assistant to compose letters, reports, and code blocks in privacy.", icon: "edit_document" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#1e293b]/5 border border-[#1e293b]/10 flex items-center justify-center text-[#1e293b] shrink-0">
-                        <span className="material-symbols-outlined text-base">{item.icon}</span>
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
-                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
                 {/* Booklet Preview Thumbnail */}
                 <a 
                   href="/booklet_bharat_ai_2.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mb-8 block relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-[#1e293b]/30 shadow-sm cursor-pointer group/video z-10"
+                  className="mb-6 block relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-[#1e293b]/30 shadow-sm cursor-pointer group/video z-10"
                 >
                   <img 
                     src="/bharat_ai_2_booklet_cover.png" 
@@ -408,17 +389,37 @@ export default function AIInfrastructuresB2BPage() {
                   </div>
                 </a>
 
-                {/* Professional Consultation Button */}
-                <a 
-                  href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%202.0%20(Professional%20Edition)"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4 px-4 rounded-xl bg-[#1e293b] hover:bg-[#0f172a] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
-                >
-                  <span className="material-symbols-outlined text-base">forum</span>
-                  Request Official Consultation
-                </a>
+                <div className="space-y-4 mb-8">
+                  {[
+                    { label: "Private AI (Local GPT)", desc: "Interact with private AI models locally without subscription fees or data leaks.", icon: "chat" },
+                    { label: "Secure Document AI", desc: "Index and extract key details from internal PDF, Excel, and doc repositories.", icon: "description" },
+                    { label: "Smart Q&A Node", desc: "Instant contextual answers backed strictly by local corporate documents.", icon: "quiz" },
+                    { label: "Knowledge Retrieval", desc: "High-speed semantic search indexing for large institutional archives.", icon: "database" },
+                    { label: "AI-Powered Drafting", desc: "Secure assistant to compose letters, reports, and code blocks in privacy.", icon: "edit_document" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-[#1e293b]/5 border border-[#1e293b]/10 flex items-center justify-center text-[#1e293b] shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
+                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+
+              {/* Professional Consultation Button */}
+              <a 
+                href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%202.0%20(Professional%20Edition)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 px-4 rounded-xl bg-[#1e293b] hover:bg-[#0f172a] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg mt-auto"
+              >
+                <span className="material-symbols-outlined text-base">forum</span>
+                Request Official Consultation
+              </a>
             </div>
 
             {/* Bharat AI 3.0 - Enterprise Edition */}
@@ -439,29 +440,9 @@ export default function AIInfrastructuresB2BPage() {
                   Private AI Infrastructure Platform
                 </h4>
                 
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-6 font-light">
                   Most suitable for <strong className="font-bold text-[#1a1a2e]">MNCs and industries</strong>. A high-capacity cluster engineered for complete data sovereignty. Designed for large corporations, government departments, and R&D facilities.
                 </p>
-
-                <div className="space-y-4 mb-8">
-                  {[
-                    { label: "AI Automation Node", desc: "Automate complex enterprise pipelines offline using custom local triggers.", icon: "bolt" },
-                    { label: "High-Speed AI Workflows", desc: "Multi-agent systems executing high-throughput queries concurrently.", icon: "insights" },
-                    { label: "Custom Model Training", desc: "Securely fine-tune large models on local specialized server hardware nodes.", icon: "terminal" },
-                    { label: "Private Analytics", desc: "Run intelligence synthesis over internal datasets with zero external sync.", icon: "assessment" },
-                    { label: "Air-Gapped Security", desc: "Absolute privacy shielding for sensitive state or proprietary IP archives.", icon: "gpp_good" }
-                  ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/5 border border-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
-                        <span className="material-symbols-outlined text-base">{item.icon}</span>
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
-                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
 
                 {/* Video Preview Thumbnail */}
                 <div 
@@ -469,7 +450,7 @@ export default function AIInfrastructuresB2BPage() {
                     setActiveVideoUrl("/video/bharat_ai_3.mp4");
                     setActiveVideoTitle("Bharat AI 3.0 Version Overview");
                   }}
-                  className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-emerald-500/30 shadow-sm cursor-pointer group/video z-10"
+                  className="mb-6 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-emerald-500/30 shadow-sm cursor-pointer group/video z-10"
                 >
                   <img 
                     src="/bharat_ai_3_thumb.png" 
@@ -492,17 +473,37 @@ export default function AIInfrastructuresB2BPage() {
                   </div>
                 </div>
 
-                {/* Professional Consultation Button */}
-                <a 
-                  href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%203.0%20(Industry%20Edition)"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
-                >
-                  <span className="material-symbols-outlined text-base">forum</span>
-                  Request Official Consultation
-                </a>
+                <div className="space-y-4 mb-8">
+                  {[
+                    { label: "AI Automation Node", desc: "Automate complex enterprise pipelines offline using custom local triggers.", icon: "bolt" },
+                    { label: "High-Speed AI Workflows", desc: "Multi-agent systems executing high-throughput queries concurrently.", icon: "insights" },
+                    { label: "Custom Model Training", desc: "Securely fine-tune large models on local specialized server hardware nodes.", icon: "terminal" },
+                    { label: "Private Analytics", desc: "Run intelligence synthesis over internal datasets with zero external sync.", icon: "assessment" },
+                    { label: "Air-Gapped Security", desc: "Absolute privacy shielding for sensitive state or proprietary IP archives.", icon: "gpp_good" }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/5 border border-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
+                        <span className="material-symbols-outlined text-base">{item.icon}</span>
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-[#1a1a2e] text-xs uppercase tracking-wider">{item.label}</h5>
+                        <p className="text-[#1a1a2e]/50 text-[10px] leading-relaxed mt-0.5">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+
+              {/* Professional Consultation Button */}
+              <a 
+                href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%203.0%20(Industry%20Edition)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg mt-auto"
+              >
+                <span className="material-symbols-outlined text-base">forum</span>
+                Request Official Consultation
+              </a>
             </div>
           </div>
 
