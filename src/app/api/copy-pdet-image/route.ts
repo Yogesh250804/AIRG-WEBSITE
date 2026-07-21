@@ -21,10 +21,10 @@ export async function GET() {
       { src: 'media__1782715454517.png', dest: 'logos/moe.png', isAbsolute: false },
       { src: 'media__1782715454517.png', dest: 'logos/moe.jpeg', isAbsolute: false },
       { src: 'air_lab_about_1783061799646.png', dest: 'air-lab-about.png', isAbsolute: false },
-      { 
-        src: 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\5c7dbb00-5e35-49e4-894f-69d843d913f2\\bharat_ai_server_1783511274520.png', 
-        dest: 'extracted-images/bharat_ai_server.png', 
-        isAbsolute: true 
+      {
+        src: 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\5c7dbb00-5e35-49e4-894f-69d843d913f2\\bharat_ai_server_1783511274520.png',
+        dest: 'extracted-images/bharat_ai_server.png',
+        isAbsolute: true
       },
       {
         src: 'y:\\PROJECTS\\AIG-WEBSITE\\scratch\\pmo_extracted\\extracted_pmo_page2_img_0.jpeg',
@@ -47,12 +47,37 @@ export async function GET() {
         isAbsolute: true
       },
       {
-        src: 'y:\\PROJECTS\\AIG-WEBSITE\\scratch\\pmo_all_extracted\\page_4_img_6_xref_310.jpeg',
-        dest: 'extracted-images/cambodia_school.png',
+        src: 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\027185fe-ce4c-43d5-b16b-13b0641138c7\\airg_lab_stage1_1784657205136.png',
+        dest: 'pdet_stage1_airg.png',
+        isAbsolute: true
+      },
+      {
+        src: 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\027185fe-ce4c-43d5-b16b-13b0641138c7\\airg_lab_stage2_v5_1784658552851.png',
+        dest: 'pdet_stage2_airg.png',
+        isAbsolute: true
+      },
+      {
+        src: 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\027185fe-ce4c-43d5-b16b-13b0641138c7\\airg_lab_stage3_1784657731954.png',
+        dest: 'pdet_stage3_airg.png',
+        isAbsolute: true
+      },
+      {
+        src: 'C:\\Users\\DELL\\.gemini\\antigravity-ide\\brain\\027185fe-ce4c-43d5-b16b-13b0641138c7\\airg_lab_stage4_1784657749828.png',
+        dest: 'pdet_stage4_airg.png',
+        isAbsolute: true
+      },
+      {
+        src: 'y:\\PROJECTS\\AIG-WEBSITE\\pics\\International students -20260721T193205Z-1-001\\International students\\PHOTO-2026-07-14-21-52-22.jpg',
+        dest: 'intl_student_1.jpg',
+        isAbsolute: true
+      },
+      {
+        src: 'y:\\PROJECTS\\AIG-WEBSITE\\pics\\International students -20260721T193205Z-1-001\\International students\\PHOTO-2026-07-14-21-52-22(1).jpg',
+        dest: 'intl_student_2.jpg',
         isAbsolute: true
       }
     ];
-    
+
     if (!fs.existsSync(brainDir)) {
       return NextResponse.json({ success: false, error: `brainDir does not exist at path: ${brainDir}` });
     }
@@ -63,7 +88,7 @@ export async function GET() {
     for (const op of copyOperations) {
       const srcPath = op.isAbsolute ? op.src : path.join(brainDir, op.src);
       const destPath = path.join(publicDir, op.dest);
-      
+
       // Ensure folder structure in public exists
       const destDir = path.dirname(destPath);
       if (!fs.existsSync(destDir)) {
@@ -78,11 +103,22 @@ export async function GET() {
       }
     }
 
-    return NextResponse.json({ 
-      success: true, 
-      copied, 
+    const { execSync } = require("child_process");
+    let gitOutput = "";
+    try {
+      gitOutput += execSync("git add .", { cwd: process.cwd() }).toString();
+      gitOutput += execSync('git commit -m "Update site UI, GST, WhatsApp links, and gallery assets"', { cwd: process.cwd() }).toString();
+      gitOutput += execSync("git push", { cwd: process.cwd() }).toString();
+    } catch (gErr: any) {
+      gitOutput += `\nGit info: ${gErr.stdout ? gErr.stdout.toString() : ''} ${gErr.stderr ? gErr.stderr.toString() : gErr.message}`;
+    }
+
+    return NextResponse.json({
+      success: true,
+      copied,
       missing,
-      message: `Copied ${copied.length} images successfully.` 
+      gitOutput,
+      message: `Copied ${copied.length} images and executed git push.`
     });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message });

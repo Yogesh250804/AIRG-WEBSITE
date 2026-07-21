@@ -43,6 +43,8 @@ export default function AIInfrastructuresB2BPage() {
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
   const BHARAT_AI_3_PHOTOS = [
+    "/intl_student_1.jpg",
+    "/intl_student_2.jpg",
     "/images/bharat-ai-3/PHOTO-2026-07-15-11-22-57.jpg",
     "/images/bharat-ai-3/PHOTO-2026-07-15-11-30-26.jpg",
     "/images/bharat-ai-3/PHOTO-2026-07-15-11-31-39.jpg",
@@ -313,8 +315,8 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   </div>
                   {/* Top-Left Bharat AI branding */}
-                  <div className="absolute top-3 left-3 z-20 select-none">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-mono">BHARAT AI 1.0</span>
+                  <div className="absolute top-3 left-3 z-20 select-none bg-black/80 backdrop-blur-md px-3 py-1 rounded-md border border-white/20">
+                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-white font-mono">BHARAT AI 1.0</span>
                   </div>
                   {/* Bottom-Left Watch badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
@@ -322,10 +324,17 @@ export default function AIInfrastructuresB2BPage() {
                     <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Version Info</span>
                   </div>
                 </div>
-              </div>
-              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
-                <span>DEPLOYMENT: LOCAL MESH</span>
-                <span>STATUS: READY</span>
+
+                {/* Professional Consultation Button */}
+                <a 
+                  href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%201.0%20(Education%20Edition)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
+                >
+                  <span className="material-symbols-outlined text-base">forum</span>
+                  Request Official Consultation
+                </a>
               </div>
             </div>
 
@@ -389,8 +398,8 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   </div>
                   {/* Top-Left Bharat AI branding */}
-                  <div className="absolute top-3 left-3 z-20 select-none">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-mono">BHARAT AI 2.0</span>
+                  <div className="absolute top-3 left-3 z-20 select-none bg-black/80 backdrop-blur-md px-3 py-1 rounded-md border border-white/20">
+                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-white font-mono">BHARAT AI 2.0</span>
                   </div>
                   {/* Bottom-Left Download badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
@@ -398,10 +407,17 @@ export default function AIInfrastructuresB2BPage() {
                     <span className="text-[9px] font-black uppercase tracking-wider text-white">Download Booklet</span>
                   </div>
                 </a>
-              </div>
-              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
-                <span>DEPLOYMENT: LOCAL SERVER</span>
-                <span>STATUS: READY</span>
+
+                {/* Professional Consultation Button */}
+                <a 
+                  href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%202.0%20(Professional%20Edition)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 px-4 rounded-xl bg-[#1e293b] hover:bg-[#0f172a] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
+                >
+                  <span className="material-symbols-outlined text-base">forum</span>
+                  Request Official Consultation
+                </a>
               </div>
             </div>
 
@@ -466,8 +482,8 @@ export default function AIInfrastructuresB2BPage() {
                     </div>
                   </div>
                   {/* Top-Left Bharat AI branding */}
-                  <div className="absolute top-3 left-3 z-20 select-none">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/95 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] font-mono">BHARAT AI 3.0</span>
+                  <div className="absolute top-3 left-3 z-20 select-none bg-black/80 backdrop-blur-md px-3 py-1 rounded-md border border-white/20">
+                    <span className="text-[10px] font-black uppercase tracking-[0.15em] text-white font-mono">BHARAT AI 3.0</span>
                   </div>
                   {/* Bottom-Left Watch badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
@@ -476,38 +492,44 @@ export default function AIInfrastructuresB2BPage() {
                   </div>
                 </div>
 
-                {/* View Photos Button */}
-                <button 
-                  onClick={() => {
-                    setIsGalleryOpen(true);
-                    setActivePhotoIdx(0);
-                  }}
-                  className="mb-8 w-full py-3.5 px-4 rounded-xl border border-emerald-500/20 hover:border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/5 font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                {/* Professional Consultation Button */}
+                <a 
+                  href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%203.0%20(Industry%20Edition)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
                 >
-                  <span className="material-symbols-outlined text-sm">photo_library</span>
-                  View Photos & Gallery
-                </button>
-              </div>
-              <div className="pt-6 border-t border-black/5 flex items-center justify-between text-xs font-mono text-[#1a1a2e]/40">
-                <span>DEPLOYMENT: GPU CLUSTER</span>
-                <span>STATUS: READY</span>
+                  <span className="material-symbols-outlined text-base">forum</span>
+                  Request Official Consultation
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Sleek CTA block below grid */}
+          {/* Sleek Custom AI Builds & Consultation CTA block */}
           <div className="mt-16 text-center">
-            <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 p-6 sm:p-8 rounded-[2rem] border border-black/5 bg-white/40 backdrop-blur-md max-w-4xl mx-auto shadow-sm">
-              <div className="text-left space-y-1">
-                <h4 className="text-lg font-black text-[#1a1a2e] uppercase font-headline">Need Help Choosing the Right Bharat AI Version?</h4>
-                <p className="text-sm text-[#1a1a2e]/60 font-medium">Consult with our AI infrastructure specialists to select or customize the perfect deployment for your organization.</p>
+            <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 p-6 sm:p-8 rounded-[2rem] border border-black/5 bg-white/50 backdrop-blur-md max-w-5xl mx-auto shadow-sm relative overflow-hidden">
+              <div className="text-left space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="px-3.5 py-1.5 rounded-full bg-primary text-white text-[10px] font-mono font-black uppercase tracking-widest shadow-sm">
+                    CUSTOM AI BUILDS AVAILABLE
+                  </span>
+                  <span className="text-[10px] font-mono text-[#1a1a2e]/40 font-bold uppercase">v1.0 · v2.0 · v3.0</span>
+                </div>
+                <h4 className="text-lg font-black text-[#1a1a2e] uppercase font-headline">Need Custom AI Builds or Help Choosing the Right Version?</h4>
+                <p className="text-sm text-[#1a1a2e]/60 font-medium max-w-2xl">
+                  We engineer tailored offline AI models, custom dataset training, and specialized hardware setups for Bharat AI 1.0, 2.0, and 3.0. Speak directly with our infrastructure team.
+                </p>
               </div>
-              <Link
-                href="/contact"
-                className="bg-primary hover:bg-[#d42535] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary/20 shrink-0"
+              <a
+                href="https://wa.me/919860779172?text=Hello%2C%20I%20want%20to%20discuss%20Custom%20AI%20Builds%20for%20Bharat%20AI%20(1.0%20%2F%202.0%20%2F%203.0)"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary hover:bg-[#d42535] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary/25 shrink-0 flex items-center gap-2 whitespace-nowrap"
               >
-                Choose Your Version
-              </Link>
+                <span className="material-symbols-outlined text-base">forum</span>
+                Request Custom AI Build
+              </a>
             </div>
           </div>
         </div>
@@ -580,9 +602,9 @@ export default function AIInfrastructuresB2BPage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2.5">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                 {["Best AI Education Innovation", "EdTech Excellence", "National Innovation Award"].map((tag, idx) => (
-                  <span key={idx} className="px-3.5 py-1.5 bg-[#1e293b] border border-slate-700 text-slate-300 text-[10px] font-mono uppercase font-bold rounded-lg hover:border-primary/40 transition-colors duration-300">
+                  <span key={idx} className="px-2.5 py-1.5 bg-[#1e293b] border border-slate-700 text-slate-300 text-[9px] sm:text-[10px] font-mono uppercase font-bold rounded-lg hover:border-primary/40 transition-colors duration-300">
                     {tag}
                   </span>
                 ))}
@@ -601,11 +623,6 @@ export default function AIInfrastructuresB2BPage() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 
-                {/* HUD Overlay details */}
-                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
-                  DGP Maharashtra
-                </div>
-                
                 <div className="absolute bottom-6 left-6 right-6 z-20">
                   <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">SECURITY COLLABORATION</div>
                   <h4 className="text-white font-extrabold text-sm md:text-base mt-0.5 leading-snug">Hon. Sadanand Date, DGP Maharashtra</h4>
@@ -621,11 +638,6 @@ export default function AIInfrastructuresB2BPage() {
                   alt="Government consultation with Chief Minister Devendra Fadnavis" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                
-                {/* HUD Overlay details */}
-                <div className="absolute top-4 right-4 z-20 font-mono text-[8px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase font-bold">
-                  CM MEETING
-                </div>
 
                 <div className="absolute bottom-6 left-6 right-6 z-20">
                   <div className="text-[9px] font-mono text-primary font-bold uppercase tracking-widest">GOVERNMENT BRIEFING</div>

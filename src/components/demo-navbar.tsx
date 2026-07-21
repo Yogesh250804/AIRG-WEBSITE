@@ -28,7 +28,7 @@ export function Navbar() {
         { name: "Institute Labs", href: "/learning/pdet-lab" },
         { name: "Grampanchayat AI Lab", href: "/learning/grampanchayat-ai-lab" },
         { name: "AI Infrastructure", href: "/learning/ai-infrastructures" },
-        { name: "Courses & Implant Training", href: "/#learning" },
+        { name: "Courses", href: "/#learning" },
         { name: "Workshops", href: "/#workshops" }
       ]
     },

@@ -155,14 +155,6 @@ export default function AppleCarousel() {
                     {activeWorkshop.title}
                   </h3>
                   {/* Description removed */}
-                  <div className="flex items-center gap-3 pt-2">
-                    <Link href={getLabUrl(activeWorkshop.slug)} className="px-6 py-2.5 bg-white text-black font-bold text-[10px] uppercase tracking-widest rounded-lg hover:scale-105 active:scale-95 transition-transform duration-200 inline-block text-center">
-                      Explore Details
-                    </Link>
-                    <Link href={getLabUrl(activeWorkshop.slug)} className="px-6 py-2.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-[10px] uppercase tracking-widest rounded-lg hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-200 inline-block text-center">
-                      Audit Record
-                    </Link>
-                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>

@@ -1011,7 +1011,9 @@ export default function NewDesignContent() {
 
   const labs = labsData;
 
-  const fieldRecords = workshopsData;
+  const fieldRecords = workshopsData.filter(
+    (w) => !w.slug.startsWith("international-students-")
+  );
 
 
 
@@ -1078,7 +1080,7 @@ export default function NewDesignContent() {
                         }}
                         className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block w-full"
                       >
-                        Courses & Implant Training
+                        Courses
                       </button>
                       <button
                         onClick={() => {
@@ -1264,7 +1266,7 @@ export default function NewDesignContent() {
                             }}
                             className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e] w-full"
                           >
-                            Courses & Implant Training
+                            Courses
                           </button>
                           <button
                             onClick={() => {
@@ -1729,10 +1731,9 @@ export default function NewDesignContent() {
                     </div>
 
 
-                    <h2 className="font-headline tracking-tighter leading-[0.9] uppercase text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-[#1a1a2e]">
-                      Building The <br />
-                      <span className="text-primary text-glow-red">Future</span> Through <br />
-                      <span className="text-[#1a1a2e]/30">Partnerships</span>
+                    <h2 className="font-headline tracking-tighter leading-[0.9] uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.2rem] font-black text-[#1a1a2e]">
+                      Building The <span className="text-primary text-glow-red">Future</span> <br />
+                      Through <span className="text-[#1a1a2e]/30">Partnerships</span>
                     </h2>
                     <p className="text-sm md:text-lg text-[#1a1a2e]/60 max-w-lg font-light leading-relaxed">
                       AIR G International collaborates with governments, universities, industry leaders, innovation ecosystems, and educational institutions worldwide to create future-ready learning environments.
@@ -3105,7 +3106,7 @@ export default function NewDesignContent() {
 
 
                       {/* Lab Centre Photo */}
-                      <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-4 border border-black/5 bg-slate-100 shrink-0">
+                      <Link href={`/labs/${lab.slug}`} className="block relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-4 border border-black/5 bg-slate-100 shrink-0 cursor-pointer">
                         <Image 
                           src={lab.img} 
                           alt={lab.name} 
@@ -3113,7 +3114,7 @@ export default function NewDesignContent() {
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                           sizes="(max-width: 768px) 100vw, 300px"
                         />
-                      </div>
+                      </Link>
 
                       <h4 className="text-lg font-headline font-bold mb-2 text-[#1a1a2e] uppercase tracking-tight group-hover:text-primary transition-colors">{lab.name}</h4>
                       <p className="text-xs text-[#1a1a2e]/40 leading-relaxed mb-4 h-16 overflow-hidden line-clamp-3 font-body">{lab.desc}</p>
@@ -3218,10 +3219,6 @@ export default function NewDesignContent() {
                             <div className="h-full bg-primary w-[35%] transition-all duration-500"></div>
                           </div>
                         </div>
-
-                        <button className="w-full py-3.5 bg-primary/10 border border-primary/30 text-[#1a1a2e] font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-primary transition-all">
-                          Download Full Asset
-                        </button>
                       </div>
                     </>
                   ) : (

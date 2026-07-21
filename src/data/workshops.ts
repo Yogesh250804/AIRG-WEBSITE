@@ -14,6 +14,48 @@ export interface Workshop {
 
 export const workshopsData: Workshop[] = [
   {
+    slug: "international-students-1",
+    title: "International Students AI & Hardware Workshop",
+    category: "Global Training",
+    desc: "Hands-on Artificial Intelligence, Robotics, and Hardware prototyping session for international students.",
+    url: "/intl_student_1.jpg",
+    detailedDesc: "Empowering international students with advanced AI hardware, microcontrollers, and edge computing kits. Students collaborate on building practical IoT and robotics projects.",
+    location: "Global Centre, India",
+    date: "Active Workshop",
+    techStack: ["Edge AI Kits", "Microcontrollers", "Robotics Sensors", "Python Sandbox"],
+    stats: [
+      { label: "International Delegation", value: "Global Students" },
+      { label: "Hardware Projects", value: "Hands-on Prototyping" },
+      { label: "AI Integration", value: "Edge Compute Nodes" }
+    ],
+    highlights: [
+      "Cross-border collaboration on AI and embedded systems",
+      "Hands-on assembly of smart IoT and robotics modules",
+      "Interactive coding and real-world hardware deployment"
+    ]
+  },
+  {
+    slug: "international-students-2",
+    title: "International Students Hardware & Robotics Lab",
+    category: "Global Training",
+    desc: "International student group engaged in practical hardware engineering and deep-tech innovation.",
+    url: "/intl_student_2.jpg",
+    detailedDesc: "Interactive workshop for international delegation exploring next-generation robotics, microprocessors, and AI-driven automation systems.",
+    location: "Global Centre, India",
+    date: "Active Workshop",
+    techStack: ["Embedded Systems", "Robotics Sensors", "3D Prototyping", "Edge Computing"],
+    stats: [
+      { label: "International Delegation", value: "Global Students" },
+      { label: "Lab Projects", value: "Hardware Design" },
+      { label: "Mentorship", value: "Senior AI Engineers" }
+    ],
+    highlights: [
+      "In-depth hardware circuit design and microcontroller programming",
+      "Practical experimentation with sensor networks and motor drivers",
+      "Comprehensive exposure to AIR G International deep-tech infrastructure"
+    ]
+  },
+  {
     slug: "rajendra-khandala-1",
     title: "AIRG Rajendra Khandala Lab",
     category: "School Lab",
