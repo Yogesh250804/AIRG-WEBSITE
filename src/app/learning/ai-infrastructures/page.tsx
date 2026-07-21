@@ -133,7 +133,7 @@ export default function AIInfrastructuresB2BPage() {
           <div className="flex flex-col lg:flex-row gap-10 items-center justify-between">
 
             {/* Left Column: Big Bold Typography */}
-            <div className="w-full lg:w-[45%] text-left shrink-0">
+            <div className="w-full lg:w-[50%] text-left shrink-0">
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -148,16 +148,16 @@ export default function AIInfrastructuresB2BPage() {
                 {/* Subtle Ambient Red Glow */}
                 <div className="absolute -left-6 -top-6 w-96 h-48 bg-[#EE2C3C]/10 rounded-full blur-[100px] pointer-events-none" />
 
-                <h1 className="font-headline text-5xl sm:text-7xl lg:text-[76px] font-black tracking-tight leading-[0.94] uppercase text-left text-[#0a0a14] relative z-10 space-y-1">
+                <h1 className="font-headline tracking-tighter leading-[0.93] uppercase text-left text-[#0a0a14] relative z-10 space-y-1">
                   {/* Line 1: BUILD AI */}
                   <div className="overflow-hidden py-1">
                     <motion.span
                       initial={{ y: "100%", opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                      className="block font-black"
+                      className="block text-4xl sm:text-6xl lg:text-[72px] font-black"
                     >
-                      BUILD <span className="text-[#EE2C3C] text-glow-red">AI</span>
+                      BUILD <span className="text-[#EE2C3C]">AI</span>
                     </motion.span>
                   </div>
 
@@ -167,7 +167,7 @@ export default function AIInfrastructuresB2BPage() {
                       initial={{ y: "100%", opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                      className="block text-[#0a0a14] font-black tracking-tighter"
+                      className="block text-3xl sm:text-5xl lg:text-[58px] font-black text-[#0a0a14] tracking-[-0.05em]"
                     >
                       INFRASTRUCTURE
                     </motion.span>
@@ -179,7 +179,7 @@ export default function AIInfrastructuresB2BPage() {
                       initial={{ y: "100%", opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                      className="block text-[#EE2C3C] font-black tracking-tight"
+                      className="block text-3xl sm:text-5xl lg:text-[62px] font-black text-[#EE2C3C] tracking-tight"
                     >
                       AT YOUR PREMISES
                     </motion.span>
@@ -224,7 +224,7 @@ export default function AIInfrastructuresB2BPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="w-full lg:w-[55%] relative shrink-0"
+              className="w-full lg:w-[50%] relative shrink-0"
             >
               <div className="relative p-[2px] rounded-[2.5rem] bg-gradient-to-tr from-blue-600/30 via-blue-400/10 to-cyan-500/40 shadow-2xl hover:scale-[1.01] transition-transform duration-500">
                 <div className="aspect-[1536/871] rounded-[2.4rem] overflow-hidden relative bg-white border border-black/5">
