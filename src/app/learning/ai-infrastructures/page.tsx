@@ -130,10 +130,10 @@ export default function AIInfrastructuresB2BPage() {
       {/* Hero Section */}
       <div className="pt-36 pb-12 relative overflow-hidden bg-gradient-to-b from-[#f8f8fb] via-white to-white">
         <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-12 items-center justify-between">
+          <div className="flex flex-col lg:flex-row gap-10 items-center justify-between">
 
             {/* Left Column: Big Bold Typography */}
-            <div className="flex-1 w-full text-left">
+            <div className="w-full lg:w-[45%] text-left shrink-0">
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -144,38 +144,48 @@ export default function AIInfrastructuresB2BPage() {
                 Institutional Collaboration
               </motion.div>
 
-              <h1 className="font-headline text-5xl sm:text-7xl lg:text-[84px] font-black tracking-tighter leading-[0.95] mb-8 uppercase text-left text-[#1a1a2e]">
-                <span className="block overflow-hidden py-1">
-                  <motion.span
-                    initial={{ y: "100%", opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    Build A
-                  </motion.span>
-                </span>
-                <span className="block overflow-hidden py-1">
-                  <motion.span
-                    initial={{ y: "100%", opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                    className="block text-primary font-black"
-                  >
-                    State-Of-The-Art
-                  </motion.span>
-                </span>
-                <span className="block overflow-hidden py-1.5">
-                  <motion.span
-                    initial={{ y: "100%", opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                    className="block text-transparent bg-clip-text bg-gradient-to-r from-[#1a1a2e] via-[#1a1a2e] to-primary/80 font-black"
-                  >
-                    AIR Lab Setup
-                  </motion.span>
-                </span>
-              </h1>
+              <div className="relative mb-8 text-left">
+                {/* Subtle Ambient Red Glow */}
+                <div className="absolute -left-6 -top-6 w-96 h-48 bg-[#EE2C3C]/10 rounded-full blur-[100px] pointer-events-none" />
+
+                <h1 className="font-headline text-5xl sm:text-7xl lg:text-[76px] font-black tracking-tight leading-[0.94] uppercase text-left text-[#0a0a14] relative z-10 space-y-1">
+                  {/* Line 1: BUILD AI */}
+                  <div className="overflow-hidden py-1">
+                    <motion.span
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                      className="block font-black"
+                    >
+                      BUILD <span className="text-[#EE2C3C] text-glow-red">AI</span>
+                    </motion.span>
+                  </div>
+
+                  {/* Line 2: INFRASTRUCTURE */}
+                  <div className="overflow-hidden py-1">
+                    <motion.span
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                      className="block text-[#0a0a14] font-black tracking-tighter"
+                    >
+                      INFRASTRUCTURE
+                    </motion.span>
+                  </div>
+
+                  {/* Line 3: AT YOUR PREMISES */}
+                  <div className="overflow-hidden py-1">
+                    <motion.span
+                      initial={{ y: "100%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                      className="block text-[#EE2C3C] font-black tracking-tight"
+                    >
+                      AT YOUR PREMISES
+                    </motion.span>
+                  </div>
+                </h1>
+              </div>
 
               <div className="overflow-hidden mb-10 max-w-xl">
                 <motion.p
@@ -209,15 +219,15 @@ export default function AIInfrastructuresB2BPage() {
               </motion.div>
             </div>
 
-            {/* Right Column: Dynamic Abstract Layout */}
+            {/* Right Column: Dynamic Abstract Layout (Larger Picture) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex-1 w-full relative max-w-xl lg:max-w-none"
+              className="w-full lg:w-[55%] relative shrink-0"
             >
-              <div className="relative p-[2px] rounded-[2rem] bg-gradient-to-tr from-blue-600/30 via-blue-400/10 to-cyan-500/40 shadow-2xl">
-                <div className="aspect-[1536/871] rounded-[1.9rem] overflow-hidden relative bg-white border border-black/5">
+              <div className="relative p-[2px] rounded-[2.5rem] bg-gradient-to-tr from-blue-600/30 via-blue-400/10 to-cyan-500/40 shadow-2xl hover:scale-[1.01] transition-transform duration-500">
+                <div className="aspect-[1536/871] rounded-[2.4rem] overflow-hidden relative bg-white border border-black/5">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent mix-blend-overlay z-10 pointer-events-none" />
                   <img
                     src="/extracted-images/bharat_ai_engine_v4.png"
