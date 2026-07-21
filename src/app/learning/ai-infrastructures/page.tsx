@@ -273,7 +273,7 @@ export default function AIInfrastructuresB2BPage() {
                   AI Innovation Lab Engine
                 </h4>
                 
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light min-h-[72px]">
                   Most suitable for <strong className="font-bold text-[#1a1a2e]">schools and institutes</strong>. An offline-first local system enabling students to access interactive AI chatbots, programming labs, and computer vision models completely without internet.
                 </p>
 
@@ -285,7 +285,7 @@ export default function AIInfrastructuresB2BPage() {
                     { label: "AI Training Lab", desc: "A visual local pipeline for students to collect custom data, train ML models, and evaluate offline.", icon: "model_training" },
                     { label: "Interactive Graphs", desc: "Learn data science by editing Python visualization scripts and rendering real-time charts.", icon: "bar_chart" }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
+                    <div key={idx} className="flex gap-3 min-h-[44px]">
                       <div className="w-8 h-8 rounded-lg bg-primary/5 border border-primary/10 flex items-center justify-center text-primary shrink-0">
                         <span className="material-symbols-outlined text-base">{item.icon}</span>
                       </div>
@@ -303,7 +303,7 @@ export default function AIInfrastructuresB2BPage() {
                     setActiveVideoUrl("/video/bharat_ai_1.mp4");
                     setActiveVideoTitle("Bharat AI 1.0 Version Overview");
                   }}
-                  className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-primary/30 shadow-sm cursor-pointer group/video z-10"
+                  className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-primary/30 shadow-sm cursor-pointer group/video z-10 mt-auto"
                 >
                   <img 
                     src="/bharat_ai_1_thumb.png" 
@@ -332,7 +332,7 @@ export default function AIInfrastructuresB2BPage() {
                 href="https://wa.me/919860779172?text=Hello%2C%20I%20would%20like%20to%20request%20an%20official%20consultation%20for%20Bharat%20AI%201.0%20(Education%20Edition)"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg mt-auto"
+                className="w-full py-4 px-4 rounded-xl bg-primary hover:bg-[#d42535] text-white font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg"
               >
                 <span className="material-symbols-outlined text-base">forum</span>
                 Request Official Consultation
@@ -357,8 +357,8 @@ export default function AIInfrastructuresB2BPage() {
                   SIA Workspace System
                 </h4>
                 
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Most suitable for <strong className="font-bold text-[#1a1a2e]">Professionals, Management Heads, Small teams, Medium teams with lawyers and CAs</strong>. Empower firms, consultants, and developers with private assistants. Boost productivity by querying local knowledge bases with absolute confidentiality.
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light min-h-[72px]">
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">professionals, consultants, CAs, and firms</strong>. Empower teams with private local assistants to boost productivity and query knowledge bases with confidentiality.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -369,7 +369,7 @@ export default function AIInfrastructuresB2BPage() {
                     { label: "Knowledge Retrieval", desc: "High-speed semantic search indexing for large institutional archives.", icon: "database" },
                     { label: "AI-Powered Drafting", desc: "Secure assistant to compose letters, reports, and code blocks in privacy.", icon: "edit_document" }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
+                    <div key={idx} className="flex gap-3 min-h-[44px]">
                       <div className="w-8 h-8 rounded-lg bg-[#1e293b]/5 border border-[#1e293b]/10 flex items-center justify-center text-[#1e293b] shrink-0">
                         <span className="material-symbols-outlined text-base">{item.icon}</span>
                       </div>
@@ -386,7 +386,7 @@ export default function AIInfrastructuresB2BPage() {
                   href="/booklet_bharat_ai_2.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mb-8 block relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-[#1e293b]/30 shadow-sm cursor-pointer group/video z-10"
+                  className="mb-8 block relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-[#1e293b]/30 shadow-sm cursor-pointer group/video z-10 mt-auto"
                 >
                   <img 
                     src="/bharat_ai_2_booklet_cover.png" 
@@ -440,8 +440,8 @@ export default function AIInfrastructuresB2BPage() {
                   Private AI Infrastructure Platform
                 </h4>
                 
-                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light">
-                  Most suitable for <strong className="font-bold text-[#1a1a2e]">MNCs and industries</strong>. A high-capacity cluster engineered for complete data sovereignty. Designed for large corporations, government departments, and R&D facilities.
+                <p className="text-sm text-[#1a1a2e]/60 leading-relaxed mb-8 font-light min-h-[72px]">
+                  Most suitable for <strong className="font-bold text-[#1a1a2e]">MNCs, industries, and government</strong>. A high-capacity cluster engineered for complete data sovereignty, air-gapped security, and specialized R&D facilities.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -452,7 +452,7 @@ export default function AIInfrastructuresB2BPage() {
                     { label: "Private Analytics", desc: "Run intelligence synthesis over internal datasets with zero external sync.", icon: "assessment" },
                     { label: "Air-Gapped Security", desc: "Absolute privacy shielding for sensitive state or proprietary IP archives.", icon: "gpp_good" }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex gap-3">
+                    <div key={idx} className="flex gap-3 min-h-[44px]">
                       <div className="w-8 h-8 rounded-lg bg-emerald-500/5 border border-emerald-500/10 flex items-center justify-center text-emerald-600 shrink-0">
                         <span className="material-symbols-outlined text-base">{item.icon}</span>
                       </div>
