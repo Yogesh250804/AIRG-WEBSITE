@@ -298,7 +298,7 @@ export default function AIInfrastructuresB2BPage() {
                 <div 
                   onClick={() => {
                     setActiveVideoUrl("/video/bharat_ai_1.mp4");
-                    setActiveVideoTitle("Bharat AI 1.0 Demo");
+                    setActiveVideoTitle("Bharat AI 1.0 Version Overview");
                   }}
                   className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-primary/30 shadow-sm cursor-pointer group/video z-10"
                 >
@@ -319,7 +319,7 @@ export default function AIInfrastructuresB2BPage() {
                   {/* Bottom-Left Watch badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-                    <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Demo Video</span>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Version Info</span>
                   </div>
                 </div>
               </div>
@@ -451,7 +451,7 @@ export default function AIInfrastructuresB2BPage() {
                 <div 
                   onClick={() => {
                     setActiveVideoUrl("/video/bharat_ai_3.mp4");
-                    setActiveVideoTitle("Bharat AI 3.0 Demo");
+                    setActiveVideoTitle("Bharat AI 3.0 Version Overview");
                   }}
                   className="mb-4 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-emerald-500/30 shadow-sm cursor-pointer group/video z-10"
                 >
@@ -472,7 +472,7 @@ export default function AIInfrastructuresB2BPage() {
                   {/* Bottom-Left Watch badge */}
                   <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5 z-20">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Demo Video</span>
+                    <span className="text-[9px] font-black uppercase tracking-wider text-white">Watch Version Info</span>
                   </div>
                 </div>
 
@@ -499,14 +499,14 @@ export default function AIInfrastructuresB2BPage() {
           <div className="mt-16 text-center">
             <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-6 p-6 sm:p-8 rounded-[2rem] border border-black/5 bg-white/40 backdrop-blur-md max-w-4xl mx-auto shadow-sm">
               <div className="text-left space-y-1">
-                <h4 className="text-lg font-black text-[#1a1a2e] uppercase font-headline">Want to build custom AI infrastructure?</h4>
-                <p className="text-sm text-[#1a1a2e]/60 font-medium">Partner with us to deploy the Bharat AI Engine at your institution or enterprise.</p>
+                <h4 className="text-lg font-black text-[#1a1a2e] uppercase font-headline">Need Help Choosing the Right Bharat AI Version?</h4>
+                <p className="text-sm text-[#1a1a2e]/60 font-medium">Consult with our AI infrastructure specialists to select or customize the perfect deployment for your organization.</p>
               </div>
               <Link
                 href="/contact"
                 className="bg-primary hover:bg-[#d42535] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all shadow-lg shadow-primary/20 shrink-0"
               >
-                Join Us Today
+                Choose Your Version
               </Link>
             </div>
           </div>

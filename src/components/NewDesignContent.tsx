@@ -613,6 +613,26 @@ export default function NewDesignContent() {
   const [compInst, setCompInst] = useState("");
   const [isSubmittingComp, setIsSubmittingComp] = useState(false);
 
+  const heroLabImages = [
+    "/pratham/PHOTO-2026-07-14-20-49-29.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-29 (1).jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30 (1).jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-30 (2).jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-31.jpg",
+    "/pratham/PHOTO-2026-07-14-20-49-32.jpg",
+    "/pratham/PHOTO-2026-07-14-20-50-11.jpg",
+    "/pratham/PHOTO-2026-07-14-20-50-11 (1).jpg"
+  ];
+  const [heroLabImageIndex, setHeroLabImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroLabImageIndex((prev) => (prev + 1) % heroLabImages.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [heroLabImages.length]);
+
   const getUpiDeepLink = (app?: string) => {
     const MERCHANT_UPI = "9860779172-5@ybl";
     const MERCHANT_NAME = "AIR G International";
@@ -1021,8 +1041,8 @@ export default function NewDesignContent() {
                 return (
                   <div key={item} className="relative group py-6">
                     <button
-                      className={`nav-link font-semibold transition-colors text-xs uppercase tracking-widest flex items-center ${activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/40 hover:text-[#1a1a2e]'}`}
-                      onClick={() => navigateTo(item)}
+                      className={`nav-link font-semibold transition-colors text-xs uppercase tracking-widest flex items-center ${activeFace === 'labs' || activeFace === 'learning' ? 'text-primary' : 'text-[#1a1a2e]/40 hover:text-[#1a1a2e]'}`}
+                      onClick={() => navigateTo('labs')}
                     >
                       {labels[item]}
                       <span className="material-symbols-outlined ml-1 text-[16px]">expand_more</span>
@@ -1052,6 +1072,14 @@ export default function NewDesignContent() {
                       >
                         AI Infrastructure
                       </Link>
+                      <button
+                        onClick={() => {
+                          navigateTo('learning');
+                        }}
+                        className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-[#1a1a2e]/60 hover:text-primary hover:bg-black/5 transition-colors whitespace-nowrap text-left block w-full"
+                      >
+                        Courses & Implant Training
+                      </button>
                       <button
                         onClick={() => {
                           navigateTo('workshops');
@@ -1191,10 +1219,11 @@ export default function NewDesignContent() {
                       <div key={item} className="flex flex-col border-b border-black/5">
                         <button
                           className={`text-left py-2 font-bold text-sm uppercase tracking-widest transition-colors ${
-                            activeFace === item ? 'text-primary' : 'text-[#1a1a2e]/60 hover:text-[#1a1a2e]'
+                            activeFace === 'labs' || activeFace === 'learning' ? 'text-primary' : 'text-[#1a1a2e]/60 hover:text-[#1a1a2e]'
                           }`}
                           onClick={() => {
-                            navigateTo(item);
+                            navigateTo('labs');
+                            setIsMobileMenuOpen(false);
                           }}
                         >
                           {labels[item]}
@@ -1228,6 +1257,15 @@ export default function NewDesignContent() {
                           >
                             AI Infrastructure
                           </Link>
+                          <button
+                            onClick={() => {
+                              navigateTo('learning');
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="text-left py-2 text-xs font-bold uppercase tracking-widest text-[#1a1a2e]/50 hover:text-[#1a1a2e] w-full"
+                          >
+                            Courses & Implant Training
+                          </button>
                           <button
                             onClick={() => {
                               navigateTo('workshops');
@@ -2835,42 +2873,158 @@ export default function NewDesignContent() {
           </section>
 
           {/* FACE 2: LABS (NEXUS NODES) */}
-          <section className={`cube-face ${getFaceClass('labs')} pt-16 pb-20 overflow-y-auto custom-scrollbar`} id="labs-face">
-            <div className="max-w-[1440px] mx-auto px-5 md:px-20">
-              <div className="mb-10 relative">
-                <div className="absolute left-[-20px] top-0 h-full w-[1px] bg-black/5">
-                  <div className="absolute top-0 left-[-4px] w-2 h-2 bg-primary rounded-full animate-pulse" />
-                </div>
-                <span className="text-primary font-black tracking-[0.4em] uppercase text-[10px] mb-4 block font-mono">Strategic Infrastructure</span>
-                <h2 className="font-headline tracking-tighter leading-[0.9]">
-                  <span className="block text-4xl md:text-6xl font-black text-[#1a1a2e] uppercase">
-                    AIR G
-                  </span>
-                  <span className="block text-4xl md:text-6xl font-black bg-gradient-to-r from-[#EE2C3C] via-[#FF5C6C] to-[#BD1A29] bg-clip-text text-transparent uppercase drop-shadow-[0_2px_8px_rgba(238,44,60,0.15)]">
-                    Labs
-                  </span>
-                </h2>
-                <p className="text-[#1a1a2e]/40 mt-4 max-w-2xl text-base font-light leading-relaxed font-body border-l-2 border-primary/20 pl-6">
-                  A distributed network of deep-tech facilities operating at the edge of physical possibility. Precision engineered for the kinetic horizon.
-                </p>
+          <section className={`cube-face ${getFaceClass('labs')} pt-0 pb-20 overflow-y-auto custom-scrollbar`} id="labs-face">
+            
+            {/* Indian Flag Cyberpunk Hero Section Header (Full-Bleed End-to-End Layout) */}
+            <div 
+              className="w-full pt-16 pb-20 relative overflow-hidden border-b border-white/[0.04] text-left mb-12"
+              style={{
+                background: 'radial-gradient(circle at 20% 20%, rgba(255, 103, 31, 0.35), transparent 60%), radial-gradient(circle at 80% 80%, rgba(19, 136, 8, 0.35), transparent 60%), radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15), transparent 45%), #0B0F19'
+              }}
+            >
+              {/* Cyberpunk Grid Background Overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+              {/* Floating High-Tech Particles */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+                <span className="absolute text-[8px] font-mono text-[#FF9933]/15 animate-float-slow left-[10%] top-[40%]">01</span>
+                <span className="absolute text-[9px] font-mono text-white/10 animate-float-medium left-[25%] top-[80%]">&lt;AI&gt;</span>
+                <span className="absolute text-[8px] font-mono text-[#138808]/20 animate-float-fast left-[80%] top-[30%]">+</span>
+                <span className="absolute text-[10px] font-mono text-white/10 animate-float-slow left-[70%] top-[70%]">10</span>
+                <span className="absolute text-[8px] font-mono text-[#FF9933]/20 animate-float-medium left-[85%] top-[60%]">[ROS2]</span>
+                <span className="absolute text-[9px] font-mono text-[#138808]/15 animate-float-fast left-[15%] top-[20%]">IOT</span>
+                <span className="absolute text-[8px] font-mono text-white/10 animate-float-slow left-[40%] top-[85%]">0</span>
+                <span className="absolute text-[10px] font-mono text-primary/10 animate-float-medium left-[90%] top-[10%]">1</span>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-                {[
-                  { label: "Verified Hubs", val: "50+ Labs", icon: "domain", pulse: true },
-                  { label: "Coverage Area", val: "7+ Countries", icon: "public" },
-                  { label: "Strategic Partners", val: "50+ Partners", icon: "handshake" },
-                  { label: "Students Empowered", val: "50000+ Students", icon: "school" }
-                ].map((item) => (
-                  <div key={item.label} className="p-6 glass-premium rounded-2xl border border-black/5 border-t-2 border-t-primary flex flex-col gap-2 group hover:border-primary/50 transition-all shadow-sm">
-                    <div className="flex items-center gap-2">
-                      {item.pulse ? <span className="w-2 h-2 bg-primary rounded-full animate-pulse shadow-[0_0_10px_#EE2C3C]"></span> : <span className="material-symbols-outlined text-xs text-primary">{item.icon}</span>}
-                      <span className="text-[10px] font-bold text-[#1a1a2e]/40 uppercase tracking-widest font-mono">{item.label}</span>
+              {/* Rotating Ashoka Chakra Watermark */}
+              <svg 
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] opacity-[0.18] text-[#0038A8] pointer-events-none animate-[spin_180s_linear_infinite]" 
+                viewBox="0 0 100 100"
+              >
+                <circle cx="50" cy="50" r="45" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                <circle cx="50" cy="50" r="42" stroke="currentColor" strokeWidth="0.4" fill="none" />
+                <circle cx="50" cy="50" r="8" stroke="currentColor" strokeWidth="1.2" fill="none" />
+                {Array.from({ length: 24 }).map((_, i) => {
+                  const angle = (i * 360) / 24;
+                  return (
+                    <line
+                      key={i}
+                      x1="50"
+                      y1="50"
+                      x2={50 + 42 * Math.cos((angle * Math.PI) / 180)}
+                      y2={50 + 42 * Math.sin((angle * Math.PI) / 180)}
+                      stroke="currentColor"
+                      strokeWidth="0.8"
+                    />
+                  );
+                })}
+              </svg>
+
+              <div className="max-w-[1600px] mx-auto px-6 md:px-16 relative z-10">
+                <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+                  
+                  {/* Left Content */}
+                  <div className="flex-1 w-full text-left">
+                    <div>
+                      <motion.div 
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.03] text-xs font-mono uppercase tracking-widest mb-8"
+                        style={{ color: 'rgba(255, 255, 255, 0.9)' }}
+                      >
+                        <span className="w-2 h-2 rounded-full bg-[#FF9933] animate-pulse" />
+                        <span>STRATEGIC INFRASTRUCTURE</span>
+                      </motion.div>
+                      
+                      <h1 className="font-headline text-5xl md:text-6xl lg:text-[72px] font-black tracking-tighter leading-[0.95] mb-8 uppercase text-left">
+                        <span className="block overflow-hidden py-1">
+                          <motion.span 
+                            initial={{ y: "100%", opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                            className="block bg-gradient-to-r from-[#FF9933] to-[#FF671F] bg-clip-text"
+                            style={{ color: 'transparent', WebkitTextFillColor: 'transparent' }}
+                          >
+                            AIR G
+                          </motion.span>
+                        </span>
+                        <span className="block overflow-hidden py-1.5">
+                          <motion.span 
+                            initial={{ y: "100%", opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                            className="block bg-gradient-to-r from-white via-slate-100 to-[#138808] bg-clip-text"
+                            style={{ color: 'transparent', WebkitTextFillColor: 'transparent' }}
+                          >
+                            LABS
+                          </motion.span>
+                        </span>
+                      </h1>
+                      
+                      <div className="overflow-hidden mb-10 max-w-xl">
+                        <motion.p 
+                           initial={{ y: "100%", opacity: 0 }}
+                           animate={{ y: 0, opacity: 1 }}
+                           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                           className="text-lg md:text-xl font-light leading-relaxed"
+                           style={{ color: 'rgba(255, 255, 255, 0.8)' }}
+                        >
+                          A distributed network of deep-tech facilities operating at the edge of physical possibility. Precision engineered for the kinetic horizon.
+                        </motion.p>
+                      </div>
+
+                      {/* Left Column Stats Cards - Exact Copy from School Labs Page */}
+                      <div className="grid grid-cols-3 gap-4 max-w-xl">
+                        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 text-left backdrop-blur-md">
+                          <span className="text-[9px] font-mono uppercase tracking-widest block mb-1" style={{ color: '#FF9933' }}>State Nodes</span>
+                          <span className="text-xl md:text-2xl font-black font-headline" style={{ color: '#ffffff' }}>50+ Labs</span>
+                        </div>
+                        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 text-left backdrop-blur-md">
+                          <span className="text-[9px] font-mono uppercase tracking-widest block mb-1" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Empowered</span>
+                          <span className="text-xl md:text-2xl font-black font-headline" style={{ color: '#ffffff' }}>50k+ Kids</span>
+                        </div>
+                        <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 text-left backdrop-blur-md">
+                          <span className="text-[9px] font-mono uppercase tracking-widest block mb-1" style={{ color: '#138808' }}>Curriculums</span>
+                          <span className="text-xl md:text-2xl font-black font-headline" style={{ color: '#ffffff' }}>Grades 1-10</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-sm text-[#1a1a2e] font-black font-headline uppercase tracking-tight">{item.val}</div>
                   </div>
-                ))}
+
+                  {/* Right Hero Premium Image Card with 3D Tilt Hover Effect */}
+                  <div className="flex-1 w-full relative">
+                    {/* Backing Glows */}
+                    <div className="absolute -inset-4 bg-gradient-to-tr from-[#138808]/20 via-[#0038A8]/10 to-[#FF9933]/25 rounded-[2.5rem] blur-2xl opacity-75 pointer-events-none" />
+                    
+                    {/* 3D tilt card */}
+                    <motion.div 
+                      whileHover={{ rotateY: -6, rotateX: 6, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="relative p-[2px] rounded-[2.5rem] bg-gradient-to-tr from-[#138808]/40 via-white/10 to-[#FF9933]/50 shadow-2xl cursor-pointer"
+                      style={{ transformStyle: "preserve-3d", perspective: 1000 }}
+                    >
+                      <div className="aspect-[4/3] rounded-[2.4rem] bg-slate-950/90 overflow-hidden relative group">
+                        <img 
+                          src={heroLabImages[heroLabImageIndex]} 
+                          alt="AIR G Innovation Lab" 
+                          className="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+                        
+                        {/* Glowing scanning laser line */}
+                        <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF9933] to-transparent opacity-90 animate-scan pointer-events-none z-20" />
+                        {/* Matrix Scan lines overlay */}
+                        <div className="absolute inset-0 opacity-[0.04] bg-[linear-gradient(rgba(18,185,129,0)_50%,rgba(18,185,129,0.25)_50%)] bg-[size:100%_4px] pointer-events-none" />
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <div className="max-w-[1440px] mx-auto px-5 md:px-20 space-y-12">
         {/* NEW SECTION: Video Tour */}
         <div className="mb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-[#0B0F19] p-6 md:p-10 rounded-[2.5rem] border border-white/[0.04] relative overflow-hidden shadow-2xl text-left">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:3rem_3rem] pointer-events-none" />

@@ -22,12 +22,13 @@ export function Navbar() {
     { name: "Home", href: "/" },
     { 
       name: "Labs", 
-      href: "/#learning",
+      href: "/#labs",
       dropdown: [
         { name: "School Labs", href: "/learning/school-labs" },
         { name: "Institute Labs", href: "/learning/pdet-lab" },
         { name: "Grampanchayat AI Lab", href: "/learning/grampanchayat-ai-lab" },
         { name: "AI Infrastructure", href: "/learning/ai-infrastructures" },
+        { name: "Courses & Implant Training", href: "/#learning" },
         { name: "Workshops", href: "/#workshops" }
       ]
     },

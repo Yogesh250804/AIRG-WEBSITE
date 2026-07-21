@@ -10,6 +10,92 @@ import {
   TrendingUp, Globe, FileText, Settings
 } from "lucide-react";
 
+const prathamMedia = [
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-29.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-29 (1).jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-30.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-30 (1).jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-30 (2).jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-31.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-49-32.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-50-11.jpg" },
+  { type: "image", url: "/pratham/PHOTO-2026-07-14-20-50-11 (1).jpg" },
+  { type: "video", url: "/pratham/VIDEO-2026-07-14-20-47-54.mp4" },
+  { type: "video", url: "/pratham/VIDEO-2026-07-14-20-47-55.mp4" },
+  { type: "video", url: "/pratham/VIDEO-2026-07-14-20-47-56.mp4" },
+];
+
+const PrathamMediaCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % prathamMedia.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + prathamMedia.length) % prathamMedia.length);
+  };
+
+  const currentItem = prathamMedia[currentIndex];
+
+  return (
+    <div className="w-full max-w-[280px] mt-4 flex flex-col items-center">
+      <span className="text-[10px] font-mono font-black text-primary uppercase tracking-[0.15em] mb-2 block w-full text-center">
+        ACTIVITY PHOTOS & VIDEOS
+      </span>
+      <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-black/10 bg-black/5 shadow-md group">
+        <AnimatePresence mode="wait">
+          {currentItem.type === "image" ? (
+            <motion.img
+              key={currentItem.url}
+              src={currentItem.url}
+              alt={`Pratham Activities ${currentIndex + 1}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full object-cover select-none"
+            />
+          ) : (
+            <motion.div
+              key={currentItem.url}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full h-full"
+            >
+              <video
+                src={currentItem.url}
+                controls
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          onClick={handlePrev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <ChevronRight className="w-4 h-4 rotate-180" />
+        </button>
+
+        <button
+          onClick={handleNext}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+
+        <div className="absolute bottom-2 right-2 bg-black/70 backdrop-blur-md text-white text-[9px] font-mono px-2 py-0.5 rounded-full font-bold">
+          {currentIndex + 1} / {prathamMedia.length}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function GrampanchayatAILabPage() {
   const [activeZone, setActiveZone] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -294,31 +380,31 @@ export default function GrampanchayatAILabPage() {
             {/* Impact Metric Cards */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-4">
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
-                <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Global Reach</span>
-                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">50,000+</div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Students Empowered</div>
-                <p className="text-[10px] text-white/40 font-light mt-2">Across global schools and advanced training networks.</p>
+                <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Grassroots Impact</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">500+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1 font-bold">Rural Students Trained</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Hands-on AI, robotics, & coding exposure in local village schools.</p>
               </div>
 
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
                 <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Local Village</span>
-                <div className="text-3xl sm:text-4xl font-black font-headline text-primary mt-2">1,500+</div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Villagers Connected</div>
-                <p className="text-[10px] text-white/40 font-light mt-2">Trained on local language AI assistants and digital tools.</p>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-[#4ade80] mt-2">1,500+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1 font-bold">Villagers Connected</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Trained on local language AI assistants & agricultural digital tools.</p>
               </div>
 
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
-                <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Global Reach</span>
-                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">50+</div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Labs Established</div>
-                <p className="text-[10px] text-white/40 font-light mt-2">Innovation and deep tech lab centers built globally.</p>
+                <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider bg-primary/10 px-2 py-0.5 rounded">Historic Milestone</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">1st</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1 font-bold">Grampanchayat AI Hub</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">India's first pioneer lab established directly inside local self-governance.</p>
               </div>
 
               <div className="bg-white/5 border border-white/10 p-6 rounded-3xl text-left hover:border-primary/30 transition-all hover:scale-[1.02] duration-300">
-                <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Local Village</span>
-                <div className="text-3xl sm:text-4xl font-black font-headline text-white mt-2">5+</div>
-                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1">Active IoT Nodes</div>
-                <p className="text-[10px] text-white/40 font-light mt-2">Soil and crop telemetry nodes deployed in the area.</p>
+                <span className="text-[9px] font-mono text-[#4ade80] font-bold uppercase tracking-wider bg-[#4ade80]/10 px-2 py-0.5 rounded">Smart Agritech</span>
+                <div className="text-3xl sm:text-4xl font-black font-headline text-[#4ade80] mt-2">10+</div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-white/70 mt-1 font-bold">Active Telemetry Sensors</div>
+                <p className="text-[10px] text-white/40 font-light mt-2">Soil moisture & crop monitoring sensors active in local fields.</p>
               </div>
             </div>
           </div>
@@ -560,6 +646,143 @@ export default function GrampanchayatAILabPage() {
           </div>
         </div>
       </section>
+
+      {/* SECTION: OUR NGO PARTNERS */}
+      <section className="relative z-10 w-full bg-[#f8fafc] border-y border-black/5 py-24 text-left">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-20 space-y-16">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-mono font-black text-primary uppercase tracking-widest">Grassroots Collaborations</span>
+            <h2 className="font-headline text-3xl md:text-5xl font-black text-[#1a1a2e] uppercase tracking-tighter leading-none mt-2">
+              OUR NGO <span className="text-primary text-glow-red">PARTNERS</span>
+            </h2>
+            <p className="text-sm md:text-base text-[#1a1a2e]/55 font-light leading-relaxed max-w-2xl mx-auto">
+              Partnering with leading organizations to deliver digital literacy, AI labs, and STEM education to rural communities.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center gap-12 max-w-6xl mx-auto">
+            {/* Row 1: Pratham (Most Value) */}
+            <div className="w-full max-w-5xl flex justify-center">
+              <div className="relative bg-gradient-to-br from-slate-50 to-white p-8 md:p-12 rounded-[2.5rem] border border-black/5 shadow-xl w-full overflow-hidden text-left">
+                
+                {/* Top Tagline */}
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-black/5">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+                    <span className="text-xs font-mono font-black text-[#1a1a2e] uppercase tracking-widest">Featured Strategic Partnership</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+                  
+                  {/* Left Column: Logo & Stats */}
+                  <div className="lg:col-span-4 flex flex-col items-center lg:items-start gap-3 w-full">
+                    <span className="text-[11px] font-mono font-extrabold text-primary uppercase tracking-[0.15em] text-center max-w-[280px] block w-full">
+                      STEAM & TECHNOLOGY PARTNER
+                    </span>
+                    <div className="w-full aspect-square max-w-[280px] flex items-center justify-center p-6 bg-white rounded-3xl border-2 border-primary shadow-md hover:shadow-lg transition-all duration-300">
+                      <img 
+                        src="/logos/prratham_logo_original.webp" 
+                        alt="Pratham Logo" 
+                        className="max-w-full max-h-full object-contain scale-105"
+                      />
+                    </div>
+                    <PrathamMediaCarousel />
+                  </div>
+
+                  {/* Right Column: Detailed Info */}
+                  <div className="lg:col-span-8 space-y-6">
+                    <div className="space-y-4 text-[#1a1a2e]/75 font-body text-sm leading-relaxed">
+                      <p>
+                        <strong>AIR G International</strong> is proud to partner with <strong>Pratham</strong> as its AI, STEAM, Robotics, and Emerging Technology Partner. This collaboration brings together Pratham&apos;s extensive educational reach and commitment to improving learning outcomes with AIR G International&apos;s expertise in future-ready technologies.
+                      </p>
+                      <p>
+                        Together, we are empowering the next generation through hands-on, project-based learning in Artificial Intelligence (AI), Robotics, Coding, Internet of Things (IoT), Drone Technology, 3D Printing, Virtual Reality (VR), Electronics, and Design Thinking. Through this partnership, more than 10,000 students across India have already been introduced to emerging technologies, fostering innovation, critical thinking, creativity, and problem-solving skills that prepare them for the future workforce.
+                      </p>
+                      <p className="text-xs text-[#1a1a2e]/70 leading-relaxed border-l-2 border-primary/20 pl-4">
+                        Pratham is one of the largest and most successful non-governmental organizations (NGOs) in India, specifically focusing on education. Operating across more than 25 states and union territories, it reaches and supports millions of children and youth annually through literacy, elementary education, and skill-building.
+                      </p>
+                    </div>
+
+                    {/* Key Highlights Grid */}
+                    <div className="pt-6 border-t border-black/5">
+                      <h4 className="text-xs font-mono font-black text-[#1a1a2e] uppercase tracking-widest mb-4">Key Highlights</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                          <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">Reach</span>
+                          <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Impacts over 6-7 million children and young adults every year.</p>
+                        </div>
+                        <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                          <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">History</span>
+                          <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Established in 1995 in Mumbai to provide pre-school education in slums.</p>
+                        </div>
+                        <div className="bg-white border border-black/5 rounded-2xl p-4 shadow-sm space-y-1">
+                          <span className="text-[10px] font-mono text-primary font-black uppercase tracking-wider block">Programs</span>
+                          <p className="text-xs text-[#1a1a2e]/60 font-light leading-normal">Known for remedial learning (Read India) and the ASER report.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+            {/* Row 2: Remaining 4 Partners */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
+              {[
+                { 
+                  name: "Pravich Welfare Foundation", 
+                  logo: "/logos/pravich_logo.png",
+                  desc: "Focuses on rural digital literacy, youth skill development, and community welfare initiatives."
+                },
+                { 
+                  name: "Sanjyot Bahuuddeshiya Sanstha", 
+                  logo: "/logos/sanjyot_logo.png",
+                  desc: "Supports elementary education assistance, social support programs, and rural vocational training." 
+                },
+                { 
+                  name: "Suprabhat Mahila Mandal", 
+                  logo: "/logos/suprabhat_logo.png",
+                  desc: "Dedicated to empowering women, child welfare projects, and conducting rural health awareness camps."
+                },
+                { 
+                  name: "Yashwant Bahuuddeshiya Samajik Sanstha", 
+                  logo: "/logos/yashwant_logo.png",
+                  desc: "Promotes rural development, environmental preservation campaigns, and youth guidance seminars."
+                }
+              ].map((ngo, idx) => (
+                <div key={idx} className="group relative bg-white p-6 rounded-[2rem] border border-primary/20 hover:border-primary/50 hover:shadow-lg transition-all duration-500 flex flex-col items-center text-center">
+                  <div className="w-32 h-32 flex items-center justify-center p-2 bg-slate-50 rounded-2xl border border-black/5 mb-4 group-hover:scale-105 transition-transform duration-300 shrink-0 shadow-sm">
+                    <img 
+                      src={ngo.logo} 
+                      alt={ngo.name} 
+                      className="max-w-[90%] max-h-[90%] object-contain"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (target.src.includes(".jpg")) {
+                          target.src = target.src.replace(".jpg", ".png");
+                        } else if (target.src.includes(".png")) {
+                          target.src = target.src.replace(".png", ".jpg");
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-headline text-lg font-black text-[#1a1a2e] uppercase tracking-tight">{ngo.name}</h4>
+                    <p className="text-xs text-[#1a1a2e]/55 font-light leading-relaxed">
+                      {ngo.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Establish Lab Contact CTA Section */}
       <section className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-20 py-24 border-t border-black/5 text-left bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
