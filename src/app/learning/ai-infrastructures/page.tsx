@@ -469,7 +469,7 @@ export default function AIInfrastructuresB2BPage() {
                     setActiveVideoUrl("/video/bharat_ai_3.mp4");
                     setActiveVideoTitle("Bharat AI 3.0 Version Overview");
                   }}
-                  className="mb-4 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-emerald-500/30 shadow-sm cursor-pointer group/video z-10"
+                  className="mb-8 relative aspect-video rounded-2xl overflow-hidden border border-black/5 hover:border-emerald-500/30 shadow-sm cursor-pointer group/video z-10"
                 >
                   <img 
                     src="/bharat_ai_3_thumb.png" 
