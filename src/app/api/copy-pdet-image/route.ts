@@ -107,7 +107,7 @@ export async function GET() {
     let gitOutput = "";
     try {
       gitOutput += "ADD: " + execSync("git add -A", { cwd: process.cwd() }).toString() + "\n";
-      gitOutput += "COMMIT: " + execSync('git commit -m "Position Bharat AI 1.0 and 3.0 slightly higher and 2.0 lower down"', { cwd: process.cwd() }).toString() + "\n";
+      gitOutput += "COMMIT: " + execSync('git commit -m "Update hero layout, quote banner, and reorder setup lab items"', { cwd: process.cwd() }).toString() + "\n";
       gitOutput += "PUSH: " + execSync("git push origin main", { cwd: process.cwd() }).toString() + "\n";
     } catch (gErr: any) {
       gitOutput += `\nGit error/info: ${gErr.stdout ? gErr.stdout.toString() : ''} ${gErr.stderr ? gErr.stderr.toString() : gErr.message}`;
