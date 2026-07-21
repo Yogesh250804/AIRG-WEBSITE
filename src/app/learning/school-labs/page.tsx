@@ -237,14 +237,14 @@ export default function SchoolLabsPage() {
       image: "/lab-smartlearning.png",
       photos: ["/attachments/PHOTO-2026-07-10-14-56-30.jpg", "/attachments/PHOTO-2026-07-10-14-56-31_1.jpg"],
       items: [
+        { name: "Electrician Work", qty: 0, unitCost: 60000, isLot: true },
+        { name: "Lab Setup/Installation", qty: 0, unitCost: 70000, isLot: true },
+        { name: "Light Bundle", qty: 0, unitCost: 10000, isLot: true },
         { name: "Acrylic Lab Name (Entry)", qty: 0, unitCost: 6000, isLot: false },
         { name: "Acrylic Names, Stickers for Dept.", qty: 0, unitCost: 1200, isLot: false },
         { name: "Technology Acrylic Posters", qty: 0, unitCost: 2000, isLot: false },
         { name: "Information Boards PVC Foam", qty: 0, unitCost: 2000, isLot: false },
-        { name: "Information Books Set", qty: 0, unitCost: 200, isLot: false },
-        { name: "Electrician Work", qty: 0, unitCost: 60000, isLot: true },
-        { name: "Lab Setup/Installation", qty: 0, unitCost: 70000, isLot: true },
-        { name: "Light Bundle", qty: 0, unitCost: 10000, isLot: true }
+        { name: "Information Books Set", qty: 0, unitCost: 200, isLot: false }
       ]
     },
     {
