@@ -583,7 +583,12 @@ export default function AIInfrastructuresB2BPage() {
               Government Partnerships & <span className="text-primary text-glow-red">Vision</span>
             </h2>
             <div className="w-36 h-[3px] bg-gradient-to-r from-orange-500 via-white to-emerald-500 mx-auto rounded-full mt-4" />
-            <p className="text-slate-400 text-lg font-light max-w-3xl mx-auto pt-2">
+            <div className="pt-2 pb-1">
+              <span className="inline-block italic text-[#FF9933] text-xl md:text-2xl font-serif font-semibold tracking-wide border-x border-[#FF9933]/30 px-6 py-1 bg-amber-500/5 rounded-lg">
+                “On the mission to build Indigenous AI Infrastructure.”
+              </span>
+            </div>
+            <p className="text-slate-400 text-lg font-light max-w-3xl mx-auto pt-1">
               Privileged to collaborate with senior governance nodes and education leaders to scale advanced technical learning facilities nationally.
             </p>
           </div>
