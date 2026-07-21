@@ -339,7 +339,7 @@ export default function AIInfrastructuresB2BPage() {
             </div>
 
             {/* Bharat AI 2.0 - Professional Edition */}
-            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-[#1e293b]/40 hover:shadow-[0_20px_50px_rgba(30,41,59,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden">
+            <div className="group relative glass-premium p-8 rounded-[2.5rem] border border-black/5 hover:border-[#1e293b]/40 hover:shadow-[0_20px_50px_rgba(30,41,59,0.08)] bg-white/60 backdrop-blur-md transition-all duration-500 flex flex-col justify-between h-full overflow-hidden lg:translate-y-8">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#1e293b]/5 rounded-full blur-2xl pointer-events-none" />
               <div>
                 <div className="flex justify-between items-start mb-6">
